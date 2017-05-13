@@ -5,5 +5,7 @@
 - ### Java
   - #### FastCampus 교육
   - #### Mini Project
-  -
+
 - ### Android
+  - #### FastCampus 교육
+  - #### Mini Project
