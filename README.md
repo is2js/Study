@@ -2,10 +2,6 @@
 
 ## Contents :open_file_folder:
 
-- ### Java
-  - #### FastCampus 교육
-  - #### Mini Project
+- ### [Java](https://github.com/mdy0501/Study/tree/master/Java)
 
-- ### Android
-  - #### FastCampus 교육
-  - #### Mini Project
+- ### [Android](https://github.com/mdy0501/Study/tree/master/Android)
