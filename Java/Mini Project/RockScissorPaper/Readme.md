@@ -3,7 +3,6 @@
  - 상속 / Override / static 변수 개념을 사용하였습니다.
  - 클래스를 세분화 하였습니다.
 ---
-### <가위/바위/보 결과 계산표>
 ![계산](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/RockScissorPaper/rockscissorpaper_calculate.PNG)
 ```Java
 package com.mdy.rockscissorpaper;
