@@ -1,8 +1,7 @@
 package com.mdy.java.extend.city.design;
 
-public class Infra {
+public abstract class Infra {
 	int price;
 	int position_X;
 	int position_y;
-	
 }

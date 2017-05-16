@@ -1,5 +1,7 @@
 package com.mdy.java.extend;
 
+import java.util.Scanner;
+
 import com.mdy.java.extend.city.hospital.Doctor;
 import com.mdy.java.extend.city.hospital.Hospital;
 import com.mdy.java.extend.city.hospital.Nurse;
@@ -45,6 +47,8 @@ public class ExtendMain {
 		Patient patients[] = new Patient[21];
 		for(int i=0; i<21; i++){
 			patients[i]  = new Patient();
+			Scanner scanner = new Scanner(System.in);
+			patients[i].setName(scanner.nextLine());
 		}
 		
 		// 의사 3명이 환자 7명씩을 진찰한다.

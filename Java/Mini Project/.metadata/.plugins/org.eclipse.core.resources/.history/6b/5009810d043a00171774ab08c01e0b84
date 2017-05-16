@@ -1,0 +1,16 @@
+package com.mdy.java.polymorphism;
+
+public class PolyMain {
+
+	public static void main(String[] args) {
+		Father son = new Son();
+		//타입을 부모로 대체하는 순간 자식의 메소드 및 변수들이 가려진다.
+		son.setName("쥬니어");
+		System.out.println(son.getName());
+		
+		Father daughter = new Daughter();
+		daugther.goSchool();
+		
+		
+	}
+}

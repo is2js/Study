@@ -1,0 +1,16 @@
+package com.mdy.java.exception;
+
+public class ExceptionMain {
+
+	public static void main(String[] args) {
+		try{
+			int array[] = new int[6];
+			
+			array[5] = 10;
+			array[6] = 11;
+		}catch(ArrayIndexOutOfBoundsException e){
+			String msg = nameOfException.getMessage();
+			
+	}
+
+}

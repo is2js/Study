@@ -1,6 +1,6 @@
 package com.mdy.java.extend.city.design;
 
-public class People {
+public abstract class People {
 
 	private String gender;
 	private String name;
@@ -13,6 +13,7 @@ public class People {
 	public void move(String direction){
 		System.out.println(direction+"방향으로 움직인다.");
 	}
+	
 	
 	public String getName(){
 		return name;

@@ -1,6 +1,6 @@
 package com.mdy.java.extend.city.design;
 
-public class Building {
+public abstract class Building {
 	public int door;
 	public String color;
 	public String floor;

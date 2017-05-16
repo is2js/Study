@@ -1,6 +1,6 @@
 package com.mdy.java.extend.city.design;
 
-public class Furniture {
+public abstract class Furniture {
 	int size;
 	int price;
 	String name;

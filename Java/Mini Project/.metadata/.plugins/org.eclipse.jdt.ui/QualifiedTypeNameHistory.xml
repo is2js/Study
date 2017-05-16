@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.mdy.java.extend.city.Police"/>
+<fullyQualifiedTypeName name="com.mdy.java.extend.city.design.People"/>
+<fullyQualifiedTypeName name="com.mdy.java.extend.city.hospital.Hospital"/>
+<fullyQualifiedTypeName name="java.util.Scanner"/>
+</qualifiedTypeNameHistroy>

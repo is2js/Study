@@ -1,0 +1,9 @@
+package com.mdy.java.extend.city.hospital;
+
+import com.mdy.java.extend.city.design.People;
+import com.mdy.java.extend.city.design.abstvoid;
+
+public class Nurse extends People{
+	@Override
+	public abstract void move(String direction);
+}
