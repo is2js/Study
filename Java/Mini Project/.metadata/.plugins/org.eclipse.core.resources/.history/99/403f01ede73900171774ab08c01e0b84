@@ -1,0 +1,38 @@
+package com.mdy.java.extend;
+
+import com.mdy.java.extend.city.Police;
+import com.mdy.java.extend.city.hospital.Hospital;
+
+public class ExtendMain {
+
+	public static void main(String[] args) {
+//		Father father = new Father();
+//		father.process();
+//		father.goDestination();
+		
+//		Police police = new Police();
+//		police.color = "파란색";
+//		police.floor = "2F";
+		
+/*		
+		병원을 하나 만들고,
+		의사를 3명
+		간호사 6명 - 각각 다른 방향으로 한번씩 움직인다.
+		환자 21명
+		각 의사가 환자를 7명씩 진찰하는 프로그램을 작성하세요.
+*/		
+		
+		
+		Hospital hospital = new Hospital();
+		hospital.color = "하얀색";
+		hospital.floor = "5F";
+		hospital.door = 2;
+		hospital.size = 100;
+		hospital.price = 50000;
+		
+		
+		
+		
+	}
+
+}

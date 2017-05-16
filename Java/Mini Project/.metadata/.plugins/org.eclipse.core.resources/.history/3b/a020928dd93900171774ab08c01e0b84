@@ -1,0 +1,15 @@
+package com.mdy.java.extend;
+
+import com.mdy.java.extend.obj.Father;
+
+public class ExtendMain {
+
+	public static void main(String[] args) {
+		Father fa = new Father();
+		fa.lastname = "조던";
+		fa.name = "마이클";
+		fa.car = "람보르기니";
+		fa.money = 1000000000;
+	}
+
+}

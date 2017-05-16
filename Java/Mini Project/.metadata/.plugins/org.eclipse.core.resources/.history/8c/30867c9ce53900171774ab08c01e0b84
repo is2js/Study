@@ -1,0 +1,5 @@
+package com.mdy.java.extend.city;
+
+public class Doctor extends People{
+
+}

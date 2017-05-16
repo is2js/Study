@@ -1,0 +1,5 @@
+package com.mdy.java.extend.obj;
+
+public interface Cook {
+
+}

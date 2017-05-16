@@ -1,0 +1,13 @@
+package com.mdy.java.extend.obj;
+
+public class Father {
+	public String lastname;
+	public String name;
+	
+	public int age;
+	public int money;
+	public String house;
+	public String car;
+	public String girlfriend; // 부모클래스의 속성은 포괄적인 것으로 해야 자식클래스도 사용할 수 있다.
+
+}

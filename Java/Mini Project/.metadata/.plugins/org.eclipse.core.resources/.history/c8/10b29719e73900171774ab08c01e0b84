@@ -1,0 +1,23 @@
+package com.mdy.java.extend;
+
+import com.mdy.java.extend.city.Police;
+import com.mdy.java.extend.city.hospital.Hospital;
+
+public class ExtendMain {
+
+	public static void main(String[] args) {
+//		Father father = new Father();
+//		father.process();
+//		father.goDestination();
+		
+		Police police = new Police();
+		police.color = "파란색";
+		police.floor = "2F";
+		
+		Hospital hospital = new hospital();
+		hospital.color = "하얀색";
+		police.floor = "5F";
+		
+	}
+
+}

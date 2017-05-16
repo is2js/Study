@@ -1,0 +1,6 @@
+package com.mdy.java.extend.obj;
+
+public class Son extends Father {
+	public String wife;
+	public String girlfriend; 
+}

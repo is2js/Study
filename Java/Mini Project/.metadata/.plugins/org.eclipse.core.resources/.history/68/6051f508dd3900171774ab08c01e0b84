@@ -1,0 +1,22 @@
+package com.mdy.java.extend.obj;
+
+public class Son extends Father {
+	public String wife;
+	public String girlfriend;
+	
+	@Override
+	public void process9(){
+		
+	}
+	
+	
+	@Override
+	public void goDestination(){
+		supuer.process9(); // 아빠꺼
+		process9(); // 내꺼
+		
+		// 내가 할일 작성
+	}
+	
+	
+}

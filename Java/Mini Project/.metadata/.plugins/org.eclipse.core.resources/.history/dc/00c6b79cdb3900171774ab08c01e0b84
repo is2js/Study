@@ -1,0 +1,20 @@
+package com.mdy.java.extend;
+
+import com.mdy.java.extend.obj.Father;
+import com.mdy.java.extend.obj.Son;
+
+public class ExtendMain {
+
+	public static void main(String[] args) {
+		Son son = new Son();
+		son.lastname = "조던";
+		son.name = "쥬니어";
+		son.car = "머스탱";
+		son.money = 0;
+		son.wife = "수지";
+		son.girlfriend = "수지";
+		
+		System.out.println(son.wife);
+	}
+
+}

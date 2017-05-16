@@ -1,0 +1,11 @@
+package com.mdy.java.extend.city;
+
+public class People {
+
+	private String gender;
+	private int age;
+	private String skinColor;
+	private String hairColor;
+	private int weight;
+	
+}

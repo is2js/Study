@@ -1,0 +1,10 @@
+package com.mdy.java.extend.city.hospital;
+
+import com.mdy.java.extend.city.design.People;
+
+public class Doctor extends People{
+	
+	public void move(String direction){
+		System.out.println("어떤 방향으로 움직인다.");
+	}
+}

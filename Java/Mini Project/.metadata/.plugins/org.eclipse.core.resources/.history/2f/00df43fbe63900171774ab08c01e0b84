@@ -1,0 +1,20 @@
+package com.mdy.java.extend;
+
+import com.mdy.java.extend.city.Police;
+
+public class ExtendMain {
+
+	public static void main(String[] args) {
+//		Father father = new Father();
+//		father.process();
+//		father.goDestination();
+		
+		Police police = new Police();
+		police.color = "ÆÄ¶õ»ö";
+		police.floor = "2F";
+		
+		Hospital hospital = new 
+		
+	}
+
+}
