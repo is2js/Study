@@ -1,0 +1,12 @@
+package com.mdy.mybbs.presenter;
+
+import java.util.Scanner;
+
+public class BbsPresenter {
+	
+	public void start(){
+		Scanner scanner = new Scanner(System.in);
+		
+	}
+	
+}

@@ -1,0 +1,10 @@
+package com.mdy.mybbs;
+
+public class MyBbsMain {
+
+	public static void main(String[] args) {
+		BbsPresenter presenter = new BbsPresenter();
+
+	}
+
+}

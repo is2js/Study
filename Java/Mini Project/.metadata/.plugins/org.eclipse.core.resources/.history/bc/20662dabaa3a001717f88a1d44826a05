@@ -1,0 +1,31 @@
+package com.mdy.mybbs.view;
+
+public class BbsList {
+	
+	// 목록을 뿌리기
+	public void showList(){
+		
+	}
+	
+	// 쓰기 이동
+	public void goInput(){
+		
+	}
+	
+	// 상세보기로 이동
+	public void goDetail(long id){
+		
+	}
+	
+	// 검색
+	public void search(){
+		
+	}
+	
+	// 삭제
+	public void delete(long id){
+		
+	}
+	
+	
+}

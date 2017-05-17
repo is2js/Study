@@ -1,0 +1,10 @@
+package com.mdy.mybbs.view;
+
+public class BbsDetail {
+	
+	public void showDetail(Bbs bbs){
+		
+		
+	}
+
+}
