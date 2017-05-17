@@ -47,4 +47,8 @@ public class Bbs {
 		this.view = view;
 	}
 	
+	@Override
+	public String toString(){
+		return id + ":" + title + ":" + author + ":" + date + ":" + view;
+	}
 }

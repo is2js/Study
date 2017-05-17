@@ -1,0 +1,38 @@
+package com.mdy.mybbs.view;
+
+import com.mdy.mybbs.model.Bbs;
+
+public class BbsDetail {
+	
+	public void showNo(long id){
+		System.out.println("글번호:"+bbs.getId());
+	}
+	
+	public void showTitle(String title){
+		System.out.println("제목:"+title);
+	}
+	
+	public void showAuthor(){
+		System.out.println("작성자:"+bbs.getAuthor());
+	}
+	
+	public void showDate(){
+		System.out.println("작성일자:"+bbs.getDate());
+	}
+	
+	public void showView(){
+		System.out.println("조회수:"+bbs.getView());
+	}
+	
+	public void showContent(){
+		System.out.println(bbs.getContent());
+	}
+	
+	public void showDetail(Bbs bbs){
+		
+		
+		
+		
+		
+	}
+}

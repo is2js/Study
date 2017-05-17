@@ -20,6 +20,7 @@ public class BbsInput {
 		bbs.setAuthor(author);
 		bbs.setContent(content);
 		
+		
 		return bbs;
 	}
 	
