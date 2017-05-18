@@ -56,16 +56,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 ---
 ###### 2. [.travis.yml]파일
+ - [.travis.yml]파일은 루트디렉토리에 저장되어 있어야 한다.
+ - 아래 트래비스 파일은 띄어쓰기까지 동일하게 해줘야 정상 작동한다.
+
 ```
 language: android
 
-jdk: oraclejdk7
+jdk: oraclejdk8
 
 android:
   components:
   - platform-tools             # ADB (디바이스 또는 에뮬레이터와 통신) 포함
   - tools                      # 실제 안드로이드 SDK
-  - build-tools-25.0.3         # 빌드 툴 버전
+  - build-tools-25.0.1         # 빌드 툴 버전
   - android-25                 # 타겟 버전
   - extra-android-m2repository # 안드로이드에서 제공하는 라이브러리
 
@@ -74,3 +77,4 @@ before_install:
 
 script: ./gradlew build
 ```
+---
