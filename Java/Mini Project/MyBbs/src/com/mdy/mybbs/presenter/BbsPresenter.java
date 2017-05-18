@@ -1,10 +1,12 @@
 package com.mdy.mybbs.presenter;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import com.mdy.mybbs.model.Bbs;
+import com.mdy.mybbs.model.BbsLoader;
 import com.mdy.mybbs.view.BbsDetail;
 import com.mdy.mybbs.view.BbsInput;
 import com.mdy.mybbs.view.BbsList;
@@ -23,8 +25,13 @@ public class BbsPresenter {
 	BbsInput input;
 	BbsList list;
 	BbsDetail detail;
+	BbsLoader loader;
 	
 	int number = 0;
+	
+	/**
+	 * new 생성자가 호출되면 init() 함수를 통해 초기화해준다.
+	 */
 	
 	// BbsPresenter 생성자
 	public BbsPresenter(){
@@ -39,6 +46,7 @@ public class BbsPresenter {
 		input = new BbsInput();
 		list = new BbsList();
 		detail = new BbsDetail();
+		loader = new BbsLoader();
 		datas = new ArrayList<>();
 	}
 	
@@ -49,6 +57,7 @@ public class BbsPresenter {
 			String command = scanner.nextLine();
 			switch(command){
 				case "l":
+					datas = loader.read();
 					list.showList(datas);
 					break;
 				case "w":
@@ -66,6 +75,8 @@ public class BbsPresenter {
 		number = number + 1;
 		bbs.setId(number);
 		bbs.setDate(getDate());
+		loader.write(bbs);
+		
 		datas.add(bbs);
 //		datas.add(input.process(scanner));    // 한줄로 작성할 경우.
 	}
@@ -75,7 +86,7 @@ public class BbsPresenter {
 		long currentTime = System.currentTimeMillis();
 		return sdf.format(currentTime);
 	}
-	
+
 	// 상세보기로 이동
 	private void goDetail(){
 		System.out.println("글번호를 입력하세요:");
@@ -93,6 +104,7 @@ public class BbsPresenter {
 				break; // 조건문에 부합되면 반복문을 중지한다.
 			}
 		}
+		
 	}
 	
 	
