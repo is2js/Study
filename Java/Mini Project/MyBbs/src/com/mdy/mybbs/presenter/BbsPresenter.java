@@ -27,7 +27,7 @@ public class BbsPresenter {
 	BbsDetail detail;
 	BbsLoader loader;
 	
-	int number = 0;
+	long number = 0;
 	
 	/**
 	 * new 생성자가 호출되면 init() 함수를 통해 초기화해준다.
@@ -72,7 +72,8 @@ public class BbsPresenter {
 	
 	private void write(){
 		Bbs bbs = input.process(scanner);
-		number = number + 1;
+//		number = number + 1;
+		number = loader.readCount();
 		bbs.setId(number);
 		bbs.setDate(getDate());
 		loader.write(bbs);

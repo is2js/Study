@@ -1,0 +1,5 @@
+package com.mdy.mybbs.util;
+
+public class FileUtil {
+
+}

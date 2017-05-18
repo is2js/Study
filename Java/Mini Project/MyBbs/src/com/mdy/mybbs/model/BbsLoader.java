@@ -11,9 +11,13 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.ArrayList;
 
+import com.mdy.mybbs.util.FileUtil;
+
 public class BbsLoader {
 	final String DATABASE_DIR = "c:/Temp/mybbs/";    //    "c:\\Temp\\mybbs\\";  이렇게 해줘도 된다.
 	final String DATABASE_NAME = "mybbs.db";
+	final String DATABASE_COUNT = "mybbscount.db";
+	
 	final String COLUMN_SEPERATOR = "@@"; // 한칸 단위
 	final String RECORD_SEPERATOR = "\r\n"; // 한줄 단위
 	/**
@@ -65,25 +69,10 @@ public class BbsLoader {
 	public void write(Bbs bbs) {
 		// bbs에 있는 데이터를 텍스트 파일에 저장한다.
 		// 1. 디렉토리가 있는지 검사
-		
-		File dir = new File(DATABASE_DIR);
-		if(!dir.exists()){
-			dir.mkdirs(); // 검사한 경로상의 모든 디렉토리를 생성해준다.
-		}
+		FileUtil.makeDirectoryIfNotExist(DATABASE_DIR);
 		
 		// 1.1 파일이 있는지 검사하고 없으면 생성
-		File database = new File(DATABASE_DIR+DATABASE_NAME);
-		if(!database.exists()){
-			try {
-			database.createNewFile();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-		
-		// 2. bbs에 내용을 database 파일에 저장을 해야 한다.
-		// 2.1 먼저  저장하는 데이터의 구조를 설계해야 한다.
-		// 2.1.1 구분자를 정의해 두어야 한다.
+		File database = FileUtil.getFile(DATABASE_DIR + DATABASE_NAME);
 		
 		// 2.2 bbs의 내용을 횡으로 펼친다.
 		String oneData = bbs.getId() + COLUMN_SEPERATOR
@@ -106,4 +95,42 @@ public class BbsLoader {
 			e.printStackTrace();
 		}
 	}
+	
+	public long readCount(){
+		long result = 0;
+		// 1. 위와 마찬가지로 디렉토리와 파일이 있는지 검사하고, 없으면 먼저 생성해준다.
+		// 1.1 디렉토리 검사 및 생성
+		FileUtil.makeDirectoryIfNotExist(DATABASE_DIR);
+		
+		// 1.2 파일이 있는지 검사하고 없으면 생성
+		File database = FileUtil.getFile(DATABASE_DIR + DATABASE_COUNT);
+
+		try {
+			String number = FileUtil.readFileForCount(database) +"";
+			// 로직
+			// 4. 읽어온 데이터에 아무것도 없으면 첫번째 글이므로 result에 1을 세팅
+			if(number == null){
+				result = 1;
+			// 5. 데이터가 있으면 숫자로 변환하고 +1을 해서 result에 세팅
+			} else {
+				long tempNumber = Long.parseLong(number);
+				result = tempNumber + 1;
+			}
+			
+			//6. 데이터베이스에 최종 카운트를 저장한다.
+			FileUtil.writeFileForCount(database, result);
+			 
+			
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	
 }
+
+
+
+

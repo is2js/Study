@@ -1,0 +1,5 @@
+package com.mdy.mybbs.util;
+
+public class FileUtil {
+	// 클래스에 속성은 없고, 기능만 들어가 있는 것들이 Util 패키지에 들어간다.
+}
