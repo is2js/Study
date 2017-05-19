@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">BasicWidget</string>
+
+    <!-- 주석을 달고 -->
+    <string name="word_dog">강아지</string>
+    <string name="word_pig">돼지</string>
+    <string name="word_horse">말</string>
+
+    <string name="radio_red">빨강</string>
+    <string name="radio_green">초록</string>
+    <string name="radio_blue">파랑</string>
+</resources>

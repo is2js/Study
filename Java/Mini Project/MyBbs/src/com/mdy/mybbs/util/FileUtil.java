@@ -37,10 +37,10 @@ public class FileUtil {
 	public static String readFileForCount(File database){
 		String number = "";
 		try {
-		FileReader fr = new FileReader(database); // 1. ÀÐ±âÀ§ÇÑ ¾ãÀº »¡´ë ²È±â(¼ù°¡¶ô)
-		BufferedReader br = new BufferedReader(fr); // 2. ±½Àº »¡´ë
-		number = br.readLine(); // 3. ÇÑÁÙ¸¸ ÀÐ¾î¿À±â
-		fr.close();
+			FileReader fr = new FileReader(database); // 1. ÀÐ±âÀ§ÇÑ ¾ãÀº »¡´ë ²È±â(¼ù°¡¶ô)
+			BufferedReader br = new BufferedReader(fr); // 2. ±½Àº »¡´ë
+			number = br.readLine(); // 3. ÇÑÁÙ¸¸ ÀÐ¾î¿À±â
+			fr.close();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -50,9 +50,9 @@ public class FileUtil {
 	
 	public static void writeFileForCount(File database, long result){
 		try {
-		FileWriter fw = new FileWriter(database); 
-		fw.write(result+"");
-		fw.close();
+			FileWriter fw = new FileWriter(database); 
+			fw.write(result+"");
+			fw.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
