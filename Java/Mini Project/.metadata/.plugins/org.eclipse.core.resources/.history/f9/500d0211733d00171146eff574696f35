@@ -1,11 +1,13 @@
 package com.mdy.mybbs.view;
 
 import java.util.ArrayList;
+
 import com.mdy.mybbs.model.Bbs;
 
 public class BbsList {
 	
 	// 목록에 대한 기본 설계
+	
 	
 	// 목록을 뿌리기
 	public void showList(ArrayList<Bbs> datas){
@@ -33,4 +35,6 @@ public class BbsList {
 	public void delete(long id){
 		
 	}
+	
+	
 }

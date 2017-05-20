@@ -1,6 +1,7 @@
 package com.mdy.mybbs.view;
 
 import java.util.Scanner;
+
 import com.mdy.mybbs.model.Bbs;
 
 public class BbsInput {

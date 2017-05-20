@@ -1,9 +1,11 @@
 package com.mdy.mybbs.view;
 
 import java.util.Scanner;
+
 import com.mdy.mybbs.model.Bbs;
 
 public class BbsInput {
+
 	
 	public Bbs process(Scanner scanner){
 		System.out.println("제목을 입력하세요.");
@@ -18,6 +20,8 @@ public class BbsInput {
 		bbs.setAuthor(author);
 		bbs.setContent(content);
 		
+		
 		return bbs;
 	}
+	
 }

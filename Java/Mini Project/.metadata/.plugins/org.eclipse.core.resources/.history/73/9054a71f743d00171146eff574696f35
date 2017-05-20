@@ -1,8 +1,8 @@
 package com.mdy.mybbs.model;
 
 public class Bbs {
-	
 	// 데이터 구조 설계 정의
+	
 	private long id;
 	private String title;
 	private String content;
