@@ -1,0 +1,22 @@
+package com.mdy.freetest;
+
+public class Parent {
+
+	public String name = "father";
+	public int age = 60;
+	
+	
+	Parent(String name, int age){
+		this.name = name;
+		this.age = age;
+	};
+	
+	public void goSomewhere(){
+		System.out.println("회사에 갑니다.");
+	}
+	
+	public void liveWhere(){
+		System.out.println("서울에 살고 있습니다.");
+	}
+
+}

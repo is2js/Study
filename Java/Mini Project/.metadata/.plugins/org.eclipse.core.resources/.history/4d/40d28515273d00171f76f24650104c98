@@ -1,0 +1,18 @@
+package com.mdy.freetest;
+
+public class Child extends Parent {
+	
+	public int schoolName;
+	
+	Child(String name, int age, int schoolName){
+		this.name = name;
+		this.age = age;
+		this.schoolName = schoolName;
+	}
+	
+	@Override
+	public void goSomewhere(){
+		System.out.println("학교에 갑니다.");
+	}
+
+}

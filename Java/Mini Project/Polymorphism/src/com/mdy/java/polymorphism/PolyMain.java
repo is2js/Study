@@ -9,5 +9,9 @@ public class PolyMain {
 		System.out.println(son.getName());
 		
 		Father daughter = new Daughter();
+		
+		
+		
+		
 	}
 }

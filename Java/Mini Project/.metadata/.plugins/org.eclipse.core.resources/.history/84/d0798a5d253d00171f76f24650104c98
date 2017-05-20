@@ -1,0 +1,16 @@
+package com.mdy.freetest;
+
+public class Parent {
+	
+	public String name;
+	public String age;
+	
+	public void goSomewhere(){
+		System.out.println("회사에 갑니다.");
+	}
+	
+	public void liveWhere(){
+		System.out.println("증산역에 살고 있습니다.");
+	}
+
+}
