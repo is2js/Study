@@ -2884,3 +2884,17 @@ java.nio.file.DirectoryNotEmptyException: C:\workspaces\Study\Java\Mini Project\
 !MESSAGE Could not delete: C:\workspaces\Study\Java\Mini Project\Extends\bin\com\mdy.
 !SUBENTRY 5 org.eclipse.core.filesystem 4 273 2017-05-21 00:42:58.608
 !MESSAGE Could not delete: C:\workspaces\Study\Java\Mini Project\Extends\bin\com.
+!SESSION 2017-05-21 21:57:33.977 -----------------------------------------------
+eclipse.buildId=4.6.3.M20170301-0400
+java.version=1.8.0_111
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=ko_KR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2017-05-21 21:57:47.915
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\MDY'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.

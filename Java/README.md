@@ -14,5 +14,6 @@
   - ##### [다형성(Polymorphism)](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/Polymorphism)
   - ##### [예외처리(Exception)](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/Exception)
   - ##### [게시판 만들기(객체지향사용)](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/MyBbs)
-
+- ### Questions
+  - ##### [다형성(업캐스팅)](https://github.com/mdy0501/Study/tree/master/Java/Questions/Polymorphism_Upcasting)
 *****
