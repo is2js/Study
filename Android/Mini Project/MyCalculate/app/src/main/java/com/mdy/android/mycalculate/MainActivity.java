@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onClick(View button) {  // 시스템의 이벤트 리스너를 통해 호출된다.
-            String data = "";
-            data = ((Button)button).getText().toString();
+            String data = ((Button)button).getText().toString();
 
             switch (button.getId()) {
                 case R.id.button_0: inputData(data); break;
@@ -103,8 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         public void inputData(String numb){
-            String temp = "";
-            temp = displayView.getText().append(numb).toString();
+            String temp = displayView.getText().append(numb).toString();
             displayView.setText(temp);
         }
 }
