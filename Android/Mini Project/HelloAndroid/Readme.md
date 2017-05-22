@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv = (TextView) findViewById(R.id.textView);
         btn = (Button) findViewById(R.id.btnClick);
 
-        // 1 번형태로 구현
+        // 1 번형태로 구현  (+implements View.OnClickListener)
         btn.setOnClickListener(this);
 
         // 2 번형태로 구현 - 아래에 구현된 리스너를 등록해준다.
