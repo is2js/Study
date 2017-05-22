@@ -2,13 +2,15 @@ package com.mdy.polymorphism_upcasting;
 
 public class Parent {
 
-	public String name;
-	public int age;
+	public String name = null;
+	public int age = 0;
+	 
+	public Parent(){}   // 이 부분을 빼면 Child 클래스에서 생성자 정의할때 오류난다.
 	
 	public Parent(String name, int age){
 		this.name = name;
 		this.age = age;
-	};
+	}
 	
 	public void showInformation(){
 		System.out.println("이름은 "+ name + " 입니다.");

@@ -1,0 +1,36 @@
+package com.mdy.polymorphism_upcasting;
+
+public class Child extends Parent {
+	
+	public String schoolName;
+	
+	/*public Child(){
+		//super(nam, ag);
+		//super(name, age); 없이 아래처럼 사용하면 에러난다.
+  		//
+		schoolName = name;
+	}
+	*/
+	public Child(String name1, int age1, String sc1){
+		name = name1;
+		age = age1;
+		schoolName = sc1;
+	}
+	
+	public Child(String n){
+		name = n;
+		schoolName = n;
+	}
+	
+	@Override
+	public void goSomewhere(){
+		System.out.println("학교에 갑니다.");
+	}
+	
+	@Override
+	public void showInformation(){
+		System.out.println("이름은 "+ name + " 입니다.");
+		System.out.println("나이는 "+ age + " 입니다.");
+		System.out.println("학교는 "+ schoolName + " 입니다.");
+	}
+}
