@@ -2,12 +2,17 @@ package com.mdy.android.calculator;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.mdy.android.calculator.util.Logger;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    public static final String TAG = "TAG";
 
     TextView txtPreview;
     TextView txtResult;
@@ -154,6 +159,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void setPreview(int number){
         String current = txtPreview.getText().toString();
+        Log.i(TAG, "로그의 내용=" + number);
+        Logger.d(TAG, "로그의 내용=" + number);
+        Log.w(TAG, "로그의 내용=" + number);
+        Logger.e(TAG, "로그의 내용=" + number);
+
         txtPreview.setText(current + number);
     }
 
