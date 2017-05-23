@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     final int LIST = 1;
     final int CUSTOM = 2;
     final int GRID = 3;
-    final int RECYCLER = 34;
+    final int RECYCLER = 4;
 
     Spinner spinner;
 

@@ -42,7 +42,8 @@ public class ListActivity extends AppCompatActivity {
                 Intent intent = new Intent(ListActivity.this, DetailActivity.class);
                 // 2. putExtra로 값 입력
                 String result = datas.get(position);
-                intent.putExtra(DATA_KEY, result);
+                intent.putExtra(DATA_KEY, result);  // 다음 2줄이 intent.putExtra(DATA_KEY, datas.get(position)); 으로 대체 가능
+
                 // 3. intent 를 이용한 Activity 생성 요청
                 startActivity(intent);
             }
