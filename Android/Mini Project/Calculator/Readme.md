@@ -1,9 +1,72 @@
 ### 계산기 만들기 프로젝트2 (Calculator)
 ---
-##### 사용
-- ConstraintLayout / LinearLayout 사용
-- ArrayList 사용
--
+##### 학습내용들
+- Log(로그)찍는 방법
+- 계산하는 로직 (정규표현식)
+- 코드 작성의 다양한 방법
+---
+### <Log(로그)찍는 방법>
+```java
+
+public static final String TAG = "TAG";
+
+
+private void setPreview(int number){
+        String current = txtPreview.getText().toString();
+        Log.i(TAG, "로그의 내용=" + number);
+        Log.d(TAG, "로그의 내용=" + number);
+        Log.w(TAG, "로그의 내용=" + number);
+        Log.e(TAG, "로그의 내용=" + number);
+        txtPreview.setText(current + number);
+    }
+
+```
+
+에러 아래는 실행이 안되기 때문에 로그는 에러가 난 것의 위쪽에 찍어야 한다.
+로그 Class는 간단하게 구성되어 있기 때문에 많이 찍어도 부하가 걸리지 않는다.
+
+
+#### [Logger 클래스 만들기]
+ - util 패키지를 만들고, 그 안에 Logger라는 클래스를 만든다.
+```java
+package com.mdy.android.calculator.util;
+
+import android.util.Log;
+
+/**
+ * Created by MDY on 2017-05-23.
+ */
+
+public class Logger {
+    public static final boolean DEBUG = BuildConfig.DEBUG_MODE;
+
+    public static void i(String tag, String msg){
+        if(DEBUG) {     // if DEBUG가 true 일때만 작동
+            Log.i(tag, msg);
+        }
+    }
+
+    public static void d(String tag, String msg){
+        if(DEBUG) {     // if DEBUG가 true 일때만 작동
+            Log.d(tag, msg);
+        }
+    }
+
+    public static void w(String tag, String msg){
+        if(DEBUG) {     // if DEBUG가 true 일때만 작동
+            Log.w(tag, msg);
+        }
+    }
+
+    public static void e(String tag, String msg){
+        if(DEBUG) {     // if DEBUG가 true 일때만 작동
+            Log.e(tag, msg);
+        }
+    }
+
+}
+
+```
 ---
 ### <계산하는 로직>
 ```java
