@@ -45,6 +45,7 @@ class CustomAdapter extends BaseAdapter { // BaseAdapter는 Adapter의 기본이
         this.datas = datas;
         this.context = context;
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); //getSystemService 함수를 쓰기 위해서 LayoutInflater로 캐스팅해줬다.
+        // getSystemService() 메소드를 사용해 LayoutInflater 객체를 참조하고 있다. (p257)
     }
     @Override
     public int getCount() { // 사용하는 데이터의 총 개수를 리턴 -> 리스트뷰의 길이를 추정할 수 있게 해준다.
