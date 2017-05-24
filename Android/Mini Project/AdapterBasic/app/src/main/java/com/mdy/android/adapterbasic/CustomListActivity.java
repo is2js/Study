@@ -36,6 +36,8 @@ public class CustomListActivity extends AppCompatActivity {
     }
 }
 
+// CustomAdapter역할 : Presenter(데이터 가져오고, 화면 뿌려주고, 컨트롤하고)
+// M(데이터를 가져오고) -> C(가공을 하고) > V(화면에 뿌려준다)
 class CustomAdapter extends BaseAdapter { // BaseAdapter는 Adapter의 기본이 되는 기능이 정의되어 있다.
     ArrayList<Data> datas;
     Context context;
@@ -48,21 +50,25 @@ class CustomAdapter extends BaseAdapter { // BaseAdapter는 Adapter의 기본이
         // getSystemService() 메소드를 사용해 LayoutInflater 객체를 참조하고 있다. (p257)
     }
     @Override
-    public int getCount() { // 사용하는 데이터의 총 개수를 리턴 -> 리스트뷰의 길이를 추정할 수 있게 해준다.
+    public int getCount() { // 사용하는 데이터의 총 개수를 리턴 -> 리스트뷰의 길이를 추정할 수 있게 해준다. (스크롤의 길이를 알 수 있다.)
         return datas.size();
     }
 
     @Override
     public Object getItem(int position) { // 데이터 클래스 하나를 리턴
+        Log.e("Adapter", "getItem position="+position);
         return datas.get(position);
     }
 
     @Override
     public long getItemId(int position) { // 대부분 인덱스가 그대로 리턴된다.
+        Log.e("Adapter", "getItem[Id] position="+position);
         return position;
     }
 
+
     // 아이템 뷰 하나를 리턴한다.
+    // 내가 화면에 뿌려줄 것을 뿌려준다.
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // xml을 class로 변환한다.
