@@ -24,7 +24,9 @@ public class CustomListActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.listView);
 
         // 1. 데이터
-//        ArrayList<Data> datas = new ArrayList<>();
+  /*    ArrayList<Data> datas = new ArrayList<>();
+        datas = Loader.getData();*/
+        // 이렇게 해주면 리소드를 낭비하는 것이기 때문에 아랫줄과 같이 코드를 작성하자.
         ArrayList<Data> datas = Loader.getData();
 
         // 2. 아답터
@@ -55,7 +57,7 @@ class CustomAdapter extends BaseAdapter { // BaseAdapter는 Adapter의 기본이
     }
 
     @Override
-    public Object getItem(int position) { // 데이터 클래스 하나를 리턴
+    public Object getItem(int position) { // 데이터 하나를 리턴
         Log.e("Adapter", "getItem position="+position);
         return datas.get(position);
     }
@@ -118,7 +120,7 @@ class Loader {
         for(int i=0; i<100; i++){
             Data data = new Data();
             data.setId(i+1);
-            data.setTitle("Grid Title"+i);
+            data.setTitle("Title"+i);
             result.add(data);
         }
         return result;
