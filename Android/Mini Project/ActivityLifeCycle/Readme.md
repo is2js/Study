@@ -1,7 +1,7 @@
 ## 2017.05.25.(목)
 
 ### Activity Life Cycle (액티비티 생명 주기)
-![ActivityLifeCycle](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ActivityLifeCycle/graphics/ActivityLifeCycle(image).jpg)
+![ActivityLifeCycle](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/ActivityLifeCycle/graphics/ActivityLifeCycle(image).png)
 - 현재 하나의 액티비티가 보여지고 있을때, 다른 액티비티를 실행시키더라도 기존에 실행되고 있던 액티비티가 조금이라도 화면에 보여지면 기존에 실행되고 있었던 액티비티의 Life Cycle은 onPause()가 된다.
  그리고 예를 들어 새로 실행하는 액티비티의 속성이 투명한 속성이어서 기존에 실행되던 액티비티가 계속 보이게 된다면 기존에 실행되면 액티비티의 생명주기는 계속 onPause()인 것이다.
 
