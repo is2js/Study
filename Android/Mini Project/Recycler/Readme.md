@@ -6,11 +6,45 @@
 # 수정중...
 
 #### 주요 학습 내용
-[1]
-[2]
+[1] Inflater를 꺼내는 방법 2가지
+[2] Recycler 만드는 순서
 [3]
 [4]
 [5]
+
+
+### Inflater를 꺼내는 방법 2가지
+> ##### 1. Context에서 꺼낸다.
+
+```java
+public CustomAdapter(ArrayList<Data> datas, Context context) {
+    this.datas = datas;
+    this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    this.context = context;
+}
+```
+
+
+> ##### 2. View에서 꺼낸다.
+
+```java
+@Override
+public Holder onCreateViewHolder(ViewGroup parent, int viewType) { // 뷰홀더 안에서 인플레이트하기
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null);   // 아래 것과 둘 중에 어떤 것을 사용해도 상관없다.
+                                                                                                // 다만 이렇게 하려면 item_list의 최외곽 레이아웃의 height를 wrap_content로 해줘야 한다.
+    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+    // Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
+
+
+    //  Holder holder = new Holder(view);
+    //  return holder;
+    // 2줄로 작성되었던 코드를 아래 1줄로 간편하게 작성했다.
+    return new Holder(view);
+}
+```
+
+
+Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
 
 ### Recycler 만드는 순서
 > ##### 1. 데이터 정의
