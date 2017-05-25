@@ -28,6 +28,10 @@
 ---
 ### Activity에 투명한 속성 주기
 > 보통 디자인에서는 투명한 속성을 Transparent 라 하고, 소트프웨어에서는 Translucent라고 한다.
+
+![MaterialTheme](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/ActivityLifeCycle/graphics/MaterialTheme(image).png)
+> #### [머티리얼 테마 사용 -  Link](https://developer.android.com/training/material/theme.html?hl=ko#Inheritance)
+
 ##### 1. AndroidManifest.xml 설정
 ```xml
 <application
