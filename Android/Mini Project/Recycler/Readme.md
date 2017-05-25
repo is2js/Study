@@ -15,6 +15,7 @@
 
 ### Inflater를 꺼내는 방법 2가지
 > ##### 1. Context에서 꺼낸다.
+- this.inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 ```java
 public CustomAdapter(ArrayList<Data> datas, Context context) {
@@ -26,6 +27,7 @@ public CustomAdapter(ArrayList<Data> datas, Context context) {
 
 
 > ##### 2. View에서 꺼낸다.
+-  View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
 
 ```java
 @Override
@@ -43,8 +45,10 @@ public Holder onCreateViewHolder(ViewGroup parent, int viewType) { // 뷰홀더 
 }
 ```
 
+>> - 첫번째 방법의 (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE); 와
+>>   두번째 방법의 LayoutInflater.from(parent.getContext()) 가  같은 코드이다.
+>> - LayoutInflater.from 에서 from() 메소드를 들어가보면 1번째 방법의 코드가 작성되어 있다.
 
-Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
 
 ### Recycler 만드는 순서
 > ##### 1. 데이터 정의
