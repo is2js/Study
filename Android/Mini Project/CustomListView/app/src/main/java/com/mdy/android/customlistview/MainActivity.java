@@ -41,27 +41,30 @@ public class MainActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
 
 
-        // Adapter 안으로 이동
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
-//
-//                Data data = datas.get(position);
-//
-//                intent.putExtra(DATA_KEY, position);
-//                intent.putExtra(DATA_RES_ID, data.resId);
-//                intent.putExtra(DATA_TITLE, data.title);
-//
-//                startActivity(intent);
-//            }
-//        });
+        /*Adapter 안으로 이동
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+
+                Data data = datas.get(position);
+
+                intent.putExtra(DATA_KEY, position);
+                intent.putExtra(DATA_RES_ID, data.resId);
+                intent.putExtra(DATA_TITLE, data.title);
+
+                startActivity(intent);
+            }
+        });*/
     }
 }
 
 
 // 아답터는 Presenter이다.
-class CustomAdapter extends BaseAdapter {  // BaseAdapter를 상속받으면 기본적으로 구현해줘야 하는 것들이 꼭 있다. 메소드들이 정의되어 있다.
+class CustomAdapter extends BaseAdapter {
+    // BaseAdapter를 상속받으면 기본적으로 구현해줘야 하는 것들이 꼭 있다. (메소드)
+    // 반드시 구현해야 하는 메소드 => int getCount(), Object getItem(), long getItemId(), View getView()
+
     // CustomAdapter에서 필요한 3가지
     // 1. 데이터
     ArrayList<Data> datas;
@@ -131,6 +134,9 @@ class CustomAdapter extends BaseAdapter {  // BaseAdapter를 상속받으면 기
         int resId;
 
         public Holder(View view, final Context context){
+//            no = (TextView) view.findViewById(R.id.txtNo);
+
+            // 아래 있는 txtNo, txtTitle, imageView 는 Item_list.xml에 있는 위젯들의 id값이다.
             no = (TextView) view.findViewById(R.id.txtNo);
             title = (TextView) view.findViewById(R.id.txtTitle);
             image = (ImageView) view.findViewById(R.id.imageView);
@@ -183,7 +189,7 @@ class Loader {
         for (int i = 1; i <= 10; i++) {
             Data data = new Data();
             data.no = i;
-            data.title = "아기사진";
+            data.title = i+"번째 아기사진";
 
             data.setImage("baby" + i, context);
             // 덧셈 연사자를 진행할때 연산자중 한 쪽이 String 형이면 나머지 쪽을 String 형태로 변환 한 다음 두 String형 문자열을 결합한다.
