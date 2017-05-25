@@ -3,6 +3,7 @@ package com.mdy.android.recycler;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,14 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Data> datas = Loader.getData(this);
 
         // 2. 아답터
-
+        CustomRecycler adapter = new CustomRecycler(datas, this);
 
         // 3. 연결
+        listView.setAdapter(adapter);
 
         // 4. 레이아웃 매니저 등록
+        listView.setLayoutManager(new LinearLayoutManager(this));
+
     }
 }
 
@@ -46,7 +50,9 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     //  List VIew에서 convertView == null 일때 처리
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) { // 뷰홀더 안에서 인플레이트하기
-        View view = LayoutInflater.from(parent.getContext().inflate(R.layout.item_list, parent, false);
+//        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null);   // 아래 것과 둘 중에 어떤 것을 사용해도 상관없다.
+                                                                                                    // 다만 이렇게 하려면 item_list의 최외곽 레이아웃의 height를 wrap_content로 해줘야 한다.
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
 
         return new Holder(view);  //  Holder holder = new Holder(view); - 코드를 간편하게
     }
