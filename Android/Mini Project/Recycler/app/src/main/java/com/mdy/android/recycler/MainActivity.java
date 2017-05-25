@@ -82,10 +82,12 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) { // 뷰홀더 안에서 인플레이트하기
 //        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null);   // 아래 것과 둘 중에 어떤 것을 사용해도 상관없다.
-                                                                                                    // 다만 이렇게 하려면 item_list의 최외곽 레이아웃의 height를 wrap_content로 해줘야 한다.
+                                                                                                     // 다만 이렇게 하려면 item_list의 최외곽 레이아웃의 height를 wrap_content로 해줘야 한다.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
         // Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
-
+        // LayoutInflater.from 에서 from() 메소드를 들어가보면 1번째 방법의 코드가 작성되어 있다.
+        // context를 inflate의 용도로만 사용한다면 굳이 context를 받지 않고, view로 받아서 사용해도 된다.
+        // 그러나 여기서는 context를 다른 용도로도 사용할 것이기 때문에 onCreateViewHolder 메소드의 인자로 받은 것이다.
 
         //  Holder holder = new Holder(view);
         //  return holder;
