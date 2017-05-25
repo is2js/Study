@@ -186,6 +186,7 @@ class Loader {
             data.title = "아기사진";
 
             data.setImage("baby" + i, context);
+            // 덧셈 연사자를 진행할때 연산자중 한 쪽이 String 형이면 나머지 쪽을 String 형태로 변환 한 다음 두 String형 문자열을 결합한다.
             result.add(data);
         }
         return result;
@@ -202,6 +203,5 @@ class Data {
         image = str;
         // 문자열로 리소스 아이디 가져오기
         resId = context.getResources().getIdentifier(image, "mipmap", context.getPackageName());
-
     }
 }
