@@ -51,7 +51,7 @@ class GridAdapter extends BaseAdapter { // BaseAdapter는 Adapter의 기본이 �
     }
 
     @Override
-    public Object getItem(int position) { // 데이터 클래스 하나를 리턴
+    public Object getItem(int position) { // 데이터 하나를 리턴
         Log.e("Adapter", "getItem position="+position);
         return datas.get(position);
     }

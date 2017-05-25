@@ -118,7 +118,7 @@ class Loader {
         for(int i=0; i<100; i++){
             Data data = new Data();
             data.setId(i+1);
-            data.setTitle("타이틀"+i);
+            data.setTitle("Grid Title"+i);
             result.add(data);
         }
         return result;
