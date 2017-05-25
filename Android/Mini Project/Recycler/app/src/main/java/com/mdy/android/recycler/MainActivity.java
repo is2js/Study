@@ -32,20 +32,51 @@ public class MainActivity extends AppCompatActivity {
         // 3. 연결 (아답터<=>뷰)
         listView.setAdapter(adapter);
 
+        // Recycler를 다 만들고 나서, 레이아웃 매니저를 List를 뿌려주는 매니저를 달면 쭉 List로 보이고,
+        // Grid 형태로 뿌려주는 매니저를 달면 똑같은 RecyclerView인데 그것을 격자모양으로 보여준다.
         // 4. 레이아웃 매니저 등록
         listView.setLayoutManager(new LinearLayoutManager(this));
 
     }
 }
 
+
+
+    // Recycler.Adapter를 상속받으면 .Adapter<VH> 제네릭으로 나오는데 VH는 ViewHolder의 약자이다.
+    // 강사님이 ViewHolder 이름을 Holder라고 한 이유는 ViewHolder가 이름이 정의된게 있어서 Holder로 한 것이다.
+    // ViewHolder 클래스를 만들라고 메세지가 나오는데 전구버튼을 클릭해서 만들면 CustomRecycler 클래스 밖에 만들어진다.
+    // 그런데 여기서는 ViewHolder클래스를 CustomRecycler 클래스 안에서만 사용하기 때문에 내부에 만들도록 한다.
+    // 그리고 실제로 ViewHolder들은 99%가 Adapter 내에서만 사용된다.
+    // 이제 아래 Holder 클래스 만드는 쪽에 메모..
+
 class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
+
     ArrayList<Data> datas;
     Context context;
+
+
+    /* 생성자 만들기 */
+    // 생성자는 꼭 받아야하는 것이 2개가 필수적으로 있다.
+    // (1) data  (2) context
+    // context를 받는 이유가 여기서는 조금 다르다.
+    // 여기서는 Inflater를 context에서 꺼내쓰지 않는다. 뷰에서 꺼내 쓴다.
+    // // Inflater를 꺼내쓰는 방법  (1) context에서 꺼내 쓴다.  (2) view에서 꺼내 쓴다.
+    // 이전에 다른 CustomAdapter 클래스는 context에서 Inflater를 꺼내썼다.
+    // view에서 꺼내써야 한다고 해도 context를 인자로 받긴 해야 한다.
+
     public CustomRecycler(ArrayList<Data> datas, Context context){
         this.datas = datas;
         this.context = context;
     }
 
+
+
+
+    // 아래 onCreateViewHolder 메소드가 이전에 CustomAdapter 클래스의 getView()에서 convertView 가 null일때 홀더를 생성해주던 부분이다.
+    // convertView가 null이 아니어서 항상 getView가 호출될 때 값을 세팅해줬던 부분이 onBindViewHolder 메소드 이다.
+    // 그래서 onCreateViewHolder 메소드에 ViewHolder 하나 던져주면 화면 사이즈에 맞게, 리스트행이 10줄이면 10개의 ViewHolder가 생성이 된다.
+    // 그리고 그 10개의 ViewHolder로 onBindViewHolder 메소드가 돌아가면서 값을 세팅해서 다른 값을 화면에 보여준다.
+    // 이렇게 되면 CustomAdapter에 있는 if절이 줄어들기 때문에 코드의 양이 상당히 줄게 된다.
 
     //  List VIew에서 convertView == null 일때 처리
     @Override
@@ -56,7 +87,9 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         // Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
 
 
-        //  Holder holder = new Holder(view); - 코드를 간편하게 하기 위해 아래와 같이 작성했다.
+        //  Holder holder = new Holder(view);
+        //  return holder;
+        // 2줄로 작성되었던 코드를 아래 1줄로 간편하게 작성했다.
         return new Holder(view);
     }
 
@@ -77,6 +110,24 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     public int getItemCount() {
         return datas.size();
     }
+
+
+
+
+    /* ViewHolder 만들기 */
+    // ViewHolder 클래스는 RecyclerView.Adapter에 사용할 수 있는 형태로 상위 객체가 미리 정의되어 있다.
+    // 그래서 Recycler.ViewHolder 를 상속받아서 만들어야 한다. (extends RecyclerView.ViewHolder)
+    // 그리고 나서 ViewHolder(이름: Holder) 클래스에 계속 빨간불이 들어오는데 생성자를 강제로 만들라는 메세지가 뜬다.
+    // 그리고 나서 CustomRecycler 클래스에 빨간줄이 나오는 곳으로 가서 Holder에 Alt + Enter를 눌러주면
+    // <Holder> 가 <CustomRecycler.Holder> 로 바뀐다. (Holder가 CustomRecycler 안에 있다고 알려주기 위해서)
+    // 그리고 나서 BaseAdapter에서 필수로 구현해야 하는 메소드들을 구현했듯이
+    // 여기서도 RecyclerView 클래스에 필수적으로 구현해야 하는 메소드들을 구현해준다. (3개)
+    // (1) onCreateViewHolder  ,  (2) onBindViewHolder  ,  (3) getItemCount()
+
+    // 그리고 CustomRecycler 클래스도 생성자를 통해 호출을 할 것이다.
+    // 그래서 CustomRecycler 클래스를 만들고나서 가장 먼저 해야하는 것이 생성자를 만들어 주는 것이다.
+    // public Custom() { }   ->  생성자 쪽으로 이동
+
 
     class Holder extends RecyclerView.ViewHolder {
 
