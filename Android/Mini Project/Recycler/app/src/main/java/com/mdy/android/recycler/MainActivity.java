@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         listView = (RecyclerView) findViewById(R.id.listView);
         // 1. 데이터
-        ArrayList<Data> datas = Loader.getData(this);
+        ArrayList<Data> datas = Loader.getData(this);  // this는 MainActivity를 의미하며 MainActivity는 Context를 상속하기 때문에
 
         // 2. 아답터
         CustomRecycler adapter = new CustomRecycler(datas, this);
@@ -81,7 +81,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         TextView no;
         TextView title;
         public Holder(View itemView) {
-            super(itemView);
+            super(itemView);   // 부모 클래스의 기본생성자가 없기 때문에  super()를 강제로 해야하는 것이다.
             image = (ImageView) itemView.findViewById(R.id.image);
             no = (TextView) itemView.findViewById(R.id.txtNo);
             title = (TextView) itemView.findViewById(R.id.txtTitle);
