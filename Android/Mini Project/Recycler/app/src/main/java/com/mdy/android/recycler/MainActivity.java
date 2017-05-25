@@ -23,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView = (RecyclerView) findViewById(R.id.listView);
-        // 1. 데이터
+        // 1. 데이터 정의
         ArrayList<Data> datas = Loader.getData(this);  // this는 MainActivity를 의미하며 MainActivity는 Context를 상속하기 때문에
 
-        // 2. 아답터
+        // 2. 아답터 생성
         CustomRecycler adapter = new CustomRecycler(datas, this);
 
-        // 3. 연결
+        // 3. 연결 (아답터<=>뷰)
         listView.setAdapter(adapter);
 
         // 4. 레이아웃 매니저 등록
@@ -53,11 +53,14 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
 //        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null);   // 아래 것과 둘 중에 어떤 것을 사용해도 상관없다.
                                                                                                     // 다만 이렇게 하려면 item_list의 최외곽 레이아웃의 height를 wrap_content로 해줘야 한다.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        // Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
 
-        return new Holder(view);  //  Holder holder = new Holder(view); - 코드를 간편하게
+
+        //  Holder holder = new Holder(view); - 코드를 간편하게 하기 위해 아래와 같이 작성했다.
+        return new Holder(view);
     }
 
-    // 각 데이터 셀이 나타낼때 호출되는 함수
+    // [이전에 만든 CustomAdapter와 비교] 항상 getView() 호출될때, 값을 세팅해주는 역할&각 데이터 셀이 나타낼때 호출되는 함수
     @Override
     public void onBindViewHolder(Holder holder, int position) {
         // 1. 데이터를 꺼내고
@@ -92,11 +95,11 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         }
 
         public void setNo(int no){
-            this.no.setText(no+"");
+            this.no.setText(no+"");   // 이름이 겹쳐서 this. 을 앞에 써줬다.
         }
 
         public void setTitle(String title){
-            this.title.setText(title);
+            this.title.setText(title);    // 이름이 겹쳐서 this. 을 앞에 써줬다.
         }
 
     }
