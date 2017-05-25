@@ -24,7 +24,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
 
         listView = (ListView) findViewById(R.id.listView);
-        // 1. 데이터
+        // 1. 데이터 생성
         for(int i=0; i<100; i++){
             datas.add("데이터"+i);
         }
