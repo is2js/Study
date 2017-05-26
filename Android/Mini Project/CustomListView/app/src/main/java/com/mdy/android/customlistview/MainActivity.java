@@ -146,7 +146,7 @@ class CustomAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     Intent intent = new Intent(context, DetailActivity.class);
 
-                    intent.putExtra(DATA_KEY, Holder.this.position);
+                    intent.putExtra(DATA_KEY, position);
                     intent.putExtra(DATA_RES_ID, resId);
                     intent.putExtra(DATA_TITLE, title.getText().toString());
 
