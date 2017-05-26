@@ -62,12 +62,12 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     // 여기서는 Inflater를 context에서 꺼내쓰지 않는다. 뷰에서 꺼내 쓴다.
     // // Inflater를 꺼내쓰는 방법  (1) context에서 꺼내 쓴다.  (2) view에서 꺼내 쓴다.
     // 이전에 다른 CustomAdapter 클래스는 context에서 Inflater를 꺼내썼다.
-    // view에서 꺼내써야 한다고 해도 context를 인자로 받긴 해야 한다.
+    // view에서 꺼내써야 한다고 해도 여기서는 context를 인자로 받긴 해야 한다. (다른 이유로)
 
-    public CustomRecycler(ArrayList<Data> datas, Context context){
-        this.datas = datas;
-        this.context = context;
-    }
+        public CustomRecycler(ArrayList<Data> datas, Context context){
+            this.datas = datas;
+            this.context = context;
+        }
 
 
 
@@ -78,7 +78,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     // 그리고 그 10개의 ViewHolder로 onBindViewHolder 메소드가 돌아가면서 값을 세팅해서 다른 값을 화면에 보여준다.
     // 이렇게 되면 CustomAdapter에 있는 if절이 줄어들기 때문에 코드의 양이 상당히 줄게 된다.
 
-    //  List VIew에서 convertView == null 일때 처리
+    //  List View에서 convertView == null 일때 처리
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) { // 뷰홀더 안에서 인플레이트하기
 //        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null);   // 아래 것과 둘 중에 어떤 것을 사용해도 상관없다.
