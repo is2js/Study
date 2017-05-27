@@ -35,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
         // Recycler를 다 만들고 나서, 레이아웃 매니저를 List를 뿌려주는 매니저를 달면 쭉 List로 보이고,
         // Grid 형태로 뿌려주는 매니저를 달면 똑같은 RecyclerView인데 그것을 격자모양으로 보여준다.
         // 4. 레이아웃 매니저 등록
-        listView.setLayoutManager(new LinearLayoutManager(this));  // LinearLayoutManager(this)로 하면 기본이 vertical 이고, 세번째 인자는 리벌스에 대한 것이기 때문에 false로 해준다.
-//          listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listView.setLayoutManager(new LinearLayoutManager(this));
+        // LinearLayoutManager(this)로 하면 기본이 vertical 이고, 세번째 인자는 리벌스에 대한 것이기 때문에 false로 해준다.
+        // <도형님 코드> listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 }
 
@@ -90,7 +91,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
 //        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null);   // 아래 것과 둘 중에 어떤 것을 사용해도 상관없다.
                                                                                                      // 다만 이렇게 하려면 item_list의 최외곽 레이아웃의 height를 wrap_content로 해줘야 한다.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
-        // parent에다 이 뷰 그룹을 넣을 거야, 그러나 지금 당장 넣지는 않을거야(false)
+        // inflate() 메소드 인자들의 의미 -> parent에다 이 뷰 그룹을 넣을 거야, 그러나 지금 당장 넣지는 않을거야(false)
         // Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
         // LayoutInflater.from 에서 from() 메소드를 들어가보면 1번째 방법의 코드가 작성되어 있다.
         // context를 inflate의 용도로만 사용한다면 굳이 context를 받지 않고, view로 받아서 사용해도 된다.
