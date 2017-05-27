@@ -9,19 +9,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-import static android.R.string.no;
+import static com.mdy.android.memo.R.id.txtNo;
 
 public class DetailActivity extends AppCompatActivity {
 
-    TextView txtNo, txtTitle;
+    TextView detailNo, detailTitle, detailContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        txtNo = (TextView) findViewById(R.id.txtNo);
-        txtTitle = (TextView) findViewById(R.id.editTxtTitle);
+        detailNo = (TextView) findViewById(txtNo);
+        detailTitle = (TextView) findViewById(R.id.editTxtTitle);
+        detailContent = (TextView) findViewById(R.id.editTxtContents);
 
         // Activity에서 넘어온 값 처리하기
         // 1. intent 를 꺼낸다.
@@ -39,9 +40,11 @@ public class DetailActivity extends AppCompatActivity {
             // 3.1 bundle이 있으면 값을 꺼내서 변수에 담는다.
             position = bundle.getInt(ListActivity.DATA_KEY);
         }
-        if(no > -1) {
+        if(position > -1) {
             //txtNo.setText(bundle.getInt(ListActivity.DATA_NO)+"");
-            txtTitle.setText(bundle.getString(ListActivity.DATA_TITLE));
+            detailNo.setText(bundle.getString(ListActivity.DATA_NO));
+            detailTitle.setText(bundle.getString(ListActivity.DATA_TITLE));
+            detailContent.setText(bundle.getString(ListActivity.DATA_CONTENTS));
         }
 
 

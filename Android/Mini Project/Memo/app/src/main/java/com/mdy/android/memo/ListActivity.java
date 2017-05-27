@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.mdy.android.memo.R.id.txtNo;
+import static android.content.ContentValues.TAG;
 
 public class ListActivity extends AppCompatActivity {
 
@@ -24,6 +25,7 @@ public class ListActivity extends AppCompatActivity {
     public static final String DATA_KEY = "position";
     public static final String DATA_NO = "no";
     public static final String DATA_TITLE = "title";
+    public static final String DATA_CONTENTS = "contents";
 
 
     @Override
@@ -93,6 +95,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         // 2. 데이터를 세팅
         holder.setNo(data.no);
         holder.setTitle(data.title);
+        holder.setContents(data.contents);
 
     }
 
@@ -105,13 +108,15 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     class Holder extends RecyclerView.ViewHolder{
         TextView no;
         TextView title;
+        TextView contents;
         View view;
         Context context;
 
         public Holder(View itemView, final Context context) {
             super(itemView);
-            no = (TextView) itemView.findViewById(txtNo);
+            no = (TextView) itemView.findViewById(R.id.txtNo);
             title = (TextView) itemView.findViewById(R.id.txtTitle);
+            contents = (TextView) itemView.findViewById(R.id.txtContents);
 
 
             // view로 부터 Context 받아오기
@@ -123,6 +128,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
                     v.getContext().startActivity(intent);
                 }
             });*/
+            Log.e(TAG, "no: "+no + " title: "+title + " contents: "+contents);
 
     // 인자값으로 Context 받아오기
             // 생성자에 Context 인자를 넘겨주고,
@@ -130,7 +136,9 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra(ListActivity.DATA_NO, no.getText());
                     intent.putExtra(ListActivity.DATA_TITLE, title.getText());
+                    intent.putExtra(ListActivity.DATA_CONTENTS, contents.getText());
 
                     // TextView는 getText() 뒤에 toString()을 안해줘도 된다.
                     // EditText는 getText() 뒤에 toString()을 해줘야 한다. (타입이 Editable이라서)
@@ -150,6 +158,10 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
             this.title.setText(title);
         }
 
+        public void setContents(String contents){
+            this.contents.setText(contents);
+        }
+
     }
 
 
@@ -167,6 +179,7 @@ class Loader {
             Data data = new Data();
             data.no = i;
             data.title = i+"번째 메모";
+            data.contents = i+"번째 내용입니다.";
 
             result.add(data);
         }
@@ -177,4 +190,5 @@ class Loader {
 class Data {
     public int no;
     public String title;
+    public String contents;
 }
