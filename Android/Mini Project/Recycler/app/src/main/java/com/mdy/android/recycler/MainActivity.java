@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
         // Recycler를 다 만들고 나서, 레이아웃 매니저를 List를 뿌려주는 매니저를 달면 쭉 List로 보이고,
         // Grid 형태로 뿌려주는 매니저를 달면 똑같은 RecyclerView인데 그것을 격자모양으로 보여준다.
         // 4. 레이아웃 매니저 등록
-        listView.setLayoutManager(new LinearLayoutManager(this));
-
+        listView.setLayoutManager(new LinearLayoutManager(this));  // LinearLayoutManager(this)로 하면 기본이 vertical 이고, 세번째 인자는 리벌스에 대한 것이기 때문에 false로 해준다.
+//          listView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
     }
 }
 
@@ -81,9 +81,16 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     //  List View에서 convertView == null 일때 처리
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) { // 뷰홀더 안에서 인플레이트하기
+        // ViewGroup은 View를 상속한다.
+
+        // parent ViewGroup은 뷰이기 때문에 Context를 갖고 있다. 그래서 아래에서 parent.getContext()를 사용할 수 있다.
+        // LayoutInflater는 뷰를 인플레이터를 하려고 쓰는 애이다.
+
+
 //        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, null);   // 아래 것과 둘 중에 어떤 것을 사용해도 상관없다.
                                                                                                      // 다만 이렇게 하려면 item_list의 최외곽 레이아웃의 height를 wrap_content로 해줘야 한다.
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent, false);
+        // parent에다 이 뷰 그룹을 넣을 거야, 그러나 지금 당장 넣지는 않을거야(false)
         // Inflater를 꺼내는 방법이 2가지가 있는데, 여기에서는 View에서 꺼내는 방법을 사용했다. (+ Inflater는 Context에서도 꺼내 사용할 수 있다.)
         // LayoutInflater.from 에서 from() 메소드를 들어가보면 1번째 방법의 코드가 작성되어 있다.
         // context를 inflate의 용도로만 사용한다면 굳이 context를 받지 않고, view로 받아서 사용해도 된다.
@@ -98,6 +105,9 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     // [이전에 만든 CustomAdapter와 비교] 항상 getView() 호출될때, 값을 세팅해주는 역할&각 데이터 셀이 나타낼때 호출되는 함수
     @Override
     public void onBindViewHolder(Holder holder, int position) {
+        // position은 0부터 시작하는 인덱스라고 생각하면 된다. (1이 아니라 0부터 시작한다.)
+
+
         // 1. 데이터를 꺼내고
         Data data = datas.get(position);
         // 2. 데이터를 세팅
@@ -131,7 +141,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     // public Custom() { }   ->  생성자 쪽으로 이동
 
 
-    class Holder extends RecyclerView.ViewHolder {
+    class Holder extends RecyclerView.ViewHolder {  // RecycerView 클래스의 innerClass가 ViewHolder이다.
 
         ImageView image;
         TextView no;
@@ -139,8 +149,19 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         public Holder(View itemView) {
             super(itemView);   // 부모 클래스의 기본생성자가 없기 때문에  super()를 강제로 해야하는 것이다.
             image = (ImageView) itemView.findViewById(R.id.image);
+            // 내가 인자로 받아온 것은 itemView이고, 그 뷰에 있는 값에 참조를 해줘야 하기 때문에 .itemView를 해준 것이다.
+            // .itemView를 한 것은 위에서 LayoutInflater를 한 것은 itemView를 인플레이트 한 것이기 때문에 그 뷰에 값을 참조해주는 것이다.  -> 이건 바보같은 질문! 그냥 메소드만을 보고 이해하면 된다.
             no = (TextView) itemView.findViewById(R.id.txtNo);
             title = (TextView) itemView.findViewById(R.id.txtTitle);
+
+
+            // TODO 클릭 리스너 달아보기
+//            title.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                }
+//            });
         }
 
         public void setImage(int resId){
