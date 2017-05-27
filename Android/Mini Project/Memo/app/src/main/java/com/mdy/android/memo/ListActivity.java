@@ -31,6 +31,7 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
 
+
         listView = (RecyclerView) findViewById(R.id.recycleView);
 
         // 1. 데이터 정의
@@ -82,7 +83,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list, parent , false);
-        return new Holder(view);
+        return new Holder(view, context);
     }
 
     @Override
@@ -92,8 +93,6 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         // 2. 데이터를 세팅
         holder.setNo(data.no);
         holder.setTitle(data.title);
-
-//        holder.setListener();
 
     }
 
@@ -107,20 +106,39 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         TextView no;
         TextView title;
         View view;
+        Context context;
 
-        public Holder(View itemView) {
+        public Holder(View itemView, final Context context) {
             super(itemView);
             no = (TextView) itemView.findViewById(txtNo);
             title = (TextView) itemView.findViewById(R.id.txtTitle);
 
-            title.setOnClickListener(new View.OnClickListener() {
+
+            // view로 부터 Context 받아오기
+/*            title.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), DetailActivity.class);
+                    Intent intent = new Intent(v.getContext(), DetailActivity.class);   // v.getContext()
                     intent.putExtra(ListActivity.DATA_TITLE, title.getText());
                     v.getContext().startActivity(intent);
                 }
+            });*/
+
+    // 인자값으로 Context 받아오기
+            // 생성자에 Context 인자를 넘겨주고,
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra(ListActivity.DATA_TITLE, title.getText());
+
+                    // TextView는 getText() 뒤에 toString()을 안해줘도 된다.
+                    // EditText는 getText() 뒤에 toString()을 해줘야 한다. (타입이 Editable이라서)
+
+                    context.startActivity(intent);
+                }
             });
+
 
         }
 
@@ -131,16 +149,6 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
         public void setTitle(String title){
             this.title.setText(title);
         }
-
-/*        public void setListener(){
-            this.view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(, DetailActivity.class);
-
-                }
-            });
-        }*/
 
     }
 
