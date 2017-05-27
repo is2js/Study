@@ -69,7 +69,7 @@ class CustomAdapter extends BaseAdapter {
     // 1. 데이터
     ArrayList<Data> datas;
     // 2. 인플레이터
-    LayoutInflater inflater;
+    LayoutInflater inflater;  // LayoutInflater는 뷰를 인플레이터를 하려고 쓰는 애이다.
     // 3. 컨텍스트
     Context context;
 
@@ -181,7 +181,6 @@ class CustomAdapter extends BaseAdapter {
         }
     }
 }
-
 
 class Loader {
     public static ArrayList<Data> getData(Context context) {
