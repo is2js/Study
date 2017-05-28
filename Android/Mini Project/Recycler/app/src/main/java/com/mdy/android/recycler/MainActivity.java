@@ -84,6 +84,10 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) { // 뷰홀더 안에서 인플레이트하기
         // ViewGroup은 View를 상속한다.
 
+        // 뷰가 생존하려면 Context가 필요한 것이다.
+        // 뷰를 만들려면 context를 넣어줘야 한다.
+        // 그런데 액티비티는 자기 자신이 context인 것이다.
+
         // parent ViewGroup은 뷰이기 때문에 Context를 갖고 있다. 그래서 아래에서 parent.getContext()를 사용할 수 있다.
         // LayoutInflater는 뷰를 인플레이터를 하려고 쓰는 애이다.
 
@@ -99,7 +103,7 @@ class CustomRecycler extends RecyclerView.Adapter<CustomRecycler.Holder>{
 
         //  Holder holder = new Holder(view);
         //  return holder;
-        // 2줄로 작성되었던 코드를 아래 1줄로 간편하게 작성했다.
+        //  2줄로 작성되었던 코드를 아래 1줄로 간편하게 작성했다.
         return new Holder(view);
     }
 
@@ -186,7 +190,7 @@ class Loader {
         for (int i = 1; i <= 10; i++) {
             Data data = new Data();
             data.no = i;
-            data.title = "아기사진";
+            data.title = "아기사진"+i;
 
             data.setImage("baby" + i, context);
             result.add(data);
