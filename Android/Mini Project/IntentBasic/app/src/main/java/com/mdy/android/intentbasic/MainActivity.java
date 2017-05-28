@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         btnBrowser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String phoneNumber = txtUrl.getText().toString();
-                Uri uri = Uri.parse("http://" + phoneNumber);
+                String url = txtUrl.getText().toString();
+                Uri uri = Uri.parse("http://" + url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                 startActivity(intent);
             }
