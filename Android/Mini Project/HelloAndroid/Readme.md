@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
  - [.travis.yml]파일은 루트디렉토리에 저장되어 있어야 한다.
  - 아래 트래비스 파일은 띄어쓰기까지 동일하게 해줘야 정상 작동한다.
 
-```
+```yml
 language: android
 
 jdk: oraclejdk8
@@ -71,6 +71,16 @@ android:
   - build-tools-25.0.1         # 빌드 툴 버전
   - android-25                 # 타겟 버전
   - extra-android-m2repository # 안드로이드에서 제공하는 라이브러리
+
+  licenses:
+    # Check licenses: http://docs.travis-ci.com/user/languages/android/#Dealing-with-Licenses
+    # By default Travis will accept all the licenses, but it's also possible to define a white list:
+    # White list current android-sdk-license revision.
+    # - 'android-sdk-license-5be876d5'
+    # White list all android-sdk-license revisions.
+    # - 'android-sdk-license-.+'
+    # White list all the licenses.
+    - '.+'
 
 before_install:
   - chmod +x gradlew
