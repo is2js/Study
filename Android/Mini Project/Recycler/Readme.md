@@ -8,9 +8,7 @@
 #### 주요 학습 내용
 [1] Inflater를 꺼내는 방법 2가지
 [2] Recycler 만드는 순서
-[3]
-[4]
-[5]
+
 
 
 ### Inflater를 꺼내는 방법 2가지
@@ -73,7 +71,7 @@ listView.setAdapter(adapter);
 ```java
 listView.setLayoutManager(new LinearLayoutManager(this));
 ```
--
+
 
 ---
 
