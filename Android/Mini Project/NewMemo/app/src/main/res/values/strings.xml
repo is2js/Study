@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Memo</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="title_list_activity">메모 목록입니다.</string>
+</resources>
