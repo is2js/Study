@@ -27,6 +27,7 @@ public class DetailActivity extends AppCompatActivity {
 
     // 뒤로가기 (취소)
     public void back(){
+        Toast.makeText(this, "취소하였습니다.", Toast.LENGTH_SHORT).show();
         // 저장하지 않고 목록으로 돌아간다.
         finish();
     }

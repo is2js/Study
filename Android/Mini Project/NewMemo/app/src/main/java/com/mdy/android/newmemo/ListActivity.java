@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mdy.android.newmemo.domain.Memo;
+
+import java.util.ArrayList;
+
 /*
   자주 사용되는 기능 알아보기
   1. Activity 갤러리 사용하기
@@ -48,16 +52,17 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public class ListActivity extends AppCompatActivity {
-
     ListView view;
+    ArrayList<Memo> datas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_list);
-
         view = new ListView(this);
         view.init();
+
+        RecyclerAdapter adapter = new RecyclerAdapter(datas);
+        view.setRecyclerAdapter(adapter);
     }
 
     public void goDetail() {
