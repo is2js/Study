@@ -36,8 +36,7 @@
   - 액티비티 생명주기 / 액티비티에 투명한(Translucent) 속성값 주기
 
   ##### 11. [Memo](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Memo)
-  -
 
   ##### 12. [NewMemo](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/NewMemo)
-  -
+  - MVP 패턴 적용 / SimpleDateFormat 사용 / FloatingActionButton 항상 위에 오게하는 코드
 *****
