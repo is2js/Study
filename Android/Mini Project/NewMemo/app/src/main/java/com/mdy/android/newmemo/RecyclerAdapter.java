@@ -63,10 +63,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
     public class Holder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView textTitle;
         TextView textDate;
-        String id;
+        String id;      // id는 파일명이다.
         public Holder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            // LinearLayout의 id값을 이용해서 setOnClickListener를 사용하려고 했으나
+            // itemView에 바로 setOnClickListener를 붙이는 것이 더 간단해서 이렇게 했음.
+            // 이렇게 하면 Casting하는 연산과 find하는 연산을 1번 줄일 수 있음.
             textTitle = (TextView) itemView.findViewById(R.id.textTitle);
             textDate  = (TextView) itemView.findViewById(R.id.textDate);
         }

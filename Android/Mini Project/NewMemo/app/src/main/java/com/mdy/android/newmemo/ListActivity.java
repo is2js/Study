@@ -64,11 +64,13 @@ public class ListActivity extends AppCompatActivity {
         view = new ListView(this);
         view.init();
 
-        // 데이터 가져오기
+        // 데이터 정의 (데이터 가져오기)
         datas = Loader.getData(this);
 
-        // 리사이클러뷰 세팅하기
-        adapter = new RecyclerAdapter(datas);
+        // 아답터 생성 (RecyclerView 세팅하기)
+        adapter = new RecyclerAdapter(datas);   // adapter를 전역변수로 선언(RecyclerAdapter adapter)
+
+        // 연결 (아답터 <=> 뷰)
         view.setRecyclerAdapter(adapter);
     }
 
