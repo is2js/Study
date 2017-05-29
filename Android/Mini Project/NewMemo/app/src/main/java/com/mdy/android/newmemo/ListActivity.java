@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.mdy.android.newmemo.domain.Loader;
 import com.mdy.android.newmemo.domain.Memo;
 
 import java.util.ArrayList;
@@ -52,8 +53,10 @@ import java.util.ArrayList;
  */
 
 public class ListActivity extends AppCompatActivity {
+    public static final String DOCUMENT_ID = "document_id";
     ListView view;
     ArrayList<Memo> datas;
+    RecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,12 +64,26 @@ public class ListActivity extends AppCompatActivity {
         view = new ListView(this);
         view.init();
 
-        RecyclerAdapter adapter = new RecyclerAdapter(datas);
+        // 데이터 가져오기
+        datas = Loader.getData(this);
+
+        // 리사이클러뷰 세팅하기
+        adapter = new RecyclerAdapter(datas);
         view.setRecyclerAdapter(adapter);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // 데이터 가져오기
+        datas = Loader.getData(this);
+        adapter.notifyDataSetChanged();
+    }
+
+    // 입력창 이동
     public void goDetail() {
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra(DOCUMENT_ID, "");
         startActivity(intent);
     }
 }

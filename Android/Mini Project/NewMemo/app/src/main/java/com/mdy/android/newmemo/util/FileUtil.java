@@ -37,7 +37,6 @@ public class FileUtil {
                 Log.e(TAG, e.toString());
             }
         }
-
         return result;
     }
 
@@ -63,7 +62,6 @@ public class FileUtil {
             }
         }
         // 2. 에러발생시 Toast 메시지를 출력하고, content에 "" 공백을 전달한다.
-
         return content;
     }
 }

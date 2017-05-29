@@ -1,6 +1,7 @@
 package com.mdy.android.newmemo;
 
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -44,5 +45,6 @@ public class ListView {
 
     public void setRecyclerAdapter(RecyclerAdapter adapter) {
         recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity));
     }
 }
