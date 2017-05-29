@@ -1,13 +1,13 @@
-## 2017.00.00.(0)
+## 2017.05.29.(월)
 
-### 프로젝트 명
+### NewMemo
 ---
 #### 주요 학습 내용
-[1]
+[1] MVP 패턴 적용
 [2]
 [3]
 [4]
-[5]
+[5] FloatingActionButton 키보드 창 위에 나올 수 있게 하는 코드
 
 -
 -
@@ -15,8 +15,11 @@
 -
 -
 ---
-##### [1] 타이틀1
-- 1.
+##### [1] MVP 패턴 적용
+* ListActivity와 DetailActivity를 Presenter와 View의 분리하였음.
+  - Presenter - 로직
+  - View - 화면 구현
+-
 ```java
 
 ```
@@ -90,21 +93,15 @@
 ```
 ---
 
-##### [5] 타이틀5
-- 1.
-```java
-
-```
-- 2.
-```java
-
-```
-- 3.
-```java
-
-```
-- 4.
-```java
-
+##### [5] FloatingActionButton 키보드 창 위에 나올 수 있게 하는 코드
+- [AndroidManifests.xml] 소스코드에서
+  android:windowSoftInputMode="adjustResize"   추가
+```xml
+  <activity
+      android:name=".DetailActivity"
+      android:label="@string/title_activity_detail"
+      android:theme="@style/AppTheme.NoActionBar"
+      android:windowSoftInputMode="adjustResize">    // 추가한 부분
+  </activity>
 ```
 ---
