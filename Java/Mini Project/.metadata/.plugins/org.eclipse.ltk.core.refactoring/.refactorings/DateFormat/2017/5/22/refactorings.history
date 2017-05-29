@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;com.mdy.java.dateformat.DateFormartExam&apos; to &apos;DateFormatExam&apos;&#x0D;&#x0A;- Original project: &apos;DateFormat&apos;&#x0D;&#x0A;- Original element: &apos;com.mdy.java.dateformat.DateFormartExam&apos;&#x0D;&#x0A;- Renamed element: &apos;com.mdy.java.dateformat.DateFormatExam&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;DateFormartExam&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;com.mdy.java.dateformat{DateFormartExam.java[DateFormartExam" matchStrategy="1" name="DateFormatExam" qualified="false" references="true" similarDeclarations="false" stamp="1496064590241" textual="false" version="1.0"/>
+</session>

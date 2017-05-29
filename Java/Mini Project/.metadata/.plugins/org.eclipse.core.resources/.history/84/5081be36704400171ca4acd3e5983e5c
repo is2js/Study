@@ -1,0 +1,10 @@
+package com.mdy.java.dateformat;
+
+public class DateFormartExam {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
