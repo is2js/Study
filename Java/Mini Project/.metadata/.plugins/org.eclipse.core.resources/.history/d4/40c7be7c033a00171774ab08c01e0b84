@@ -1,7 +1,0 @@
-package com.mdy.java.polymorphism;
-
-public class Son extends Father{
-	public void goSchool(){
-		System.out.println("학교에 갑니다.");
-	}
-}

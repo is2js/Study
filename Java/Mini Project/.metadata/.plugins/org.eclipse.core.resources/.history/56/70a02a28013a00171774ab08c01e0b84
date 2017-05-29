@@ -1,6 +1,0 @@
-package com.mdy.java.polymorphism;
-
-public class Father {
-	String name;
-	int age;
-}
