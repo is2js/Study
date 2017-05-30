@@ -11,11 +11,10 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-import static android.R.attr.data;
 import static com.mdy.android.memo2.R.id.fab;
 
 public class DetailActivity extends AppCompatActivity {
-
+    private static final String TAG = "DetailActivity";
     FloatingActionButton btnSave;   // 버튼
     EditText editText;  // 입력 위젯
 
@@ -58,10 +57,20 @@ public class DetailActivity extends AppCompatActivity {
             // 3. 버퍼를 씌워서 속도를 향상시킨후 한 줄씩 읽어서 result 결과값에 계속 더해준다.
             BufferedInputStream bis = new BufferedInputStream(fis);
 
+            // 4. 내가 한번에 읽어올 단위를 설정
             byte buffer[] = new byte[1024];
+
             int count = 0;
+            // 내가 버퍼 단위로 읽어왔는데 내가 읽은 버퍼안에 몇글자가 있는지 확인하기 위해서
+            // 버퍼로 떴는데 몇글자가 들어있는지를 count에 담아준다.
+            // buffer에 글자가 담긴다.
+
             while( (count = bis.read(buffer)) != -1 ) {
-                String data = "";
+
+                String data = new String(buffer, 0, count);
+                // 0부터 count까지만 데이터로 스트링으로 변환을 해준다.
+                // 그래서 마지막에 1024 크기 안에 100개의 크기만 담겼다면
+
                 result = result + data;
             }
 
@@ -89,7 +98,7 @@ public class DetailActivity extends AppCompatActivity {
             fos.close();
             // 3. 스트림을 닫아준다.
         } catch (Exception e) {
-            Log.e("DetailActivity", e.toString());
+            Log.e(TAG, e.toString());
         }
     }
 
