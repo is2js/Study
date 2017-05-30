@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity {
     // 읽기에는 transaction이란 개념이 적용되지 않는다.
     // 저장해둔 설정값 가져오기
     private void loadPreference(){
-        String name = sharedPreferences.getString("name", "[none]");
-        String email = sharedPreferences.getString("email", "[none]");
+        String name = sharedPreferences.getString("name", "");
+        String email = sharedPreferences.getString("email", "");
         String password = sharedPreferences.getString("password", "");
 
         editName.setText(name);
