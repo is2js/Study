@@ -39,4 +39,8 @@
 
   ##### 12. [NewMemo](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/NewMemo)
   - MVP 패턴 적용 / SimpleDateFormat 사용 / FloatingActionButton 항상 위에 오게하는 코드
+
+  ##### 13. [Properties](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Properties)
+  - SharedPreference
+
 *****
