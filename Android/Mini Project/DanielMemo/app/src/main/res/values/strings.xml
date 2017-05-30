@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DanielMemo</string>
+    <string name="title_activity_list">ListActivity</string>
+    <string name="title_activity_detail">DetailActivity</string>
+</resources>
