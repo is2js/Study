@@ -21,6 +21,9 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         document_id = intent.getExtras().getString("document_id");
 
+        // TODO
+        // intent.getExtras() 가 넘겨받은 것 자체가 bundle이다.
+
         if(!document_id.equals("")){
             String content = FileUtil.read(this, document_id);
             detailView.setMemo(content);

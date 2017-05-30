@@ -16,6 +16,7 @@ import java.util.ArrayList;
 public class Loader {
     private static final String TAG = "Loader";
     public static final String FILE_STORAGE = "/data/data/com.mdy.android.newmemo/files";
+
     public static ArrayList<Memo> datas = new ArrayList<>();
 
     public static ArrayList<Memo> getData(Context context){
