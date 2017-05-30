@@ -85,7 +85,7 @@ public class ListActivity extends AppCompatActivity {
     // 입력창 이동
     public void goDetail() {
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DOCUMENT_ID, "");
+        //intent.putExtra(DOCUMENT_ID, "");
         startActivity(intent);
     }
 }

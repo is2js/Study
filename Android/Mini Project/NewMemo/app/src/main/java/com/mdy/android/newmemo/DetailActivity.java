@@ -21,9 +21,7 @@ public class DetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         document_id = intent.getExtras().getString("document_id");
 
-        if(document_id.equals("")){
-            // 입력창
-        }else{
+        if(!document_id.equals("")){
             String content = FileUtil.read(this, document_id);
             detailView.setMemo(content);
         }
