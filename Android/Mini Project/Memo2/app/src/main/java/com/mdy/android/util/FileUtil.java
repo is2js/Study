@@ -76,7 +76,7 @@ public class FileUtil {
             // 3. 텍스트 파일을 읽기 위한 Reader 계열의 버퍼에 담고
             BufferedReader br = new BufferedReader(isr);
             // 4. 한줄을 읽은 후 result 에 저장하고
-            result = br.readLine();
+            result = br.readLine();   // 순차적으로 close()를 해준다.
             // 5. 스트림을 닫는다.
 //            br.close();
 //            isr.close();

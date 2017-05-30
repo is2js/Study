@@ -23,6 +23,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
     }
 
 
+
+
+
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         // inflator로 xml을 호출해서 View 인스턴스를 생성한다.
