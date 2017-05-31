@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RuntimePermission</string>
+    <string name="btnPre"> &lt; </string>   <!-- less than -->
+    <string name="btnBack"> &gt; </string>   <!-- greater than -->
 </resources>
