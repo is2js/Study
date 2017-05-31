@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.mdy.android.danielmemo.domain.Memo;
@@ -58,10 +59,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         private TextView date;
         // 셀이 화면에 그려질때 ViewHolder에 세팅해줄 파일이름을 저장할 변수 선언
         private String documentId;
+        private CheckBox checkBox;
+//        private boolean checked = false;
+
         public Holder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.txtTitle);
             date = (TextView) itemView.findViewById(R.id.txtDate);
+            CheckBox checked = (CheckBox) itemView.findViewById(R.id.checkBox);
+            boolean checked = false;
             // 셀이 onClick 되었을때 DetailActivity를 호출하면서
             // 파일이름을 document_id에 담아서 넘겨준다.
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -23,6 +23,8 @@ public class ListActivity extends AppCompatActivity {
 
     boolean firstFlag = true;
 
+    ArrayList<Memo> datas;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +33,7 @@ public class ListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // 1. 데이터
-        ArrayList<Memo> datas = Loader.getData(this);  // this(context)를 넘겨줘야 데이터를 가져올 수 있다.
+        datas = Loader.getData(this);  // this(context)를 넘겨줘야 데이터를 가져올 수 있다.
 
         // 2. 아답터
         adapter = new RecyclerAdapter(datas);
@@ -57,7 +59,7 @@ public class ListActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                deleteContent();
+                datas = Loader.deleteData(view.getId());
             }
         });
 

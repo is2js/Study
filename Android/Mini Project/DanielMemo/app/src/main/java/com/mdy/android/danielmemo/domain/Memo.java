@@ -8,6 +8,16 @@ public class Memo {
     private String id;
     private String content;
     private String date;
+    private boolean check;
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
     public String getId() {
         return id;
     }

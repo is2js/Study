@@ -1,6 +1,7 @@
 package com.mdy.android.danielmemo.domain;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.mdy.android.util.FileUtil;
 
@@ -34,15 +35,15 @@ public class Loader {
 
         // 1.2 파일 클래스에 정의된 listFiles 함수를 이용해서 파일목록을 가져온다.
         // listFiles()를 사용하면 리턴값이 파일에 배열로 넘어온다.
-        File fIles[] = dir.listFiles();
+        File fIies[] = dir.listFiles();
 
         // 1.3 파일이 하나도 없으면 그냥 리턴한다.
-        if(fIles == null)
+        if(fIies == null)
             return datas;
 
         // 파일이 있을 경우,
         // 2.1 반복문을 돌면서 파일의 내용을 Memo 객체에 담은후 datas에 add한다.
-        for(File file : fIles){
+        for(File file : fIies){
             // 2.2 파일이면 (디렉토리일 경우는 안함)
             if(file.isFile()) {
                 Memo memo = new Memo();
@@ -71,6 +72,32 @@ public class Loader {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         return sdf.format(value);
     }
+
+
+
+
+    public static ArrayList<Memo> deleteData(Context context,String filename){
+
+
+        try {
+            File dir = new File(DIR_PATH);
+
+            // 1.2 파일 클래스에 정의된 listFiles 함수를 이용해서 파일목록을 가져온다.
+            // listFiles()를 사용하면 리턴값이 파일에 배열로 넘어온다.
+            File files[] = dir.listFiles();
+
+
+            for (int i = 0; i < files.length; i++) {
+                String fName = files[i].getName();
+                if (fName.equals("  ")) {
+                    files[i].delete();
+                }
+            }
+        } catch (Exception e) {
+            Toast.makeText(context, "파일 삭제 실패", Toast.LENGTH_SHORT).show();
+        }
+
+
 
 
 }
