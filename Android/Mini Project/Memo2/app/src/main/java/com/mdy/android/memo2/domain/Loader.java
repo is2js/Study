@@ -30,7 +30,7 @@ public class Loader {
 
 
         // 1.1 목록을 가져올 디렉토리경로를 파일 클래스로 생성하고
-        File dir = new File(DIR_PATH);
+        File dir = new File(DIR_PATH);  // new File("디렉토리경로")
 
         // 1.2 파일 클래스에 정의된 listFiles 함수를 이용해서 파일목록을 가져온다.
         // listFiles()를 사용하면 리턴값이 파일에 배열로 넘어온다.
