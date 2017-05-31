@@ -8,6 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -71,19 +72,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     webView.goForward();
                 }
                 break;
-            case R.id.btnGo:
-                // url 이동
-                String temp = editTextUrl.getText().toString();
-                if (!"".equals(temp)) {  // 공백이 아닐경우 처리
-                    // or 정규식으로 url 패턴일때만 처리
-
-                    loadUrl(temp);
+            case R.id.btnGo:    // url 이동
+                String url = editTextUrl.getText().toString();
+                if(!"".equals(url)) { // 공백이 아닐경우 처리
+                    // 문자열이 url 패턴일때만
+                    if(url.matches("^(www.)?([a-zA-Z0-9]+).[a-zA-Z0-9]*.[a-z]{3}.?([a-z]+)?$")) {
+                        loadUrl(url);
+                    }else{
+                        Toast.makeText(this, "URL이 잘못되었습니다.",Toast.LENGTH_SHORT).show();
+                    }
                 }
-
                 break;
             default:
                 break;
         }
-
     }
 }
