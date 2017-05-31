@@ -43,4 +43,6 @@
   ##### 13. [Properties](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Properties)
   - SharedPreference
 
+  ##### 14. [ActivityControl](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ActivityControl)
+  - startActivityforResult - Acitivity 사이에서 값 주고 받기
 *****
