@@ -3,15 +3,18 @@ package com.mdy.android.activitycontrol;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 public class SubActivity extends AppCompatActivity {
 
+
     TextView textView;
     EditText editText;
     Button button;
+    String value;
 
 
     @Override
@@ -29,10 +32,35 @@ public class SubActivity extends AppCompatActivity {
         Bundle bundle = intent.getExtras(); // 여기는 전달된 값이 없으면 null이 된다.
         // 3. 단일 값을 꺼낸다. 꺼내기 전에 null 체크를 해줘야 한다.
         if(bundle != null) {
-            String value = bundle.getString("key");     // .putExtra("변수", "값")으로
+            value = bundle.getString("key");     // .putExtra("변수", "값")으로
             textView.setText(value);
         }
 
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // MainActivity에서 넘겨받은 값을 int로 변환
+                int num1 = Integer.parseInt(value);
+                // 현재 Activity에 입력된 값을 받아서
+                String temp = editText.getText().toString();
+                // int로 변환
+                int num2 = Integer.parseInt(temp);
+
+                int result = num1 + num2;
+
+                /* 값 반환하기 */
+
+                // 결과값을 intent에 담아서
+                Intent intent = new Intent();
+                intent.putExtra("result", result);
+
+                // setResult에 넘겨준다.
+                setResult(RESULT_OK, intent);
+
+                // 3. 현재 activity를 종료한다.
+                finish();
+            }
+        });
 
 
         // 이렇게 한번에 해줘도 된다.

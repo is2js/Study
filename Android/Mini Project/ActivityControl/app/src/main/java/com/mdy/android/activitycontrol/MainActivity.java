@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,13 +33,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public static final int BUTTON_RESULT = 99;
+    public static final int BUTTON_START = 98;
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             // 일반적인 Activity start
             case R.id.btnStart:
-                startActivity(intent);
+                intent.putExtra("key", "0");  //  putExtra("변수", "값")
+                startActivityForResult(intent, BUTTON_START);
                 break;
             // 값을 돌려받는 Activity start
             case R.id.btnForResult:
@@ -55,7 +58,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
                                                                      // Intent에 결과값이 담겨온다.
-        super.onActivityResult(requestCode, resultCode, data);
 
-    }
+        // requestCode에는 BUTTON_RESULT가 담긴다.
+        // resultCode는 반환하는 쪽에서 세팅해준다.
+
+
+//        super.onActivityResult(requestCode, resultCode, data);
+        Toast.makeText(this, "Result Code"+resultCode, Toast.LENGTH_SHORT).show();
+
+        int result;
+
+        if(resultCode == RESULT_OK)
+            switch(requestCode){
+                case BUTTON_RESULT :
+                    // Intent인 data에서 result 변수로 값을 꺼내는데 값이 없을 경우 디폴트값으로 0 을 사용한다.
+                    result = data.getIntExtra("result", 7); // 뒤에 인자는 디폴트값(값이 아예 안넘어왔을 경우)
+                    // SubActivity.java 소스에서  이 부분(intent.putExtra("result", result);)을 주석처리해주면 결과값이 7로 넘어온다.
+
+                    editText.setText("결과값="+result);
+                    Toast.makeText(this, "Result 버튼을 눌렀다가 돌아옴", Toast.LENGTH_SHORT).show();
+                    break;
+                case BUTTON_START :
+                    result = data.getIntExtra("result", 7);
+                    editText.setText("결과값="+result);
+                    Toast.makeText(this, "Start 버튼을 눌렀다가 돌아옴", Toast.LENGTH_SHORT).show();
+
+            }
+        }
 }
