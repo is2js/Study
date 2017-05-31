@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">WebView</string>
+    <string name="btnPre"> &lt; </string>   <!-- less than -->
+    <string name="btnBack"> &gt; </string>   <!-- greater than -->
+</resources>
