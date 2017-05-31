@@ -63,8 +63,6 @@ public class Loader {
             }
         }
 
-
-
         return datas;
     }
 
@@ -76,7 +74,7 @@ public class Loader {
 
 
 
-    public static ArrayList<Memo> deleteData(Context context,String filename){
+    public static void deleteData(Context context, String fileName) {
 
 
         try {
@@ -89,15 +87,14 @@ public class Loader {
 
             for (int i = 0; i < files.length; i++) {
                 String fName = files[i].getName();
-                if (fName.equals("  ")) {
+                if (fName.equals(fileName)) {
                     files[i].delete();
                 }
             }
         } catch (Exception e) {
             Toast.makeText(context, "파일 삭제 실패", Toast.LENGTH_SHORT).show();
         }
-
-
+    }
 
 
 }

@@ -12,7 +12,7 @@
         android:layout_weight="7">
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/listCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|center_vertical|center_horizontal"
