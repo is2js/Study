@@ -75,22 +75,9 @@ public class Loader {
 
 
     public static void deleteData(Context context, String fileName) {
-
-
         try {
-            File dir = new File(DIR_PATH);
-
-            // 1.2 파일 클래스에 정의된 listFiles 함수를 이용해서 파일목록을 가져온다.
-            // listFiles()를 사용하면 리턴값이 파일에 배열로 넘어온다.
-            File files[] = dir.listFiles();
-
-
-            for (int i = 0; i < files.length; i++) {
-                String fName = files[i].getName();
-                if (fName.equals(fileName)) {
-                    files[i].delete();
-                }
-            }
+            File file = new File(DIR_PATH+"/"+fileName);
+            file.delete();
         } catch (Exception e) {
             Toast.makeText(context, "파일 삭제 실패", Toast.LENGTH_SHORT).show();
         }

@@ -46,14 +46,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         holder.setTitle(memo.getContent());
         holder.setDate(memo.getDate());
         holder.setDocumentId(memo.getId());
-        holder.setCheck(memo.getCheck());
-
-        holder.chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                memo.setCheck(isChecked);
-            }
-        });
+        holder.setCheck(memo.getDelete());
     }
 
     @Override
@@ -86,6 +79,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
                     v.getContext().startActivity(intent);
                 }
             });
+
+            chkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    setCheck(isChecked);
+                }
+            });
         }
 
         // Holder의 속성값을 세팅하는 setter 함수들
@@ -101,7 +101,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
             documentId = value;
         }
         public void setCheck(boolean bool){
-            chkBox.setChecked(bool);
+            for(Memo memo : datas){
+                if(memo.getId().equals(documentId)){
+                    memo.setDelete(bool);
+                    break;
+                }
+            }
         }
     }
 }

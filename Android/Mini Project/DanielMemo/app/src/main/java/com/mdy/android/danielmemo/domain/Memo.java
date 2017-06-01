@@ -8,14 +8,14 @@ public class Memo {
     private String id;
     private String content;
     private String date;
-    private boolean checkBox = false;
+    private boolean delete = false;
 
-    public boolean getCheck() {
-        return checkBox;
+    public boolean getDelete() {
+        return delete;
     }
 
-    public void setCheck(boolean check) {
-        this.checkBox = check;
+    public void setDelete(boolean check) {
+        this.delete = check;
     }
 
     public String getId() {

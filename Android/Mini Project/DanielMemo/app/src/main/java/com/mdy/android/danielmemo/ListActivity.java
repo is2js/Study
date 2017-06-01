@@ -59,12 +59,22 @@ public class ListActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Loader.deleteData(view.getContext(), memo.getId());     // (datas.get(position)).getId   //datas.getId()
 
-             //   datas = Loader.deleteData(view.getId());
+                for(Memo memo : datas){
+                    if(memo.getDelete()){
+                        Loader.deleteData(ListActivity.this, memo.getId());
+                        adapter.notifyDataSetChanged();
+                    }
+                }
+
+                Intent intent = new Intent(ListActivity.this, ListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+
 
             }
         });
+
 
 
 
