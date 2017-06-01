@@ -8,11 +8,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import static com.mdy.android.activitycontrol.R.id.subEditText;
+import static com.mdy.android.activitycontrol.R.id.subTextView;
+
 public class SubActivity extends AppCompatActivity {
 
 
-    TextView textView;
-    EditText editText;
+    TextView sTextView;
+    EditText sEditText;
     Button button;
     String value;
 
@@ -22,8 +25,8 @@ public class SubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub);
 
-        textView = (TextView) findViewById(R.id.textView);
-        editText = (EditText) findViewById(R.id.editText);
+        sTextView = (TextView) findViewById(subTextView);
+        sEditText = (EditText) findViewById(subEditText);
         button = (Button) findViewById(R.id.button);
 
         // 1. 이전 activity에서 넘어온 intent 객체
@@ -33,7 +36,7 @@ public class SubActivity extends AppCompatActivity {
         // 3. 단일 값을 꺼낸다. 꺼내기 전에 null 체크를 해줘야 한다.
         if(bundle != null) {
             value = bundle.getString("key");     // .putExtra("변수", "값")으로
-            textView.setText(value);
+            sTextView.setText(value);
         }
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +45,7 @@ public class SubActivity extends AppCompatActivity {
                 // MainActivity에서 넘겨받은 값을 int로 변환
                 int num1 = Integer.parseInt(value);
                 // 현재 Activity에 입력된 값을 받아서
-                String temp = editText.getText().toString();
+                String temp = sEditText.getText().toString();
                 // int로 변환
                 int num2 = Integer.parseInt(temp);
 

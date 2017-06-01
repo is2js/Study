@@ -8,11 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.mdy.android.activitycontrol.R.id.mainEditText;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     Button buttonStart, buttonForResult;
     Intent intent;
-    EditText editText;
+    EditText mEditText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         buttonStart = (Button) findViewById(R.id.btnStart);
         buttonForResult = (Button) findViewById(R.id.btnForResult);
-        editText = (EditText) findViewById(R.id.editText);
+        mEditText = (EditText) findViewById(mainEditText);
 
         buttonStart.setOnClickListener(this);
         buttonForResult.setOnClickListener(this);
@@ -32,8 +34,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-    public static final int BUTTON_RESULT = 99;
     public static final int BUTTON_START = 98;
+    public static final int BUTTON_RESULT = 99;
 
     @Override
     public void onClick(View v) {
@@ -45,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             // 값을 돌려받는 Activity start
             case R.id.btnForResult:
-                intent.putExtra("key", editText.getText().toString());  //  putExtra("변수", "값")
+                intent.putExtra("key", mEditText.getText().toString());  //  putExtra("변수", "값")
 
                 startActivityForResult(intent, BUTTON_RESULT);
                 // startActivityForResult 두번째 인자는 호출받는 곳에서 구별할 수 있게 해주는 구분자이다.
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                                                      // Intent에 결과값이 담겨온다.
 
         // requestCode에는 BUTTON_RESULT가 담긴다.
-        // resultCode는 반환하는 쪽에서 세팅해준다.
+        // resultCode는 반환하는 쪽에서 세팅해준다. (여기서는 SubActivity.java쪽에서 RESULT_OK를 보내줬음.)
 
 
 //        super.onActivityResult(requestCode, resultCode, data);
@@ -75,12 +77,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     result = data.getIntExtra("result", 7); // 뒤에 인자는 디폴트값(값이 아예 안넘어왔을 경우)
                     // SubActivity.java 소스에서  이 부분(intent.putExtra("result", result);)을 주석처리해주면 결과값이 7로 넘어온다.
 
-                    editText.setText("결과값="+result);
+                    mEditText.setText("결과값="+result);
                     Toast.makeText(this, "Result 버튼을 눌렀다가 돌아옴", Toast.LENGTH_SHORT).show();
                     break;
                 case BUTTON_START :
                     result = data.getIntExtra("result", 7);
-                    editText.setText("결과값="+result);
+                    mEditText.setText("결과값="+result);
                     Toast.makeText(this, "Start 버튼을 눌렀다가 돌아옴", Toast.LENGTH_SHORT).show();
 
             }

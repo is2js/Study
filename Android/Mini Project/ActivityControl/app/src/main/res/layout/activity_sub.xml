@@ -7,7 +7,7 @@
     tools:context="com.mdy.android.activitycontrol.SubActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/subTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -20,7 +20,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/subEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -30,7 +30,7 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/subTextView" />
 
     <Button
         android:id="@+id/button"
@@ -40,6 +40,6 @@
         android:text="Return"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/subEditText"
         app:layout_constraintHorizontal_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
