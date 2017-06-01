@@ -22,6 +22,7 @@ public class CheckPermissionActivity extends AppCompatActivity {
         // 설치 안드로이드폰의 api level 가져오기  => Build.VERSION.SDK_INT
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             // level 23은 마시멜로이다.  Build.VERSION_CODES.M : 마시멜로를 가리킨다.
+            // 롤리팝의 경우, Build.VERSION_CODES.LOLLIPOP 이라고 해야함.
             // 마시멜로부터는 앞에 대문자 한자만 써도 된다.
             checkPermission();
         } else {
