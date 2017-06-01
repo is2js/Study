@@ -3,6 +3,7 @@ package com.mdy.android.contacts;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -14,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.e("TAG", "=========== MainActivity =========== onCreate 호출 ===========");
 
         buttonCall = (Button) findViewById(R.id.btnContact);
 

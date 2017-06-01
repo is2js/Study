@@ -18,8 +18,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
 
     List<Data> datas;
 
-    getContacts();
-
 
     public RecyclerAdapter(List<Data> datas){
         this.datas = datas;
@@ -43,6 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         final Data data = datas.get(position);
 
         // 2. 데이터를 세팅
+        holder.setTextId(data.getId());
         holder.setTextName(data.getName());
         holder.setTextPhoneNumber(data.getTel());
 
@@ -58,14 +57,20 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
 
     /* Holder 클래스 */
     class Holder extends RecyclerView.ViewHolder {
+        TextView textId;
         TextView textName;
         TextView textPhoneNumber;
 
         /* Holder 생성자 */
         public Holder(View itemView) {
             super(itemView);
+            textId = (TextView) itemView.findViewById(R.id.txtId);
             textName = (TextView) itemView.findViewById(R.id.txtName);
             textPhoneNumber = (TextView) itemView.findViewById(R.id.txtPhoneNumber);
+        }
+
+        public void setTextId(int id) {
+            textId.setText(id+"");
         }
 
         public void setTextName(String name) {

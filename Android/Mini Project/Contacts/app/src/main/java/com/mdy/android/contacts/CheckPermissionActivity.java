@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 public class CheckPermissionActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class CheckPermissionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_permission);
 
+        Log.e("TAG", "=========== CheckPermissionActivity =========== onCreate 호출 ===========");
 
         // 0. api level 이 23이상일 경우만 실행
         // 설치 안드로이드폰의 api level 가져오기  => Build.VERSION.SDK_INT
@@ -74,3 +76,4 @@ public class CheckPermissionActivity extends AppCompatActivity {
         finish();
     }
 }
+

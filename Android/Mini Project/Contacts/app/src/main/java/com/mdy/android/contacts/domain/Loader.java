@@ -15,11 +15,14 @@ import java.util.List;
 
 public class Loader {
 
+    private List<Data> datas = new ArrayList<>();
+    private Context context;
 
-    public static List<Data> datas = new ArrayList<>();
+    public Loader(Context context){
+        this.context = context;
+    }
 
-    public static List<Data> getContacts() {
-
+    public List<Data> getContacts() {
 
 
         // 데이터베이스 혹은 content resolver를 통해 가져온 데이터를 적재할
@@ -47,7 +50,11 @@ public class Loader {
 
         // 3. Content Resolver로 쿼리를 날려서 데이터를 가져온다.
         // 결과값을 Cursor의 형태로 반환한다. ArrayList와 같은 형태
-        Cursor cursor = resolver.query(phoneUri, projections, null, null, null); // 3, 4번째는 조건식 같은 것이다.
+        Cursor cursor = resolver.query(phoneUri,    // 데이터의 주소
+                projections,    // 가져올 데이터 컬럼명 배열
+                null,           // 조건절에 들어가는 컬럼명들 지정
+                null,           // 지정된 컬럼명과 매핑되는 실제 조건 값
+                null);          // 정렬
 
         // 4. 반복문을 통해 cursor에 담겨있는 데이터를 하나씩 추출한다.
         if (cursor != null) {
@@ -74,6 +81,8 @@ public class Loader {
                 // 6. 여러개의 객체를 담을 수 있는 저장소에 적재한다.
                 datas.add(data);
             }
+            // * 중요 : 사용 후 close 를 호출하지 않으면 메모리 누수가 발생할 수 있다.
+            cursor.close();
         }
         return datas;
     }

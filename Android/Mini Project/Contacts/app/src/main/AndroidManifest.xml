@@ -20,7 +20,6 @@
         </activity>
         <activity android:name=".CheckPermissionActivity" />
         <activity android:name=".ContactActivity" />
-        <activity android:name=".ListActivity"></activity>
     </application>
 
 </manifest>

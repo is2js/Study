@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.mdy.android.contacts.domain.Data;
 import com.mdy.android.contacts.domain.Loader;
@@ -19,13 +20,12 @@ public class ContactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-
-
+        Log.e("TAG", "=========== ContactActivity =========== onCreate 호출 ===========");
 
         // 1. 데이터 정의
+        Loader loader = new Loader(this);
 
-//        List<Data> datas = getContacts();
-        List<Data> datas = Loader.getContacts();
+        List<Data> datas = loader.getContacts();
 
 
         // 우리가 정의한 메소드이기 때문에 getContents(); 만 호출해도 데이터를 만들어서 리턴까지 해준다.
@@ -33,6 +33,9 @@ public class ContactActivity extends AppCompatActivity {
         /*for(Data data : getContacts()){
             Log.i("Contacts", "이름="+data.getName() +", tel"+data.getTel());
         }*/
+
+
+        recycler = (RecyclerView) findViewById(R.id.recyclerView);
 
         // 2. 아답터 생성
         RecyclerAdapter adapter = new RecyclerAdapter(datas);

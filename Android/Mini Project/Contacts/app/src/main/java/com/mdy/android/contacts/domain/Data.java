@@ -9,8 +9,6 @@ public class Data {
     private int id;
     private String name;
     private String tel;
-    private String address;
-    private String email;
 
     public int getId() {
         return id;
@@ -36,19 +34,4 @@ public class Data {
         this.tel = tel;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
 }
