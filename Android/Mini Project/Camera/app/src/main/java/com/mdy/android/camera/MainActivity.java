@@ -32,13 +32,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnGal = (Button) findViewById(R.id.btnGallery);
         image = (ImageView) findViewById(R.id.imageView);
 
-        //리스너
-        btnCam.setOnClickListener(this);
-        btnGal.setOnClickListener(this);
 
         // 버튼 잠금
         btnCam.setEnabled(false);
         btnGal.setEnabled(false);
+
+
+        //리스너
+        btnCam.setOnClickListener(this);
+        btnGal.setOnClickListener(this);
+
 
         // 마시멜로 이상 버전에서만 런타임 권한 체크
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
