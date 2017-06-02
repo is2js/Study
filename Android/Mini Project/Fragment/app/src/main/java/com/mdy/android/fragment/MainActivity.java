@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         // 트랜잭션 처리 전체를 stack에 담아놨다가, 안드로이드의 back 버튼으로 뒤로가기를 할 수 있다.
         transaction.addToBackStack(null); // null로 해주면 순서대로 빠져나온다.
         transaction.commit();
+//        getSupportFragmentManager().popBackStack();
+
 
     }
 
