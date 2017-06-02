@@ -72,8 +72,11 @@ public class CheckPermissionActivity extends AppCompatActivity {
     }
 
     public void cancel(){
-        Toast.makeText(this, "권한을 요청을 승인하셔야 앱을 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "권한요청을 승인하셔야 앱을 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
         finish();
     }
+
+
+
 }
 

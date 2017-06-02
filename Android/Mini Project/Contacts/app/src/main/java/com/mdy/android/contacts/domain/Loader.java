@@ -38,6 +38,7 @@ public class Loader {
 
         // 1. 데이터 컨텐츠 URI (자원의 주소)를 정의
         // 전화번호 URI = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
+        // 데이터가 있는 테이블 주소
         Uri phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI; // 테이블명과 같이 생각하면 된다.
         // 이너클래스
 
@@ -56,12 +57,19 @@ public class Loader {
                 null,           // 지정된 컬럼명과 매핑되는 실제 조건 값
                 null);          // 정렬
 
+
+        // cursor에 데이터 존재여부
         // 4. 반복문을 통해 cursor에 담겨있는 데이터를 하나씩 추출한다.
         if (cursor != null) {
-            while (cursor.moveToNext()) { // moveToNext() 다음 데이터로 이동, 데이터가 있으면 계속 while문이 동작
+            while (cursor.moveToNext()) {
+                // moveToNext() 다음 데이터로 이동, 데이터가 있으면 계속 while문이 동작
+                // moveToNext()가 true, false를 반환하기 때문에 while문으로 하는 것이 적합
                 // 4.1 위에 정의한 프로젝션의 컬럼명으로 cursor 있는 인덱스값을 조회하고
                 int idIndex = cursor.getColumnIndex(projections[0]);
                 int id = cursor.getInt(idIndex);
+                // int id = cursor.getInt(0);   위의 2줄을 이렇게 해줘도 된다.
+                // 그런데 코드의 가독성을 위해 위와 같이 한다.
+
 
                 int nameIndex = cursor.getColumnIndex(projections[1]);
                 String name = cursor.getString(nameIndex);
@@ -81,9 +89,11 @@ public class Loader {
                 // 6. 여러개의 객체를 담을 수 있는 저장소에 적재한다.
                 datas.add(data);
             }
-            // * 중요 : 사용 후 close 를 호출하지 않으면 메모리 누수가 발생할 수 있다.
-            cursor.close();
         }
+        // * 중요 : 사용 후 close 를 호출하지 않으면 메모리 누수가 발생할 수 있다.
+        // 사용 후 커서 자원을 반환한다.
+        cursor.close();
+
         return datas;
     }
 

@@ -23,7 +23,7 @@ public class ContactActivity extends AppCompatActivity {
         Log.e("TAG", "=========== ContactActivity =========== onCreate 호출 ===========");
 
         // 1. 데이터 정의
-        Loader loader = new Loader(this);
+        Loader loader = new Loader();
 
         List<Data> datas = loader.getContacts();
 
