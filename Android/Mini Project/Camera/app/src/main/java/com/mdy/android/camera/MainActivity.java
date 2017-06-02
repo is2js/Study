@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
-
     private final int REQ_PERMISSION = 100;
 
     Button btnCam, btnGal;
@@ -68,7 +67,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
             init();
         } else {
-
             // 2. 권한이 없으면 사용자에게 권한을 달라고 요청
             String permissions[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA}; // 동시에 여러개 호출할 수 있으니까 복수로
             requestPermissions(permissions , REQ_PERMISSION);  // -> 권한을 요구하는 팝업이 사용자 화면에 노출된다.
@@ -85,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if(grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED){
                 init();
-                // 3.2 사용자가 거절 했음.
+            // 3.2 사용자가 거절 했음.
             } else {
                 cancel();
             }

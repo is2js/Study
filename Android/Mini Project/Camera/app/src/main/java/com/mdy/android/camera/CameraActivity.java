@@ -64,18 +64,14 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                     } else {
                         fileUri = Uri.fromFile(photoFile);
                     }
-
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri);
                     startActivityForResult(intent, Const.Camera.REQ_CAMERA);
                 }
-
-
             }catch(Exception e){
-                e.printStackTrace();
+                //  e.printStackTrace();  -> 예외처리에서 에러가 나면 이렇게 해주면 에러를 확인할 수 있다.
                 Toast.makeText(getBaseContext(), "사진파일 저장을 위한 임시파일을 생성할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 return;  // 사진파일이 생성안되면 더이상 진행되지 않게 하려고 return; 한다.
             }
-
 
         } else { // 롤리팝 미만 버젼에서만 바로 실행
             startActivityForResult(intent, Const.Camera.REQ_CAMERA);
