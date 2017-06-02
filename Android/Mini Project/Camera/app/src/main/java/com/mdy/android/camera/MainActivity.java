@@ -112,8 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // startActivityForResult( intent, 100 ); 으로 해도 된다.
                 break;
             case R.id.btnCamera:
+                intent = new Intent(MainActivity.this, CameraActivity.class);
+                startActivity(intent);
                 break;
-
         }
     }
 
