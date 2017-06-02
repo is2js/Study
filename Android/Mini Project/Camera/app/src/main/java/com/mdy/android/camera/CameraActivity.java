@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -58,7 +59,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 if(photoFile != null){
                     // 마시멜로 이상 버전은 파일 프로바이더를 통해 권한을 획득
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        fileUri = FileProvider.getUriForFile(getBaseContext(), BuildConfig.APPLICATION_ID+".provier", photoFile);
+                        fileUri = FileProvider.getUriForFile(getBaseContext(), BuildConfig.APPLICATION_ID+".provider", photoFile);
                     // 롤리팝 버전은 권한 없이 획득이 가능
                     } else {
                         fileUri = Uri.fromFile(photoFile);
@@ -70,6 +71,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
 
             }catch(Exception e){
+                e.printStackTrace();
                 Toast.makeText(getBaseContext(), "사진파일 저장을 위한 임시파일을 생성할 수 없습니다.", Toast.LENGTH_SHORT).show();
                 return;  // 사진파일이 생성안되면 더이상 진행되지 않게 하려고 return; 한다.
             }
@@ -107,12 +109,13 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
             if(resultCode == RESULT_OK) {
                 Uri imageUri = null;
                 // 롤리팝 미만 버전에서는 data 인텐트에 찍은 사진의 uri 가 담겨온다.
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+                if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
                     imageUri = data.getData();
                 } else {
                     imageUri = fileUri;
-
                 }
+                Log.i("Camera","file=============================="+fileUri);
+                Log.i("Camera","file=============================="+imageUri);
                 imageView.setImageURI(imageUri);
             }
         }
