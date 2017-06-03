@@ -1,6 +1,6 @@
 # Camera
 Gallery 와 Camera 기능을 사용해본다.
-- **[전체소스코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/WebView/app/src/main/java/com/mdy/android/camera/MainActivity.java)**
+- **[전체소스코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Camera/app/src/main/java/com/mdy/android/camera/MainActivity.java)**
 
 ## 권한체크
 - 특정 권한이 있는지 시스템에 물어본다.
