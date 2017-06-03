@@ -15,7 +15,7 @@
   - RelativeLayout / LinearLayout /  GridLayout
 
   #### 4. [MyCalculate](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MyCalculate)
-  - 클릭리스너 / 이중 LinearLayout
+  - 계산기능(정규표현식) / 클릭리스너 / 이중 LinearLayout
 
   #### 5. [Calculator ](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Calculator)  
   - 계산하는로직(정규표현식 사용) / Log찍는방법
