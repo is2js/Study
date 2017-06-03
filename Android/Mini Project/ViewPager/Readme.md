@@ -1,6 +1,6 @@
 # ViewPager
 ViewPager에 대해서 알아본다.
-- **[전체소스코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/WebView/app/src/main/java/com/mdy/android/viewpager/MainActivity.java)**
+- **[전체소스코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/ViewPager/app/src/main/java/com/mdy/android/viewpager/MainActivity.java)**
 
 ## ViewPager, TabLayout 추가
 - ViewPager
