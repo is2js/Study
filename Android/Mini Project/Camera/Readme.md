@@ -2,7 +2,47 @@
 Gallery 와 Camera 기능을 사용해본다.
 - **[전체소스코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Camera/app/src/main/java/com/mdy/android/camera/MainActivity.java)**
 
+
 ## 권한체크
+- 롤리팝 이상 버전에서는 **File Provider** 라는 것을 이용해 권한을 획득해야 한다.
+  (File Provider와 Content Provider는 아무런 연관이 없다.)
+> ### File Provier를 사용하는 이유
+>> 내가 이미지 파일을 저장할 특정 저장 공간에 대한 권한을 획득하는 것이다.
+>> 그 저장 공간은 외부 공간이어서 모든 앱들이 같이 액세스를 할 수 있다.
+>> 그래서 거기서 실제 write를 하겠다고 권한을 얻는 것이다.
+- **AndroidManifest.xml** 에 아래 코드를 추가
+  (사진을 저장하기 위한 파일에 대한 권한을 획득하기 위한 설정)
+```xml
+<!-- 사진을 저장하기 위한 파일에 대한 권한을 획득하기 위한 설정 -->
+  <provider
+      android:name="android.support.v4.content.FileProvider"
+      android:authorities="${applicationId}.provider"
+      android:exported="false"
+      android:grantUriPermissions="true">
+      <!-- resource 파일을 res/xml 폴더 안에 생성 -->
+      <meta-data
+          android:name="android.support.FILE_PROVIDER_PATHS"
+          android:resource="@xml/file_path"/>         <!-- res - xml - file_path.xml 을 만들어준다. -->
+  </provider>
+```
+
+- res - xml - file_path.xml 을 만들어준다.
+```xml
+  <?xml version="1.0" encoding="utf-8"?>
+  <paths>
+      <!-- name = content:// 로 시작하는 uri 주소체계의 suffix 가 된다. 즉, uri의 suffix이다.  -->
+      <!-- 안드로이드에서 내 자원을 엑세스 하기 위해서 가지고 있는 주소이다. -->
+
+      <!-- path = /External Storage/CameraN 가 된다. 물리경로의 실제 디렉토리 이름이다. 안드로이드에서 내 자원을 엑세스하기 위해서 가지고 있는 주소이다. -->
+      <!-- 파일탐색기 구조를 정의하기 위한 것이다. -->
+      <external-path name="Camera" path="CameraN" />
+  </paths>
+
+```
+
+
+
+
 - 특정 권한이 있는지 시스템에 물어본다.
 ```java
   // 마시멜로 이상 버전에서만 런타임 권한 체크
