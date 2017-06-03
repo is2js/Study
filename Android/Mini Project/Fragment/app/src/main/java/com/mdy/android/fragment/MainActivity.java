@@ -18,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
         createFragments();
 
         addList();
-
-
     }
 
     private void createFragments(){

@@ -20,7 +20,6 @@ public class DetailFragment extends Fragment {
         // Required empty public constructor
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,5 +37,4 @@ public class DetailFragment extends Fragment {
     public void setActivity(MainActivity activity){
         this.activity = activity;
     }
-
 }
