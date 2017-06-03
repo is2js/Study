@@ -51,7 +51,7 @@
   - 런타임 퍼미션(Runtime Permission) / 컨텐츠 리졸버(Content Resolver)
 
   #### 16. [Camera](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Camera)
-  - 권한체크 / Camera 기능 이용(Lollipop / Marshmallow이상)
+  - File Provider / 권한체크 / Camera 기능 이용(Lollipop / Marshmallow이상)
 
   #### 17. [Fragment](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Fragment)
   - FrameLayout 만들기 / onCreateView() 메소드 작성 / Fragment 화면에 넣기(transaction 코드 작성)
