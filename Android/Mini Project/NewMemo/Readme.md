@@ -8,6 +8,12 @@
 [3] FloatingActionButton 키보드 창 위에 나올 수 있게 하는 코드
 
 ---
+- [interal storage]에 저장
+  - tools - android - android device monitor 를 누르면 파일이 저장된 것을 볼 수 있다.
+- data - data - com.mdy.android.memo2 (패키지명) - files 에 보면 파일이 저장된 것을 확인할 수 있다.
+
+
+---
 #### [1] MVP 패턴 적용
 * ##### Activity에 있는 내용들을 Presenter와 View의 분리하였음.
   - Presenter - 로직
