@@ -23,10 +23,6 @@ import java.io.IOException;
     // 그 저장 공간은 외부 공간이어서 모든 앱들이 같이 액세스를 할 수 있다.
     // 그래서 거기서 실제 write를 하겠다고 권한을 얻는 것이다.
 
-
-
-
-
 public class CameraActivity extends AppCompatActivity implements View.OnClickListener{
 
     ImageView imageView;
@@ -75,7 +71,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                                 // 마시멜로 이상 버전은 파일 프로바이더를 통해 권한을 획득
                                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                                     fileUri = FileProvider.getUriForFile(getBaseContext(), BuildConfig.APPLICATION_ID+".provider", photoFile);
-                                        // .getUriForFile()의 두번째 속성은 autoritiy인데 manifest에 설정해놓은 provider에서 확인하면 된다.
+                                        // .getUriForFile()의 두번째 속성은 autoritiy인데 manifest에 설정해놓은 android:authorities에서 확인하면 된다.
                                         // photoFile을 넘겨주면 이 파일에 대해서 권한이 획득이 되는 것이다.
                                         // 이제 권한이 획득이 되었으니 intent로 넘겨주면 된다. 5째줄 아래 코드로 이동.
                                 // 롤리팝 버전은 권한 없이 획득이 가능
@@ -103,7 +99,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     // 이걸 만들때 exception이 발생할 수 있으니 예외처리를 해주라는 메세지가 떠서 처리해줬다.
     // 이렇게 해주면 호출한 쪽에서 try ~ catch 처리를 해주면 된다.
     private File createFile() throws IOException{
-        // 임시파일명 생성
+        // 임시파일이름 생성
         String tempFileName = "TEMP_"+System.currentTimeMillis();
         // 임시파일 저장용 디렉토리 생성
         File tempDir = new File(Environment.getExternalStorageDirectory() + "/CameraN/");
