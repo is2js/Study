@@ -14,7 +14,7 @@ public class ThreadBasicActivity extends AppCompatActivity {
 
 
         // 1.1 Thread 생성 (방법1)
-        Thread thread = new Thread(){
+        Thread thread1 = new Thread(){
             @Override
             public void run() {
                 Log.i("Thread Test", "Hello Thread!");
@@ -22,7 +22,7 @@ public class ThreadBasicActivity extends AppCompatActivity {
         };
 
         // 1.2 Thread 실행
-        thread.start(); // run() 함수를 실행시켜준다.
+        thread1.start(); // run() 함수를 실행시켜준다.
 
         // 2.1. Thread 생성 (방법2)       // Thread가 implement Runnable을 하고 있기 때문에(인터페이스 사용)
         Runnable thread2 = new Runnable() {

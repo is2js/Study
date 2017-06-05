@@ -23,7 +23,7 @@ public class TestActivity extends AppCompatActivity {
         });
 
         // 2. Thread 클래스 에서 1부터 100까지 출력하는 함수를 실행
-        new LogThread().start();
+        new LogThread().start();    // 이 thread가 실행되는 것도 서브스레드에서 실행되는 것이다.
 
         // 3. 위의 Thread 클래스의 실행순서를 1번과 바꿔서 실행
     }
