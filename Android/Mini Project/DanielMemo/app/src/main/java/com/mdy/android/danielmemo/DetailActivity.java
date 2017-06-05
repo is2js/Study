@@ -9,18 +9,28 @@ import android.widget.EditText;
 
 import com.mdy.android.util.FileUtil;
 
+import static com.mdy.android.danielmemo.R.id.detailContent;
+
 public class DetailActivity extends AppCompatActivity {
     private static final String TAG = "DetailActivity";
-    public static final String DOC_KEY_NAME = "document_id";
-    FloatingActionButton btnSave;   // 버튼
-    EditText editText;  // 입력 위젯
 
-    String document_id = "";
+    public static final String DATA_TITLE = "title";
+    public static final String DATA_CONTENTS = "contents";
+
+    FloatingActionButton btnSave;   // 버튼
+    EditText editTextTitle;       // 제목 입력 위젯
+    EditText editTextContent;  // 내용 입력 위젯
+
+    String document_title = "";
+    String document_content = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        editTextTitle = (EditText) findViewById(R.id.detailId);
+        editTextContent = (EditText) findViewById(detailContent);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -28,10 +38,16 @@ public class DetailActivity extends AppCompatActivity {
         // null 에서는 getString 호출 시 Exception이 발생한다.
         // 따라서 bundle의 null 여부를 체크해준다.
         if(bundle != null) {
-            document_id = bundle.getString(DOC_KEY_NAME);
+//            document_title = bundle.getString(DATA_TITLE);
+//            document_content = bundle.getString(DATA_CONTENTS);
+            editTextTitle.setText(bundle.getString(DetailActivity.DATA_TITLE));
+            editTextContent.setText(bundle.getString(DetailActivity.DATA_CONTENTS));
+
         }
 
-        editText = (EditText) findViewById(R.id.editText);
+
+
+
 
 
         // 가. 액티비티가 실행되면 파일의 내용을 불러와서 화면에 뿌려준다.
@@ -49,18 +65,20 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void writeContent() {
-        // 1. 메모의 내용을 가져온다.
-        String content = editText.getText().toString();
+        // 1. 메모의 제목과 내용을 가져온다.
+        String id = editTextTitle.getText().toString();
+        String content = editTextContent.getText().toString();
 
         // 2. 파일이름을 생성한다.
         String filename = "Memo"+System.currentTimeMillis()+".txt"; // System.nanoTime()으로 해도 된다.
 
         // document_id가 있으면 파일을 새로 생성하지 않고, 기존 이름을 사용해서 수정처리하다.
-        if(!document_id.equals("")) {
-            filename = document_id;
+        if(!id.equals("")) {
+            filename = id;
         }
 
         // 3. 메모를 파일에 저장한다.
+        FileUtil.write(getBaseContext(), filename, id);
         FileUtil.write(getBaseContext(), filename, content);
 
         // write 메소드가 onClick 안에 있을때는 DetailActivity.this로 썼는데
@@ -73,16 +91,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private void loadContent() {
         // document_id 값이 있을 때만 파일을 읽어와서 화면에 출력한다.
-        if(!"".equals(document_id)) {
-            String memo = FileUtil.read(this, document_id);
-            editText.setText(memo);
+        if(!"".equals(document_title)) {
+            String title = FileUtil.read(this, document_title);
+            String content = FileUtil.read(this, document_content);
+            editTextTitle.setText(title);
+            editTextContent.setText(content);
         }
     }
-
-
-
-
-
-
-
 }

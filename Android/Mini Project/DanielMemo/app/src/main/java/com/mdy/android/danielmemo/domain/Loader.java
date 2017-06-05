@@ -48,7 +48,7 @@ public class Loader {
             if(file.isFile()) {
                 Memo memo = new Memo();
                 // 2.2.1 파일명을 가져와서 담는다.
-                memo.setId(file.getName());
+                memo.setTitle(file.getName());
                 // 2.2.2 작성일자를 formatting해서 문자열로 담는다.
                 String formatted = convertLongToDate(file.lastModified());
                 memo.setDate( formatted );

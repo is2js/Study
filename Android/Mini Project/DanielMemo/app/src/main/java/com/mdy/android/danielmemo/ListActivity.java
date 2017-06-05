@@ -62,7 +62,7 @@ public class ListActivity extends AppCompatActivity {
 
                 for(Memo memo : datas){
                     if(memo.getDelete()){
-                        Loader.deleteData(ListActivity.this, memo.getId());
+                        Loader.deleteData(ListActivity.this, memo.getTitle());
                         adapter.notifyDataSetChanged();
                     }
                 }

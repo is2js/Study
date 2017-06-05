@@ -5,7 +5,7 @@ package com.mdy.android.danielmemo.domain;
  */
 
 public class Memo {
-    private String id;
+    private String title;
     private String content;
     private String date;
     private boolean delete = false;
@@ -18,11 +18,11 @@ public class Memo {
         this.delete = check;
     }
 
-    public String getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
-    public void setId(String id) {
-        this.id = id;
+    public void setTitle(String title) {
+        this.title = title;
     }
     public String getContent() {
         return content;
