@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private final int REQ_PERMISSION = 100;
     @TargetApi(Build.VERSION_CODES.M)
     private void checkPermission(){
-        //1 권한체크 - 특정권한이 있는지 시스템에 물어본다
+        // 1. 권한체크 - 특정권한이 있는지 시스템에 물어본다
         if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
 
         }else{

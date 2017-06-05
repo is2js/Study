@@ -27,7 +27,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
  */
 public class FourFragment extends Fragment implements OnMapReadyCallback {
 
-
     LocationManager manager = null;
     GoogleMap map = null;
 
