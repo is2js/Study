@@ -51,7 +51,7 @@
   - 런타임 퍼미션(Runtime Permission) / 컨텐츠 리졸버(Content Resolver)
 
   #### 16. [Camera](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Camera)
-  - File Provider / 권한체크 / Camera 기능 이용(Lollipop / Marshmallow이상)
+  - File Provider / 버전호환성 / 권한체크 / Camera 기능 이용(Lollipop / Marshmallow이상)
 
   #### 17. [Fragment](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Fragment)
   - FrameLayout 만들기 / onCreateView() 메소드 작성 / Fragment 화면에 넣기(transaction 코드 작성)
@@ -59,5 +59,8 @@
   #### 18. [ViewPager](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ViewPager)
   - ViewPager, TabLayout사용 / PagerAdapter 클래스 / ViewPager와 TabLayout의 연결
 
+  #### 19. [ThreadBasic](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ThreadBasic)
+  - Thread에 관한 설명 / Thread 생성 및 실행
+  - [빗방울 떨어지게 하는 코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/ThreadBasic/app/src/main/java/com/mdy/android/threadbasic/RainActivity.java)
 
 *****
