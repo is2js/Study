@@ -1,10 +1,14 @@
 package com.mdy.android.viewpager;
 
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +47,7 @@ public class FourFragment extends Fragment implements OnMapReadyCallback {
 
         // 상위 액티비티의 자원을 사용하기 위해서 Activity를 가져온다.
         // 캐스팅을 해줘야 내가 만든 함수를 사용할 수 있다.
-        MainActivity activity = (MainActivity) getActivity();   // getActivity();는 Fragment()가 가지고 있는 고유 함수이다. 나를 상속하고 있는 엑티비티???
+        MainActivity activity = (MainActivity) getActivity();   // getActivity();는 Fragment()가 가지고 있는 고유 함수이다. getActivity()는 내가 포함된 액티비티를 반환한다.
 
         manager = activity.getLocationManager();
 
@@ -69,14 +73,24 @@ public class FourFragment extends Fragment implements OnMapReadyCallback {
     }
 
 
-    // 리스널르 등록하려면 locationManager를 통해 리스너를 등록할 수 있다.
+    // 리스너를 등록하려면 locationManager를 통해 리스너를 등록할 수 있다.
 
     // 현재 프래그먼트가 러닝직전
     @Override
     public void onResume() {
         super.onResume();
 
-        // GPS 리스너 등록           =>  위치제공자 사용을 위한 권한처리를 해줘야 한다. (MainAcitivity에 했음.)
+        // GPS 리스너 등록
+        // =>  위치제공자 사용을 위한 권한처리를 해줘야 한다. (MainAcitivity에 했음.)
+        // =>  예외처리를 해줘야 한다.
+
+        // 마시멜로 이상버전에서는 런타임 권한 체크여부를 확인해야 한다.
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            // GPS 사용을 위한 권한 획득이 되어 있지 않으면 리스너 등록을 하지 않는다.
+            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                return;
+            }
+        }
         manager.requestLocationUpdates(LocationManager.GPS_PROVIDER,    //위치 제공자
                 3000,   // 변경사항 체크 주기 milisecond 단위 (3초마다)
                 1,      // 변경사항 체크 거리 meter 단위 (내가 1m 단위를 벗어나면 변경)
@@ -89,6 +103,17 @@ public class FourFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onPause() {
         super.onPause();
+
+        // 마시멜로 이상버전에서는 런타임 권한 체크여부를 확인해야 한다.
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            // GPS 사용을 위한 권한 획득이 되어 있지 않으면 리스너를 해제하지 않는다.
+            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                return;
+            }
+        }
+
+        // 리스너 해제 (프래그먼트가 더이상 동작하지 않으면 리스너를 해제한다.)
+        manager.removeUpdates(locationListener);
     }
 
 

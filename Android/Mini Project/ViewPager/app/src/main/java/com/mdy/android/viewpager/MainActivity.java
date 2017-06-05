@@ -91,11 +91,18 @@ public class MainActivity extends AppCompatActivity {
 
     // 위치제공자 사용을 위한 권한처리
     private final int REQ_PERMISSION = 100;
+    @TargetApi(Build.VERSION_CODES.M)
+    private void checkPermission(){
+        //1 권한체크 - 특정권한이 있는지 시스템에 물어본다
+        if(checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
 
+        }else{
+            // 2. 권한이 없으면 사용자에 권한을 달라고 요청
+            String permissions[] = {Manifest.permission.ACCESS_FINE_LOCATION};
+            requestPermissions(permissions ,REQ_PERMISSION); // -> 권한을 요구하는 팝업이 사용자 화면에 노출된다
+        }
+    }
 
-
-    // 액티비티에 오버라이드 되어 있는 함수는 PermissionControl로 옮기면 호출할 방법이 없다.
-    // 그래서 onRequestPermissionsResult() 메소드는 MainActivity에 놔둔다.
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -113,8 +120,6 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(this, "권한요청을 승인하셔야 GPS를 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
         finish();
     }
-
-
 
 
 
