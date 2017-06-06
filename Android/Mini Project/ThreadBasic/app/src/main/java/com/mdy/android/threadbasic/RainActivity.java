@@ -70,6 +70,8 @@ public class RainActivity extends AppCompatActivity {
         }
     }
 
+
+
     // 빗방울을 만들어 주는 클래스
     class Rain extends Thread {
         @Override
@@ -107,6 +109,9 @@ public class RainActivity extends AppCompatActivity {
         }
     }
 
+
+
+
     // 빗방울 클래스
     // 생성되는 순간 자신의 생명주기를 갖고 동작한다.
     class RainDrop extends Thread {
@@ -118,7 +123,7 @@ public class RainActivity extends AppCompatActivity {
 
         int speed; // 속도
 
-        boolean run = true;
+        boolean run = true; // 플래그(빗방울이 바닥까지 떨어지면 false로 바꿔준다.)
 
         @Override
         public void run() {
@@ -136,6 +141,8 @@ public class RainActivity extends AppCompatActivity {
             run = false;
         }
     }
+
+
 
     // 화면을 그릴 수 있는 클래스
     class Stage extends View {
@@ -162,4 +169,7 @@ public class RainActivity extends AppCompatActivity {
             this.rainDrops.add(rainDrop);
         }
     }
+
+
+
 }
