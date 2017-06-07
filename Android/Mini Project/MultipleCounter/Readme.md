@@ -6,6 +6,8 @@
 ## 핸들러(Handler)
 #### 안드로이드에서는 Sub Thread에서 메인에 있는 UI를 건들지 못하게 제한되어 있다.
 #### 그래서 핸들러를 통해서 접근을 강제하는 것이다.
+![Handler01](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/MultipleCounter/graphics/Handler01.JPG)
+![Handler02](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/MultipleCounter/graphics/Handler02.JPG)
 <br>
 
 - 우리가 앱을 띄우게 되면 앱 안에서 Looper라는게 계속 돌고 있다.
