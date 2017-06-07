@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
-
         // 화면 세로길이
         deviceHeight = metrics.heightPixels;
         // 화면 가로넓이
@@ -45,19 +44,22 @@ public class MainActivity extends AppCompatActivity {
         // 중심점 세로
         center_y = deviceHeight / 2;
         // 선의길이
-        LINE = center_x - 50;
+        LINE = center_x - 30;
 
         stage = new CustomView(getBaseContext());
-        setContentView(stage);
+        setContentView(stage);  // 화면 전체사이즈로 뷰를 그려준다.
 
         // 화면을 그려주는 Thread를 동작시킨다.
         new DrawStage().start();
 
-        SecondHand hand1 = new SecondHand(5, center_x, center_y, LINE, 1000/360);
+        SecondHand hand1 = new SecondHand(15, center_x, center_y, (LINE-120) , 1000, Color.BLUE);
         stage.addHand(hand1);
 
-        SecondHand hand2 = new SecondHand(20, center_x, center_y, LINE, 1000);
+        SecondHand hand2 = new SecondHand(10, center_x, center_y, (LINE-50) , 10, Color.RED);
         stage.addHand(hand2);
+
+        SecondHand hand3 = new SecondHand(5, center_x, center_y, LINE , 1, Color.GREEN);
+        stage.addHand(hand3);
     }
 
     class SecondHand extends Thread {
@@ -74,8 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
         int interval = 0;
 
-        public SecondHand(int stroke, int x, int y, int length, int interval){
-            paint.setColor(Color.BLUE);
+        public SecondHand(int stroke, int x, int y, int length, int interval, int color){
+            paint.setColor(color);
             paint.setStrokeWidth(stroke);
 
             start_x = x;
@@ -91,8 +93,8 @@ public class MainActivity extends AppCompatActivity {
                 angle = angle + 1;
                 // 화면의 중앙부터 12시방향으로 직선을 긋는다
                 double angle_temp = angle - 90;
-                end_x = Math.cos(angle_temp * Math.PI / 180) * LINE + center_x; // x좌표 구하는 식
-                end_y = Math.sin(angle_temp * Math.PI / 180) * LINE + center_y; // y좌표 구하는 식
+                end_x = Math.cos(angle_temp * Math.PI / 180) * line + center_x; // x좌표 구하는 식
+                end_y = Math.sin(angle_temp * Math.PI / 180) * line + center_y; // y좌표 구하는 식
 
                 if(interval > 0){
                     try {
@@ -105,24 +107,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 뷰만 다시 그려주는 역할
+    // 뷰만 다시 그려주는 역할 (onDraw 를 호출)
     class DrawStage extends Thread {
         @Override
         public void run() {
 //            super.run();
             while(runFlag){
-                stage.postInvalidate();
+                stage.postInvalidate(); // postInvalidate()는 onDraw()를 호출해준다.
             }
         }
     }
 
-    // View클래스(CustomView)를 만들면 기본적으로 onDraw() 메소드는 가지고 있어야 한다
+    // View를 상속받은 클래스(CustomView)를 만들면 기본적으로 onDraw() 메소드는 가지고 있어야 한다
     class CustomView extends View {
         List<SecondHand> hands = new ArrayList<>();
 
         public CustomView(Context context) {
             super(context);
-
         }
 
         public void addHand(SecondHand hand){
@@ -132,10 +133,15 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onDraw(Canvas canvas) {
-            super.onDraw(canvas);
-            if( hands.size() > 0) {
+            //super.onDraw(canvas);
+            if( hands.size() > 0 ) {
                 for(SecondHand hand :hands) {
-                    canvas.drawLine(hand.start_x, hand.start_y, (float) hand.end_x, (float) hand.end_y, hand.paint);
+                    canvas.drawLine( (float) hand.start_x, (float) hand.start_y, (float) hand.end_x, (float) hand.end_y, hand.paint );
+                    // drawLine() 메소드의 첫번째 인자는 x좌표 시작하는 점이고,
+                    //                     두번째 인자는 y좌표 시작하는 점이고,
+                    //                     세번째 인자는 x좌표 끝나는 점이고,
+                    //                     네번째 인자는 y좌표 끝나는 점이다.
+                    //                     다섯번째 인자는 Paint 객체 이다.
                 }
             }
         }
@@ -147,6 +153,5 @@ public class MainActivity extends AppCompatActivity {
         super.onDestroy();
         runFlag = false; // Thread 를 종료시켜준다.
     }
-
 
 }
