@@ -64,12 +64,15 @@
   - [빗방울 떨어지게 하는 코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/ThreadBasic/app/src/main/java/com/mdy/android/threadbasic/RainActivity.java)
 
   #### 20. [ThreadClock](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ThreadClock)
-  -
+  - Thread를 이용한 아날로그 시계 만들기
+  - 화면의 가로, 세로 길이 구하는 방법
+  - onDraw()와 postInvalidate, drawLine() 메소드
+  - Thread 안의 run() 메소드 안에 while문 사용시 Flag를 이용해야 한다.
 
   #### 21. [MultipleCounter](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MultipleCounter)
-  - **Handler 객체**에 대한 설명
+  - **Handler 객체** 에 대한 설명
   - handleMessage() 메소드, Message 객체에 대한 설명
 
   #### 22. [HandMemo](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HandMemo)
-  -
+  - 색깔과 굵기를 정해 터치로 메모를 한다.
 *****
