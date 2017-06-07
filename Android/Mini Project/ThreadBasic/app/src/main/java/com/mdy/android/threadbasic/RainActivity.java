@@ -65,7 +65,7 @@ public class RainActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                stage.postInvalidate();
+                stage.postInvalidate(); // postInvalidate()는 onDraw()를 호출해준다.
             }
         }
     }
