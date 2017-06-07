@@ -117,6 +117,16 @@ class Counter extends Thread {
             count++;
 
             // 핸들러를 통해 메세지를 날릴때, Message객체를 생성해서 날릴 수 있다.
+
+            // 메세지 객체가 정해져있다.  msg
+            // 핸들러를 통해서 일반적으로 자바에서 설계할때 핸들러를 통해서 메세지는 int로 주고 받는다.
+            // msg.what에 메세지를 담아서 보내는데 what의 타입이 int이다.
+            // 플래그값 상수 설계하듯이 핸들러로 메세지를 통신할때는 미리 상수로 다 정의해놓는다.
+            // ex) public static final int SET_COUNT = 99;
+            // 어떤 메세지를 핸들러를 통해 서브스레드에서 날려주면 switch를 통해서 msg.what을 꺼낸다.
+            // what이 SET_COUNT 일 경우는, textViews[ 값1 ].setText( ""+값2 );
+            // 이 handler는 Counter 인스턴스를 생성할 때(스레드가 new 될때), 인자로 handler를 넘겨줘야 한다.
+
             Message msg = new Message();
             msg.what = MainActivity.SET_COUNT;
             msg.arg1 = textViewIndex;   // 텍스트뷰의 인덱스를 넘겨주게끔 설계했으므로
