@@ -63,4 +63,13 @@
   - Thread에 관한 설명 / Thread 생성 및 실행
   - [빗방울 떨어지게 하는 코드](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/ThreadBasic/app/src/main/java/com/mdy/android/threadbasic/RainActivity.java)
 
+  #### 20. [ThreadClock](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ThreadClock)
+  -
+
+  #### 21. [MultipleCounter](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MultipleCounter)
+  - **Handler 객체**에 대한 설명
+  - handleMessage() 메소드, Message 객체에 대한 설명
+
+  #### 22. [HandMemo](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HandMemo)
+  -
 *****
