@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
@@ -42,6 +43,8 @@ public class MainActivity extends AppCompatActivity  {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
         layout = (FrameLayout) findViewById(R.id.layout);
         color = (RadioGroup) findViewById(R.id.color);
@@ -52,6 +55,7 @@ public class MainActivity extends AppCompatActivity  {
                 switch(checkedId) {
                     case R.id.radioBlack :
                         setBrush(Color.BLACK, thickType);
+                        colorType = Color.BLACK;
                         Toast.makeText(MainActivity.this , "검정색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.radioGreen :
@@ -76,6 +80,14 @@ public class MainActivity extends AppCompatActivity  {
 
         seekCount = (TextView) findViewById(R.id.seekCount);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
+
+        findViewById(R.id.btnNew).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                board.removeBrush();
+                Toast.makeText(MainActivity.this , "초기화 되었습니다.", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
@@ -145,6 +157,10 @@ public class MainActivity extends AppCompatActivity  {
         // Path path;  // 내가 터치를 하면서 움직이면 터치한 포인트들의 점을 찍은 다음에 연결해준다.
 
 
+        public void removeBrush(){
+            brushes.removeAll(brushes);
+            invalidate();
+        }
         public Board(Context context) {
             super(context); // super를 들어가봐서 하는 것이 많이 있으면 주석처리하면 안된다.
         }
