@@ -25,13 +25,17 @@ public class MainActivity extends AppCompatActivity  {
     FrameLayout layout;
     RadioGroup color;
 
-//    List<Brush> brushes;
     Path current_path;
-    Paint current_paint; // 현재 세팅된 paint
     SeekBar seekBar;
     TextView seekCount;
 
     Board board;
+
+    Paint paint;
+
+
+    int colorType = Color.BLACK;    // 초기값(색깔: 검정색)
+    int thickType = 10; // 초기값(두께: 10)
 
 
     @Override
@@ -47,13 +51,19 @@ public class MainActivity extends AppCompatActivity  {
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch(checkedId) {
                     case R.id.radioGreen :
-                        setBrush(Color.GREEN);
+                        setBrush(Color.GREEN, thickType);
+                        colorType = Color.GREEN;
+                        Toast.makeText(MainActivity.this , "초록색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.radioBlue :
-                        setBrush(Color.BLUE);
+                        setBrush(Color.BLUE, thickType);
+                        colorType = Color.BLUE;
+                        Toast.makeText(MainActivity.this , "파란색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.radioRed :
-                        setBrush(Color.RED);
+                        setBrush(Color.RED, thickType);
+                        colorType = Color.RED;
+                        Toast.makeText(MainActivity.this , "빨간색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -72,15 +82,15 @@ public class MainActivity extends AppCompatActivity  {
         layout.addView(board);
 
         // 3. 기본 브러쉬 세팅
-        setBrush(Color.BLACK, 10);
+        setBrush(colorType, thickType);
 
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                setBrush( , progress);
-
-
+                seekCount.setText(progress+"");
+                setBrush(colorType , progress);
+                thickType = progress;
 
                 /*Brush brush = new Brush();
                 current_paint = new Paint();
@@ -108,13 +118,34 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
-
-
     }
 
 
 
-    private void setBrush(int colorType, int thickType) {
+
+    private void setBrush(int color, int thick) {
+        // 2. 붓을 만들어서 보드에 담는다.
+        Paint paint = new Paint();
+        paint.setColor(color);  // ColorType으로 넘겨받는 인자를 색깔로 설정
+        paint.setStyle(Paint.Style.STROKE); // 선을 채우지 않고, 굵기를 지정
+        paint.setAntiAlias(true);   // 디자인쪽에서 나오는 용어인데
+        // 선을 만들어줄때 그 사이를 부드럽게 (경계점이 모호하게 만들어서)
+
+
+        // SeekBar에서 처리
+        paint.setStrokeJoin(Paint.Join.ROUND);  // 연결되었을때 연결점을 둥글게 연결
+        paint.setStrokeCap(Paint.Cap.ROUND);  // 닫히는 부분
+        paint.setDither(true); // 옆으로 깨지는 것을 보정, 선을 긋게 되면 선 사이에 튀어나오는 노이즈를 제거해준다.
+        paint.setStrokeWidth(thick);
+        board.setPaint(paint);
+    }
+
+
+
+
+
+/*    private void setBrush(float thickType) {
+        this.thickType = thickType;
         // 2. 붓을 만들어서 보드에 담는다.
         Paint paint = new Paint();
         paint.setColor(colorType);  // ColorType으로 넘겨받는 인자를 색깔로 설정
@@ -127,9 +158,27 @@ public class MainActivity extends AppCompatActivity  {
         paint.setStrokeJoin(Paint.Join.ROUND);  // 연결되었을때 연결점을 둥글게 연결
         paint.setStrokeCap(Paint.Cap.ROUND);  // 닫히는 부분
         paint.setDither(true); // 옆으로 깨지는 것을 보정, 선을 긋게 되면 선 사이에 튀어나오는 노이즈를 제거해준다.
-        paint.setStrokeWidth(thickType);
+        paint.setStrokeWidth(this.thickType);
         board.setPaint(paint);
     }
+
+    private void setBrush(int colorType) {
+        this.colorType = colorType;
+        // 2. 붓을 만들어서 보드에 담는다.
+        Paint paint = new Paint();
+        paint.setColor(this.colorType);  // ColorType으로 넘겨받는 인자를 색깔로 설정
+        paint.setStyle(Paint.Style.STROKE); // 선을 채우지 않고, 굵기를 지정
+        paint.setAntiAlias(true);   // 디자인쪽에서 나오는 용어인데
+        // 선을 만들어줄때 그 사이를 부드럽게 (경계점이 모호하게 만들어서)
+
+
+        // SeekBar에서 처리
+        paint.setStrokeJoin(Paint.Join.ROUND);  // 연결되었을때 연결점을 둥글게 연결
+        paint.setStrokeCap(Paint.Cap.ROUND);  // 닫히는 부분
+        paint.setDither(true); // 옆으로 깨지는 것을 보정, 선을 긋게 되면 선 사이에 튀어나오는 노이즈를 제거해준다.
+        paint.setStrokeWidth(thickType);
+        board.setPaint(paint);
+    }*/
 
     class Brush {
         Paint paint;
@@ -181,7 +230,7 @@ public class MainActivity extends AppCompatActivity  {
 
     class Board extends View {  // 뷰를 만들었으면 onDraw() 메소드를 만들어준다.
         List<Brush> brushes = new ArrayList<>();
-        Paint paint;
+//        Paint paint;
         // Path path;  // 내가 터치를 하면서 움직이면 터치한 포인트들의 점을 찍은 다음에 연결해준다.
 
 
@@ -189,8 +238,8 @@ public class MainActivity extends AppCompatActivity  {
             super(context); // super를 들어가봐서 하는 것이 많이 있으면 주석처리하면 안된다.
         }
 
-        public void setPaint(Paint paint) {
-            this.paint = paint;
+        public void setPaint(Paint paintValue) {
+            paint = paintValue;
         }
 
         @Override
