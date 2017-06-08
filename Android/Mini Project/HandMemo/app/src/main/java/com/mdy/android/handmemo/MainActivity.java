@@ -50,19 +50,24 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
                 switch(checkedId) {
+                    case R.id.radioBlack :
+                        colorType = Color.BLACK;
+                        setBrush(colorType, thickType);
+                        Toast.makeText(MainActivity.this , "검정색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                        break;
                     case R.id.radioGreen :
-                        setBrush(Color.GREEN, thickType);
                         colorType = Color.GREEN;
+                        setBrush(colorType, thickType);
                         Toast.makeText(MainActivity.this , "초록색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.radioBlue :
-                        setBrush(Color.BLUE, thickType);
                         colorType = Color.BLUE;
+                        setBrush(colorType, thickType);
                         Toast.makeText(MainActivity.this , "파란색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.radioRed :
-                        setBrush(Color.RED, thickType);
                         colorType = Color.RED;
+                        setBrush(colorType, thickType);
                         Toast.makeText(MainActivity.this , "빨간색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                 }
