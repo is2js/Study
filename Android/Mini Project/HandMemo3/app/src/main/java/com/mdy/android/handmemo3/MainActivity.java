@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -20,10 +21,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity  {
+
 
     FrameLayout layout;
     RadioGroup color;
@@ -96,7 +100,6 @@ public class MainActivity extends AppCompatActivity  {
         });
 
 
-
         // 썸네일 이미지뷰
         imageView = (ImageView) findViewById(R.id.imageView);
         // 캡쳐를 할 뷰의 캐쉬를 사용한다.
@@ -112,6 +115,17 @@ public class MainActivity extends AppCompatActivity  {
                 captured = layout.getDrawingCache();
                 // 캡쳐한 이미지를 썸네일에 보여준다.
                 imageView.setImageBitmap(captured);
+
+                FileOutputStream fos;
+                try {
+                    fos = new FileOutputStream(Environment.getExternalStorageDirectory().toString()+"/DCIM/capture_"+System.currentTimeMillis()+".jpeg");
+                    captured.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                Toast.makeText(getApplicationContext(), "Captured!", Toast.LENGTH_LONG).show();
+
+
             }
         });
 
@@ -146,7 +160,11 @@ public class MainActivity extends AppCompatActivity  {
             }
         });
 
+
+
+
     }
+
 
 
 
@@ -249,4 +267,22 @@ public class MainActivity extends AppCompatActivity  {
             return true;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
