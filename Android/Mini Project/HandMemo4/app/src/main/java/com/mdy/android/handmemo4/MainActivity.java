@@ -1,19 +1,29 @@
 package com.mdy.android.handmemo4;
 
+import android.Manifest;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.IdRes;
+import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -21,12 +31,18 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    private final int REQ_PERMISSION = 100;
+
 
     FrameLayout layout;
     RadioGroup color;
@@ -34,6 +50,7 @@ public class MainActivity extends AppCompatActivity  {
     Path current_path;
     SeekBar seekBar;
     TextView seekCount;
+    Button btnLoad;
 
     Board board;
 
@@ -42,7 +59,7 @@ public class MainActivity extends AppCompatActivity  {
     ImageView imageView;               // 캡쳐한 이미지를 썸네일로 화면에 표시
 
     // 캡쳐한 이미지를 저장하는 변수
-    Bitmap captured = null;
+    // Bitmap captured = null;
 
 
     int colorType = Color.BLACK;    // 초기값(색깔: 검정색)
@@ -62,26 +79,26 @@ public class MainActivity extends AppCompatActivity  {
         color.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                switch(checkedId) {
-                    case R.id.radioBlack :
+                switch (checkedId) {
+                    case R.id.radioBlack:
                         setBrush(Color.BLACK, thickType);
                         colorType = Color.BLACK;
-                        Toast.makeText(MainActivity.this , "검정색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "검정색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.radioGreen :
+                    case R.id.radioGreen:
                         setBrush(Color.GREEN, thickType);
                         colorType = Color.GREEN;
-                        Toast.makeText(MainActivity.this , "초록색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "초록색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.radioBlue :
+                    case R.id.radioBlue:
                         setBrush(Color.BLUE, thickType);
                         colorType = Color.BLUE;
-                        Toast.makeText(MainActivity.this , "파란색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "파란색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
-                    case R.id.radioRed :
+                    case R.id.radioRed:
                         setBrush(Color.RED, thickType);
                         colorType = Color.RED;
-                        Toast.makeText(MainActivity.this , "빨간색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this, "빨간색 붓이 선택되었습니다.", Toast.LENGTH_SHORT).show();
                         break;
                 }
             }
@@ -95,7 +112,7 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onClick(View v) {
                 board.removeBrush();
-                Toast.makeText(MainActivity.this , "초기화 되었습니다.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "초기화 되었습니다.", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -112,30 +129,35 @@ public class MainActivity extends AppCompatActivity  {
                 // 다시 만들고
                 layout.buildDrawingCache();
                 // 레이아웃의 그려진 내용을 Bitmap 형태로 가져온다.
-                captured = layout.getDrawingCache();
+                Bitmap captured = layout.getDrawingCache();
                 // 캡쳐한 이미지를 썸네일에 보여준다.
                 imageView.setImageBitmap(captured);
 
-                FileOutputStream fos;
-                try {
-                    fos = new FileOutputStream(Environment.getExternalStorageDirectory().toString()+"/DCIM/capture_"+System.currentTimeMillis()+".jpeg");
-                    captured.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                }
-                Toast.makeText(getApplicationContext(), "Captured!", Toast.LENGTH_LONG).show();
-
-
+                makeUri(captured);
             }
         });
 
 
+        btnLoad = (Button) findViewById(R.id.btnLoad);
 
 
+        // 버튼 잠금
+        btnLoad.setEnabled(false);
 
 
+        //리스너
+        btnLoad.setOnClickListener(this);
 
 
+        // 마시멜로 이상 버전에서만 런타임 권한 체크
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // level 23은 마시멜로이다.  Build.VERSION_CODES.M : 마시멜로를 가리킨다.
+            // 마시멜로부터는 앞에 대문자 한자만 써도 된다.
+            checkPermission();
+        } else {
+            // 아니면 그냥 run() 메소드 실행
+            init();
+        }
 
 
         // 1. 보드를 새로 생성한다.
@@ -151,8 +173,8 @@ public class MainActivity extends AppCompatActivity  {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                seekCount.setText(progress+"");
-                setBrush(colorType , progress);
+                seekCount.setText(progress + "");
+                setBrush(colorType, progress);
                 thickType = progress;
             }
 
@@ -168,8 +190,6 @@ public class MainActivity extends AppCompatActivity  {
         });
 
     }
-
-
 
 
     private void setBrush(int color, int thick) {
@@ -190,12 +210,10 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
-
     class Brush {
         Paint paint;
         Path path;
     }
-
 
 
     class Board extends View {  // 뷰를 만들었으면 onDraw() 메소드를 만들어준다.
@@ -204,10 +222,11 @@ public class MainActivity extends AppCompatActivity  {
         // Path path;  // 내가 터치를 하면서 움직이면 터치한 포인트들의 점을 찍은 다음에 연결해준다.
 
 
-        public void removeBrush(){
+        public void removeBrush() {
             brushes.removeAll(brushes);
             invalidate();
         }
+
         public Board(Context context) {
             super(context); // super를 들어가봐서 하는 것이 많이 있으면 주석처리하면 안된다.
         }
@@ -219,7 +238,7 @@ public class MainActivity extends AppCompatActivity  {
         @Override
         protected void onDraw(Canvas canvas) {
 //            super.onDraw(canvas);
-            for(Brush brush : brushes) {
+            for (Brush brush : brushes) {
                 canvas.drawPath(brush.path, brush.paint);
             }
         }
@@ -230,11 +249,11 @@ public class MainActivity extends AppCompatActivity  {
             float x = event.getX();
             float y = event.getY();
 
-            Log.e("LOG", "onTouchEvent=" + x);
+//            Log.e("LOG", "onTouchEvent=" + x);
 
-            switch (event.getAction()){
-                case MotionEvent.ACTION_DOWN :
-                    Log.e("LOG", "onTouchEvent==================down");
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+//                    Log.e("LOG", "onTouchEvent==================down");
                     // 새로운 붓을 생성 - path 와 paint를 포함한다.
                     Brush brush = new Brush();
                     // 가. Path 생성
@@ -248,14 +267,14 @@ public class MainActivity extends AppCompatActivity  {
                     current_path.moveTo(x, y);  // 이전점과 현재점 사이를 그리지 않고 이동한다.
 
                     break;
-                case MotionEvent.ACTION_MOVE :
-                    Log.e("LOG", "onTouchEvent==================move");
+                case MotionEvent.ACTION_MOVE:
+//                    Log.e("LOG", "onTouchEvent==================move");
                     current_path.lineTo(x, y);  // 바로 이전점과 현재점 사이에 줄을 그어준다.
                     break;
-                case MotionEvent.ACTION_POINTER_UP :
+                case MotionEvent.ACTION_POINTER_UP:
                     Toast.makeText(getContext(), "언제찍히니?", Toast.LENGTH_SHORT).show();
                     break;
-                case MotionEvent.ACTION_UP :
+                case MotionEvent.ACTION_UP:
                     current_path.lineTo(x, y);
                     break;
             }
@@ -270,4 +289,138 @@ public class MainActivity extends AppCompatActivity  {
             return true;
         }
     }
+
+
+
+    Uri fileUri = null;
+    private void makeUri(Bitmap bitmap) {
+        File captureFile = null;
+        try {
+            captureFile = createFile(bitmap);
+            if(captureFile != null){
+                // 마시멜로 이상 버전은 파일 프로바이더를 통해 권한을 획득
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                    // v파일 uri 생성
+                    fileUri = FileProvider.getUriForFile(getBaseContext(), BuildConfig.APPLICATION_ID+".provider", captureFile);
+                    Log.e("fileUri", "=========마시멜로 이상 버전========fileUri===========" + fileUri);
+                } else {
+                    // 이미지 파일 Uri 강제생성
+                    String path = MediaStore.Images.Media.insertImage(getContentResolver(),captureFile.getPath(),captureFile.getName(),"HandMemo");
+                    //fileUri = Uri.fromFile(captureFile);
+                    Log.e("fileUri", "=========마시멜로 미만 버전========path===========" + path);
+                }
+
+            }
+        }catch(Exception e){
+            Toast.makeText(getBaseContext(), "이미지 파일 Uri 를 생성할 수 없습니다.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    private File createFile(Bitmap bitmap) throws IOException {
+
+        // 임시파일 저장용 디렉토리 생성
+        File tempDir = new File(Environment.getExternalStorageDirectory() + "/CameraN");
+        // Environment.getExternalStorageDirectory() : External Storage의 루트경로를 가져옴. (파일탐색기를 열었을때 제일 먼저 뜨는)
+        // 그런데 이게 시스템의 루트 경로는 아니다.
+
+        // tempDir가 없으면 생성한다.
+        if(!tempDir.exists()){
+            tempDir.mkdir();   // tempDir.mkdirs()로 하면 중간에 없는 경로까지 다 생성해준다.
+        }
+
+        // 저장될 파일의 전체 경로 - 파일명 포함
+        String fullName = tempDir.getPath() + "/Memo_" +System.currentTimeMillis() + ".jpeg";
+
+        FileOutputStream fos;
+        try {
+            fos = new FileOutputStream(fullName);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        // 실제 생성된 파일을 리턴
+        File tempFile = new File(fullName);
+        return tempFile;
+    }
+
+
+
+
+
+
+    @TargetApi(Build.VERSION_CODES.M)       // @RequireApi 와 @TargetApi 는 동일하다고 생각해도 된다.
+    private void checkPermission() {
+        // 1. 권한체크 - 특정권한이 있는지 시스템에 물어본다.
+        // checkSelfPermission 반환값이 true, false가 아니라 미리 정의된 상수로 반환한다.
+        if( checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED ) {
+            init();
+        } else {
+            // 2. 권한이 없으면 사용자에게 권한을 달라고 요청
+            String permissions[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE}; // 동시에 여러개 호출할 수 있으니까 복수로
+            requestPermissions(permissions , REQ_PERMISSION);  // -> 권한을 요구하는 팝업이 사용자 화면에 노출된다.
+
+        }
+    }
+
+    // 3. 사용자가 권한체크 팝업에서 권한을 승인 또는 거절하면 아래 메서드가 호출된다.
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == REQ_PERMISSION) {
+            // 3.1 사용자가 승인을 했음.
+            if(grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                init();
+                // 3.2 사용자가 거절 했음.
+            } else {
+                cancel();
+            }
+        }
+    }
+
+    public void init(){
+        btnLoad.setEnabled(true);
+    }
+
+    public void cancel(){
+        Toast.makeText(this, "권한을 요청을 승인하셔야 앱을 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
+        finish();
+    }
+
+
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // EXTERNAL_CONTENT_URI 에 여러가지가 있는데 그 중에서 이미지들을 가져올 수 있게 해준다.
+        startActivityForResult( Intent.createChooser(intent, "앱을 선택하세요."), 100);    // 사진앱이 여러개일 경우 선택하게끔 해준다.
+        // startActivityForResult( intent, 100 ); 으로 해도 된다.
+    }
+
+
+    // startActivityForResult()가 끝나면 호출되는 메소드
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            switch (requestCode) {
+                case 100:
+                    Uri imageUri = data.getData();
+                    Log.i("Gallery","imageUri========================="+imageUri);
+                    imageView.setImageURI(imageUri);
+                    break;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
 }
