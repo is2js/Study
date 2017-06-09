@@ -4,10 +4,12 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  * Created by MDY on 2017-06-09.
@@ -51,4 +53,56 @@ public class DBHelper extends OrmLiteSqliteOpenHelper {
             e.printStackTrace();
         }
     }
+
+    // Create - 데이터를 입력 (set과 같다.)
+    public void create(Memo memo) { // 데이터 단위가 메모클래스가 된다.
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);   // Data Access Object
+            // 2. 데이터를 입력
+            dao.create(memo);   // 이렇게 해주면 insert쿼리를 작성할 필요가 없다.
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Read All
+    public List<Memo> readAll() {
+        List<Memo> datas = null;
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);   // Data Access Object
+            // 2.1 데이터 전체 읽어오기
+            datas = dao.queryForAll();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return datas;
+    }
+
+    // Read One
+    public Memo read(int memoid) {
+        Memo memo = null;
+        try {
+            // 1. 테이블에 연결
+            Dao<Memo, Integer> dao = getDao(Memo.class);   // Data Access Object
+            // 2.1 데이터 한개 읽어오기
+            memo = dao.queryForId(memoid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return memo;
+    }
+
+    // Update
+    public void update() {
+
+    }
+
+    // Delete
+    public void delete() {
+
+    }
+
+
 }

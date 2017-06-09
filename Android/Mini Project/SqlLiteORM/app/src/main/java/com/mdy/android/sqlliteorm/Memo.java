@@ -11,21 +11,22 @@ import java.util.Date;
 @DatabaseTable(tableName =  "memo")
 public class Memo {
     @DatabaseField(generatedId = true)  // 자동증가값으로 생성
-            private int id;
+    private int id;
     @DatabaseField()
     private String title;
     @DatabaseField()
     private String content;
     @DatabaseField()
-    private Date data;
+    private Date date;
 
-    @DatabaseField()
+    @DatabaseField
     private String name;
 
 
 
     public Memo() {
         // OrmLite 는 기본생성자가 없으면 동작하지 않습니다.
+        setDate();
     }
 
 
@@ -35,7 +36,7 @@ public class Memo {
         return id;
     }
 
-    public void setId(int id) {
+    private void setId(int id) {
         this.id = id;
     }
 
@@ -55,12 +56,13 @@ public class Memo {
         this.content = content;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDate() {
+        return date;
     }
 
-    public void setData(Date data) {
-        this.data = data;
+    private void setDate() {
+        Date date = new Date(System.currentTimeMillis());   // 생성자 안에 넣어주면 현재 시간값을 데이터 타입으로 바꿔준다.
+        this.date = date;
     }
 
 
