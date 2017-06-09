@@ -29,7 +29,11 @@ public class Memo {
         setDate();
     }
 
-
+    public Memo(String title, String content) {
+        this.title = title;
+        this.content = content;
+        setDate();
+    }
 
 
     public int getId() {
