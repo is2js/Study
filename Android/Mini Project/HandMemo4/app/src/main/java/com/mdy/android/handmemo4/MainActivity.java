@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         seekCount = (TextView) findViewById(R.id.seekCount);
         seekBar = (SeekBar) findViewById(R.id.seekBar);
 
-        findViewById(R.id.btnNew).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btnReset).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 board.removeBrush();
