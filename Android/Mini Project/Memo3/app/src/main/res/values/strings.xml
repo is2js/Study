@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Memo3</string>
+    <string name="title_activity_text_memo_list">TextMemoListActivity</string>
+    <string name="title_activity_text_memo_detail">TextMemoDetailActivity</string>
 </resources>
