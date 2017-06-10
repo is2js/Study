@@ -75,4 +75,18 @@
 
   #### 22. [HandMemo](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HandMemo)
   - 색깔과 굵기를 정해 터치로 메모를 한다.
+
+  #### 23. [HandMemo2](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HandMemo2)
+  -
+  #### 24. [HandMemo3](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HandMemo3)
+  -
+
+  #### 25. [HandMemo4](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HandMemo4)
+  -
+
+
+  #### 26.  [SqlLiteORM](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/SqlLiteORM)
+  -
+
+
 *****
