@@ -55,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
         // 2. 파일이름을 생성한다.
         String filename = "Memo"+System.currentTimeMillis()+".txt"; // System.nanoTime()으로 해도 된다.
 
-        // document_id가 있으면 파일을 새로 생성하지 않고, 기존 이름을 사용해서 수정처리하다.
+        // document_id가 있으면 파일을 새로 생성하지 않고, 기존 이름을 사용해서 수정처리한다.
         if(!document_id.equals("")) {
             filename = document_id;
         }
