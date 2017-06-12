@@ -103,6 +103,8 @@
   - JSON
   - REST API
   - HttpUrlConnection
+    - HttpURLConnection 객체
+    - 네트워크 처리 ( 요청처리 Request / 응답처리 Response )
 
 
   #### 29.  [HttpUrlConnection_Interface](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpUrlConnection_Interface)
