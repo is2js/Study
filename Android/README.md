@@ -89,4 +89,25 @@
   -
 
 
+  #### 27.  [ThreadAsyncTask](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ThreadAsyncTask)
+  - AsyncTask()
+    - onPreExecute()
+    - doInBackground()
+    - onPostExecute()
+    - onProgressUpdate()
+  - sendEmptyMessage()
+  - ProgressDialog
+
+
+  #### 28.  [HttpUrlConnection](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpUrlConnection)
+  - JSON
+  - REST API
+  - HttpUrlConnection
+
+
+  #### 29.  [HttpUrlConnection_Interface](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpUrlConnection_Interface)
+  - Interface 적용
+
+
+
 *****
