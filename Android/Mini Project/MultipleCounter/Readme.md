@@ -34,7 +34,9 @@ Runnable이 들어오면 핸들러를 호출하지 않고, Runnable만 꺼내서
 
 
 ## 핸들러(Handler) 객체 및 메소드 설명
+
 #### (1) Handler 객체 , handleMessage() 메소드
+
 ```java
   Handler handler = new Handler() {
     @Override
@@ -47,14 +49,15 @@ Runnable이 들어오면 핸들러를 호출하지 않고, Runnable만 꺼내서
   };
 ```
 
+
 - Sub Thread로부터 메시지를 전달받을 **Handler** 를 생성한다.... <메시지 통신>
 
 - Sub Thread에서 메시지를 전달하면 **handleMessage()** 메소드가 동작한다
   - handleMessage() -> 메세지를 컨트롤해주는 메소드
   - 내가 Sub Thread에서 메세지를 핸들러로 날려주면 handleMessage 함수가 동작을 한다는 말이다.
-  - handleMessage() 메소드 안의 super.handleMessage(msg);는 안에 들어가보면 특별히 해주는 것이 없기 때문에 주석처리해줘도 된다.
+  - handleMessage() 메소드 안의 super.handleMessage(msg); 는 안에 들어가보면 특별히 해주는 것이 없기 때문에 주석처리해줘도 된다.
 <br>
-- 메세지 객체가 정해져있다.  <msg>
+- 메세지 객체가 정해져있다.  (msg)
 - 핸들러를 통해서 일반적으로 자바에서 설계할때 핸들러를 통해서 메세지는 int로 주고 받는다.
 - msg.what에 메세지를 담아서 보내는데 what의 타입이 int이다.
 - 플래그값 상수 설계하듯이 핸들러로 메세지를 통신할때는 미리 상수로 다 정의해놓는다.
@@ -62,8 +65,7 @@ Runnable이 들어오면 핸들러를 호출하지 않고, Runnable만 꺼내서
 - 어떤 메세지를 핸들러를 통해 Sub Thread에서 날려주면 switch를 통해서 msg.what을 꺼낸다.
 - what이 SET_COUNT 일 경우는, textViews[ 값1 ].setText( ""+값2 );
 - 이 handler는 Counter 인스턴스를 생성할 때(스레드가 new 될때), 인자로 handler를 넘겨줘야 한다.
-<br>
-- 이렇게 서브스레드를 통해서 메인스레드로 핸들러에 메시지를 태워서 보내면 실행을  시킬 수 있다.
+##### 이렇게 서브스레드를 통해서 메인스레드로 핸들러에 메시지를 태워서 보내면 실행을  시킬 수 있다.
 
 
 #### (2) Message 객체
