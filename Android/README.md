@@ -86,7 +86,9 @@
 
 
   #### 26.  [SqlLiteORM](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/SqlLiteORM)
-  -
+  - 기본 Query
+  - SQLite
+  - ORM
 
 
   #### 27.  [ThreadAsyncTask](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ThreadAsyncTask)
@@ -100,6 +102,7 @@
 
 
   #### 28.  [HttpUrlConnection](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpUrlConnection)
+  - Interface 적용
   - JSON
   - REST API
   - HttpUrlConnection
@@ -108,8 +111,8 @@
 
 
   #### 29.  [HttpUrlConnection_Interface](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpUrlConnection_Interface)
-  - Interface 적용
-
-
+  - JSON / GSON
+  - String 연산 (String / StringBuffer / StringBuilder)
+  - **공공API 로 제공되는 json 데이터를 활용해서 맵에 좌표를 출력** (GoogleMap / Marker)
 
 *****
