@@ -1,0 +1,18 @@
+package com.mdy.java;
+
+public class Building {
+	// 1. 속성 정의
+	int 높이;
+	String 주소;
+	float 위치;
+	String 소유자정보;
+	double 가격;
+	
+	// 2. 기능 정의
+	void rent();
+	
+	void sell();
+	
+	
+	
+}

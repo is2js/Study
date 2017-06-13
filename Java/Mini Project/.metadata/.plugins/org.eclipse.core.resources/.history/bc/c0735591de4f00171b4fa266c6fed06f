@@ -1,0 +1,53 @@
+package com.mdy.java;
+
+public abstract class Building {
+	// 1. 속성 정의
+	int 높이;
+	String 주소;
+	float 위치;
+	String 소유자정보;
+	double 가격;
+	Door 문;
+	
+	// 2. 기능 정의
+	void opened(){
+		switch(문.type){
+			case Door.TYPE_REVOLVE:
+				break;
+			case Door.TYPE_SLIDE:
+				break;
+			case Door.TYPE_HINGED:
+				break;
+		}
+	};
+	void closed(){
+		if(문 == true){
+			문 = false;
+		}
+	};
+	
+}
+
+
+abstract class Door {
+	public static final int TYPE_REVOLVE = 1;	// 회전 문
+	public static final int TYPE_SLIDE = 2;		// 미닫이 문
+	public static final int TYPE_HINGED = 3;	// 여닫이 문
+	
+	int type;
+}
+
+abstract class Person {
+	abstract void open();
+	abstract void close();
+}
+
+
+
+
+
+
+
+
+
+

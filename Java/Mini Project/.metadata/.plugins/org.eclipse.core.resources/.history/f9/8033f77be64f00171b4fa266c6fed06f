@@ -1,0 +1,33 @@
+package com.mdy.java;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SeoulPolice extends Building {
+	List<Person> persons   = new ArrayList<>();
+	List<Person> criminals = new ArrayList<>();
+	// 경찰의 기본 업무
+	public void arrest(Person person){
+		persons.add(person);
+	}
+	
+	public void judge(){
+		for(Person person : persons){
+			if(person.guilty == true){
+				criminals.add(person);
+			}
+		}
+	}
+}
+
+class Person {
+	boolean guilty = false;
+}
+
+class Prison {
+	List<Person> prisoners = new ArrayList<>();
+	
+	public void setPerson(Person person){
+		prisoners.add(person);
+	}
+}

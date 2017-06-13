@@ -1,0 +1,10 @@
+package com.mdy.java;
+
+public class DesignMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

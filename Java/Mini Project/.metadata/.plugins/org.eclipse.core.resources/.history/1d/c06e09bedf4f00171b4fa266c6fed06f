@@ -1,0 +1,5 @@
+package com.mdy.java;
+
+public class Police extends Building {
+	
+}
