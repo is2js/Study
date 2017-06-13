@@ -3,8 +3,6 @@ package com.mdy.android.threadasynctask;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     // thread 에서 호출하기 위한 handler
     // Handler를 만들고 handleMessage() 메소드를 Override해준다.
-    Handler handler = new Handler() {
+    /*Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
         }
-    };
+    };*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 // 생성자를 통해 MainActivity의 handler를 넘겨준다.
+/*
 class CustomThread extends Thread {
     Handler handler;
 
@@ -161,4 +160,4 @@ class CustomThread extends Thread {
             e.printStackTrace();
         }
     }
-}
+}*/
