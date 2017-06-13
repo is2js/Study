@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         spinner = (Spinner) findViewById(R.id.spinner);
         // ListView 에 데이터 연결하기
         // 1. 데이터 정의 - datas 정의하였음.
-        // 2. 아답터 생성  - 뷰에 넣을 데이터를 조작해주는게 아답터이다. 데이터의 변경 사항이 있어도 아답터가 처리를 해준다. (레이아웃 등)
+        // 2. 아답터 생성 - 뷰에 넣을 데이터를 조작해주는게 아답터이다. 데이터의 변경 사항이 있어도 아답터가 처리를 해준다. (레이아웃 등)
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, datas);
         // 3. 뷰에 아답터 연결
         spinner.setAdapter(adapter);
