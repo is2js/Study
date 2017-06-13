@@ -31,6 +31,9 @@
   ##### 9. [SimpleDateFormat](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/DateFormat)
   - SimpleDateFormat 패턴 및 사용예제
 
+  ##### 10. [Design](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/Design)
+  - Interface
+
 
 
 
