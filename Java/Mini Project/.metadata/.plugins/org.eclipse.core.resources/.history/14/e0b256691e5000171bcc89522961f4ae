@@ -24,9 +24,9 @@ abstract class Lock {
 }
 
 abstract class Door {
-	public static final int TYPE_REVOLVE = 1;	// 회전 문
-	public static final int TYPE_SLIDE = 2;		// 미닫이 문
-	public static final int TYPE_HINGED = 3;	// 여닫이 문
+	public static final int TYPE_REVOLVE = 1;
+	public static final int TYPE_SLIDE = 2;
+	public static final int TYPE_HINGED = 3;
 	
 	Lock lock;
 	

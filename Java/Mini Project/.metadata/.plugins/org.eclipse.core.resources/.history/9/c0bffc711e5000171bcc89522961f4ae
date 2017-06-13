@@ -7,10 +7,10 @@ public class DesignMain {
 		Prison prison = new Prison();
 		
 		Person theif = new Person();
+		// ...
+		// ...
+		
 		police.arrest(theif);
-		// ...
-		// ...
-		// 다수를  잡은 후...
 		
 		// 오후 1시
 		police.investigate();
@@ -20,5 +20,7 @@ public class DesignMain {
 		
 		// 오후 3시
 		police.transferTo(prison);
+
 	}
+
 }
