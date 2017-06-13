@@ -23,7 +23,18 @@ import java.util.List;
 public class BbsDao {
 
     DBHelper helper;
-    Dao<Bbs,Integer> dao;
+
+    static Dao<Bbs,Integer> dao;
+
+    private static BbsDao bbsDao = null;
+
+
+
+    public static BbsDao getInstance(Context context) {
+        if(bbsDao == null)
+            bbsDao = new BbsDao(context);
+        return bbsDao;
+    }
 
     private BbsDao(Context context){
         // 데이터베이스 연결

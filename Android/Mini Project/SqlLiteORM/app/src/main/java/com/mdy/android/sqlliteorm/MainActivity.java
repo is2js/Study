@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         */
 
         // BbsDao의 접근제한자를 private으로 만들고 사용해봐라. (과제)
-        BbsDao dao = new BbsDao(this);
+        BbsDao dao = BbsDao.getInstance(getBaseContext());
         dao.create(new Bbs());
 
 

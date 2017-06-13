@@ -10,7 +10,7 @@ import java.util.Date;
  */
 
 // 데이터베이스의 테이블로 사용할 것이라고 알려주는 annotation
-@DatabaseTable(tableName =  "memo") // 이렇게 해주면 Memo 클래스를 'memo'라는 테이블로 생성해준다.
+@DatabaseTable(tableName = "memo") // 이렇게 해주면 Memo 클래스를 'memo'라는 테이블로 생성해준다.
 public class Memo {
     @DatabaseField(generatedId = true)  // 자동증가값으로 생성(generatedId = true)
     private int id;
