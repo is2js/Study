@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
         사용 : http://openAPI.seoul.go.kr:8088/5043654c666d647935386866617047/json/SearchPublicToiletPOIService/1/5/
      */
     static final String URL_PREFIX  = "http://openAPI.seoul.go.kr:8088/";
-    static final String URL_CERT    = "5043654c666d647935386866617047";
+    static final String URL_CERT    = "5043654c666d647935386866617047";         // 인증키
     static final String URL_MID     = "/json/SearchPublicToiletPOIService/";
 
     int pageBegin = 1;
@@ -94,6 +94,20 @@ public class MainActivity extends AppCompatActivity
         //                   메모리 공간 할당
         //                 ------------------------------
         //                         메모리 공간 할당
+        // 문자열이 늘어날때마다 급속도로 메모리가 낭비되어 연산속도가 엄청 느려진다.
+        // String 연산은 반복문에서 많이 돌리면 컴퓨터에 엄청난 부담이 간다.
+        // 그래서 나온 것이 StringBuffer, StringBuilder이다.
+        // StringBuffer의 사용법은 ArrayList와 비슷하다.
+        // String Builder가 StringBuffer보다 String 연산속도가 몇십배 빠르다.
+        // 2개의 차이는 동기화 지원 여부이다.
+        // 여러개의 쓰레드가 sb 를 공통적으로 쳐다보고 있을때, 서로 막 바꾸려고 한다.
+        // 이때 StringBuffer는 동기화를 지원하고, StringBuilder는 동기화를 미지원한다.
+        // 그러나 지금은 둘다 쓰지 않는다.
+        // 특별하게 복잡하지 않은 String 연산은 컴파일시 자동으로 StringBuilder로 바뀐다.
+        // 이런식의 단순한 경우에는 그냥 써도 된다. 그러나 변수들어가고, 반복문, if문 들어갈 경우에는 안된다.
+        // 동기화란 내가 1,2,3,4를 읽으려고 할때, 다른 쓰레드들이 값을 넣으면 1,2,3,4 사이에 다른 값을 집어넣어서
+        // 1,2,3,4를 순서대로 읽지 못하기 때문에 다른 쓰레드들을 멈추게 하고, 1,2,3,4,를 읽는 것이다.
+
 
         /*StringBuffer sb = new StringBuffer();   // 동기화 지원
         sb.append("문자열");

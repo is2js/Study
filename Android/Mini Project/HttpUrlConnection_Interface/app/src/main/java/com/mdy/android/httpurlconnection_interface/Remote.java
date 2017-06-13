@@ -14,7 +14,6 @@ import java.net.URL;
 
 public class Remote {
 
-
     // thread 를 생성
     public static void newTask(final TaskInterface taskInterface){
 
