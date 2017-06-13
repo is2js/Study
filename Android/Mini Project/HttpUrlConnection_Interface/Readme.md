@@ -21,8 +21,9 @@
 - KEY값은 문자열이기 때문에 반드시 "KEYNAME" 이렇게 쌍따옴표를 붙여줘야 하고 VALUE에는 기본 자료형이나 배열, 객체를 넣으면 된다.
 
 <br>
-- JSON의 기본표현 형태
-  ```
+
+<JSON의 기본표현 형태>
+  ```json
   {
       "age": 25,
       "name": "HongGilDong",
@@ -71,6 +72,9 @@
 
 - ##### 데이터통신은 string으로만 한다.
 
+<br>
+<br>
+
 ## 2. String 연산
 - (1) String
 - (2) StringBuffer    - <동기화 지원>    - StringBuilder보다 속도가 느림.
@@ -91,6 +95,20 @@
 >> StringBuilder sbl = new StringBuilder();    // 동기화 미지원(속도가 빠름)
 >> sbl.append("문자열");
 >> slb.append("문자열");
+
+> - 문자열이 늘어날때마다 급속도로 메모리가 낭비되어 연산속도가 엄청 느려진다.
+> String 연산은 반복문에서 많이 돌리면 컴퓨터에 엄청난 부담이 간다.
+> 그래서 나온 것이 StringBuffer, StringBuilder이다.
+> StringBuffer의 사용법은 ArrayList와 비슷하다.
+> String Builder가 StringBuffer보다 String 연산속도가 몇십배 빠르다.
+> 2개의 차이는 동기화 지원 여부이다.
+> 여러개의 쓰레드가 sb 를 공통적으로 쳐다보고 있을때, 서로 막 바꾸려고 한다.
+> 이때 StringBuffer는 동기화를 지원하고, StringBuilder는 동기화를 미지원한다.
+> 그러나 지금은 둘다 쓰지 않는다.
+> 특별하게 복잡하지 않은 String 연산은 컴파일시 자동으로 StringBuilder로 바뀐다.
+> 이런식의 단순한 경우에는 그냥 써도 된다. 그러나 변수들어가고, 반복문, if문 들어갈 경우에는 안된다.
+> 동기화란 내가 1,2,3,4를 읽으려고 할때, 다른 쓰레드들이 값을 넣으면 1,2,3,4 사이에 다른 값을 집어넣어서
+> 1,2,3,4를 순서대로 읽지 못하기 때문에 다른 쓰레드들을 멈추게 하고, 1,2,3,4,를 읽는 것이다.
 
 ---
 String, StringBuffer, StringBuilder ... 모두 문자열을 저장하고, 관리하는 클래스인 것 같기는 한데, 왜 이렇게 굳이 여러가지를 만들어 놓았을까요?
