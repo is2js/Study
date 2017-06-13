@@ -37,7 +37,6 @@ public class SeoulPolice extends Building implements Prison.Callback {  // Priso
 	public void transferTo(Prison prison){
 		// criminals 를 교도소로 보내시오
 		prison.setPersons(criminals,this);
-		// this는 SeoulPolice를 가리킨다.
 	}
 	
 	// Prison 의 Callback 인터페이스 구현체
@@ -54,8 +53,6 @@ class Prison {
 		prisoners.add(person);
 	}
 	
-	
-	// Callback으로 다형성을 해준 이유는 독립적으로 동작할 수 있도록 하기 위해서(위에 SeoulPolice class 없애도 동작하도록)
 	public void setPersons(List<Person> criminals, Callback police){ // Police 에서 this를 넘겼지만, 다형성에 의해 인터페이스
 		for(Person person : criminals){
 			prisoners.add(person);
