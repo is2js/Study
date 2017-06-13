@@ -90,7 +90,9 @@ json.변수명[1].서브명2
 
 #### 설정
 - manifest에 INTERNET 퍼미션 꼭 해줄 것.
-  - <uses-permission android:name="android.permission.INTERNET"/>
+  ```xml
+  <uses-permission android:name="android.permission.INTERNET"/>
+  ```
 - 사용하는 핸드폰 기기의 Wifi를 연결해줄 것
 <br>
 
