@@ -113,6 +113,21 @@
   #### 29.  [HttpUrlConnection_Interface](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpUrlConnection_Interface)
   - JSON / GSON
   - String 연산 (String / StringBuffer / StringBuilder)
-  - **공공API 로 제공되는 json 데이터를 활용해서 맵에 좌표를 출력** (GoogleMap / Marker)
+  - **공공API 로 제공되는 json 데이터를 활용해서 맵에 좌표를 출력**
+    - **GoogleMap / Marker**
+
+
+  #### 30. [HttpUrlConnection_Interface2](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpUrlConnection_Interface2)
+  - Method 기능별 분리
+  - Scroll Listener
+  - final에 대한 이해
+
+
+  #### 31. [ServiceBasic](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ServiceBasic)
+  - Service
+
+
+  #### 32. [MusicPlayer](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MusicPlayer)
+  -
 
 *****
