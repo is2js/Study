@@ -3,6 +3,8 @@ package com.mdy.android.httpurlconnection_interface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -38,6 +40,9 @@ public class MainActivity extends AppCompatActivity
     // 한 페이지에 불러오는 데이터 수
     static final int PAGE_OFFSET = 10;
 
+    // 현재 페이지
+    int page = 1;
+
     ListView listView;
     TextView textView;
     String url = "";
@@ -46,6 +51,11 @@ public class MainActivity extends AppCompatActivity
 
 
     // 아답터에서 사용할 데이터 공간을 정의
+    // 이렇게 final을 붙여주면 datas는 new로는 들어올 방법이 없다.
+    // datas의 메모리 공간은 바뀔 수 없다.
+    // 아답터에 딱 들어가는 순간 이 datas의 데이터가 빠지고 나갈때 아답터를 notify해주면
+    // 변경사항이 무조건 반영이 된다.  final을 해줘서.
+    // 다른 곳에서 datas를 new 해주면 메모리 주소가 바뀌어서 아답터가 notify를 해줄 수가 없게 된다.
     final List<String> datas = new ArrayList<>();
 
     @Override
@@ -61,6 +71,7 @@ public class MainActivity extends AppCompatActivity
 
         listView.setAdapter(adapter);
 
+        listView.setOnScrollListener(scrollListener);
 
 
 
@@ -70,55 +81,65 @@ public class MainActivity extends AppCompatActivity
         // 로드되면 onReady 호출하도록
         mapFragment.getMapAsync(this);
 
-
-
-
-
     }
 
-    private void setPage(int page) {
-        pageEnd = page * PAGE_OFFSET;
-        pageBegin = pageEnd - PAGE_OFFSET + 1;
+
+    // 스크롤의 상태값을 체크해주는 리스너
+    boolean lastItemVisible = false;    // 리스트의 마지막 아이템이 보이는지 여부를 확인해주는 변수
+    // 스크롤 리스너
+    AbsListView.OnScrollListener scrollListener = new AbsListView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            // onScrollStateChanged => 현재 스크롤이 끝까지 가서 더이상 움직이지 않는다. 그럴때 상태를 체크해준다.
+
+
+
+            /* if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                        Log.i("Scroll", "현재 스크롤이 idle 상태입니다.");   // => 스크롤을 움직이다 멈추면 멈춘 순간에 Log 메세지가 찍힌다.
+                } */
+            if(scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE
+                    && lastItemVisible) {
+                nextPage();
+                setUrl();
+                Remote.newTask(MainActivity.this);
+            }
+        }
+        // firstVisibleItem = 현재 보여지는 첫번째 아이템의 번호(index)
+        // visibleItemCount = 현재 화면에 보여지는 아이템의 개수
+        // totalItemCount   = 리스트에 담겨있는 전체 아이템의 개수
+        @Override
+        public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            // 스크롤에 변화가 있으면
+            // int firstVisibleItem => 제일 앞에 있는 아이템의 index를 넘겨준다.
+            // int visibleItemCount => 보여지는 아이템의 개수
+            // int totalItemCount   => 전체 아이템의 개수
+            // AbsListView 는 ListView가 상속받고 있는 부모 객체이다.
+            // GridView도 AbsListView를 상속받고 있는데 GridView도 사용할 수 있게 AbsListView로 되어 있는 것이다.
+
+            /* Log 로 넘어오는 인자를 확인해보자. */
+            Log.d("ListView", "firstVisibleItem = " + firstVisibleItem);        // 0 이 찍힌다.
+            Log.d("ListView", "visibleItemCount = " + visibleItemCount);        // 4 가 찍힌다.
+            Log.d("ListView", "totalItemCount = " + totalItemCount);            // 10이 찍힌다.
+
+            // lastItemVisible은 우리가 직접 선언한 변수이다. (리스트의 마지막 아이템이 보이는지 여부를 확인해주는 변수)
+            if(totalItemCount <= firstVisibleItem + visibleItemCount){
+                lastItemVisible = true;
+            }else{
+                lastItemVisible = false;
+            }
+        }
+    };
+
+    private void nextPage(){
+        page = page + 1;
     }
 
-    private void setUrl(int begin, int end){
-        // String
-        // StringBuffer
-        // StringBuilder   - 문자열 연산시 가장 빠름 (몇십배 차이가 남. StringBuffer보다)
 
-        // String 연산..........
-        // String result = "문자열" + "문자열";
-        // result = "문자열문자열";
-        // String result = "문자열" + "문자열" + "문자열";
-        //                 -------------------
-        //                   메모리 공간 할당
-        //                 ------------------------------
-        //                         메모리 공간 할당
-        // 문자열이 늘어날때마다 급속도로 메모리가 낭비되어 연산속도가 엄청 느려진다.
-        // String 연산은 반복문에서 많이 돌리면 컴퓨터에 엄청난 부담이 간다.
-        // 그래서 나온 것이 StringBuffer, StringBuilder이다.
-        // StringBuffer의 사용법은 ArrayList와 비슷하다.
-        // String Builder가 StringBuffer보다 String 연산속도가 몇십배 빠르다.
-        // 2개의 차이는 동기화 지원 여부이다.
-        // 여러개의 쓰레드가 sb 를 공통적으로 쳐다보고 있을때, 서로 막 바꾸려고 한다.
-        // 이때 StringBuffer는 동기화를 지원하고, StringBuilder는 동기화를 미지원한다.
-        // 그러나 지금은 둘다 쓰지 않는다.
-        // 특별하게 복잡하지 않은 String 연산은 컴파일시 자동으로 StringBuilder로 바뀐다.
-        // 이런식의 단순한 경우에는 그냥 써도 된다. 그러나 변수들어가고, 반복문, if문 들어갈 경우에는 안된다.
-        // 동기화란 내가 1,2,3,4를 읽으려고 할때, 다른 쓰레드들이 값을 넣으면 1,2,3,4 사이에 다른 값을 집어넣어서
-        // 1,2,3,4를 순서대로 읽지 못하기 때문에 다른 쓰레드들을 멈추게 하고, 1,2,3,4,를 읽는 것이다.
+    private void setUrl(){
+        int end = page * PAGE_OFFSET;
+        int begin = end - PAGE_OFFSET + 1;
 
-
-        /*StringBuffer sb = new StringBuffer();   // 동기화 지원
-        sb.append("문자열");
-        sb.append("문자열");
-
-        StringBuilder sbl = new StringBuilder();    // 동기화 미지원(속도가 빠름)
-        sb.append("문자열");
-        sb.append("문자열");*/
-        // 요즘엔 자동으로 컴파일러가 스트림빌더로 바꿔준다.(단순한 경우)
-
-        url = URL_PREFIX + URL_CERT + URL_MID + begin + "/" + end;
+        url = URL_PREFIX + URL_CERT + URL_MID +begin+"/"+end;
     }
 
     @Override
@@ -131,14 +152,13 @@ public class MainActivity extends AppCompatActivity
         Gson gson = new Gson();
 
         // 1. json String -> class 로 변환
-        Data data = gson.fromJson(jsonString, Data.class);
+        Data data = gson.fromJson(jsonString, Data.class);  // 스트링을 클래스로 변환해준다.
 
         // 총 개수를 화면에 세팅
         textView.setText("총 개수:" + data.getSearchPublicToiletPOIService().getList_total_count());
         // 건물의 이름을 listView에 세팅
 
         Row rows[] = data.getSearchPublicToiletPOIService().getRow();
-
         // 네트웍에서 가져온 데이터를 꺼내서 datas에 담아준다.
         for(Row row : rows){
             datas.add(row.getFNAME());
@@ -161,14 +181,14 @@ public class MainActivity extends AppCompatActivity
         adapter.notifyDataSetChanged();
     }
 
+
     GoogleMap myMap;
     @Override
     public void onMapReady(GoogleMap googleMap) {
         myMap = googleMap;
 
         // 최초 호출시 첫번째 집합을 불러온다.
-        setPage(1);
-        setUrl(pageBegin, pageEnd);
+        setUrl();
         Remote.newTask(this);
     }
 }
