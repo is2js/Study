@@ -1,11 +1,17 @@
 package com.mdy.android.musicplayer2;
 
+import android.content.Context;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mdy.android.musicplayer2.ListFragment.OnListFragmentInteractionListener;
 import com.mdy.android.musicplayer2.domain.Music;
 import com.mdy.android.musicplayer2.dummy.DummyContent.DummyItem;
@@ -13,6 +19,8 @@ import com.mdy.android.musicplayer2.dummy.DummyContent.DummyItem;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -22,6 +30,8 @@ import java.util.Set;
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     private final OnListFragmentInteractionListener mListener;
 
+    // Gilde에 context를 주기 위해 선언
+    private Context context = null;
     // 데이터 저장소
     private final List<Music.Item> datas;
 
@@ -34,6 +44,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        if (context == null)
+            context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_item, parent, false);
         return new ViewHolder(view);
@@ -44,14 +56,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         // datas 저장소에 들어가 있는 Music.Item 한개를 꺼낸다.
         //Music.Item item = datas.get(position);
 
+        holder.position = position;
         holder.mIdView.setText(datas.get(position).id);
         holder.mContentView.setText(datas.get(position).title);
 
-        holder.mView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        //holder.imgAlbum.setImageURI(datas.get(position).albumArt);
+        Glide
+                .with(context)
+                .load(datas.get(position).albumArt)     // 로드할 대상
+                .placeholder(R.mipmap.icon)             // 로드가 안됐을 경우
+                .bitmapTransform(new CropCircleTransformation(context))
+                .into(holder.imgAlbum);                 // 이미지를 출력할 대상을 지정
+
+
     }
 
     @Override
@@ -59,21 +76,98 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return datas.size();
     }
 
+    static final int STOP = 0;
+    static final int PLAY = 1;
+    static final int PAUSE = 2;
+    MediaPlayer player = null;
+    int playerStatus = STOP;
+
+
+    public void play(int position){
+        // 1. 미디어 플레이어 사용하기
+        Uri musicUri = datas.get(position).musicUri;
+        if(player != null) {
+            player.release();
+        }
+        player = MediaPlayer.create(context, musicUri);
+
+        // 2. 설정
+        player.setLooping(false);   // 반복여부
+
+        // 3. 시작
+        player.start();
+
+        playerStatus = PLAY;
+    }
+
+    public void pause(){
+        player.pause();
+        playerStatus = PAUSE;
+    }
+
+    public void replay(){
+        player.start();
+    }
+
+    public void goDetail(int position){
+
+    }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public int position;
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
+        public final ImageView imgAlbum;
+        public final ImageButton btnPause;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mIdView = (TextView) view.findViewById(R.id.id);
             mContentView = (TextView) view.findViewById(R.id.content);
-        }
+            imgAlbum = (ImageView) view.findViewById(R.id.imgAlbum);
+            btnPause = (ImageButton) view.findViewById(R.id.btnPause);
 
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+            // 플레이
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    play(position);
+                    btnPause.setImageResource(android.R.drawable.ic_media_pause);
+                    btnPause.setVisibility(View.VISIBLE);
+                }
+            });
+
+            btnPause.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switch (playerStatus){
+                        case PLAY:
+                            pause();
+                            // pause 가 클릭되면 이미지 모양이 play 로 바뀐다.
+                            btnPause.setImageResource(android.R.drawable.ic_media_play);
+                            break;
+                        case PAUSE:
+                            replay();
+                            playerStatus = PLAY;
+                            btnPause.setImageResource(android.R.drawable.ic_media_pause);
+                            break;
+                    }
+                }
+            });
+
+
+
+            // 상세보기로 이동 -> 뷰페이저로 이동
+            mView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    goDetail(position);
+                    return true;
+                }
+            });
         }
     }
 }

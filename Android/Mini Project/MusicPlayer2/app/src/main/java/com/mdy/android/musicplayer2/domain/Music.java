@@ -62,6 +62,8 @@ public class Music {
                 items.add(item);
             }
         }
+        // 메모리 누수가 발생하지 않도록 커서 꼭 닫을 것
+        cursor.close();
     }
 
     private String getValue(Cursor cursor, String name){
