@@ -62,7 +62,7 @@ public class ListFragment extends Fragment {
             // 데이터를 초기화
             Music music = Music.getInstance();  // getInstance()를 static으로 해줘서 가능
             music.loader(getContext()); // 데이터를 미리 로드 해둔다.
-            music.getItems();   // 로드한 데이터를 가져온다.
+            //music.getItems();   // 로드한 데이터를 가져온다.
 
             // Fragment에는 getContext()메소드가 있다. Activity에는 getBaseContext() 메소드가 있다.
 
