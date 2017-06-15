@@ -75,7 +75,7 @@ public class Music {
     }
 
 
-    // TODO: Set이 정상적으로 중복값을 허용하지 않도록 어떤 함수를 오버라이드 해서 구현할 것!
+    // Set 이 중복값을 허용하지 않도록 equals 와 hashCode를 활용한다.
     public class Item {
         String id;
         String albumId;
@@ -84,6 +84,22 @@ public class Music {
 
         Uri musicUri;
         Uri albumArt;
+
+
+        @Override
+        public boolean equals(Object item) {
+            // null 체크
+            if(item == null) return false;
+            // 객체 타입 체크
+            if (!(item instanceof Item)) return false;
+            // 키값의 hashcode 비교
+            return id.hashCode() == item.hashCode();
+        }
+
+        @Override
+        public int hashCode() {
+            return id.hashCode();
+        }
     }
 
     private Uri makeMusicUri(String musicId){
