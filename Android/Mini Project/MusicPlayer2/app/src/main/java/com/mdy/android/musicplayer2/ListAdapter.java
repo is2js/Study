@@ -28,6 +28,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * TODO: Replace the implementation with code for your data type.
  */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
+
     private final OnListFragmentInteractionListener mListener;
 
     // Gilde에 context를 주기 위해 선언
@@ -38,7 +39,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     public ListAdapter(Set<Music.Item> items, OnListFragmentInteractionListener listener) {
         mListener = listener;
 
-        // set에서 데이터 꺼내서 사용을 하는데 index를 필요로 하는겨우 array 에 담는다
+        // set에서 데이터 꺼내서 사용을 하는데 index를 필요로 하는 경우 array 에 담는다
         datas = new ArrayList<>(items);
     }
 
@@ -53,20 +54,21 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        // datas 저장소에 들어가 있는 Music.Item 한개를 꺼낸다.
+        // datas 저장소에 들어가 있는 Music.Item 한개를 꺼낸다. (position에 맞게끔)
         //Music.Item item = datas.get(position);
 
         holder.position = position;
+
         holder.mIdView.setText(datas.get(position).id);
         holder.mContentView.setText(datas.get(position).title);
 
         //holder.imgAlbum.setImageURI(datas.get(position).albumArt);
         Glide
-                .with(context)
-                .load(datas.get(position).albumArt)     // 로드할 대상
+                .with(context)                          // 글라이드 사용
+                .load(datas.get(position).albumArt)     // 로드할 대상 Uri
                 .placeholder(R.mipmap.icon)             // 로드가 안됐을 경우
                 .bitmapTransform(new CropCircleTransformation(context))
-                .into(holder.imgAlbum);                 // 이미지를 출력할 대상을 지정
+                .into(holder.imgAlbum);                 // 이미지를 출력할 대상을 지정 (입력될 이미지뷰)
 
 
     }
@@ -114,6 +116,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public int position;
         public final View mView;
@@ -122,6 +125,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         public final ImageView imgAlbum;
         public final ImageButton btnPause;
 
+
         public ViewHolder(View view) {
             super(view);
             mView = view;
@@ -129,6 +133,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             mContentView = (TextView) view.findViewById(R.id.content);
             imgAlbum = (ImageView) view.findViewById(R.id.imgAlbum);
             btnPause = (ImageButton) view.findViewById(R.id.btnPause);
+
+
 
             // 플레이
             mView.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +145,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                     btnPause.setVisibility(View.VISIBLE);
                 }
             });
+
 
             btnPause.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -159,15 +166,27 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             });
 
 
-
             // 상세보기로 이동 -> 뷰페이저로 이동
             mView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     goDetail(position);
-                    return true;
+                    return true;    // return true를 하면 롱클릭 후 onClick이 실행되지 않도록 해준다.
                 }
             });
         }
+
+
+
+
+
+
+
+
     }
+
+
+
+
+
 }

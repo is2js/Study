@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.support.annotation.NonNull;
-import android.widget.Toast;
 
 /**
  * Created by MDY on 2017-06-15.
@@ -17,7 +16,8 @@ public class PermissionControl {
     public static final int REQ_FLAG = 1001231456;
 
     // permissions은 다른 클래스에서 사용할 일이 없기 때문에 private
-    private static String permissions[] = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+    // 아래에 있는 static 함수들이 사용하려면 static 변수여야 한다.
+    private static String permissions[] = {Manifest.permission.READ_EXTERNAL_STORAGE};
 
 
 
@@ -49,13 +49,14 @@ public class PermissionControl {
             }
         }
 
-
+        // 권한이 거절이 된게 하나라도 있으면.. 아래를 실행
         if (denied) {
             // 2. 권한이 없으면 사용자에게 권한을 달라고 요청
             // 동시에 여러개 호출할 수 있으니까 복수로
             activity.requestPermissions(permissions, REQ_FLAG);  // -> 권한을 요구하는 팝업이 사용자 화면에 노출된다.
         } else {
-            callInit(activity);
+            callInit(activity); // 아래에도 중복되어 사용해서 밖으로 뺐다.
+            // ((CallBack) activity).init();    <= 넘어온 activity를 CallBack으로 캐스팅한 다음에 init 함수를 호출한다.
         }
     }
 
@@ -66,7 +67,7 @@ public class PermissionControl {
             boolean granted = true;
             for (int grant : grantResults) {
                 if (grant !=  PackageManager.PERMISSION_GRANTED) {
-                    granted = true;
+                    granted = false;
                     break;
                 }
             }
@@ -76,17 +77,24 @@ public class PermissionControl {
                 callInit(activity);
                 // 3.2 사용자가 거절 했음.
             } else {
-                Toast.makeText(activity, "권한을 요청을 승인하셔야 앱을 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
-                // activity.finish();
+                ((CallBack) activity).cancel();
+                /*Toast.makeText(activity, "권한을 요청을 승인하셔야 앱을 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
+                activity.finish();*/
             }
         }
     }
 
 
 
-    private  static  void callInit(Activity activity){
+
+    private static void callInit(Activity activity){
+
+        // activity가 CallBack을 구현했는지 확인하는 작업
+        // 아니면 런타임 Exception을 날려주면 된다.
         if(activity instanceof  CallBack){
             ((CallBack) activity).init();
+            // 넘어온 activity를 CallBack으로 캐스팅한 다음에 init 함수를 호출한다.
+            // 캐스팅을 해줘야 init함수가 보인다.
         } else {
             throw new RuntimeException("must implement this.CallBack" );
         }
@@ -94,7 +102,10 @@ public class PermissionControl {
 
 
 
+
+
     public interface CallBack {
         public void init();
+        public void cancel();
     }
 }
