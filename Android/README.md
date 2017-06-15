@@ -128,6 +128,12 @@
 
 
   #### 32. [MusicPlayer](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MusicPlayer)
+  - 모델(Data) 완성
+
+  #### 33. [MusicPlayer2](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MusicPlayer2)
+  - 뮤직플레이어 추가
+
+  #### 34. [MusicPlayer3](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MusicPlayer3)
   -
 
 *****
