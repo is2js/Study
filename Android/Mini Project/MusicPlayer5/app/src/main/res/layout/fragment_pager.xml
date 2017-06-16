@@ -28,7 +28,8 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="12dp"
-            app:srcCompat="@android:drawable/ic_media_play" />
+            android:background="#00ff0000"
+            app:srcCompat="@drawable/icon_play"/>
 
         <ImageButton
             android:id="@+id/btnPrevious"
@@ -39,7 +40,8 @@
             android:layout_marginRight="19dp"
             android:layout_toLeftOf="@+id/btnPlay"
             android:layout_toStartOf="@+id/btnPlay"
-            app:srcCompat="@android:drawable/ic_media_previous" />
+            android:background="#00ff0000"
+            app:srcCompat="@drawable/icon_previous" />
 
         <ImageButton
             android:id="@+id/btnNext"
@@ -50,7 +52,8 @@
             android:layout_marginStart="19dp"
             android:layout_toEndOf="@+id/btnPlay"
             android:layout_toRightOf="@+id/btnPlay"
-            app:srcCompat="@android:drawable/ic_media_next" />
+            android:background="#00ff0000"
+            app:srcCompat="@drawable/icon_next" />
     </RelativeLayout>
 
     <TextView
