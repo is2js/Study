@@ -117,7 +117,7 @@ class CustomAdapter extends BaseAdapter {
         // 이렇게 해줘도 되는데, 캐스팅을 하게 되면 대부분 속도 저하가 일어난다.
 //        ((TextView) convertView.findViewById(R.id.txtNo)).setText(data.no + "");
 //        ((TextView) convertView.findViewById(R.id.txtTitle)).setText(data.title);
-        holder.setPostion(position);
+//        holder.setPostion(position);
         holder.setNo(data.no);
         holder.setTitle(data.title);
         holder.setImage(data.resId);
