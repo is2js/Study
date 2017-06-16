@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context="com.mdy.android.musicplayer4.DetailFragment">
 
     <android.support.v4.view.ViewPager
@@ -56,19 +57,19 @@
         android:id="@+id/txtCurrent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00:00"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:text="00:00" />
 
     <TextView
         android:id="@+id/txtDuration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="99:99"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:text="99:99" />
 
     <SeekBar
         android:id="@+id/seekBar"
