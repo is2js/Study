@@ -71,6 +71,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 .into(holder.imgAlbum);                 // 이미지를 출력할 대상을 지정 (입력될 이미지뷰)
 
 
+        // puase 버튼의 보임 유무를 결정한다.
+        if(datas.get(position).itemClicked == true) {
+            holder.btnPause.setVisibility(View.VISIBLE);
+        } else {
+            holder.btnPause.setVisibility(View.GONE);
+        }
+
+
     }
 
     @Override
@@ -115,6 +123,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     }
 
+    public void setItemClicked(int position){
+        for (Music.Item item : datas){
+            item.itemClicked = false;
+        }
+        datas.get(position).itemClicked = true;
+        // 리스트뷰 전체를 갱신해준다.
+        notifyDataSetChanged(); // 아답터를 갱신해준다.
+    }
+
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -140,11 +157,24 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    setItemClicked(position);
                     play(position);
                     btnPause.setImageResource(android.R.drawable.ic_media_pause);
-                    btnPause.setVisibility(View.VISIBLE);
+//                    btnPause.setVisibility(View.VISIBLE);
                 }
             });
+
+
+
+            // 상세보기로 이동 -> 뷰페이저로 이동
+            mView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    goDetail(position);
+                    return true;    // return true를 하면 롱클릭 후 onClick이 실행되지 않도록 해준다.
+                }
+            });
+
 
 
             btnPause.setOnClickListener(new View.OnClickListener() {
@@ -166,14 +196,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             });
 
 
-            // 상세보기로 이동 -> 뷰페이저로 이동
-            mView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    goDetail(position);
-                    return true;    // return true를 하면 롱클릭 후 onClick이 실행되지 않도록 해준다.
-                }
-            });
+
         }
 
 
