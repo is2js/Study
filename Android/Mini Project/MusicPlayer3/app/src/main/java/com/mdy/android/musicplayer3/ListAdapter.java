@@ -151,7 +151,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             btnPause.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switch (playerStatus){
+                    switch (Player.playerStatus){
                         case Player.PLAY:
                             Player.pause();
                             // pause 가 클릭되면 이미지 모양이 play 로 바뀐다.
