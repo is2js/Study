@@ -11,13 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.mdy.android.musicplayer4.domain.Music;
-import com.mdy.android.musicplayer4.dummy.DummyContent.DummyItem;
 
 public class ListFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
     private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
 
@@ -25,7 +22,6 @@ public class ListFragment extends Fragment {
     public ListFragment() {
     }
 
-    // TODO: Customize parameter initialization
     @SuppressWarnings("unused")
     public static ListFragment newInstance(int columnCount) {
         ListFragment fragment = new ListFragment();
@@ -75,6 +71,18 @@ public class ListFragment extends Fragment {
     }
 
 
+    // onAttach가 될때 onAttach를 통해서 액티비티가 담겨서 넘어온다. context로 쌓여서
+    // 여기에 context로 넘어오는게 Activity인데 다형성때문에 Context로 캐스팅이 되서 사용하는 것이다.
+    // 그러면 액티비티가 넘어왔다는 것은 ListAdapter에서
+    // 메인액티비티가 implements ListFragment.OnListFragmentInteractionalListener를 구현을 해서,
+    // onListFragmentInteraction() 메소드를 Override했다.
+    // 그러면 궁극적으로 ListFragment에서 구현한 mListener를 ListAdapter에다 넘겨줬으니까
+    // ListAdapter에서 이 리스너(mListener)의 어떤 함수를 실행시키면
+            // public void goDetail(int position){
+            //     mListener.onListFragmentInteraction();
+            // }
+    // 메인액티비티의 함수를 직접 실행할 수 있다. ListFragment를 건너뛰고  (미리 구현이 되어 있어서)
+    // 그러면 우리가 해야할 것은 뷰페이저가 있는 프레그먼트만 add를 해주면 된다.
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -94,6 +102,6 @@ public class ListFragment extends Fragment {
 
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(DummyItem item);
+        void goDetailInteraction(int position);
     }
 }

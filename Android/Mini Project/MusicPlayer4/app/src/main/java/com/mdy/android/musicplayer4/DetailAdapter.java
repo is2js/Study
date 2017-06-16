@@ -10,9 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mdy.android.musicplayer4.domain.Music;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by MDY on 2017-06-16.
@@ -22,8 +20,8 @@ public class DetailAdapter extends PagerAdapter {
 
     List<Music.Item> datas = null;
 
-    public DetailAdapter(Set<Music.Item> datas) {
-        this.datas = new ArrayList<>(datas);
+    public DetailAdapter(List<Music.Item> datas) {
+        this.datas = datas;
     }
 
     @Override

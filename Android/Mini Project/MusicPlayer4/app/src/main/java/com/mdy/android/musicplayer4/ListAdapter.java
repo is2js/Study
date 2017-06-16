@@ -13,21 +13,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.mdy.android.musicplayer4.ListFragment.OnListFragmentInteractionListener;
 import com.mdy.android.musicplayer4.domain.Music;
-import com.mdy.android.musicplayer4.dummy.DummyContent.DummyItem;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static com.mdy.android.musicplayer4.Player.playerStatus;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
- * specified {@link OnListFragmentInteractionListener}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private final OnListFragmentInteractionListener mListener;
@@ -37,11 +29,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     // 데이터 저장소
     private final List<Music.Item> datas;
 
-    public ListAdapter(Set<Music.Item> items, OnListFragmentInteractionListener listener) {
+    public ListAdapter(List<Music.Item> items, OnListFragmentInteractionListener listener) {
         mListener = listener;
 
         // set에서 데이터 꺼내서 사용을 하는데 index를 필요로 하는 경우 array 에 담는다
-        datas = new ArrayList<>(items);
+        datas = items;
     }
 
     @Override
@@ -88,8 +80,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     }
 
 
-
+    //
     public void goDetail(int position){
+        mListener.goDetailInteraction(position);
 
     }
 

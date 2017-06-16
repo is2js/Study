@@ -40,8 +40,30 @@ public class Player {
         playerStatus = PAUSE;
     }
 
-    public static void replay(){
+    public static void replay() {
         player.start();
+    }
+
+    // 음원의 길이를 리턴
+    public static int getDuration() {
+        if(player != null) {
+            return player.getDuration();
+        } else {
+            // player가 아무것도 없으면 0을 반환
+            return 0;
+        }
+    }
+
+
+    // 매초마다 getCurrent() 메소드를 호출시켜서 현재포지션을 체크해서
+    // seekBar를 이동시켜주면 된다.
+    // 현재 음원의 실행 구간을 리턴해준다.
+    public static int getCurrent() {
+        if(player != null){
+            return player.getCurrentPosition();
+        } else {
+            return 0;
+        }
     }
 
 }
