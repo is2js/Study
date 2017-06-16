@@ -1,7 +1,6 @@
 package com.mdy.android.musicplayer3;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,6 +20,8 @@ import java.util.List;
 import java.util.Set;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
+import static com.mdy.android.musicplayer3.Player.playerStatus;
 
 /**
  * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
@@ -58,7 +59,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         //Music.Item item = datas.get(position);
 
         holder.position = position;
-
+        holder.musicUri = datas.get(position).musicUri;
         holder.mIdView.setText(datas.get(position).id);
         holder.mContentView.setText(datas.get(position).title);
 
@@ -86,38 +87,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         return datas.size();
     }
 
-    static final int STOP = 0;
-    static final int PLAY = 1;
-    static final int PAUSE = 2;
-    MediaPlayer player = null;
-    int playerStatus = STOP;
 
-
-    public void play(int position){
-        // 1. 미디어 플레이어 사용하기
-        Uri musicUri = datas.get(position).musicUri;
-        if(player != null) {
-            player.release();
-        }
-        player = MediaPlayer.create(context, musicUri);
-
-        // 2. 설정
-        player.setLooping(false);   // 반복여부
-
-        // 3. 시작
-        player.start();
-
-        playerStatus = PLAY;
-    }
-
-    public void pause(){
-        player.pause();
-        playerStatus = PAUSE;
-    }
-
-    public void replay(){
-        player.start();
-    }
 
     public void goDetail(int position){
 
@@ -136,6 +106,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public int position;
+        public Uri musicUri;
         public final View mView;
         public final TextView mIdView;
         public final TextView mContentView;
@@ -158,7 +129,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     setItemClicked(position);
-                    play(position);
+                    Player.play(musicUri, mView.getContext());
                     btnPause.setImageResource(android.R.drawable.ic_media_pause);
 //                    btnPause.setVisibility(View.VISIBLE);
                 }
@@ -181,14 +152,14 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     switch (playerStatus){
-                        case PLAY:
-                            pause();
+                        case Player.PLAY:
+                            Player.pause();
                             // pause 가 클릭되면 이미지 모양이 play 로 바뀐다.
                             btnPause.setImageResource(android.R.drawable.ic_media_play);
                             break;
-                        case PAUSE:
-                            replay();
-                            playerStatus = PLAY;
+                        case Player.PAUSE:
+                            Player.replay();
+                            playerStatus = Player.PLAY;
                             btnPause.setImageResource(android.R.drawable.ic_media_pause);
                             break;
                     }
