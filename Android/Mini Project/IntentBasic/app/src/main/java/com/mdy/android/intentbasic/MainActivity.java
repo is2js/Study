@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String phoneNumber = txtCall.getText().toString();   // getText()가 EditText를 반환하기 때문에 toString()으로 해줘야한다.
-                Uri uri = Uri.parse("tel:" + phoneNumber); // parse라는 것은 스트링으로 되어 있는 것을 객체화 시켜주는 것.
+                Uri uri = Uri.parse("tel:" + phoneNumber); // parse라는 것은 스트링으로 되어 있는 것(데이터)을 객체화 시켜주는 것.
                                                             // parse와 반대되는 것이 toString();
                                                             // tel:  이 글씨는 바뀌면 안된다.
                 Intent intent = new Intent(Intent.ACTION_DIAL, uri);
