@@ -5,6 +5,26 @@
 #### 주요 학습 내용
 - ListView에 CustomAdapter를 연결하였음.
 - 이 프로젝트는 MVP 패턴을 이용하였음.
+
+### MVP는 각각 Class로 만들어진다.
+- View는 Holder 클래스이다.
+  - MVP에서 **View의 역할은 화면에 출력하고, 입력을 받는 역할이다.**
+  - 그래서 onClickListener를 View에다 달아준다.
+- Presenter는 Adapter 클래스이다.
+  - MVP라면 Presenter내부에 뷰에 있는 속성을 직접 엑세스해서 그 함수를 사용하는게 없어야 한다.
+    - findViewById / setText 와 같은 것들은 View로 보낸다.
+- Model은 Data 클래스 이다.
+
+<br>
+
+- 로직이 들어가려면 메소드가 있어야 한다.
+
+
+<br>
+<br>
+
+
+
 >> ##### [참고] M(데이터를 가져오고) -> C(가공을 하고) > V(화면에 뿌려준다)
 >>> 이전에 작성했던 코드에서 MVC 패턴을 이용했을 때는
 >>> CustomAdapter역할이 Presenter(데이터 가져오고, 화면 뿌려주고, 컨트롤하고)였다.
