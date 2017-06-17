@@ -30,7 +30,8 @@
   - Inflater를 꺼내는 방법 2가지 / Recycler 만드는 순서
 
   #### 9. [IntentBasic](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/IntentBasic)
-  - Implicit(암시적) Intent 사용 /  인텐트 활용 / 파싱(Parsing)
+  - 직렬화(serialized) / 파싱(Parsing)
+  - Implicit(암시적) Intent 사용 /  인텐트 활용
 
   ##### 10. [ActivityLifeCycle](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ActivityLifeCycle)
   - 액티비티 생명주기 / 액티비티에 투명한(Translucent) 속성값 주기
@@ -48,7 +49,19 @@
   - 퍼미션(permission) / WebView Client 사용 / 특수문자 사용(\&lt; , \&gt;)
 
   #### 15. [Contacts](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Contacts)
-  - 런타임 퍼미션(Runtime Permission) / 컨텐츠 리졸버(Content Resolver)
+  - **런타임 퍼미션(Runtime Permission)**
+    - Runtime Permission 종류
+    - 권한 획득처리
+      - (1) 권한 획득하기 전 권한 유효성 체크
+      - (2) 설명이 필요할 경우 처리
+      - (3) 권한 획득을 위한 API
+      - (4) 결과처리 - onRequestPermissionResult(int, String[], int[])
+    - 권한 체크 코드
+      - checkSelfPermission(String) != packageManager.PERMISSION_GRANTED
+    - 결과 처리 코드
+      - onRequestPermissionResult
+  - **컨텐츠 리졸버(Content Resolver)**
+    - 전화번호 데이터 불러오기
 
   #### 16. [Camera](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Camera)
   - File Provider / 버전호환성 / 권한체크 / Camera 기능 이용(Lollipop / Marshmallow이상)
