@@ -108,7 +108,7 @@ class GridAdapter extends BaseAdapter { // BaseAdapter는 Adapter의 기본이 �
         return convertView;
     }
 
-    // item layout에 있는 위젯을 정의해둔다.
+    // Holder에는 내가 사용하는 item layout에 있는 위젯을 정의해둔다.
     class Holder {
         public ImageView image;
         public TextView title;

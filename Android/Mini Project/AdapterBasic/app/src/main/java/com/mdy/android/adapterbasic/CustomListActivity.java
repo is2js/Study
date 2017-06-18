@@ -93,6 +93,8 @@ class CustomAdapter extends BaseAdapter { // BaseAdapter는 Adapter의 기본이
             convertView = inflater.inflate(R.layout.item_custom_list, null);
             holder.no = (TextView) convertView.findViewById(R.id.txtNo);   // item_custom_list.xml 에 있는 id값을 가져온다.
             holder.title = (TextView) convertView.findViewById(R.id.txtTitle);
+
+            // convertView 안에 holder가 들어가게 된다. 그래서 holder안에 있는 위젯은 convertView안에 있는 위젯과 동일하게 된다.
             convertView.setTag(holder);  // 라벨링을 해주기 위해서 , 몇번째 행을 가져오기 위해서
         }else{
             holder = (Holder) convertView.getTag();    // getTag()는 타입이 Object이니까 Holder로 캐스팅을 해준다.
