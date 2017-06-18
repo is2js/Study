@@ -37,6 +37,7 @@ public class Music {
         // 데이터가 계속 쌓이는 것을 방지한다.
         items.clear();
 
+        // ContentResolver는 context에서 꺼내야하기 때문에 context가 꼭 필요하다.
         ContentResolver resolver = context.getContentResolver();
 
         // 1. 테이블명 정의
