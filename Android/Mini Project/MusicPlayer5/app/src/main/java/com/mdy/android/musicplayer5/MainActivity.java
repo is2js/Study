@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnLi
     @Override
     public void init(){
         setViews();
+//        Fragment tempFragment = ListFragment.newInstance(1);
         setFragment(ListFragment.newInstance(1));    // 목록 프래그컨트
         // 1이면 1줄 , 2이면 2줄, 3이면 3줄
     }

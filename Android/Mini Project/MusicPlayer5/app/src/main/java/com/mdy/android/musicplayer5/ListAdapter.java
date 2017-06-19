@@ -148,7 +148,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             btnPause.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    switch (Player.playerStatus){
+                    if( Player.playerStatus == Player.PLAY ) {
+                        Player.pause();
+                        // pause 가 클릭되면 이미지 모양이 play 로 바뀐다.
+                        btnPause.setImageResource(android.R.drawable.ic_media_play);
+                    } else if ( Player.playerStatus == Player.PAUSE ) {
+                        Player.replay();
+                        playerStatus = Player.PLAY;
+                        btnPause.setImageResource(android.R.drawable.ic_media_pause);
+                    }
+
+
+                    /*switch (Player.playerStatus){
                         case Player.PLAY:
                             Player.pause();
                             // pause 가 클릭되면 이미지 모양이 play 로 바뀐다.
@@ -159,7 +170,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                             playerStatus = Player.PLAY;
                             btnPause.setImageResource(android.R.drawable.ic_media_pause);
                             break;
-                    }
+                    }*/
+
                 }
             });
 

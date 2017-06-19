@@ -42,12 +42,22 @@ public class PermissionControl {
         // checkSelfPermission 반환값이 true, false가 아니라 미리 정의된 상수로 반환한다.
 
         boolean denied = false;
+
         for (String perm : permissions) {
-            if (activity.checkSelfPermission(perm) != PackageManager.PERMISSION_GRANTED) {
+            if (activity.checkSelfPermission(perm) == PackageManager.PERMISSION_GRANTED) {
+                break;
+            } else if (activity.checkSelfPermission(perm) == PackageManager.PERMISSION_DENIED) {
                 denied = true;
                 break;
             }
         }
+
+        /*for (String perm : permissions) {
+            if (activity.checkSelfPermission(perm) != PackageManager.PERMISSION_GRANTED) {
+                denied = true;
+                break;
+            }
+        }*/
 
         // 권한이 거절이 된게 하나라도 있으면.. 아래를 실행
         if (denied) {
@@ -65,12 +75,22 @@ public class PermissionControl {
         if(requestCode == REQ_FLAG) {
 
             boolean granted = true;
+
             for (int grant : grantResults) {
-                if (grant !=  PackageManager.PERMISSION_GRANTED) {
+                if (grant ==  PackageManager.PERMISSION_GRANTED) {
+                    break;
+                } else if (grant ==  PackageManager.PERMISSION_DENIED) {
                     granted = false;
                     break;
                 }
             }
+
+            /*for (int grant : grantResults) {
+                if (grant !=  PackageManager.PERMISSION_GRANTED) {
+                    granted = false;
+                    break;
+                }
+            }*/
 
             // 3.1 사용자가 승인을 했음.
             if(granted){
