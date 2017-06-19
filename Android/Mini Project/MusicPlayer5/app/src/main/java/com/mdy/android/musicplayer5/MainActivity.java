@@ -11,8 +11,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements ListFragment.OnListFragmentInteractionListener, PermissionControl.CallBack {
 
-
-
     FrameLayout layout;
 
     @Override

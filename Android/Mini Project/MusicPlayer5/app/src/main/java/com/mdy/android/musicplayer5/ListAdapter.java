@@ -27,13 +27,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
     // Gilde에 context를 주기 위해 선언
     private Context context = null;
     // 데이터 저장소
-    private final List<Music.Item> datas;
+    private List<Music.Item> datas;
 
-    public ListAdapter(List<Music.Item> items, OnListFragmentInteractionListener listener) {
+    public ListAdapter(OnListFragmentInteractionListener listener) {
         mListener = listener;
 
+
+    }
+
+    public void setDatas(List<Music.Item> datas){
         // set에서 데이터 꺼내서 사용을 하는데 index를 필요로 하는 경우 array 에 담는다
-        datas = items;
+        this.datas = datas;
     }
 
     @Override

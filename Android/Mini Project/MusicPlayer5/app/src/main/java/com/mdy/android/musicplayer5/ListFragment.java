@@ -31,6 +31,8 @@ public class ListFragment extends Fragment {
         return fragment;
     }
 
+
+    // onCreate() 보다 아~~~래에 있는 onAttach()가 먼저 호출된다.
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,7 +66,8 @@ public class ListFragment extends Fragment {
 
 
             // 데이터를 세팅
-            ListAdapter adapter = new ListAdapter(music.getItems(), mListener);
+            ListAdapter adapter = new ListAdapter(mListener);
+            adapter.setDatas(music.getItems());
             recyclerView.setAdapter(adapter);
         }
         return view;

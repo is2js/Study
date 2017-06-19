@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,8 +18,10 @@ import java.util.Set;
 
 public class Music {
     private static Music instance = null;
+    // 중복을 방지하기 위해 데이터 저장소의 형태를 Set 으로 설정
     private Set<Item> items = null;
 
+    // HashSet은 Value로만 된다.
     private Music() {
         items = new HashSet<>();
     }
@@ -30,12 +33,22 @@ public class Music {
         return instance;
     }
 
+    // HashSet은 Value로만 되어서 ArrayList에 담아주면 인덱스랑 값이 저장된다.
     public List<Item> getItems(){
         return new ArrayList<>(items);
     }
 
     // 음악 데이터를 폰에서 꺼낸다음 List 저장소에 담아둔다.
     public void loader(Context context) {   // 컨텐트 리졸버는 context에서 꺼내쓸 수 있다.
+
+        // 0. 먼저 Album Art 가 있는 테이블에서 전체 이미지를 조회해서 저장해 둔다
+        setAlbumArt(context);
+        // (음악ID, 앨범아트 이미지경로) = hashMap
+        // (     1, /sdcard/exteranl/0/media..... image.jpg)
+        // (     2, /sdcard/exteranl/0/media..... image3.jpg)
+
+
+
         // items.clear(); Set을 사용함으로 중복을 방지할 수 있다
         ContentResolver resolver = context.getContentResolver();
 
@@ -58,8 +71,10 @@ public class Music {
                 item.title = getValue(cursor, proj[2]);
                 item.artist = getValue(cursor, proj[3]);
 
+                // 음원 Uri
                 item.musicUri = makeMusicUri(item.id);
-                item.albumArt = makeAlbumUri(item.albumId);
+                // 앨범아트 가져오기
+                item.albumArt = albumMap.get(Integer.parseInt(item.albumId));
                 // 저장소에 담는다...
                 items.add(item);
             }
@@ -81,7 +96,7 @@ public class Music {
         public String title;
 
         public Uri musicUri;
-        public Uri albumArt;
+        public String albumArt;
 
         public boolean itemClicked = false;
 
@@ -103,13 +118,39 @@ public class Music {
 
     private Uri makeMusicUri(String musicId){
         Uri contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                        // contentUri를 Log로 찍어보면 content://media/external/audio/media
         return Uri.withAppendedPath(contentUri, musicId);
     }
 
-    private Uri makeAlbumUri(String albumId){
+    // 앨범아트 데이터만 따로 저장
+    private static HashMap<Integer, String> albumMap = new HashMap<>();
+
+    private static void setAlbumArt(Context context) {
+        String[] Album_cursorColumns = new String[]{
+                MediaStore.Audio.Albums.ALBUM_ART, //앨범아트
+                MediaStore.Audio.Albums._ID
+        };
+        Cursor Album_cursor = context.getContentResolver().query(
+                MediaStore.Audio.Albums.EXTERNAL_CONTENT_URI,
+                Album_cursorColumns, null, null, null);
+        if (Album_cursor != null) { //커서가 널값이 아니면
+            if (Album_cursor.moveToFirst()) { //처음참조
+                int albumArt = Album_cursor.getColumnIndex(MediaStore.Audio.Albums.ALBUM_ART);
+                int albumId = Album_cursor.getColumnIndex(MediaStore.Audio.Albums._ID);
+                do {
+                    if (!albumMap.containsKey(Integer.parseInt(Album_cursor.getString(albumId)))) { //맵에 앨범아이디가 없으면
+                        albumMap.put(Integer.parseInt(Album_cursor.getString(albumId)), Album_cursor.getString(albumArt)); //집어넣는다
+                    }
+                } while (Album_cursor.moveToNext());
+            }
+        }
+        Album_cursor.close();
+    }
+
+    /*private Uri makeAlbumUri(String albumId){
         String albumUri = "content://media/external/audio/albumart/";
         return Uri.parse(albumUri + albumId);
-    }
+    }*/
 
 }
 

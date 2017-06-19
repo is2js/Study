@@ -97,6 +97,7 @@ public class DetailFragment extends Fragment {
             setOnClickListener();
             setViewPager(position);
 
+
         }
 
         private void setOnClickListener(){
