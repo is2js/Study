@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnLi
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         list = ListFragment.newInstance(1); // 1이면 1줄 , 2이면 2줄, 3이면 3줄
-        detail = DetailFragment.newInstance(-1);
+        detail = DetailFragment.newInstance();
 
         PermissionControl.checkVersion(this);
 

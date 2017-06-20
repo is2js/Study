@@ -3,6 +3,7 @@ package com.mdy.android.musicplayer6;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Handler;
 
 /**
  * Created by MDY on 2017-06-16.
@@ -18,12 +19,21 @@ public class Player {
 
 
     // 음원 세팅
-    public static void init(Uri musicUri, Context context) {
+    public static void init(Uri musicUri, Context context, final Handler handler) {
         if(player != null) {
             player.release();
         }
         player = MediaPlayer.create(context, musicUri);
-        player.setLooping(false);   // 반복여부 설정
+        player.setLooping(false); // 반복여부 설정
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                // 음악 플레이가 종료되면 호출된다.
+                // 이 때 seekBar thread를 멈춰야 한다.
+                if(handler != null)
+                    handler.sendEmptyMessage(DetailFragment.STOP_THREAD);
+            }
+        });
     }
 
     public static void play(){
@@ -38,6 +48,7 @@ public class Player {
 
     public static void replay() {
         player.start();
+        playerStatus = PLAY;
     }
 
     // 음원의 길이를 리턴
@@ -62,4 +73,10 @@ public class Player {
         }
     }
 
+
+    // current 로 실행구간 이동시키기
+    public static void setCurrent(int current){
+        if(player != null)
+            player.seekTo(current);
+    }
 }

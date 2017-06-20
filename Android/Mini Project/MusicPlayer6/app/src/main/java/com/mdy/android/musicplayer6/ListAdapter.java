@@ -31,8 +31,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     public ListAdapter(OnListFragmentInteractionListener listener) {
         mListener = listener;
-
-
     }
 
     public void setDatas(List<Music.Item> datas){
@@ -126,7 +124,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     setItemClicked(position);
-                    Player.init(musicUri, mView.getContext());
+                    Player.init(musicUri, mView.getContext(), null);
                     Player.play();
                     btnPause.setImageResource(android.R.drawable.ic_media_pause);
 //                    btnPause.setVisibility(View.VISIBLE);
