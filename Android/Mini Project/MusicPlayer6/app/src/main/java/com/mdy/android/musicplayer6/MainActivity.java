@@ -1,5 +1,6 @@
 package com.mdy.android.musicplayer6;
 
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -12,14 +13,21 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity implements ListFragment.OnListFragmentInteractionListener, PermissionControl.CallBack {
 
     FrameLayout layout;
+    ListFragment list;
+    DetailFragment detail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        PermissionControl.checkVersion(this);
+        // 볼륨 조절 버튼으로 미디어 음량만 조절하기 위한 설정
+        setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
+        list = ListFragment.newInstance(1); // 1이면 1줄 , 2이면 2줄, 3이면 3줄
+        detail = DetailFragment.newInstance(-1);
+
+        PermissionControl.checkVersion(this);
 
     }
 
@@ -35,9 +43,8 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnLi
     @Override
     public void init(){
         setViews();
-//        Fragment tempFragment = ListFragment.newInstance(1);
-        setFragment(ListFragment.newInstance(1));    // 목록 프래그컨트
-        // 1이면 1줄 , 2이면 2줄, 3이면 3줄
+        setFragment(list); // 목록 프래그먼트
+
     }
 
     @Override
@@ -77,7 +84,8 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnLi
     // Adapter에서 interface를 직접 호출해서 사용한다.
     @Override
     public void goDetailInteraction(int position) {
-        addFragment(DetailFragment.newInstance(position));
+        detail.setPosition(position);
+        addFragment(detail);
     }
 
 

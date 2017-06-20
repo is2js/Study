@@ -68,6 +68,7 @@ public class ListFragment extends Fragment {
             // 데이터를 세팅
             ListAdapter adapter = new ListAdapter(mListener);
             adapter.setDatas(music.getItems());
+
             recyclerView.setAdapter(adapter);
         }
         return view;

@@ -126,7 +126,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                 @Override
                 public void onClick(View v) {
                     setItemClicked(position);
-                    Player.play(musicUri, mView.getContext());
+                    Player.init(musicUri, mView.getContext());
+                    Player.play();
                     btnPause.setImageResource(android.R.drawable.ic_media_pause);
 //                    btnPause.setVisibility(View.VISIBLE);
                 }
@@ -144,7 +145,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             });
 
 
-
+            // pause 버튼 클릭
             btnPause.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
