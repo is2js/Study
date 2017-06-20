@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.mdy.android.musicplayer6.util.PermissionControl;
+
 public class MainActivity extends AppCompatActivity implements ListFragment.OnListFragmentInteractionListener, PermissionControl.CallBack {
 
     FrameLayout layout;

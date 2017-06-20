@@ -1,4 +1,4 @@
-package com.mdy.android.musicplayer6;
+package com.mdy.android.musicplayer6.util;
 
 import android.Manifest;
 import android.annotation.TargetApi;
