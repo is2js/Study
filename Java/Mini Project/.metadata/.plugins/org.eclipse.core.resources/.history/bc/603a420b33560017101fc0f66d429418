@@ -1,0 +1,19 @@
+import mail.Mail;
+import mail.Server;
+
+public class PatternMain {
+
+	public static void main(String[] args) {
+		
+		Server mailServer = new Server();
+		
+		// 편지글 작성
+		Mail mail = new Mail();
+		
+		// 발송
+		mailServer.sender(mail);
+		
+
+	}
+
+}

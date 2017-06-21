@@ -1,0 +1,17 @@
+package mail;
+
+public class Server implements IProxy {
+
+	@Override
+	public void sender(Mail mail) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Mail receiver() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

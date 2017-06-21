@@ -1,0 +1,6 @@
+package mail;
+
+public interface IProxy {
+	void sender();
+	void receiver();
+}

@@ -1,0 +1,16 @@
+package mail;
+
+public class Proxy implements IProxy {
+
+	@Override
+	public void sender(Mail mail) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Mail get() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
