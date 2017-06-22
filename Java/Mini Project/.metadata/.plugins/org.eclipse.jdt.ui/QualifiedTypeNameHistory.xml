@@ -14,7 +14,7 @@
 <fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="java.net.Socket"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.portable.InputStream"/>
-<fullyQualifiedTypeName name="java.io.InputStream"/>
 <fullyQualifiedTypeName name="org.omg.CORBA.portable.OutputStream"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
 </qualifiedTypeNameHistroy>

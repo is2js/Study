@@ -17,15 +17,15 @@ public class Client {
 	}
 	
 	public void setConnect(){
-		// ì„œë¸Œ thread ì—ì„œ ì„œë²„ì—°ê²°ì„ í†µí•´ í‚¤ë³´ë“œ ì…ë ¥ê°’ì„ ì„œë²„ë¡œ ì „ë‹¬í•œë‹¤.
+		// ¼­ºê thread ¿¡¼­ ¼­¹ö¿¬°áÀ» ÅëÇØ Å°º¸µå ÀÔ·Â°ªÀ» ¼­¹ö·Î Àü´ŞÇÑ´Ù.
 		System.out.println("SetConnect");
-		Scanner scanner = new Scanner(System.in); // í‚¤ë³´ë“œ ì…ë ¥ ìƒì„±
+		Scanner scanner = new Scanner(System.in); // Å°º¸µå ÀÔ·Â »ı¼º
 		try {
 			System.out.println("in try");
 			OutputStream os = socket.getOutputStream();
 			while(true){
-				String word = scanner.nextLine() + "\r\n"; // ì…ë ¥ì„ ëŒ€ê¸°í•˜ê³  ìˆë‹¤ê°€ enter í‚¤ê°€ ì…ë ¥ë˜ë©´
-				os.write(word.getBytes()); // streamì„ í†µí•´ ì„œë²„ì¸¡ìœ¼ë¡œ ì „ë‹¬í•œë‹¤.
+				String word = scanner.nextLine() + "\r\n"; // ÀÔ·ÂÀ» ´ë±âÇÏ°í ÀÖ´Ù°¡ enter Å°°¡ ÀÔ·ÂµÇ¸é
+				os.write(word.getBytes()); // streamÀ» ÅëÇØ ¼­¹öÃøÀ¸·Î Àü´ŞÇÑ´Ù.
 				os.flush();
 				System.out.println("input:"+word);
 			}
