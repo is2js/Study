@@ -32,8 +32,19 @@
   - SimpleDateFormat 패턴 및 사용예제
 
   ##### 10. [Design](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/Design)
-  - Interface
+  - Interface에 대한 이해
 
+  ##### 11. [DesignPattern](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/DesignPattern)
+  - 디자인패턴
+
+  ##### 12. [Chatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/Chatting)
+  - Java를 이용한 채팅서버 구현
+
+  ##### 13. [WebServer](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/WebServer)
+  - 간단한 웹 서버를 구성
+
+  ##### 14. [WebClient](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/WebClient)
+  - 간단한 웰 클라이언트를 구성
 
 
 
