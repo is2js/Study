@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+
         service = new Intent(this, PlayerService.class);
 
 
