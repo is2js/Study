@@ -10,8 +10,8 @@ public class Server {
 	ServerSocket serverSocket = null;
 
 	
-	// 1. ì„œë²„ë¥¼ ìƒì„±
-	public Server(int port){ // ì„œë²„ì—ì„œ ì‚¬ìš©í•  í¬íŠ¸
+	// 1. ¼­¹ö¸¦ »ı¼º
+	public Server(int port){ // ¼­¹ö¿¡¼­ »ç¿ëÇÒ Æ÷Æ®
 		try {
 			serverSocket = new ServerSocket(port);
 
@@ -20,17 +20,17 @@ public class Server {
 		}
 	}
 	
-	// 2. ì„œë²„ë™ì‘
+	// 2. ¼­¹öµ¿ÀÛ
 	public void process(){
-		// ì—¬ê¸°ì„œ ì†Œì¼“ì„ ì—´ê³  ëŒ€ê¸°
+		// ¿©±â¼­ ¼ÒÄÏÀ» ¿­°í ´ë±â
 		System.out.println("Server is running...");
 		while(true){
-			// 3. ì„œë¸Œ thread ì—ì„œ ì†Œì¼“ì„ ì—´ê³  ëŒ€ê¸°
+			// 3. ¼­ºê thread ¿¡¼­ ¼ÒÄÏÀ» ¿­°í ´ë±â
 			Socket socket;
 			try {
-				socket = serverSocket.accept(); // <- ì—¬ê¸°ì„œ í”„ë¡œê·¸ë¨ì´ ë©ˆì¶˜ë‹¤
+				socket = serverSocket.accept(); // <- ¿©±â¼­ ÇÁ·Î±×·¥ÀÌ ¸ØÃá´Ù
 				System.out.println(socket.getInetAddress()+" : Connected");
-				subProcess(socket); // ì„œë¸Œ thread ì—ì„œ ì†Œì¼“ì„ ì²˜ë¦¬í•˜ëŠ” í•¨ìˆ˜ë¡œ ë„˜ê²¨ì¤€ë‹¤
+				subProcess(socket); // ¼­ºê thread ¿¡¼­ ¼ÒÄÏÀ» Ã³¸®ÇÏ´Â ÇÔ¼ö·Î ³Ñ°ÜÁØ´Ù
 			} catch (IOException e) {
 				e.printStackTrace();
 			} 
@@ -43,10 +43,10 @@ public class Server {
 				try {
 					InputStream os = socket.getInputStream();
 					System.out.println("opened stream");
-					// ìŠ¤íŠ¸ë¦¼ì„ ì—´ê³  ë°ì´í„° í†µì‹ ì„ ì¤€ë¹„
+					// ½ºÆ®¸²À» ¿­°í µ¥ÀÌÅÍ Åë½ÅÀ» ÁØºñ
 					BufferedReader br = new BufferedReader(new InputStreamReader(os));
 					System.out.println("opened buffered");
-					// ì¤„ë‹¨ìœ„ë¡œ ë°ì´í„°ë¥¼ ë°›ì•„ì„œ í™”ë©´ì— ì¶œë ¥
+					// ÁÙ´ÜÀ§·Î µ¥ÀÌÅÍ¸¦ ¹Ş¾Æ¼­ È­¸é¿¡ Ãâ·Â
 					while(true){
 						String message= br.readLine();
 						System.out.println(socket.getInetAddress()+":"+message);

@@ -1,11 +1,11 @@
 
 public class ChattingMain {
 	public static void main(String args[]){
-		// ì„œë²„ ìƒì„±
-		Server server = new Server(10004);
-		server.process();
+		// ¼­¹ö »ı¼º
+//		Server server = new Server(10004);
+//		server.process();
 		
-		// í´ë¼ì´ì–¸íŠ¸ ìƒì„±
+		// Å¬¶óÀÌ¾ğÆ® »ı¼º
 		Client client = new Client();
 		client.setConnect();
 	}
