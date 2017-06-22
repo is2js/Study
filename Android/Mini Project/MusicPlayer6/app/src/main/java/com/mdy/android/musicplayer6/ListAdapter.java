@@ -18,8 +18,6 @@ import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-import static com.mdy.android.musicplayer6.Player.playerStatus;
-
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
 
     private final OnListFragmentInteractionListener mListener;
@@ -72,8 +70,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         } else {
             holder.btnPause.setVisibility(View.GONE);
         }
-
-
     }
 
     @Override
@@ -118,7 +114,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             btnPause = (ImageButton) view.findViewById(R.id.btnPause);
 
 
-
             // 플레이
             mView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -147,13 +142,12 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
             btnPause.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if( Player.playerStatus == Player.PLAY ) {
+                    if( Player.status == Const.Player.PLAY ) {
                         Player.pause();
                         // pause 가 클릭되면 이미지 모양이 play 로 바뀐다.
                         btnPause.setImageResource(android.R.drawable.ic_media_play);
-                    } else if ( Player.playerStatus == Player.PAUSE ) {
+                    } else if ( Player.status == Const.Player.PAUSE ) {
                         Player.replay();
-                        playerStatus = Player.PLAY;
                         btnPause.setImageResource(android.R.drawable.ic_media_pause);
                     }
 
@@ -170,25 +164,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
                             btnPause.setImageResource(android.R.drawable.ic_media_pause);
                             break;
                     }*/
-
                 }
             });
-
-
-
         }
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
 }

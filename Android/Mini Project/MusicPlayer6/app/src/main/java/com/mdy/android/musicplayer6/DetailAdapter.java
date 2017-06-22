@@ -17,7 +17,6 @@ import java.util.List;
  */
 
 public class DetailAdapter extends PagerAdapter {
-
     List<Music.Item> datas = null;
 
     public DetailAdapter(List<Music.Item> datas) {

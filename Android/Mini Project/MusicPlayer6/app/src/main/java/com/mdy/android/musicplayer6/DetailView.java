@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.mdy.android.musicplayer6.domain.Music;
+import com.mdy.android.musicplayer6.util.TimeUtil;
 
 import java.util.List;
 
@@ -31,6 +32,9 @@ public class DetailView implements View.OnClickListener{
     ImageButton btnPlay,btnNext,btnPrev;
     SeekBar seekBar;
     TextView current,duration;
+
+    // 플레이어를 컨트롤하는 메인에 있는 함수 사용
+    DetailFragment.PlayerInterface playerInterface;
 
     // 음악 플레이에 따라 seekbar를 변경해주는 thread
     SeekBarThread seekBarThread = null;
@@ -56,7 +60,8 @@ public class DetailView implements View.OnClickListener{
         return view;
     }
 
-    public DetailView(View view, DetailFragment presenter){
+    public DetailView(View view, DetailFragment presenter, DetailFragment.PlayerInterface playerInterface){
+        this.playerInterface = playerInterface;
         this.context = view.getContext();
         this.view = view;
         this.presenter = presenter;
@@ -74,6 +79,7 @@ public class DetailView implements View.OnClickListener{
         setOnClickListener();
         setViewPager(position);
         setSeekBar();
+        setSeekBarThread();
     }
 
     private void setOnClickListener(){
@@ -98,8 +104,6 @@ public class DetailView implements View.OnClickListener{
         viewPager.addOnPageChangeListener(viewPagerListener);
         // 페이지를 이동하고
         viewPager.setCurrentItem(position);
-        // 처음 한번 Presenter 에 해당되는 Fragment 의 musicInit 을 호출해서 음악을 초기화 해준다.
-        musicInit(position);
     }
 
     private void setSeekBar(){
@@ -121,6 +125,12 @@ public class DetailView implements View.OnClickListener{
 
             }
         });
+    }
+
+    private void setSeekBarThread(){
+        // seekBar를 변경해주는 thread
+        seekBarThread = new SeekBarThread(handler);
+        seekBarThread.start();
     }
 
     public void setDuration(int time){
@@ -152,8 +162,24 @@ public class DetailView implements View.OnClickListener{
     }
 
     public void play(){
-        Player.play();
-        seekBarThread.start();
+        switch(Player.status){
+            case Const.Player.PLAY:
+//                Player.pause();
+                playerInterface.pausePlayer();
+                // pause 가 클릭되면 이미지 모양이 play 로 바뀐다.
+                btnPlay.setImageResource(android.R.drawable.ic_media_play);
+                break;
+            case Const.Player.PAUSE:
+//                Player.play();
+                playerInterface.playPlayer();
+                btnPlay.setImageResource(android.R.drawable.ic_media_pause);
+                break;
+            case Const.Player.STOP:
+                playerInterface.playPlayer();
+                btnPlay.setImageResource(android.R.drawable.ic_media_pause);
+                break;
+        }
+        // Player.play();
     }
 
     public void next(){
@@ -166,7 +192,7 @@ public class DetailView implements View.OnClickListener{
 
     public void setSeekBarPosition(int time){
         seekBar.setProgress(time);
-        current.
+        current.setText(TimeUtil.miliToMinSec(time));
     }
 
     // 최초에 호출될 경우는 페이지의 이동이 없으므로 호출되지 않는다.
@@ -199,7 +225,15 @@ public class DetailView implements View.OnClickListener{
         setDuration(musicDuration);
         seekBar.setMax(Player.getDuration());
 
-        // seekBar를 변경해주는 thread
-        seekBarThread = new SeekBarThread(handler);
+        // 뷰페이저 이동시 음원을 초기화하는데
+        // 이전 음원이 실행상태였으면 자동으로 실행시켜준다.
+        if(Player.status == Const.Player.PLAY){
+            playerInterface.playPlayer();
+        }
+    }
+
+    public void setDestroy() {
+        seekBarThread.setRunFlag(false);
+        seekBarThread.interrupt();
     }
 }
