@@ -149,4 +149,9 @@
   #### 34. [MusicPlayer3](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/MusicPlayer3)
   -
 
+  #### 35. [HttpFromMyServer](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpFromMyServer)
+  - HttpURLConnection
+  - getInputStream, InputStreamReader, BufferedReader
+  - StringBuilder, toString()
+  - AsyncTask
 *****
