@@ -110,7 +110,6 @@ public class DetailFragment extends Fragment {
         private void setViewPager(int position){
             DetailAdapter adapter = new DetailAdapter(getDatas());
             viewPager.setAdapter(adapter);
-
             viewPager.setCurrentItem(position); // 뷰페이저가 최초에 세팅될 때 해당 페이지로 이동을 하게 된다.
         }
 
