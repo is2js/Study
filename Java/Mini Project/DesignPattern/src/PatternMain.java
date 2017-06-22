@@ -34,7 +34,7 @@ public class PatternMain {
 		
 		publisher.addObserver(new Subscriber("홍길동"));
 //		publisher.addObserver(new Subscriber("이순신"));
-		new Subscriber("이순신", publisher);
+		new Subscriber("이순신", publisher);	// 오버로딩을 활용한 생성자 선언
 		publisher.addObserver(new Subscriber("장보고"));
 		
 		publisher.process();
