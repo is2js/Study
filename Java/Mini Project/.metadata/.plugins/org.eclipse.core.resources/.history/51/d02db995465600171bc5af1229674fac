@@ -1,0 +1,11 @@
+package factorymethod;
+
+public class PhoneFactory extends FactoryMethod {
+
+	@Override
+	public Product make() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

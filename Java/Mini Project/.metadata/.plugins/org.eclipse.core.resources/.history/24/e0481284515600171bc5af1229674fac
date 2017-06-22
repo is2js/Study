@@ -1,0 +1,26 @@
+import java.net.ServerSocket;
+
+public class Server {
+	
+	ServerSocket serverSocket = null;
+	
+	// 1. 서버를 생성
+	public Server(int port){	// 서버에서 사용할 포트
+		serverSocket = new ServerSocket(port);
+	}
+	
+	// 2. 서버 동작
+	public void process(){
+		
+		// 서버 자체가 서브스레드로 돌아간다.
+		
+		// 여기서 소켓을 열고 대기
+		while(true){
+			// 3. 서브 thread에서 소켓을 열고 대기
+			
+			// 4. 소켓에 연결요청이 들어오면 소켓을 열고 저장소에 담아둔다.
+		}			
+		// 5. 소켓을 통해 데이터가 들어오면 화면에 출력
+		
+	}
+}

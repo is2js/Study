@@ -1,0 +1,11 @@
+package factorymethod;
+
+public class TVFactory extends FactoryMethod {
+
+	@Override
+	public Product make() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,9 @@
+package observer;
+
+import java.util.List;
+
+public class Publisher {
+	// Observer ÀúÀå¼Ò
+	List<Observer> observers;
+	
+}

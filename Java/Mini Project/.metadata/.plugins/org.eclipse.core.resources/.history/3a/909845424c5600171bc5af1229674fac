@@ -1,0 +1,13 @@
+package observer;
+
+import java.util.List;
+
+public class Publisher {
+	// Observer 저장소
+	List<Observer> observers;
+	
+	// Observer 추가하기
+	public void addObserver(Observer obs){
+		
+	}
+}

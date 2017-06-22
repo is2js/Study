@@ -1,0 +1,28 @@
+package observer;
+
+import java.util.List;
+
+public class Publisher {
+	// Observer 저장소
+	List<Observer> observers;
+	
+	// Observer 추가하기
+	public void addObserver(Observer obs){
+		observers.add(obs);
+	}
+	
+	// 값을 처리하는 자체 처리함수
+	public void process(){
+		// 처리..
+		
+		// 이벤트 발생시..
+		notice();
+	}
+	
+	// 변경사항 알리기
+	private void notice(){
+		for(Observer observer : observers){
+			observer.alarm();
+		}
+	}
+}

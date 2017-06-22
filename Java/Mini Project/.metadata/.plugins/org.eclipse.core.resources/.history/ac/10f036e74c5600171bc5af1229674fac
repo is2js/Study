@@ -1,0 +1,14 @@
+package observer;
+
+public class Subscriber implements Observer{
+
+	@Override
+	public void alarm() {
+		showEvent();
+		
+	}
+	
+	private void showEvent(){
+		System.out.println("변경사항이 있습니다.");
+	}
+}

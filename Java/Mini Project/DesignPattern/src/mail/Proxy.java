@@ -11,11 +11,4 @@ public class Proxy implements IProxy {
 		
 		mailServer.sender(mail);
 	}
-
-	@Override
-	public Mail get() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

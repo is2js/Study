@@ -11,20 +11,5 @@ public class Server implements IProxy {
 	@Override
 	public void sender(Mail mail) {
 		System.out.println(mail + "을 발송하였습니다.");
-		
 	}
-
-	@Override
-	public Mail get() {
-		Mail mail = new Mail();
-		
-		return mail;
-	}
-	
-	private void receiver(){
-		// 메일을 받으면
-		
-		mails.add(new Mail());
-	}
-	
 }
