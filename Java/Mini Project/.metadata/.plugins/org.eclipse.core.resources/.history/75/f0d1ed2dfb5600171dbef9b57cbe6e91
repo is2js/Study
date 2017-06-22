@@ -1,0 +1,56 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+import org.omg.CORBA.portable.InputStream;
+
+public class Server {
+	
+	ServerSocket serverSocket;
+	
+	public Server(int port){
+		try {
+			// 특정 port로 소켓을 열어서 서버를 생성
+			serverSocket = new ServerSocket(port);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void run(){
+		System.out.println("Server is running...");
+		
+		try {
+			
+			Socket client = serverSocket.accept();	// 연결이 완성될때까지 이줄에서 멈춘다.
+			processClient(client);	// 연결된 소켓을 던져준다.
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private void processClient(Socket client){
+		// 태스크를 서브 thread에서 실행해서 서버소켓이 계속 동작할 수 있도록 해준다.
+		new Thread(){
+			public void run(){
+				// 연결된 Socket에서 Stream을 열어서 통신준비를 한다.
+				try(InputStream is = client.getInputStream()){
+					
+					// 버퍼로 데이터 처리 속도를 높인다.
+					BufferedReader br = new BufferedReader(new InputStreamReader(is));	
+					
+					String line = "";
+					// 데이터가 없을때까지(null이 아닐때까지) 한줄씩 읽어서 출력한다.
+					while( (line = br.readLine()) != null){
+						System.out.println(line);
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}.start();
+	}
+}

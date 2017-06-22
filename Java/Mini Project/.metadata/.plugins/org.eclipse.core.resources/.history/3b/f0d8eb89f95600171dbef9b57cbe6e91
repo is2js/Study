@@ -1,0 +1,18 @@
+import java.io.IOException;
+import java.net.ServerSocket;
+
+public class Server {
+	
+	ServerSocket serverSocket;
+	
+	public Server(int port){
+		try {
+			// 특정 port로 소켓을 열어서 서버를 생성
+			serverSocket = new ServerSocket(port);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}
