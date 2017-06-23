@@ -22,7 +22,9 @@
 
   System.out.println(result); // 5*4*3*2*1 = 120 이 출력됨.
 ```
+
 <br>
+
 #### (2) 재귀함수를 이용한 Factorial
 ```java
   System.out.println("재귀함수 적용: " + Factorial(5))  // 출력값: 120
@@ -62,13 +64,3 @@ public static int fibo(int n){
   }
 }
 ```
-
-## 소제목3
-- 소제목3에 대한 설명
-
-
-
-
-조건
-
-한글 설명
