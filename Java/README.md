@@ -46,7 +46,10 @@
   ##### 14. [WebClient](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/WebClient)
   - 간단한 웰 클라이언트를 구성
 
+  ##### 15. [Recursive](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/Recursive)
+  - 재귀함수 ( Factorial / 피보나치 수열 )
 
+<br>
 
 - ### Questions
   - ##### [다형성(업캐스팅)](https://github.com/mdy0501/Study/tree/master/Java/Questions/Polymorphism_Upcasting)
