@@ -3,16 +3,16 @@ public class RecursiveMain {
 
 	public static void main(String[] args) {
 		
-		int input1 = 5;
-		int result = 1;
-		
-		for(int i=1; i<=input1; i++){
-			result = result*i;
-		}
-		
-		System.out.println(result);
-
-		System.out.println("재귀함수 적용: " + Factorial(5));
+//		int input1 = 5;
+//		int result = 1;
+//		
+//		for(int i=1; i<=input1; i++){
+//			result = result*i;
+//		}
+//		
+//		System.out.println(result);
+//
+//		System.out.println("Factorial Method 적용: " + Factorial(5));
 		
 		System.out.println("======= 피보나치 수열 =======");
 		
