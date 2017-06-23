@@ -1,0 +1,24 @@
+
+public class RecursiveMain {
+
+	public static void main(String[] args) {
+		int result = 1;
+		
+		for(int i=1; i<=4; i++){
+			result = result*i;
+		}
+		
+		System.out.println(result);
+
+	}
+	
+	public int Recursive(int value){
+		int a=0;
+		int b=0;
+		
+		
+		
+		return 0;
+	}
+
+}
