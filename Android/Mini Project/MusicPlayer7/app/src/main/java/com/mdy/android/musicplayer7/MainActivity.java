@@ -26,10 +26,7 @@ public class MainActivity extends AppCompatActivity implements ListFragment.OnLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         service = new Intent(this, PlayerService.class);
-
 
         // 볼륨 조절 버튼으로 미디어 음량만 조절하기 위한 설정
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
