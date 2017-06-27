@@ -158,7 +158,8 @@
   #### 36. [HttpBbs](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpBbs)
   - Gson / fromJson
 
-
+  #### 37. [HttpBbs7](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpBbs7)
+  - **GET / POST** (Http method)
 
 
 *****
