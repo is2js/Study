@@ -64,7 +64,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         Log.d("Post Data", "Post Data"+jsonString);
         // 4. json 전송
         DataSender sender = new DataSender();
-        String url = "http://192.168.10.79:8080/bbs.insert.jsp";
+        String url = "http://192.168.10.79:8080/bbs/json/insert";
         sender.sendData(url, jsonString, this);
     }
 

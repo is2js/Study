@@ -6,6 +6,7 @@ import android.util.Log;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
 
 /**
  * Created by MDY on 2017-06-27.
@@ -48,18 +49,19 @@ public class DataSender {
             con.setDoOutput(true);  // 전송할 데이터가 있다고 알려줌.
 
             // 4. 키=값의 형태로 전송할 데이터 모양을 만들어주고,
-            String data = "jsonString=" + jsonString;   // 데이터를 전송할때는 키/값 형태로 보낸다.
+            String data = "jsonString=" + URLEncoder.encode(jsonString, "utf-8");   // 데이터를 전송할때는 키/값 형태로 보낸다. + 데이터를 엔코딩한다.
             OutputStream os = con.getOutputStream();    // 스트림을 열고
             os.write(data.getBytes());  // 데이터를 byte 형으로 변환하여 전송한다.
             os.flush(); // flush를 하는 이유는 어딘가에 버퍼형태로 담겨있는데 버퍼가 가득차지 않았어도 데이터를 전송하기 위해서 호출한다.
-            os.close();
 
-            // 4. 전송결과 체크
+
+            // 5. 전송결과 체크
             int responseCode = con.getResponseCode();
 
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 return true;
             }
+            os.close();
             Log.e("HttpError", "errorCode= " + responseCode);
         }catch (Exception e){
             e.printStackTrace();

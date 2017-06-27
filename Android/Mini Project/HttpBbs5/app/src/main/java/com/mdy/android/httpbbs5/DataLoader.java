@@ -56,7 +56,6 @@ public class DataLoader {
             con.setRequestMethod("GET");    // HTTP 프로토콜 통신 방법 중에 GET으로 통신하겠다는 뜻
             // GET이 세팅된 다음에 데이터를 보낸다.
 
-
             // 2. 응답처리 (요청을 했으니까 서버에서 응답을 해서 보내줄 것이다.)
             // 응답한 것을 받으려면 Connection에서 InputStream을 열어서 서버가 주는 데이터를 받아서 처리한다.
             // 응답의 유효성 검사 (서버가 정상적으로 처리했다는 것을 확인하기 위해서 responseCode를 받는다.)
