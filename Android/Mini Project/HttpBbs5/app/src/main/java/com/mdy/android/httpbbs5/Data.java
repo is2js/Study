@@ -8,4 +8,13 @@ import java.util.List;
 
 public class Data {
     List<Bbs> bbsList;
+
+    /*public class Bbs {
+        int id;
+        String title;
+        String content;
+        String author;
+        String date;
+    }*/
+
 }

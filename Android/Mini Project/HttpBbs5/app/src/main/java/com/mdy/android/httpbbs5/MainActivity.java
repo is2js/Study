@@ -1,17 +1,21 @@
 package com.mdy.android.httpbbs5;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements DataLoader.CallBack{
+public class MainActivity extends AppCompatActivity implements DataLoader.CallBack, View.OnClickListener{
 
     TextView txtId, txtTitle, txtContent, txtAuthor, txtDate;
     RecyclerView recycler;
+    Button btnPost;
 
     CustomAdapter adapter;
 
@@ -19,8 +23,10 @@ public class MainActivity extends AppCompatActivity implements DataLoader.CallBa
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        btnPost = (Button) findViewById(R.id.btnPost);
 
         setViews();
+        setListeners();
 
         // 1. 데이터 정의
         DataLoader loader = new DataLoader();
@@ -34,11 +40,7 @@ public class MainActivity extends AppCompatActivity implements DataLoader.CallBa
 
         // 4. 레이아웃 매니저 등록
         recycler.setLayoutManager(new LinearLayoutManager(this));
-
-
     }
-
-
 
     public void setViews(){
         txtId = (TextView) findViewById(R.id.txtId);
@@ -48,6 +50,16 @@ public class MainActivity extends AppCompatActivity implements DataLoader.CallBa
         txtDate = (TextView) findViewById(R.id.txtDate);
 
         recycler = (RecyclerView) findViewById(R.id.recycler);
+    }
+
+    public void setListeners(){
+        btnPost.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(MainActivity.this, WriteActivity.class);
+        startActivity(intent);
     }
 
     @Override
