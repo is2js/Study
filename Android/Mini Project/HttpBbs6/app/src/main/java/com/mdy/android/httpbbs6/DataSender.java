@@ -30,8 +30,8 @@ public class DataSender {
             }
 
             @Override
-            protected void onPostExecute(Boolean aBoolean) {
-
+            protected void onPostExecute(Boolean result) {
+                callBack.call(result);
             }
         }.execute(url, jsonString);
     }
@@ -75,7 +75,4 @@ public class DataSender {
         return false;
     }
 
-    public interface CallBack {
-        public void call(boolean result);
-    }
 }

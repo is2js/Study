@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, DataLoader.CallBack{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, DataLoader.CallBack {
 
     TextView txtId, txtTitle, txtAuthor, txtContent, txtDate;
     RecyclerView recycler;
