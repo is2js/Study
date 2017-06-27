@@ -2,6 +2,14 @@
 #### Java로 채팅서버를 구현한다.
 - **[전체소스코드](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/Chatting/src/ChattingMain.java)**
 
+<br>
+
+##### 관련 설명
+- IP 는 주소체계이다. IP로는 컴퓨터만 찾을 수 있다.
+- 각각의 컴퓨터에 여러개의 프로그램이 있는데 각각의 프로그램과 통신을 하기 위해서는 포트를 열어줘야 한다. 그 열린 포트를 통해서 통신을 할 수 있다. 각 프로그램은 개별적으로 포트를 사용할 수 있다.
+- 웹서버의 포트번호 : 80
+- 소켓은 IP 주소와 Port가 합쳐진 것이다. ( IP + Port )
+
 #### ChattingMain.java
 ```java
 public class ChattingMain {
