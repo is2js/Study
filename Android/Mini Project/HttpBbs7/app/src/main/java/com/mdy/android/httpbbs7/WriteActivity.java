@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import com.google.gson.Gson;
 
-public class WriteActivity extends AppCompatActivity implements View.OnClickListener {
+public class WriteActivity extends AppCompatActivity implements View.OnClickListener, DataSender.CallBack {
 
     EditText editTitle, editAuthor, editContent;
     Button btnPost;
@@ -52,5 +52,10 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         String jsonString = gson.toJson(bbs);
 
         Log.d("jsonString", "===== jsonString =====" + jsonString);
+    }
+
+    @Override
+    public void call(boolean result) {
+        Log.d("WriteActivity", "전송결과= " + result);
     }
 }
