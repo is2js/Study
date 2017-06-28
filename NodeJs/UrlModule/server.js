@@ -16,7 +16,7 @@ var server = http.createServer( function (request, response){
 	console.log("주소 분리: " + parsedUrl.pathname);
 	console.log("===========================");
 	console.log("query 분리: " + parsedUrl.query);
-	console.log("===========================");
+	console.log("===========E N D===========");
 
 	// 응답 헤더
 	response.writeHead(200, {'content-Type' : 'application/json'});
