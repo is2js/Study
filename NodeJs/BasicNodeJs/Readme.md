@@ -119,8 +119,6 @@ console.log(jsonString);
 - 단점
 	- 동기보다 복잡하다.
 
-<br>
-
 #### 4. 예시
 ##### (1) 동기 방식
 ```JavaScript
