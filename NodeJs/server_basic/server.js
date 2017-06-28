@@ -7,6 +7,30 @@ var http = require("http");	// <- require는 java의 import
 
 
 
+var obj = {
+	aaa : "value123",
+	bbb : 123,
+	ccc : function(){ console.log('called'); }	
+};
+
+
+// 자바 소스와 비교 
+/*
+class obj {
+	String aaa = "value123";
+	int bbb = 123;
+
+	public void ccc() {
+		Log.i("", "called");
+	}
+}
+*/
+
+
+console.log(obj.aaa);
+obj.ccc();
+
+
 // 2. 요청 url 을 분석하는 모듈 가져오기
 var url = require("url");
 
@@ -26,7 +50,12 @@ var server = http.createServer( function (request, response){
 	// 응답 헤더
 	response.writeHead(200, {'content-Type' : 'application/json'});
 	// 응답 데이터
-	var one = '{bbsList:[{id:"1", title:"제목", content:"내용", author:"작성자", date:"2012/12/12"}]}';
+	var one = 	'{'
+				+ 	'bbsList:['
+				+ 	' {id:"1", title:"제목1", content:"내용1", author:"작성자1", date:"2011/01/11"}'
+				+ 	' , {id:"2", title:"제목2", content:"내용2", author:"작성자2", date:"2022/02/22"}'
+				+ 	' ]'
+				+ 	'}';
 	// 응답 데이터 전송 후 완료
 	response.end(one);
 
@@ -38,3 +67,4 @@ server.listen(8080, function(){
 });
 
 ////// 여기까지가 tomcat을 만든 것이다.
+
