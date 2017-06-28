@@ -5,7 +5,7 @@
 
 
 ### [Mini Project]
-  #### 1. [BasicNodeJs](https://github.com/mdy0501/Study/tree/master/NodeJs/Mini%20Project/BasicNodeJs)
+  #### 1. [BasicNodeJs](https://github.com/mdy0501/Study/tree/master/NodeJs/BasicNodeJs)
   -
 
   #### 2. [MySql ~ NodeJs 서버](https://github.com/mdy0501/Study/tree/master/NodeJs/withMySQL)
