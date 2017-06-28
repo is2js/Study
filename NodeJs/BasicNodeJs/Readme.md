@@ -95,6 +95,15 @@ console.log(jsonString);
 
 <br>
 
+## JSON 사용
+#### 1. JSON.stringify
+- 객체 --> JSON 문자열
+
+#### 2. JSON.parse
+- JSON 문자열 --> 객체
+
+<br>
+
 ## 동기방식 vs 비동기방식 비교
 #### 1. 동기 (Synchronous : 동시에 일어나는)
 - 동기는 말 그대로 동시에 일어난다는 뜻이다.
