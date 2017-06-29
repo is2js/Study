@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1061811368070",
+    "firebase_url": "https://memowebapp-89bbc.firebaseio.com",
+    "project_id": "memowebapp-89bbc",
+    "storage_bucket": "memowebapp-89bbc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061811368070:android:3a8f0b16da4f54aa",
+        "android_client_info": {
+          "package_name": "com.mdy.firenote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061811368070-6eein3qln4tc1b1omrb00cddkdls8oks.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDkZNDtlq_jFmFCmqFzV5YTg2Hf9xkXygQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
