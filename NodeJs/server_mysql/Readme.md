@@ -94,6 +94,6 @@ server.listen(8080, function(){
 
 ## CallBack 함수 동작 순서 예시
 - [예시1]
-![callback1](https://github.com/mdy0501/Study/blob/master/NodeJs/withMySQL/graphics/callback1.jpg)
+![callback1](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql/graphics/callback1.jpg)
 - [예시2]
-![callback2](https://github.com/mdy0501/Study/blob/master/NodeJs/withMySQL/graphics/callback2.jpg)
+![callback2](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql/graphics/callback2.jpg)
