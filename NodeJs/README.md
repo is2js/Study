@@ -15,9 +15,14 @@
   - Url.parse
   - 요청 서버 리소스 체크 예제
 
-  #### 3. [MySql ~ NodeJs 서버](https://github.com/mdy0501/Study/tree/master/NodeJs/withMySQL)
+  #### 3. [MySql ~ NodeJs 서버](https://github.com/mdy0501/Study/tree/master/NodeJs/server_mysql)
   - MySql ~ NodeJs 서버 연동 (파일구조 및 소스코드)
   - CallBack 함수에 대한 이해
 
-  #### 4. [MongoDB ~ NodeJs 서버](https://github.com/mdy0501/Study/tree/master/NodeJs/withMongoDB)
-  -
+  #### 4. [MongoDB_basic](https://github.com/mdy0501/Study/tree/master/NodeJs/MongoDB_basic)
+  - MongoDB에 대한 기본적인 설명
+  - MongoDB 명령어 정리
+
+  #### 5. [MongoDB ~ NodeJs 서버](https://github.com/mdy0501/Study/tree/master/NodeJs/server_mongodb)
+  - MongoDB ~ NodeJs 서버 연동 (파일구조 및 소스코드)
+  - CallBack 함수 동작 방식
