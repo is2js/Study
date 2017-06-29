@@ -17,7 +17,7 @@ exports.select = function (callback){	// <- callback에는 실행코드가 넘�
 				if(error){	// select에 대한 에러 체크
 					console.log("error: " + error);
 				} else {
-					// 조회한 데이터를 배열에 담아준다.
+					// 조회한 데이터를 result 배열에 담아준다.
 					if(docs != null){
 						console.log(docs);
 						// callback 에는 실행가능한 코드 전체가 넘어오기 때문에
