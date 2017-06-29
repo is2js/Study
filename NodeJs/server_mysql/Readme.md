@@ -11,7 +11,7 @@
 ## 파일 구조
 | Depth1 | Depth2 | Depth3 | Depth4 |
 | :---- | :---- | :---- | :---- |
-| NodeJs(폴더) | withMySQL(폴더) | server.js |   |
+| NodeJs(폴더) | server_mysql(폴더) | server.js |   |
 |   |   | connection_module(폴더) | index.js |
 
 <br>
