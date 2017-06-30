@@ -21,12 +21,31 @@ exports.getData = function(response) {
 			result.bbsList.push(newItem);
 		});
 		var jsonString = JSON.stringify(result);
+		
+		// 3. 데이터를 전송 - Head부분의 메타 정보를 보내준다.
+		response.writeHead(200, {'Content-Type' : 'application/json'});
+		
+		/* 네트워크처리 순서 */
+		// 1. 연결
+		// 2. 스트림을 열고
+		// 3. 데이터를 전송
+		// 4. 연결을 닫는다.
+
+		// end는 3번과 4번을 해주는 것이다.
 		response.end(jsonString);
 	});
 }
 
-exports.insert = function(data){
+// 데이터를 저장하는 함수
+exports.setData = function(data, response){
+	var obj = JSON.parse(data);
+	console.log(obj);
 
+	connection.insert(obj, function(){
+		console.log("call insert callback");
+		response.writeHead(200, {'Content-Type' : 'application/json'});
+		response.end('{"result_status" : "ok"}');
+	});
 }
 
 exports.update = function(data) {

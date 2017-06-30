@@ -16,12 +16,27 @@ var server = http.createServer( function (request, response){
 	var parsedUrl = url.parse(request.url);
 	var realPath = parsedUrl.pathname;	// 실제 요청주소
 	// 요청 서버 리소스 체크
-	if(realPath == '/bbs/json/list'){
-		// 응답 헤더
-		response.writeHead(200, {'Content-Type' : 'application/json'});
+	if(realPath == '/bbs'){
+		// method = GET (데이터 읽기)
+		if(request.method == "GET"){
+			// DB처리 함수 호출
+			con.getData(response);
+		} 
+		// method = POST (데이터 쓰기)
+		else if (request.method == "POST"){
+			var postedData = '';
+			// 사용자 데이터를 읽을 준비가 되면 발생
+			// on은 이벤트 발생 메소드, 
+			request.on('data', function(data){
+				postedData = postedData + data;
+			});
 
-		// DB처리 함수 호출
-		con.getData(response);
+			// 사용자의 데이터 전송이 완료되면 발생
+			request.on('end', function(){
+				con.setData(postedData, response);
+			});
+		}
+
 	} else {
 		response.writeHead(404, {'Content-Type' : 'text/html'});
 		response.end("<h1> 404 File Not Found </h1>");
@@ -32,5 +47,3 @@ var server = http.createServer( function (request, response){
 server.listen(8080, function(){
 	console.log("server is running...");
 });
-
-////// 여기까지가 tomcat을 만든 것이다.
