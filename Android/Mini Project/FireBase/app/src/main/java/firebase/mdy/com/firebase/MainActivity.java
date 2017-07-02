@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 파이어베이스 데이터베이스 연결
         database = FirebaseDatabase.getInstance();
-        // 레퍼런스를 가져옴
+        // 'message'라는 레퍼런스를 가져옴
         myRef = database.getReference("message");
-//        myRef.setValue("Hello, World!");
+//        myRef.setValue("Hello, World!");   -> 'message'라는 레퍼런스에 "Hello, World!"를 입력한다.
 
         textView = (TextView) findViewById(R.id.textView);
         editText = (EditText) findViewById(R.id.editText);
@@ -58,8 +58,7 @@ public class MainActivity extends AppCompatActivity {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
+                // 레퍼런스의 값에 변경사항이 생기면
                 String value = dataSnapshot.getValue(String.class);
                 textView.setText(value);
             }
