@@ -2,6 +2,7 @@ package firebase.mdy.com.firebaseuser;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -26,7 +27,6 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
         setViews();
 
-
     }
 
     public void setViews(){
@@ -37,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp = (Button) findViewById(R.id.btnSignUp);
     }
 
-    public void postData(){
+    public void postData(View view){
         String email = editTextEmail.getText().toString();
         String name = editTextName.getText().toString();
         String password = editTextPassword.getText().toString();

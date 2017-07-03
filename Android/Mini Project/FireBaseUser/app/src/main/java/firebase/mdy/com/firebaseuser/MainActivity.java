@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity {
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot users) {  // DataSnapshot은 JSON String구조이다.
-                List<User> data = new ArrayList<User>();
+                List<User> data = new ArrayList<>();
                 for( DataSnapshot item : users.getChildren() ){
                     String key = item.getKey();
-                    Log.i("Firebase", "user key = " + key);
+                    Log.i("FireBase", "user key = " + key);
                     User user = item.getValue(User.class);
                     data.add(user);
                 }
