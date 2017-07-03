@@ -43,10 +43,12 @@ public class SignUpActivity extends AppCompatActivity {
 
         // 패스워드 자릿수 체크
 
-        User user = new User(email, username, password);
+        User user = new User(username, email, password);
 
         // 파이어베이스에 키를 자동으로 생성하는 방법
         String childKey = userRef.push().getKey();        // hash 코드로 된 키를 레퍼런스 아래에 삽입을 해준다.
         userRef.child(childKey).setValue(user);
+
+        finish();
     }
 }

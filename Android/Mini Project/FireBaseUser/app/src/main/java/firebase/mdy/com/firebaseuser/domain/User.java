@@ -6,9 +6,9 @@ package firebase.mdy.com.firebaseuser.domain;
 
 public class User {
     // 멤버필드, 속성, 멤버변수, 전역변수 -> 4개 다 같은말
-    String username;
-    String email;
-    String password;
+    public String username;
+    public String email;
+    public String password;
 
     // 생성자
     public User(){
@@ -22,21 +22,5 @@ public class User {
 
         // password를 단방향 암호화
         this.password = password;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

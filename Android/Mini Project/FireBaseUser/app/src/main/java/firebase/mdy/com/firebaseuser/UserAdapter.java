@@ -59,8 +59,8 @@ public class UserAdapter extends BaseAdapter {
         }
 
         User user = data.get(position);
-        holder.email.setText(user.getEmail());
-        holder.username.setText(user.getUsername());
+        holder.email.setText(user.email);
+        holder.username.setText(user.username);
 
         return convertView;
     }
