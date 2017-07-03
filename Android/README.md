@@ -164,5 +164,13 @@
   #### 38. [HttpBbs7](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HttpBbs7)
   - **GET / POST** (Http method)
 
+  #### 39. [FireBaseUser](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/FireBaseUser)
+  - FireBase를 이용한 실시간 데이터 입력
+
+  #### 40. [FireBaseBbs](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/FireBaseBbs)
+  - FireBase를 이용한 간단한 게시판 구현
+    - FireBase 데이터 CRUD
+    - NaviGation Drawer Activity
+
 
 *****
