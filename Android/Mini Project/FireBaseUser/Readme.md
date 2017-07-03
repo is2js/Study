@@ -7,8 +7,9 @@
 
 
 ## 동작 화면
-![MainActivity_UserList](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/FireBaseUser/graphics/MainActivity_UserList.png)![SignUpActivity](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/FireBaseUser/graphics/SignUpActivity.png)
+<!-- ![MainActivity_UserList](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/FireBaseUser/graphics/MainActivity_UserList.png)   ![SignUpActivity](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/FireBaseUser/graphics/SignUpActivity.png) -->
 
+<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/FireBaseUser/graphics/MainActivity_UserList.png' width='200' height='333' />  <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/FireBaseUser/graphics/SignUpActivity.png' width='200' height='333' />
 
 <br>
 
