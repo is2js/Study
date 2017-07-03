@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new UserAdapter(this);
         listView.setAdapter(adapter);
 
-
         database = FirebaseDatabase.getInstance();
         // root 노드인 user를 레퍼런스로 사용
         userRef = database.getReference("user");  // Root 이름을 일치시켜줘야 한다.

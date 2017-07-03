@@ -26,7 +26,6 @@ public class SignUpActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("user");
 
-
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextName = (EditText) findViewById(R.id.editTextName);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
