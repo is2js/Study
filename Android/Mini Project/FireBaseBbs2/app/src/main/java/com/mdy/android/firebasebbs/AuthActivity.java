@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -20,8 +19,10 @@ import com.mdy.android.firebasebbs.util.PermissionControl;
 
 public class AuthActivity extends AppCompatActivity implements PermissionControl.CallBack{
 
-    // 파이어베이스 인증
+    // 파이어베이스 인증처리를 하기 위한 객체(인스턴스)
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    // 콜백처리를 위한 리스너
     private FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
         @Override
         public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -38,7 +39,7 @@ public class AuthActivity extends AppCompatActivity implements PermissionControl
 
     // 위젯 정의
     EditText editTextEmail, editTextPassword;
-    Button btnSignIn, btnSignUp;
+//    Button btnSignIn, btnSignUp;
 
     // 프로그래스바 정의
     private ProgressDialog authDialog;

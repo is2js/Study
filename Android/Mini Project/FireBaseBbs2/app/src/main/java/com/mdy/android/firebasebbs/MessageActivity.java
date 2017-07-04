@@ -13,6 +13,7 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
 
+        // 토큰을 만들어주는 함수 - FirebaseInstanceId.getInstance().getToken();
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("Message", "Refreshed token:" + refreshedToken);
     }
