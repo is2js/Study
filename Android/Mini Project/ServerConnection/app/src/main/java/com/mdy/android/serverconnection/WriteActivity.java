@@ -16,8 +16,6 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.mdy.android.serverconnection.BbsService.BASE_URL;
-
 public class WriteActivity extends AppCompatActivity {
     EditText editTitle;
     EditText editAuthor;
