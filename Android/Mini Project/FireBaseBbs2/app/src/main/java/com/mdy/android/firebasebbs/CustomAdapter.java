@@ -1,6 +1,7 @@
 package com.mdy.android.firebasebbs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,9 +10,7 @@ import android.widget.TextView;
 
 import com.mdy.android.firebasebbs.domain.Bbs;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,12 +39,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
     public void onBindViewHolder(Holder holder, int position) {
         Bbs bbs = data.get(position);
 
-        holder.txtTitle.setText(bbs.title);
-        holder.txtAuthor.setText(bbs.author);
+        holder.setTitle(bbs.title);
+        holder.setAuthor(bbs.author);
+        holder.setDate(bbs.date);
 
-        Date currentTime = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
-        holder.txtDate.setText(sdf.format(currentTime));
+        holder.setPosition(position);
     }
 
     @Override
@@ -54,13 +52,35 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
     }
 
     class Holder extends RecyclerView.ViewHolder{
-        TextView txtTitle, txtAuthor, txtDate;
+        private int position;
+        private TextView txtTitle, txtAuthor, txtDate;
 
-        public Holder(View itemView) {
+        public Holder(final View itemView) {
             super(itemView);
             txtTitle = (TextView) itemView.findViewById(R.id.txtTitle);
             txtAuthor = (TextView) itemView.findViewById(R.id.txtAuthor);
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ReadActivity.class);
+                    intent.putExtra("LIST_POSITION", position);
+                    v.getContext().startActivity(intent);
+                }
+            });
+        }
+        public void setPosition(int position){
+            this.position = position;
+        }
+        public void setTitle(String title){
+            txtTitle.setText(title);
+        }
+        public void setAuthor(String author){
+            txtAuthor.setText(author);
+        }
+        public void setDate(String date){
+            txtDate.setText(date);
         }
     }
 }

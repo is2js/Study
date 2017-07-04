@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,13 +16,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mdy.android.firebasebbs.domain.Bbs;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
     RecyclerView recycler;
-    Button btnpPost;
+//    Button btnPost;
     TextView txtBbsList;
     CustomAdapter adapter;
 
@@ -46,17 +44,17 @@ public class ListActivity extends AppCompatActivity {
         bbsRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot data) {
-                List<Bbs> list = new ArrayList<>();
+                Data.list.clear();
                 for( DataSnapshot item : data.getChildren() ){
                     // json 데이터를 Bbs 인스턴스로 변환오류 발생 가능성 있어서 예외처리 필요
                     try {
                         Bbs bbs = item.getValue(Bbs.class);
-                        list.add(bbs);
+                        Data.list.add(bbs);
                     } catch (Exception e){
                         Log.e("FireBase", e.getMessage());
                     }
                 }
-                refreshData(list);
+                refreshList(Data.list);
             }
 
             @Override
@@ -66,19 +64,20 @@ public class ListActivity extends AppCompatActivity {
         });
     }
 
-    public void refreshData(List<Bbs> data){
+    public void refreshList(List<Bbs> data){
         adapter.setData(data);
         adapter.notifyDataSetChanged();
     }
 
+    // onClick
     public void postData(View view){
-        Intent intent = new Intent(this, DetailActivity.class);
+        Intent intent = new Intent(this, WriteActivity.class);
         startActivity(intent);
     }
 
     public void setViews(){
         recycler = (RecyclerView) findViewById(R.id.recycler);
-        btnpPost = (Button) findViewById(R.id.btnPost);
+//        btnPost = (Button) findViewById(R.id.btnPost);
         txtBbsList = (TextView) findViewById(R.id.txtBbsList);
         adapter = new CustomAdapter(this);
         recycler.setAdapter(adapter);
