@@ -26,6 +26,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    public void setData(List<Bbs> data){
+        this.data = data;
+    }
+
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.item_list, parent, false);
