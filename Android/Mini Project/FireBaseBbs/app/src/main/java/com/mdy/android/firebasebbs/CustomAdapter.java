@@ -9,9 +9,7 @@ import android.widget.TextView;
 
 import com.mdy.android.firebasebbs.domain.Bbs;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,10 +41,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder> {
 
         holder.title.setText(bbs.title);
         holder.author.setText(bbs.author);
-
-        Date currentTime = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
-        holder.date.setText(sdf.format(currentTime));
+        holder.date.setText(bbs.date);
+//        Date currentTime = new Date();
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+//        holder.date.setText(sdf.format(currentTime));
     }
 
 

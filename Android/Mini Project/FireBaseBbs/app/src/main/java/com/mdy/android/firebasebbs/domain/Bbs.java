@@ -9,7 +9,7 @@ public class Bbs {
     public String title;
     public String author;
     public String content;
-    public long date;
+    public String date;
     public long count; // 조회수
 
     public Bbs(){

@@ -56,13 +56,11 @@ public class ListActivity extends AppCompatActivity {
                 refreshData(list);
             }
 
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
             }
         });
-
     }
 
     public void refreshData(List<Bbs> data){
