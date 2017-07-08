@@ -20,12 +20,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -38,8 +42,13 @@ public class HomeActivity extends AppCompatActivity
     private static final int GALLERY_CODE = 11;
     private TextView nameTextView;
     private TextView emailTextView;
+    private ImageView imageView;
+    private EditText editTextTitle, editTextDescripton;
+    private Button btnUpload;
     private FirebaseAuth auth;
     private FirebaseStorage storage;
+    private FirebaseDatabase database;
+    private String imagePath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,12 @@ public class HomeActivity extends AppCompatActivity
 
         auth = FirebaseAuth.getInstance();
         storage = FirebaseStorage.getInstance();
+        database = FirebaseDatabase.getInstance();
+
+        imageView = (ImageView) findViewById(R.id.imageView);
+        editTextTitle = (EditText) findViewById(R.id.editTextTitle);
+        editTextDescripton = (EditText) findViewById(R.id.editTextDescription);
+        btnUpload = (Button) findViewById(R.id.btnUpload);
 
         /* 권한 */
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -82,6 +97,13 @@ public class HomeActivity extends AppCompatActivity
 
         nameTextView.setText(auth.getCurrentUser().getDisplayName());
         emailTextView.setText(auth.getCurrentUser().getEmail());
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                upload(imagePath);
+            }
+        });
     }
 
     @Override
@@ -122,8 +144,8 @@ public class HomeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
+        if (id == R.id.nav_board) {
+            startActivity(new Intent(this, BoardActivity.class));
         } else if (id == R.id.nav_gallery) {
 
             Intent intent = new Intent(Intent.ACTION_PICK);
@@ -159,25 +181,12 @@ public class HomeActivity extends AppCompatActivity
             /* 파일 경로 */
             // getPath(data.getData())
 
-            StorageReference storageRef = storage.getReferenceFromUrl("gs://fir-auth-289cb.appspot.com");
+            imagePath = getPath(data.getData());
+            File file = new File(getPath(data.getData()));
+            imageView.setImageURI(Uri.fromFile(file));
 
-            Uri file = Uri.fromFile(new File(getPath(data.getData())));
-            StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
-            UploadTask uploadTask = riversRef.putFile(file);
 
-// Register observers to listen for when the download is done or if it fails
-            uploadTask.addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {
-                    // Handle unsuccessful uploads
-                }
-            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-//                    Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                }
-            });
+
 
         }
     }
@@ -191,5 +200,37 @@ public class HomeActivity extends AppCompatActivity
         cursor.moveToNext();
 
         return cursor.getString(index);
+    }
+
+    private void upload(String uri){
+        StorageReference storageRef = storage.getReferenceFromUrl("gs://fir-auth-289cb.appspot.com");
+
+        Uri file = Uri.fromFile(new File(uri));
+        StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
+        UploadTask uploadTask = riversRef.putFile(file);
+
+// Register observers to listen for when the download is done or if it fails
+        uploadTask.addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception exception) {
+                // Handle unsuccessful uploads
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
+                @SuppressWarnings("VisibleForTests")
+                Uri downloadUrl = taskSnapshot.getDownloadUrl();
+
+                ImageDTO imageDTO = new ImageDTO();
+                imageDTO.imageUrl = downloadUrl.toString();
+                imageDTO.title = editTextTitle.getText().toString();
+                imageDTO.description = editTextDescripton.getText().toString();
+                imageDTO.uid = auth.getCurrentUser().getUid();
+                imageDTO.userId = auth.getCurrentUser().getEmail();
+
+                database.getReference().child("images").push().setValue(imageDTO);
+            }
+        });
     }
 }
