@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,6 +29,7 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private GoogleApiClient mGoogleApiClient;
     private CallbackManager mCallbackManager;
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener; // 리스너
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,6 +114,25 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
             }
         });
+
+        // 리스너
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d("User is signed in TAG", "onAuthStateChanged:signed_in:" + user.getUid());
+                    Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    // User is signed out
+                    Log.d("User is signed out TAG", "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
@@ -135,14 +157,15 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                 });
     }
 
-    private void createUser(String email, String password){
+    private void createUser(final String email, final String password){
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     // 로그인 실패했을때 실행되는 부분
                     if (!task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "회원가입이 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        loginUser(email, password);
+                        // Toast.makeText(MainActivity.this, "회원가입이 실패하였습니다.", Toast.LENGTH_SHORT).show();
                     } else {
                         // 로그인 성공했을때 실행되는 부분
                         Toast.makeText(MainActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
@@ -151,6 +174,24 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                     // ...
                 }
             });
+    }
+
+    private void loginUser(String email, String password){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
+                        if (!task.isSuccessful()) {
+//                            Log.w(TAG, "signInWithEmail:failed", task.getException());
+                            Toast.makeText(MainActivity.this, "이메일 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MainActivity.this, "이메일 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
     }
 
     @Override
@@ -182,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
                         if (!task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         } else {
-                            Toast.makeText(MainActivity.this, "FireBase 아이디 생성이 완료 되었습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Google 아이디 인증이 성공하였습니다.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -192,4 +233,19 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
 }
