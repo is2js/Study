@@ -205,7 +205,7 @@ public class HomeActivity extends AppCompatActivity
     private void upload(String uri){
         StorageReference storageRef = storage.getReferenceFromUrl("gs://fir-auth-289cb.appspot.com");
 
-        Uri file = Uri.fromFile(new File(uri));
+        final Uri file = Uri.fromFile(new File(uri));
         StorageReference riversRef = storageRef.child("images/"+file.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(file);
 
@@ -228,6 +228,7 @@ public class HomeActivity extends AppCompatActivity
                 imageDTO.description = editTextDescripton.getText().toString();
                 imageDTO.uid = auth.getCurrentUser().getUid();
                 imageDTO.userId = auth.getCurrentUser().getEmail();
+                imageDTO.imageName = file.getLastPathSegment();
 
                 database.getReference().child("images").push().setValue(imageDTO);
             }
