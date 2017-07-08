@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -24,7 +26,9 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private static final int RC_SIGN_IN = 10;
-    SignInButton btnLoginGoogle;
+    private SignInButton btnLoginGoogle;
+    private Button btnLoginEmail;
+    private EditText editTextEmail, editTextPassword;
 
     private GoogleApiClient mGoogleApiClient;
     private FirebaseAuth mAuth;
@@ -53,8 +57,12 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void setViews(){
         btnLoginGoogle = (SignInButton) findViewById(R.id.btnLoginGoogle);
+        btnLoginEmail = (Button) findViewById(R.id.btnLoginEmail);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
     }
     public void setListeners(){
+        // 구글 로그인 버튼 리스너
         btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +72,31 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
+        // 이메일 로그인 버튼 리스너
+        btnLoginEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+            }
+        });
+    }
+
+    private void createUser(String email, String password){
+        mAuth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    // 로그인 실패했을때 실행되는 부분
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "회원가입이 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // 로그인 성공했을때 실행되는 부분
+                        Toast.makeText(MainActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    // ...
+                }
+            });
     }
 
     @Override
