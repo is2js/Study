@@ -7,6 +7,7 @@
     android:layout_height="400dp"
     android:layout_marginBottom="20dp"
     android:background="@color/colorWhite"
+    card_view:cardBackgroundColor="@color/colorWhite"
     card_view:cardCornerRadius="15dp">
 
     <android.support.constraint.ConstraintLayout
@@ -44,7 +45,9 @@
             android:layout_marginRight="32dp"
             android:layout_marginTop="20dp"
             android:fontFamily="NotoSansCJKkr-Medium"
+            android:maxLines="1"
             android:text="1rd Content"
+            android:textColor="#505050"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
@@ -56,9 +59,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="15dp"
             android:fontFamily="NotoSansCJKkr-Medium"
+            android:maxLines="1"
+            android:minLines="1"
             android:text="2nd Content"
+            android:textColor="#505050"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/txtContent1" />
@@ -71,14 +77,16 @@
             android:layout_marginRight="32dp"
             android:layout_marginTop="15dp"
             android:fontFamily="NotoSansCJKkr-Medium"
+            android:maxLines="1"
             android:text="3rd Content"
+            android:textColor="#505050"
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
             card_view:layout_constraintTop_toBottomOf="@+id/txtContent2" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginBottom="15dp"

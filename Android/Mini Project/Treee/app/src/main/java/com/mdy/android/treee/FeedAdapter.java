@@ -6,8 +6,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mdy.android.treee.domain.Memo;
 
 import java.util.ArrayList;
@@ -17,12 +19,12 @@ import java.util.List;
  * Created by MDY on 2017-07-11.
  */
 
-class FeedAdatper extends RecyclerView.Adapter<FeedAdatper.Holder> {
+public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
 
     List<Memo> data = new ArrayList<>();
     LayoutInflater inflater;
 
-    public FeedAdatper(Context context) {
+    public FeedAdapter(Context context) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -44,6 +46,8 @@ class FeedAdatper extends RecyclerView.Adapter<FeedAdatper.Holder> {
         holder.txtContent3.setText(memo.content3);
         holder.txtDate.setText(memo.date);
 
+        Glide.with(inflater.getContext()).load(memo.fileUriString).into(holder.imageView);
+
         holder.setPosition(position);
     }
 
@@ -57,6 +61,7 @@ class FeedAdatper extends RecyclerView.Adapter<FeedAdatper.Holder> {
         private int position;
         TextView txtContent1, txtContent2, txtContent3;
         TextView txtDate;
+        ImageView imageView;
 
         public Holder(View itemView) {
             super(itemView);
@@ -64,6 +69,7 @@ class FeedAdatper extends RecyclerView.Adapter<FeedAdatper.Holder> {
             txtContent2 = (TextView) itemView.findViewById(R.id.txtContent2);
             txtContent3 = (TextView) itemView.findViewById(R.id.txtContent3);
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
+            imageView = (ImageView) itemView.findViewById(R.id.imageView);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

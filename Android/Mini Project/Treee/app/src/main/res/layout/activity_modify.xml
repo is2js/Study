@@ -36,11 +36,12 @@
         app:layout_constraintTop_toBottomOf="@+id/txtDate">
 
         <EditText
-            android:id="@+id/txtContent1"
+            android:id="@+id/editTextContent1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="NotoSansCJKkr-Regular"
             android:gravity="top|left"
+            android:inputType="textMultiLine|textPersonName"
             android:padding="5dp"
             android:text="1rd Content"
             android:textColor="#505050"
@@ -74,11 +75,12 @@
         app:layout_constraintTop_toBottomOf="@+id/cardView2">
 
         <EditText
-            android:id="@+id/txtContent2"
+            android:id="@+id/editTextContent2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="NotoSansCJKkr-Regular"
             android:gravity="top|left"
+            android:inputType="textMultiLine|textPersonName"
             android:padding="5dp"
             android:text="2nd Content"
             android:textColor="#505050"
@@ -99,11 +101,12 @@
         android:id="@+id/cardView4">
 
         <EditText
-            android:id="@+id/txtContent3"
+            android:id="@+id/editTextContent3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="NotoSansCJKkr-Regular"
             android:gravity="top|left"
+            android:inputType="textMultiLine|textPersonName"
             android:padding="5dp"
             android:text="3rd Content"
             android:textColor="#505050"

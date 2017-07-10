@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class ModifyActivity extends AppCompatActivity {
 
-    EditText txtContent1, txtContent2, txtContent3;
+    EditText editTextContent1, editTextContent2, editTextContent3;
     TextView txtDate;
     ImageView imageViewGallery, imageViewCamera, imageViewSave;
     ImageView imageViewTime;
@@ -23,9 +23,9 @@ public class ModifyActivity extends AppCompatActivity {
     }
 
     public void setViews(){
-        txtContent1 = (EditText) findViewById(R.id.txtContent1);
-        txtContent2 = (EditText) findViewById(R.id.txtContent2);
-        txtContent3 = (EditText) findViewById(R.id.txtContent3);
+        editTextContent1 = (EditText) findViewById(R.id.editTextContent1);
+        editTextContent2 = (EditText) findViewById(R.id.editTextContent2);
+        editTextContent3 = (EditText) findViewById(R.id.editTextContent3);
 
         txtDate = (TextView) findViewById(R.id.txtDate);
 

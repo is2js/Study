@@ -18,7 +18,6 @@ import java.util.List;
 /**
  * Created by MDY on 2017-07-11.
  */
-
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
 
     List<Memo> data = new ArrayList<>();

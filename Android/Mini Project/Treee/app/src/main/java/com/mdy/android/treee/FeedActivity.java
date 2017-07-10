@@ -26,7 +26,7 @@ public class FeedActivity extends AppCompatActivity {
     ImageView imageViewText;
 
     RecyclerView recyclerFeed;
-    FeedAdatper feedAdapter;
+    FeedAdapter feedAdapter;
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
@@ -100,12 +100,12 @@ public class FeedActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FeedActivity.this, WriteActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
 
+        recyclerFeed = (RecyclerView) findViewById(R.id.recyclerFeed);
 
-        feedAdapter = new FeedAdatper(this);
+        feedAdapter = new FeedAdapter(this);
         recyclerFeed.setAdapter(feedAdapter);
         recyclerFeed.setLayoutManager(new LinearLayoutManager(this));
     }
