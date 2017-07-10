@@ -38,7 +38,6 @@ public class ReadActivity extends AppCompatActivity {
                 Glide.with(this).load(bbs.fileUriString).into(imageView);
             }
 
-
             // 값 세팅
             txtTitle.setText(bbs.title);
             txtAuthor.setText(bbs.author);
