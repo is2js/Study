@@ -41,10 +41,11 @@
             android:layout_height="match_parent"
             android:fontFamily="NotoSansCJKkr-Regular"
             android:gravity="top|left"
+            android:hint="첫 번째 감사내용"
             android:inputType="textMultiLine|textPersonName"
-            android:padding="5dp"
-            android:text="1rd Content"
+            android:padding="10dp"
             android:textColor="#505050"
+            android:textColorHint="#505050"
             android:textSize="14sp" />
     </android.support.v7.widget.CardView>
 
@@ -80,10 +81,11 @@
             android:layout_height="match_parent"
             android:fontFamily="NotoSansCJKkr-Regular"
             android:gravity="top|left"
+            android:hint="두 번째 감사내용"
             android:inputType="textMultiLine|textPersonName"
-            android:padding="5dp"
-            android:text="2nd Content"
+            android:padding="10dp"
             android:textColor="#505050"
+            android:textColorHint="#505050"
             android:textSize="14sp" />
     </android.support.v7.widget.CardView>
 
@@ -106,10 +108,11 @@
             android:layout_height="match_parent"
             android:fontFamily="NotoSansCJKkr-Regular"
             android:gravity="top|left"
+            android:hint="세 번째 감사내용"
             android:inputType="textMultiLine|textPersonName"
-            android:padding="5dp"
-            android:text="3rd Content"
+            android:padding="10dp"
             android:textColor="#505050"
+            android:textColorHint="#505050"
             android:textSize="14sp" />
     </android.support.v7.widget.CardView>
 
@@ -147,4 +150,14 @@
         app:srcCompat="@drawable/camera"
         app:layout_constraintRight_toLeftOf="@+id/imageViewSave"
         android:layout_marginRight="15dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+
+    <TextView
+        android:id="@+id/txtImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
 </android.support.constraint.ConstraintLayout>

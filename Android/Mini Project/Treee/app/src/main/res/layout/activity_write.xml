@@ -28,9 +28,9 @@
         app:srcCompat="@drawable/lightcamera" />
 
     <ImageView
-        android:id="@+id/imageViewLogo"
+        android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="0dp"/>
+        android:layout_height="0dp" />
 
     <TextView
         android:id="@+id/txtToday"
@@ -68,8 +68,10 @@
             android:gravity="top|left"
             android:hint="첫 번째 감사내용"
             android:inputType="textMultiLine|textPersonName"
-            android:padding="5dp"
-            android:textColor="#505050" />
+            android:padding="10dp"
+            android:textColor="#505050"
+            android:textColorHint="#505050"
+            android:textSize="14sp" />
     </android.support.v7.widget.CardView>
 
     <ImageView
@@ -106,8 +108,10 @@
             android:gravity="top|left"
             android:hint="두 번째 감사내용"
             android:inputType="textMultiLine|textPersonName"
-            android:padding="5dp"
-            android:textColor="#505050" />
+            android:padding="10dp"
+            android:textColor="#505050"
+            android:textColorHint="#505050"
+            android:textSize="14sp" />
     </android.support.v7.widget.CardView>
 
     <android.support.v7.widget.CardView
@@ -131,8 +135,10 @@
             android:gravity="top|left"
             android:hint="세 번째 감사내용"
             android:inputType="textMultiLine|textPersonName"
-            android:padding="5dp"
-            android:textColor="#505050" />
+            android:padding="10dp"
+            android:textColor="#505050"
+            android:textColorHint="#505050"
+            android:textSize="14sp" />
     </android.support.v7.widget.CardView>
 
     <ImageView

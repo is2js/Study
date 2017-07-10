@@ -70,8 +70,9 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(v.getContext(), WriteActivity.class);
+        Intent intent = new Intent(v.getContext(), ModifyActivity.class);
         intent.putExtra("LIST_POSITION", position);
         v.getContext().startActivity(intent);
+        finish();
     }
 }

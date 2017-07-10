@@ -218,7 +218,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void setViews(){
-        imageView = (ImageView) findViewById(R.id.imageViewLogo);
+        imageView = (ImageView) findViewById(R.id.imageView);
         imageViewCamera = (ImageView) findViewById(R.id.imageViewCamera);
         imageViewSave = (ImageView) findViewById(R.id.imageViewSave);
         imageViewGallery = (ImageView) findViewById(R.id.imageViewGallery);
