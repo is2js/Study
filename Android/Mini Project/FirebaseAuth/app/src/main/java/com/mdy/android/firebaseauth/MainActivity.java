@@ -115,7 +115,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-        // 페이스북
         // 리스너 - 사용자의 로그인 상태 변화에 응답하는 AuthStateListener를 설정
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -180,20 +179,20 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 
     private void loginUser(String email, String password){
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 //                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
-                        if (!task.isSuccessful()) {
+                    if (!task.isSuccessful()) {
 //                            Log.w(TAG, "signInWithEmail:failed", task.getException());
-                            Toast.makeText(MainActivity.this, "이메일 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MainActivity.this, "이메일 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-                        }
-
-                        // ...
+                        Toast.makeText(MainActivity.this, "이메일 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "이메일 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
                     }
-                });
+
+                    // ...
+                }
+            });
     }
 
     @Override
