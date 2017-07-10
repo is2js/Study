@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -31,15 +33,21 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.mdy.android.treee.util.PermissionControl;
 
-public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, PermissionControl.CallBack{
 
     private static final String TAG = "===FaceBook===";
     private static final int RC_SIGN_IN = 10;
 
     private SignInButton btnLoginGoogle;
+    private LoginButton loginButton;
     private Button btnLoginEmail;
     private EditText editTextEmail, editTextPassword;
+    private TextView textViewTitle;
+    private ImageView imageViewLogo;
+
+
     private GoogleApiClient mGoogleApiClient;
 
     private FirebaseAuth mAuth;
@@ -51,6 +59,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         setViews();
+
+        PermissionControl.checkVersion(this);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -103,9 +113,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         };
 
-        // 페이스북 로그인 버튼
+
         mCallbackManager = CallbackManager.Factory.create();
-        LoginButton loginButton = (LoginButton) findViewById(R.id.facebook_login_button);
+
+        // 페이스북 로그인 버튼
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
@@ -172,6 +183,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "FaceBook 아이디 연동 성공", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                        startActivity(intent);
+                        finish();
                     }
                 }
             });
@@ -209,19 +223,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "이메일 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "이메일 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
-
-                        // ...
                     }
                 });
     }
 
 
     private void setViews(){
+        loginButton = (LoginButton) findViewById(R.id.facebook_login_button);   // 페이스북 로그인 버튼
         btnLoginGoogle = (SignInButton) findViewById(R.id.btnLoginGoogle);
         btnLoginEmail = (Button) findViewById(R.id.btnLoginEmail);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        imageViewLogo = (ImageView) findViewById(R.id.imageViewLogo);
+        textViewTitle = (TextView) findViewById(R.id.textViewTitle);
     }
 
     @Override
@@ -249,6 +267,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Google 아이디 인증이 성공하였습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                            startActivity(intent);
+                            finish();
                         }
                     }
                 });
@@ -258,5 +279,16 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+
+    @Override
+    public void init() {
+
+    }
+
+    @Override
+    public void cancel() {
+        Toast.makeText(this, "권한을 요청을 승인하셔야 앱을 사용할 수 있습니다.", Toast.LENGTH_SHORT).show();
+        finish();
     }
 }

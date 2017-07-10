@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,7 +63,7 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
         txtContent3 = (TextView) findViewById(R.id.txtContent3);
         imageViewModify = (ImageView) findViewById(R.id.imageViewModify);
         txtDate = (TextView) findViewById(R.id.txtDate);
-        imageView = (ImageView) findViewById(R.id.imageView);
+        imageView = (ImageView) findViewById(R.id.imageViewLogo);
 
         imageViewModify.setOnClickListener(this);
     }

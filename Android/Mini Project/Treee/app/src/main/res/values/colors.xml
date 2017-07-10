@@ -3,7 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="loginButtonBackground">#80b7a4</color>
+    <color name="loginButtonBackground">#cce494</color>
+    <color name="ListBackground">#ecf8d0</color>
     <color name="colorLoginBackground">#fbfbe0</color>
 
     <color name="feedTextBackground">#fffff4</color>
