@@ -115,7 +115,8 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-        // 리스너
+        // 페이스북
+        // 리스너 - 사용자의 로그인 상태 변화에 응답하는 AuthStateListener를 설정
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -136,9 +137,10 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
     private void handleFacebookAccessToken(AccessToken token) {
-//        Log.d(TAG, "handleFacebookAccessToken:" + token);
-
+        Log.d("===FaceBook===", "handleFacebookAccessToken:" + token.getToken());
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        Log.d("===FaceBook===", "credential:" + credential.toString());
+
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
 //                        Log.d(TAG, "signInWithCredential:onComplete:" + task.isSuccessful());
 
                         if (!task.isSuccessful()) {
-//                            Log.w(TAG, "signInWithCredential", task.getException());
+                            Log.e("===FaceBook===", ""+task.getException().toString());
                             Toast.makeText(MainActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         } else {
@@ -197,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        // Pass the activity result back to the Facebook SDK
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
