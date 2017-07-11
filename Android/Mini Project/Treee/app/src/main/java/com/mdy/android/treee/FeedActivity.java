@@ -90,6 +90,13 @@ public class FeedActivity extends AppCompatActivity {
         });
 
         btnProfile = (ImageView) findViewById(R.id.btnProfile);
+        btnProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeedActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
 
         imageViewTopTree = (ImageView) findViewById(R.id.imageViewTopTree);
         imageViewBottomTree = (ImageView) findViewById(R.id.imageViewBottomTree);
