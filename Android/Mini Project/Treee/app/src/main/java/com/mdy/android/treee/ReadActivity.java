@@ -17,6 +17,7 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
     ImageView imageViewModify;
     TextView txtDate;
     ImageView imageView;
+    ImageView imageViewGallery;
 
     int position = 0;
 
@@ -42,7 +43,7 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
 
             // 이미지 세팅
             if (memo.fileUriString != null && !"".equals(memo.fileUriString)) {
-                Glide.with(this).load(memo.fileUriString).into(imageView);
+                Glide.with(this).load(memo.fileUriString).into(imageViewGallery);
             }
 
 
@@ -63,6 +64,7 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
         txtContent3 = (TextView) findViewById(R.id.txtContent3);
         imageViewModify = (ImageView) findViewById(R.id.imageViewModify);
         txtDate = (TextView) findViewById(R.id.txtDate);
+        imageViewGallery = (ImageView) findViewById(R.id.imageViewGallery);
         imageView = (ImageView) findViewById(R.id.imageViewLogo);
 
         imageViewModify.setOnClickListener(this);

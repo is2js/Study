@@ -178,7 +178,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
             // 이미지 세팅
             if (memo.fileUriString != null && !"".equals(memo.fileUriString)) {
-                Glide.with(this).load(memo.fileUriString).into(imageView);
+                Glide.with(this).load(memo.fileUriString).into(imageViewGallery);
             }
 
 

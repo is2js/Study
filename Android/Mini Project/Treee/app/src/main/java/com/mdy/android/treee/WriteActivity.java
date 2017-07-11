@@ -150,8 +150,8 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                     String filePath = getPathFromUri(this, imageUri);
                     Log.i("Gallery","imageUri========================="+imageUri);
                     txtImage.setText(filePath);
-                    Glide.with(getBaseContext()).load(filePath).into(imageViewGallery);
-//                    Glide.with(inflater.getContext()).load(memo.fileUriString).into(holder.imageView);
+                    imageViewGallery.setImageURI(imageUri);
+                    //Glide.with(getBaseContext()).load(filePath).into(imageViewGallery);
                     Toast.makeText(this, "사진이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 //                    imageView.setImageURI(imageUri);
                     break;

@@ -10,12 +10,14 @@ import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.mdy.android.treee.domain.Data;
 
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView imageViewTopTree, imageViewProfileShadow;
     ImageView imageProfile;
     TextView txtName, txtEmail;
+    TextView txtTreeCountName, txtTotalCount;
     Button btnLogout;
 
     private FirebaseAuth mAuth;
@@ -30,11 +32,16 @@ public class ProfileActivity extends AppCompatActivity {
         txtName.setText(mAuth.getCurrentUser().getDisplayName());
         txtEmail.setText(mAuth.getCurrentUser().getEmail());
 
+
+        txtTotalCount.setText(Data.list.size()+"");
+
     }
 
     public void setViews(){
         txtName = (TextView) findViewById(R.id.txtName);
         txtEmail = (TextView) findViewById(R.id.txtEmail);
+        txtTreeCountName = (TextView) findViewById(R.id.txtTreeCountName);
+        txtTotalCount = (TextView) findViewById(R.id.txtTotalCount);
         imageViewTopTree = (ImageView) findViewById(R.id.imageViewTopTree);
         imageViewProfileShadow = (ImageView) findViewById(R.id.imageViewProfileShadow);
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
