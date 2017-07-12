@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -42,10 +43,13 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
-    DatabaseReference memoRef;
+    DatabaseReference memoRef, userRef;
 
     // 파이어베이스 스토리지
     private StorageReference mStorageRef;
+
+    // 파이어베이스 인증
+    FirebaseAuth auth;
 
     // 프로그래서 다이얼로그
     ProgressDialog dialog;
@@ -68,6 +72,9 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
 
         // 스토리지 레퍼런스
         mStorageRef = FirebaseStorage.getInstance().getReference("images");
+
+        // 인증
+        auth = FirebaseAuth.getInstance();
 
         setData();
     }
@@ -110,6 +117,9 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         // 1. 데이터 객체 생성
         Memo memo = new Memo(content1, content2, content3);
         memo.date = inputCurrentDate();
+        memo.userUid = auth.getCurrentUser().getUid();
+        memo.userEmail = auth.getCurrentUser().getEmail();
+
 
         if(imageUri != null){
             memo.fileUriString =imageUri.toString();
@@ -118,9 +128,16 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         // 2. 입력할 데이터의 키 생성
         String memoKey = memoRef.push().getKey(); // 자동생성된 키를 가져온다.
 
+
         // 3. 생성된 키를 레퍼런스로 데이터를 입력
         //   insert와 update, delete 는 동일하게 동작
         memoRef.child(memoKey).setValue(memo);
+
+        String userUid = auth.getCurrentUser().getUid();
+        userRef = database.getReference("user").child(userUid).child("memo");
+
+        userRef.child(memoKey).setValue(memo);
+
         // 데이터 입력 후 창 닫기
         dialog.dismiss();
         finish();

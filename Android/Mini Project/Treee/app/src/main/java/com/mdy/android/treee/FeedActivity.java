@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -30,7 +31,10 @@ public class FeedActivity extends AppCompatActivity {
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
-    DatabaseReference memoRef;
+    DatabaseReference memoRef, userRef;
+
+    // 파이어베이스 인증
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,21 @@ public class FeedActivity extends AppCompatActivity {
         setViews();
 
         database = FirebaseDatabase.getInstance();
-        memoRef = database.getReference("memo");
+        memoRef = database.getReference("user").child("");
+
+        auth = FirebaseAuth.getInstance();
+
+        String userUid = auth.getCurrentUser().getUid();
+
+//        userRef = database.getReference("user");
+//        String userUid = auth.getCurrentUser().getUid();
+//        userRef.child(userUid).setValue(memo);
+
+
+
+//        userEmail= auth.getCurrentUser().getEmail();
+//        memoRef.child(userEmail).setValue(null);
+
 
         loadFeedData();
 
@@ -56,7 +74,11 @@ public class FeedActivity extends AppCompatActivity {
                     // json 데이터를 Bbs 인스턴스로 변환오류 발생 가능성 있어서 예외처리 필요
                     try {
                         Memo memo = item.getValue(Memo.class);
-                        Data.list.add(memo);
+//                        Log.w("memo.userUid", memo.userUid + "/////" + auth.getCurrentUser().getUid());
+//                        Log.w("auth.getCurrentUser().getUid()", auth.getCurrentUser().getUid() );
+                        if(memo.userUid.equals(auth.getCurrentUser().getUid()) ) {
+                            Data.list.add(memo);
+                        }
                     } catch (Exception e){
                         Log.e("FireBase", e.getMessage());
                     }

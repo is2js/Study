@@ -12,6 +12,9 @@ public class Memo {
     public String fileUriString;
     public String date;
 
+    public String userUid;
+    public String userEmail;
+
     public Memo(){
 
     }
