@@ -1,6 +1,7 @@
 package com.mdy.android.treee;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mdy.android.treee.domain.Data;
 import com.mdy.android.treee.domain.Memo;
+import com.mdy.android.treee.util.PreferenceUtil;
 
 import java.util.List;
 
@@ -31,25 +33,43 @@ public class FeedActivity extends AppCompatActivity {
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
-    DatabaseReference memoRef, userRef;
+    DatabaseReference userRef;
 
     // 파이어베이스 인증
     FirebaseAuth auth;
+
+    // SharedPreferences
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        setViews();
-
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
+        setViews();
 
-        String userUid = auth.getCurrentUser().getUid();
-        userRef = database.getReference("user").child(userUid).child("memo");
+//        PreferenceUtil.saveUidPreferences(this, auth);
+//        String userUid = PreferenceUtil.saveUidPreference(this, auth);
+
+        // 로그인에서 넘어온 userUid 받기
+//        Intent intent = getIntent();
+
+        // null값 확인
+//        if(intent != null) {
+//            String userUid = intent.getStringExtra("SHARED_PREFERENCE");
+//            userRef = database.getReference("user").child(userUid).child("memo");
+//        } else {
+
+        String uid = PreferenceUtil.getUid(this);
+        userRef = database.getReference("user").child(uid).child("memo");
+//        }
+
 
         loadFeedData();
     }
+
+
 
 
     public void loadFeedData(){

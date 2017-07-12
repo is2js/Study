@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +35,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.mdy.android.treee.util.PermissionControl;
+import com.mdy.android.treee.util.PreferenceUtil;
 
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, PermissionControl.CallBack{
 
@@ -86,13 +88,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-        // 이메일 로그인 버튼 리스너
+
+
+        // 이메일 로그인 버튼 리스너 -- 유효성 검사 추가
         btnLoginEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+                String email = editTextEmail.getText().toString();
+                boolean emailValidate = Patterns.EMAIL_ADDRESS.matcher(email).matches();
+                if (emailValidate == true) {
+                    createUser(editTextEmail.getText().toString(), editTextPassword.getText().toString());
+                } else {
+                    Toast.makeText(getBaseContext(), "이메일 형식에 맞지 않습니다.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+
 
         // 리스너 - 사용자의 로그인 상태 변화에 응답하는 AuthStateListener를 설정
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -102,6 +114,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 if (user != null) {
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
+                    PreferenceUtil.setUid(LoginActivity.this, user.getUid());
+                    // TODO
                     Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                     startActivity(intent);
                     finish();
@@ -183,6 +197,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "FaceBook 아이디 연동 성공", Toast.LENGTH_SHORT).show();
+//                        PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
                         Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                         startActivity(intent);
                         finish();
@@ -200,7 +215,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         // 로그인 실패했을때 실행되는 부분
                         if (!task.isSuccessful()) {
                             loginUser(email, password);
-                            // Toast.makeText(MainActivity.this, "회원가입이 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "회원가입이 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             // 로그인 성공했을때 실행되는 부분
                             Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
@@ -223,6 +238,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "이메일 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "이메일 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+//                            PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
                             finish();
@@ -230,6 +246,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     }
                 });
     }
+
 
 
     private void setViews(){
@@ -267,6 +284,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Google 아이디 인증이 성공하였습니다.", Toast.LENGTH_SHORT).show();
+//                            PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
                             finish();

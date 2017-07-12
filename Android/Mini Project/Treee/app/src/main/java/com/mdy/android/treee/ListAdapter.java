@@ -15,6 +15,8 @@ import com.mdy.android.treee.domain.Memo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+
 /**
  * Created by MDY on 2017-07-11.
  */
@@ -23,10 +25,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
     List<Memo> data = new ArrayList<>();
     LayoutInflater inflater;
 
+    /**
+     * 아답터 생성자
+     * @param context - 컨텍스트
+     */
     public ListAdapter(Context context) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
+    /**
+     * 데이터 세팅
+     * @param data - List<Memo>
+     */
     public void setListData(List<Memo> data){
         this.data = data;
     }
@@ -41,7 +51,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
     public void onBindViewHolder(Holder holder, int position) {
         Memo memo = data.get(position);
         holder.txtDate.setText(memo.date);
-        Glide.with(inflater.getContext()).load(memo.fileUriString).into(holder.imageView);
+//        Glide.with(inflater.getContext()).load(memo.fileUriString).into(holder.imageView);
+        Glide.with(inflater.getContext())
+                .load(memo.fileUriString)
+                .bitmapTransform(new GrayscaleTransformation(inflater.getContext()))
+                .into(holder.imageView);
         holder.setPosition(position);
     }
 
