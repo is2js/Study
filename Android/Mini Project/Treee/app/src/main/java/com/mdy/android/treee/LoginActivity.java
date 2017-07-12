@@ -115,6 +115,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     PreferenceUtil.setUid(LoginActivity.this, user.getUid());
+                    Pre
+//                    PreferenceUtil.setProfileImageUri(LoginActivity.this, "");
                     // TODO
                     Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                     startActivity(intent);

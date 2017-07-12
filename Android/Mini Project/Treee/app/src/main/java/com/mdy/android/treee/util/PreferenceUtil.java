@@ -29,11 +29,23 @@ public class PreferenceUtil {
         return sharedPreferences.getString(key, "해당 데이터 없음");
     }
 
+    // Uid 세팅
     public static void setUid(Context context, String value){
         setString(context,"userUid",value);
     }
 
     public static String getUid(Context context) {
         return getString(context, "userUid");
+    }
+
+
+
+    // Profile 사진 세팅
+    public static void setProfileImageUri(Context context, String value){
+        setString(context, "userProfileImage", value);
+    }
+
+    public static String getProfileImageUri(Context context){
+        return getString(context, "userProfileImage");
     }
 }

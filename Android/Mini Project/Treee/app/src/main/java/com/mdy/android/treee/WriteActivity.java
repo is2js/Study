@@ -177,7 +177,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
     }
 
     // Uri에서 실제 경로 꺼내는 함수
-    public static String getPathFromUri(Context context, Uri uri){
+    public String getPathFromUri(Context context, Uri uri){
         String realPath = "";
         Cursor cursor = context.getContentResolver().query(uri, null, null, null, null);
         if( cursor.moveToNext() ){

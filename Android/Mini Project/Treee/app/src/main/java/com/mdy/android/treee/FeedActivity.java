@@ -49,22 +49,8 @@ public class FeedActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         setViews();
 
-//        PreferenceUtil.saveUidPreferences(this, auth);
-//        String userUid = PreferenceUtil.saveUidPreference(this, auth);
-
-        // 로그인에서 넘어온 userUid 받기
-//        Intent intent = getIntent();
-
-        // null값 확인
-//        if(intent != null) {
-//            String userUid = intent.getStringExtra("SHARED_PREFERENCE");
-//            userRef = database.getReference("user").child(userUid).child("memo");
-//        } else {
-
-        String uid = PreferenceUtil.getUid(this);
-        userRef = database.getReference("user").child(uid).child("memo");
-//        }
-
+        String userUid = PreferenceUtil.getUid(this);
+        userRef = database.getReference("user").child(userUid).child("memo");
 
         loadFeedData();
     }
