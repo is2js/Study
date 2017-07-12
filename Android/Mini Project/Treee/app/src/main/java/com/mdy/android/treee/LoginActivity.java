@@ -34,6 +34,12 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.mdy.android.treee.domain.UserProfile;
 import com.mdy.android.treee.util.PermissionControl;
 import com.mdy.android.treee.util.PreferenceUtil;
 
@@ -52,6 +58,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     private GoogleApiClient mGoogleApiClient;
 
+    private FirebaseDatabase database;
+    private DatabaseReference userRef;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private CallbackManager mCallbackManager;
@@ -63,6 +71,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         setViews();
 
         PermissionControl.checkVersion(this);
+
+
+        database = FirebaseDatabase.getInstance();
+        userRef = database.getReference("user");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -104,8 +116,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         });
 
-
-
         // 리스너 - 사용자의 로그인 상태 변화에 응답하는 AuthStateListener를 설정
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -115,12 +125,33 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     PreferenceUtil.setUid(LoginActivity.this, user.getUid());
-                    Pre
+                    Log.w("======== Uid ========", user.getUid());
+
+                    userRef = database.getReference("user").child(user.getUid());
+                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            UserProfile profile = dataSnapshot.getValue(UserProfile.class);
+                            setProfileImg(profile.profileFileUriString);
+
+                            Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+
+
+//                    String userEmail = mAuth.getCurrentUser().getEmail();
+//                    Log.w("===== DisplayName =====", mAuth.getCurrentUser().getDisplayName());
+//                    userRef = database.getReference("user").child(user.getUid()).child("profile");
+//                    userRef.child("userEmail").setValue(userEmail);
+
 //                    PreferenceUtil.setProfileImageUri(LoginActivity.this, "");
                     // TODO
-                    Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
-                    startActivity(intent);
-                    finish();
+
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -156,6 +187,10 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Log.d("TAG2", "facebook:onError", error);
             }
         });
+    }
+
+    private void setProfileImg(String url){
+        PreferenceUtil.setProfileImageUri(this, url);
     }
 
     @Override
@@ -217,7 +252,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         // 로그인 실패했을때 실행되는 부분
                         if (!task.isSuccessful()) {
                             loginUser(email, password);
-                            Toast.makeText(LoginActivity.this, "회원가입이 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             // 로그인 성공했을때 실행되는 부분
                             Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();

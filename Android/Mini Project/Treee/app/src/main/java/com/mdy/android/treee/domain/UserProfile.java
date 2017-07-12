@@ -5,5 +5,6 @@ package com.mdy.android.treee.domain;
  */
 
 public class UserProfile {
-    public static String profileFileUriString;
+    public String uid;
+    public String profileFileUriString;
 }

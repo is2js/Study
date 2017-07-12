@@ -51,7 +51,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     // SharedPreference
-    SharedPreferences sharedPreferences;
+    SharedPreferences sharedPreferences = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +84,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
 
+//        String userUid = PreferenceUtil.getUid(this);
+//        userRef = database.getReference("user").child(userUid).child("profile");
+////        userRef = database.getReference("user").child(userUid).child("profile").child("profileFileUriString");
+//        Log.w("============= USER ===========", userRef.getKey());
+////        userRef.child("profileFileUriString").setValue(UserProfile.profileFileUriString);
+
+
         String userProfileImageUri = PreferenceUtil.getProfileImageUri(this);
         if(!userProfileImageUri.equals("")) {
             Glide.with(this).load(userProfileImageUri).into(imageProfile);
@@ -105,6 +112,7 @@ public class ProfileActivity extends AppCompatActivity {
                 mAuth.signOut();
                 LoginManager.getInstance().logOut();    // 페이스북 로그아웃 코드 (페이스북이 없으면 안써도 된다.)
                 finish();
+
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
@@ -158,14 +166,16 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void afterUploadFile(Uri imageUri){
 
+        UserProfile userProfile = new UserProfile();
+
         if(imageUri != null){
-            UserProfile.profileFileUriString = imageUri.toString();
+            userProfile.profileFileUriString = imageUri.toString();
         }
 
         String userUid = PreferenceUtil.getUid(this);
-        userRef = database.getReference("user").child(userUid).child("profile").child("profileFileUriString");
-        userRef.setValue(UserProfile.profileFileUriString);
-//        userRef.
+        userRef = database.getReference("user").child(userUid).child("profile");
+        userRef.child("profileFileUriString").setValue(userProfile.profileFileUriString);
+//        PreferenceUtil.setProfileImageUri(this, UserProfile.profileFileUriString);
     }
 
     // Uri에서 실제 경로 꺼내는 함수
