@@ -43,30 +43,17 @@ public class FeedActivity extends AppCompatActivity {
         setViews();
 
         database = FirebaseDatabase.getInstance();
-        memoRef = database.getReference("user").child("");
-
         auth = FirebaseAuth.getInstance();
 
         String userUid = auth.getCurrentUser().getUid();
-
-//        userRef = database.getReference("user");
-//        String userUid = auth.getCurrentUser().getUid();
-//        userRef.child(userUid).setValue(memo);
-
-
-
-//        userEmail= auth.getCurrentUser().getEmail();
-//        memoRef.child(userEmail).setValue(null);
-
+        userRef = database.getReference("user").child(userUid).child("memo");
 
         loadFeedData();
-
-
     }
 
 
     public void loadFeedData(){
-        memoRef.addValueEventListener(new ValueEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot data) {
                 Data.list.clear();
@@ -74,8 +61,6 @@ public class FeedActivity extends AppCompatActivity {
                     // json 데이터를 Bbs 인스턴스로 변환오류 발생 가능성 있어서 예외처리 필요
                     try {
                         Memo memo = item.getValue(Memo.class);
-//                        Log.w("memo.userUid", memo.userUid + "/////" + auth.getCurrentUser().getUid());
-//                        Log.w("auth.getCurrentUser().getUid()", auth.getCurrentUser().getUid() );
                         if(memo.userUid.equals(auth.getCurrentUser().getUid()) ) {
                             Data.list.add(memo);
                         }
