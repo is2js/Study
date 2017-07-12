@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     // 위젯 연결
     EditText editName, editEmail, editPassword;
     Button btnSave;
+    TextView txtTest1, txtTest2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +38,19 @@ public class MainActivity extends AppCompatActivity {
         editEmail = (EditText) findViewById(R.id.editEmail);
         editPassword = (EditText) findViewById(R.id.editPassword);
 
+        txtTest1 = (TextView) findViewById(R.id.txtTest1);
+        txtTest2 = (TextView) findViewById(R.id.txtTest2);
+
 
         // 데이터 불러오기
         loadPreference();
 
+        String firstData = sharedPreferences.getString("hi", "해당 데이터 없음");
+        String secondData = sharedPreferences.getString("bye", "해당 데이터 없음");
+
+
+        txtTest1.setText(firstData);
+        txtTest2.setText(secondData);
 
         btnSave = (Button) findViewById(R.id.btnSave);
 
