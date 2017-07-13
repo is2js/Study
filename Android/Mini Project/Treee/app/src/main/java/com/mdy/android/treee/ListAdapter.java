@@ -59,12 +59,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
                 .into(holder.imageView);
         holder.setPosition(position);
 
-//        holder.setClickCount
 
         if(clickCount %2 == 0){
-            holder.imageViewCheckBoxOff.setVisibility(View.VISIBLE);
-        } else if (clickCount %2 ==1) {
             holder.imageViewCheckBoxOff.setVisibility(View.INVISIBLE);
+        } else if (clickCount %2 ==1) {
+            holder.imageViewCheckBoxOff.setVisibility(View.VISIBLE);
         }
 
 
@@ -88,7 +87,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
 
     class Holder extends RecyclerView.ViewHolder{
         private int position;
-        private int checkCount = 0;
+        private int checkCount = 1;
         TextView txtDate;
         ImageView imageView;
         ImageView imageViewCheckBoxOff;
@@ -98,6 +97,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
             imageView = (ImageView) itemView.findViewById(R.id.imageViewLogo);
             imageViewCheckBoxOff = (ImageView) itemView.findViewById(R.id.imageViewCheckBoxOff);
+            imageViewCheckBoxOff.setVisibility(View.INVISIBLE);
             imageViewCheckBoxOff.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
