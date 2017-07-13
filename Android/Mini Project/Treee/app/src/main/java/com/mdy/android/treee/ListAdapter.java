@@ -24,6 +24,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
 
     List<Memo> data = new ArrayList<>();
     LayoutInflater inflater;
+    int clickCount;
 
     /**
      * 아답터 생성자
@@ -57,6 +58,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
                 .bitmapTransform(new GrayscaleTransformation(inflater.getContext()))
                 .into(holder.imageView);
         holder.setPosition(position);
+
+//        holder.setClickCount
+
+        if(clickCount %2 == 0){
+            holder.imageViewCheckBoxOff.setVisibility(View.VISIBLE);
+        } else if (clickCount %2 ==1) {
+            holder.imageViewCheckBoxOff.setVisibility(View.INVISIBLE);
+        }
+
+
+
     }
 
     @Override
@@ -64,8 +76,19 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
         return data.size();
     }
 
+    public void setItemClicked(int position){
+        for (Memo memoItem : data){
+            memoItem.check_flag = false;
+        }
+
+        data.get(position).check_flag = true;
+        // 리사이클러뷰 전체를 갱신해준다.
+        notifyDataSetChanged(); // 아답터를 갱신해준다.
+    }
+
     class Holder extends RecyclerView.ViewHolder{
         private int position;
+        private int checkCount = 0;
         TextView txtDate;
         ImageView imageView;
         ImageView imageViewCheckBoxOff;
@@ -75,6 +98,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
             imageView = (ImageView) itemView.findViewById(R.id.imageViewLogo);
             imageViewCheckBoxOff = (ImageView) itemView.findViewById(R.id.imageViewCheckBoxOff);
+            imageViewCheckBoxOff.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(checkCount %2 == 1) {
+                        imageViewCheckBoxOff.setImageResource(R.drawable.listcheckboxon);
+                    } else if (checkCount %2 == 0) {
+                        imageViewCheckBoxOff.setImageResource(R.drawable.listcheckboxoff);
+                    }
+                    checkCount++;
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -88,5 +122,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
         public void setPosition(int position){
             this.position = position;
         }
+
+        public void setClickCount(int num){
+//            this. = num;
+        }
+    }
+
+    public void postStatus(int num){
+        clickCount = num;
     }
 }

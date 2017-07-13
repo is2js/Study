@@ -46,22 +46,11 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
         setViews();
-        setFab();
+        setFabList();
         setNestedList();
 
-        btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                clickCount++;
-                if(clickCount %2 == 0) {
-                    btnMinus.setImageResource(R.drawable.listtrashcan);
 
-                } if (clickCount %2 ==1 ) {
-                    btnMinus.setImageResource(R.drawable.minus);
 
-                }
-            }
-        });
 
 
 
@@ -83,7 +72,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     //플로팅 액션 버튼 생성과 클릭 시 발생 이벤트를 정의한 함수입니다.
-    public void setFab(){
+    public void setFabList(){
         //FloatingActionButton fabList로 전역변수 설정하였습니다.
         fabList = (FloatingActionButton) findViewById(R.id.fabList);
         fabList.setVisibility(View.GONE);
@@ -178,5 +167,22 @@ public class ListActivity extends AppCompatActivity {
         listAdapter = new ListAdapter(this);
         recyclerList.setAdapter(listAdapter);
         recyclerList.setLayoutManager(new LinearLayoutManager(this));
+
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (clickCount %2 == 0) {
+                    btnMinus.setImageResource(R.drawable.listtrashcan);
+                    listAdapter.postStatus(clickCount);
+                    listAdapter.notifyDataSetChanged();
+                } else if (clickCount %2 == 1) {
+                    btnMinus.setImageResource(R.drawable.minus);
+                    listAdapter.postStatus(clickCount);
+                    listAdapter.notifyDataSetChanged();
+                }
+                clickCount++;
+            }
+        });
     }
 }

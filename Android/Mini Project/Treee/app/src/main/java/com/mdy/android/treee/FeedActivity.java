@@ -1,7 +1,6 @@
 package com.mdy.android.treee;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
@@ -47,9 +46,6 @@ public class FeedActivity extends AppCompatActivity {
     // 파이어베이스 인증
     FirebaseAuth auth;
 
-    // SharedPreferences
-    SharedPreferences sharedPreferences;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +53,7 @@ public class FeedActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         setViews();
-        setFab();
+        setFabFeed();
         setNestedFeed();
 
         String userUid = PreferenceUtil.getUid(this);
@@ -77,7 +73,7 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     //플로팅 액션 버튼 생성과 클릭 시 발생 이벤트를 정의한 함수입니다.
-    public void setFab(){
+    public void setFabFeed(){
         //FloatingActionButton fabFeed로 전역변수 설정하였습니다.
         fabFeed = (FloatingActionButton) findViewById(R.id.fabFeed);
         fabFeed.setVisibility(View.GONE);
