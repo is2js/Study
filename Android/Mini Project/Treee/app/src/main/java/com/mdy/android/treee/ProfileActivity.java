@@ -32,6 +32,8 @@ import com.mdy.android.treee.util.PreferenceUtil;
 
 import java.io.File;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView imageViewTopTree, imageViewProfileShadow;
@@ -91,9 +93,13 @@ public class ProfileActivity extends AppCompatActivity {
 ////        userRef.child("profileFileUriString").setValue(UserProfile.profileFileUriString);
 
 
+
         String userProfileImageUri = PreferenceUtil.getProfileImageUri(this);
+        Log.w("userProfileImageUri", userProfileImageUri);
         if(!userProfileImageUri.equals("")) {
-            Glide.with(this).load(userProfileImageUri).into(imageProfile);
+            Glide.with(this).load(userProfileImageUri).bitmapTransform(new CropCircleTransformation(this)).into(imageProfile);
+        } else {
+            imageProfile.setImageResource(0);
         }
 
         imageProfile.setOnClickListener(new View.OnClickListener() {
@@ -126,7 +132,8 @@ public class ProfileActivity extends AppCompatActivity {
             if(requestCode == 100){
                 Uri imageUri = data.getData();
                 String filePath = getPathFromUri(this, imageUri);
-                Glide.with(this).load(filePath).into(imageProfile);
+//                Glide.with(this).load(filePath).into(imageProfile);
+                Glide.with(this).load(filePath).bitmapTransform(new CropCircleTransformation(this)).into(imageProfile);
 //                imageProfile.setImageURI(imageUri);
                 Toast.makeText(this, "사진이 등록되었습니다,", Toast.LENGTH_SHORT).show();
                 uploadFile(filePath);

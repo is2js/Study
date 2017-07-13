@@ -127,13 +127,23 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     PreferenceUtil.setUid(LoginActivity.this, user.getUid());
                     Log.w("======== Uid ========", user.getUid());
 
-                    userRef = database.getReference("user").child(user.getUid());
+                    userRef = database.getReference("user").child(user.getUid()).child("profile");
                     userRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            UserProfile profile = dataSnapshot.getValue(UserProfile.class);
-                            setProfileImg(profile.profileFileUriString);
-
+                            try {
+                                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                                // 프로필 사진이 저장되어 있지 않으면
+                                if(userProfile == null){
+                                    setProfileImg("");
+                                } else {
+                                    // 프로필 사진이 저장되어 있으면
+                                    Log.w("=========userProfile.profileFileUteriString============", userProfile.profileFileUriString);
+                                    setProfileImg(userProfile.profileFileUriString);
+                                }
+                            } catch (Exception e){
+                                Log.e("Firebase", e.getMessage());
+                            }
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
                             finish();
@@ -189,7 +199,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         });
     }
 
-    private void setProfileImg(String url){
+    public void setProfileImg(String url){
         PreferenceUtil.setProfileImageUri(this, url);
     }
 
