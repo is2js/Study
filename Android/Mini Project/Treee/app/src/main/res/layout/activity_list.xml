@@ -9,6 +9,19 @@
     android:focusableInTouchMode="true"
     tools:context="com.mdy.android.treee.ListActivity">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabList"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="32dp"
+        android:clickable="true"
+        app:backgroundTint="#244404"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/fabfull" />
+
     <ImageView
         android:id="@+id/imageViewBottomTree"
         android:layout_width="184dp"
@@ -62,17 +75,18 @@
         app:srcCompat="@drawable/listicon" />
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedList"
         android:layout_width="300dp"
         android:layout_height="0dp"
         android:layout_marginBottom="0dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnMinus"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnMinus"
+        app:layout_constraintVertical_bias="0.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -80,6 +94,7 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cardviewList"
                 android:layout_width="290dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

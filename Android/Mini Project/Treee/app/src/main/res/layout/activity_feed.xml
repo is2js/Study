@@ -9,6 +9,19 @@
     android:focusable="true"
     android:focusableInTouchMode="true">
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabFeed"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="32dp"
+        android:clickable="true"
+        app:backgroundTint="#244404"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/fabfull" />
+
     <ImageView
         android:id="@+id/imageViewBottomTree"
         android:layout_width="184dp"
@@ -49,7 +62,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/feedtree" />
+        app:srcCompat="@drawable/feedtree1" />
 
     <ImageView
         android:id="@+id/btnListIcon"
@@ -62,11 +75,13 @@
         android:layout_marginRight="20dp" />
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nestedFeed"
         android:layout_width="290dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -80,6 +95,7 @@
             android:orientation="vertical">
 
             <android.support.v7.widget.CardView
+                android:id="@+id/cardviewFeed"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
@@ -98,16 +114,19 @@
                     app:srcCompat="@drawable/feedtext" />
             </android.support.v7.widget.CardView>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerFeed"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerFeed"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+
 
 </android.support.constraint.ConstraintLayout>

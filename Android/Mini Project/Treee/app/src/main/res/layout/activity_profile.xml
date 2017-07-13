@@ -9,6 +9,19 @@
 
 
     <ImageView
+        android:id="@+id/imageViewProfileShadow"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="-2dp"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/profileshadow" />
+
+    <ImageView
         android:id="@+id/imageViewTopTree"
         android:layout_width="135dp"
         android:layout_height="40dp"
@@ -17,27 +30,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/feedtree" />
-
-    <ImageView
-        android:id="@+id/imageViewProfileShadow"
-        android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginRight="0dp"
-        android:layout_marginTop="32dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/profileshadow" />
+        app:srcCompat="@drawable/feedtree1" />
 
     <ImageView
         android:id="@+id/imageProfile"
         android:layout_width="130dp"
         android:layout_height="130dp"
-        android:layout_marginTop="121dp"
-        android:background="@android:drawable/ic_menu_add"
+        android:layout_marginTop="114dp"
+        android:background="@drawable/emptyprofile"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

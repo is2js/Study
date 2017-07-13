@@ -3,7 +3,10 @@ package com.mdy.android.treee;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -28,6 +31,12 @@ public class FeedActivity extends AppCompatActivity {
     ImageView imageViewTopTree, imageViewBottomTree;
     ImageView imageViewText;
 
+    //플로팅 버튼을 스크롤 하는 정도에 따라 나타나게 하기 위한 전역변수 준비 시작
+    FloatingActionButton fabFeed;
+    NestedScrollView nestedFeed;
+    CardView cardviewFeed;
+    int firstCardHeight;
+
     RecyclerView recyclerFeed;
     FeedAdapter feedAdapter;
 
@@ -48,11 +57,54 @@ public class FeedActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         setViews();
+        setFab();
+        setNestedFeed();
 
         String userUid = PreferenceUtil.getUid(this);
         userRef = database.getReference("user").child(userUid).child("memo");
 
         loadFeedData();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        //onCreate에서 생성이 완료된 맨 위의 카드뷰(클릭하면 쓰기 액티비티로 이동하는 카드뷰)의
+        //크기값을 int 값인 firstCardHeight에 받아서 넘겨줍니다.
+        //(firstCardHeight도 미리 전역변수로 설정해두었습니다.)
+        //또한, 카드뷰도 cardviewFeed로 전역변수로 미리 선언하였습니다.
+        cardviewFeed = (CardView) findViewById(R.id.cardviewFeed);
+        firstCardHeight = cardviewFeed.getHeight();
+    }
+
+    //플로팅 액션 버튼 생성과 클릭 시 발생 이벤트를 정의한 함수입니다.
+    public void setFab(){
+        //FloatingActionButton fabFeed로 전역변수 설정하였습니다.
+        fabFeed = (FloatingActionButton) findViewById(R.id.fabFeed);
+        fabFeed.setVisibility(View.GONE);
+        fabFeed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FeedActivity.this, WriteActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    //맨 처음의 카드뷰 높이 만큼 스크롤 되었을 때(화면에서 첫번째 카드뷰가 사라지면) 플로팅 액션 버튼이 뜨도록 하기 위한 함수입니다.
+    //NestedScrollView에 onScrollChangeListener를 달아서 y축의 스크롤 변화를 감지하였습니다.
+    public void setNestedFeed(){
+        nestedFeed = (NestedScrollView) findViewById(R.id.nestedFeed);
+        nestedFeed.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                //scrollY값이 현재 스크롤된 값입니다. 로그로 찍어보니 dp로 찍히는 듯 한데 확실하지는 않습니다.
+                if(scrollY >= firstCardHeight){
+                    fabFeed.setVisibility(View.VISIBLE);
+                } else {
+                    fabFeed.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
 
