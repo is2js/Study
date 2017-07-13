@@ -29,6 +29,8 @@ public class ListActivity extends AppCompatActivity {
     RecyclerView recyclerList;
     ListAdapter listAdapter;
 
+    int clickCount = 1;
+
     //플로팅 버튼을 스크롤 하는 정도에 따라 나타나게 하기 위한 전역변수 준비 시작
     FloatingActionButton fabList;
     CardView cardviewList;
@@ -46,6 +48,22 @@ public class ListActivity extends AppCompatActivity {
         setViews();
         setFab();
         setNestedList();
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount++;
+                if(clickCount %2 == 0) {
+                    btnMinus.setImageResource(R.drawable.listtrashcan);
+
+                } if (clickCount %2 ==1 ) {
+                    btnMinus.setImageResource(R.drawable.minus);
+
+                }
+            }
+        });
+
+
 
         database = FirebaseDatabase.getInstance();
         memoRef = database.getReference("memo");

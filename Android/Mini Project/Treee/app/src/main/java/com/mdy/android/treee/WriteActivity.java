@@ -86,9 +86,8 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         Log.i("fileName", "====================" + fileName);
 
         // 데이터베이스의 키가 값과 동일한 구조 ( 키 = 값 )
-        final StorageReference fileRef = mStorageRef.child(fileName);
+        StorageReference fileRef = mStorageRef.child(fileName);
         Log.i("fileRef1", "=================" + fileRef);
-//        String temp = fileRef.toString();
 
         fileRef.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -97,8 +96,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                         // 파이어베이스 스토리지에 방금 업로드한 파일의 경로
                         @SuppressWarnings("VisibleForTests")
                         Uri uploadedUri = taskSnapshot.getDownloadUrl();
-                        Log.i("fileRef2", "=================" + fileRef);
-                        afterUploadFile(uploadedUri, fileRef.toString());
+                        afterUploadFile(uploadedUri);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -110,7 +108,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    public void afterUploadFile(Uri imageUri, String fileRef){
+    public void afterUploadFile(Uri imageUri){
 
         String content1 = editTextContent1.getText().toString();
         String content2 = editTextContent2.getText().toString();
@@ -123,7 +121,6 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         memo.userUid = auth.getCurrentUser().getUid();
         memo.userEmail = auth.getCurrentUser().getEmail();
 
-        memo.fileStorageRefString = fileRef;
 
 
         if(imageUri != null){
@@ -208,7 +205,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                 if( imagePath != null && !"".equals(imagePath)){
                     uploadFile(imagePath);
                 } else {
-                    afterUploadFile(null, null);
+                    afterUploadFile(null);
                 }
                 break;
             case R.id.imageViewCamera :

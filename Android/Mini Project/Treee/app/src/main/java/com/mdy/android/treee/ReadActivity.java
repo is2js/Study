@@ -1,15 +1,23 @@
 package com.mdy.android.treee;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.mdy.android.treee.domain.Data;
 import com.mdy.android.treee.domain.Memo;
+import com.mdy.android.treee.util.PreferenceUtil;
 
 public class ReadActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -18,14 +26,32 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
     TextView txtDate;
     ImageView imageView;
     ImageView imageViewGallery;
+    ImageView imageViewDelete;
 
     int position = 0;
+
+    // 데이터베이스
+    FirebaseDatabase database;
+    DatabaseReference memoRef, userRef;
+
+    // 스토리지
+    StorageReference mStorageRef;
+
+    public String tempMemoKey = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_read);
         setViews();
+
+        // 데이터베이스 레퍼런스
+        database = FirebaseDatabase.getInstance();
+        memoRef = database.getReference("memo");
+
+        // 스토리지 레퍼런스
+        mStorageRef = FirebaseStorage.getInstance().getReference("images");
 
         setData();
 
@@ -53,7 +79,8 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
             txtContent2.setText(memo.content2);
             txtContent3.setText(memo.content3);
 
-//            txtDate.setText(memo.date);
+            tempMemoKey = memo.memoKeyName;
+
 
         }
     }
@@ -64,10 +91,62 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
         txtContent3 = (TextView) findViewById(R.id.txtContent3);
         imageViewModify = (ImageView) findViewById(R.id.imageViewModify);
         txtDate = (TextView) findViewById(R.id.txtDate);
+        imageViewDelete = (ImageView) findViewById(R.id.imageViewDelete);
+        imageViewDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setAlertDialog(ReadActivity.this);
+
+            }
+        });
+
+
         imageViewGallery = (ImageView) findViewById(R.id.imageViewGallery);
         imageView = (ImageView) findViewById(R.id.imageViewLogo);
 
         imageViewModify.setOnClickListener(this);
+
+
+    }
+
+    public void setAlertDialog(Context context){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // 제목 setting
+        alertDialogBuilder.setTitle("Treee 삭제");
+
+        // AlertDialog setting
+        alertDialogBuilder
+                .setMessage("Treee를 삭제하시겠습니까?")
+                .setCancelable(false)
+                .setNegativeButton("예",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Treee를 삭제한다.
+                                memoRef.child(tempMemoKey).setValue(null);
+
+                                String userUid = PreferenceUtil.getUid(ReadActivity.this);
+                                userRef = database.getReference("user").child(userUid).child("memo");
+
+                                userRef.child(tempMemoKey).setValue(null);
+                                ReadActivity.this.finish();
+                            }
+                        })
+                .setPositiveButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Treee를 삭제하지 않는다.
+                                dialog.cancel();
+                            }
+                        });
+
+        // 다이얼로그 생성
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // 다이얼로그 보여주기
+        alertDialog.show();
     }
 
     @Override

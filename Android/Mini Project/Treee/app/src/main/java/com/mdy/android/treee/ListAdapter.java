@@ -68,11 +68,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
         private int position;
         TextView txtDate;
         ImageView imageView;
+        ImageView imageViewCheckBoxOff;
 
         public Holder(View itemView) {
             super(itemView);
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
             imageView = (ImageView) itemView.findViewById(R.id.imageViewLogo);
+            imageViewCheckBoxOff = (ImageView) itemView.findViewById(R.id.imageViewCheckBoxOff);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

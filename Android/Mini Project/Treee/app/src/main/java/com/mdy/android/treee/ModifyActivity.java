@@ -57,7 +57,6 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
     ProgressDialog dialog;
 
     String updateImage = "";
-    String updateStorageRef = "";
     String tempMemoKey = "";
 
     @Override
@@ -92,7 +91,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         // 파이어베이스에 있는 파일 경로
         String fileName = file.getName(); // + 시간값 or UUID 추가해서 만들어준다.
         // 데이터베이스의 키가 값과 동일한 구조 ( 키 = 값 )
-        final StorageReference fileRef = mStorageRef.child(fileName);
+        StorageReference fileRef = mStorageRef.child(fileName);
 
         fileRef.putFile(uri)
             .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -101,9 +100,8 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                     // 파이어베이스 스토리지에 방금 업로드한 파일의 경로
                     @SuppressWarnings("VisibleForTests")
                     Uri uploadedUri = taskSnapshot.getDownloadUrl();
-                    Log.i("uploadedUri", "========================" + uploadedUri);
 //                    Glide.with(getBaseContext()).load(uploadedUri).into(imageViewGallery);
-                    afterUploadFile(uploadedUri, fileRef.toString());
+                    afterUploadFile(uploadedUri);
                 }
             })
             .addOnFailureListener(new OnFailureListener() {
@@ -115,7 +113,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
             });
     }
 
-    public void afterUploadFile(Uri imageUri, String fileRef){
+    public void afterUploadFile(Uri imageUri){
 
         String content1 = editTextContent1.getText().toString();
         String content2 = editTextContent2.getText().toString();
@@ -127,7 +125,6 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         memo.date = inputCurrentDate();
         memo.userUid = auth.getCurrentUser().getUid();
         memo.userEmail = auth.getCurrentUser().getEmail();
-        memo.fileStorageRefString = fileRef;
 
         if(imageUri != null){
             memo.fileUriString =imageUri.toString();
@@ -149,25 +146,10 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
         userRef.child(memo.memoKeyName).setValue(memo);
 
 
-//        //////////
-//        // 2. 입력할 데이터의 키 생성
-//        String memoKey = memoRef.push().getKey(); // 자동생성된 키를 가져온다.
-//        memo.memoKeyName = memoKey;
-//
-//
-//        // 3. 생성된 키를 레퍼런스로 데이터를 입력
-//        //   insert와 update, delete 는 동일하게 동작
-//        memoRef.child(memoKey).setValue(memo);
-//        //////////
-
-
-
-
-
 
         // 3. 생성된 키를 레퍼런스로 데이터를 입력
         //   insert와 update, delete 는 동일하게 동작
-        memoRef.child(memo.memoKeyName).setValue(memo);
+        // memoRef.child(memo.memoKeyName).setValue(memo);
         // 데이터 입력 후 창 닫기
         dialog.dismiss();
         finish();
@@ -201,6 +183,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                     break;
             }
         }
+
     }
 
     // Uri에서 실제 경로 꺼내는 함수
@@ -237,7 +220,6 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
             tempMemoKey = memo.memoKeyName;
 
-            updateStorageRef = memo.fileStorageRefString;
 
             txtImage.setText(memo.fileUriString);
 
@@ -250,13 +232,13 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.imageViewSave:
-
+                dialog.show();
                 // 이미지가 있으면 이미지 경로를 받아서 저장해야 되기 때문에
                 // 이미지를 먼저 업로드 한다.
                 if( updateImage != null && !"".equals(updateImage)){
                     uploadFile(updateImage);
                 } else {
-                    afterUploadFile(null, null);
+                    afterUploadFile(null);
                 }
                 break;
             case R.id.imageViewCamera :
