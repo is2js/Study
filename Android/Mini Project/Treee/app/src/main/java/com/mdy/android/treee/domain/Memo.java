@@ -10,10 +10,13 @@ public class Memo {
     public String content3;
 
     public String fileUriString;
+    public String fileStorageRefString;
     public String date;
 
     public String userUid;
     public String userEmail;
+
+    public String memoKeyName;
 
     public Memo(){
 

@@ -16,7 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,7 +24,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.mdy.android.treee.domain.Data;
 import com.mdy.android.treee.domain.Memo;
 
 import java.io.File;
@@ -76,17 +74,21 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         // 인증
         auth = FirebaseAuth.getInstance();
 
-        setData();
     }
 
     public void uploadFile(String filePath){
         // 스마트폰에 있는 파일의 경로
         File file = new File(filePath);
         Uri uri = Uri.fromFile(file);
+        Log.i("uri", "====================" + uri);
         // 파이어베이스에 있는 파일 경로
         String fileName = file.getName(); // + 시간값 or UUID 추가해서 만들어준다.
+        Log.i("fileName", "====================" + fileName);
+
         // 데이터베이스의 키가 값과 동일한 구조 ( 키 = 값 )
-        StorageReference fileRef = mStorageRef.child(fileName);
+        final StorageReference fileRef = mStorageRef.child(fileName);
+        Log.i("fileRef1", "=================" + fileRef);
+//        String temp = fileRef.toString();
 
         fileRef.putFile(uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -95,7 +97,8 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                         // 파이어베이스 스토리지에 방금 업로드한 파일의 경로
                         @SuppressWarnings("VisibleForTests")
                         Uri uploadedUri = taskSnapshot.getDownloadUrl();
-                        afterUploadFile(uploadedUri);
+                        Log.i("fileRef2", "=================" + fileRef);
+                        afterUploadFile(uploadedUri, fileRef.toString());
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -107,7 +110,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    public void afterUploadFile(Uri imageUri){
+    public void afterUploadFile(Uri imageUri, String fileRef){
 
         String content1 = editTextContent1.getText().toString();
         String content2 = editTextContent2.getText().toString();
@@ -120,6 +123,8 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         memo.userUid = auth.getCurrentUser().getUid();
         memo.userEmail = auth.getCurrentUser().getEmail();
 
+        memo.fileStorageRefString = fileRef;
+
 
         if(imageUri != null){
             memo.fileUriString =imageUri.toString();
@@ -127,6 +132,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
 
         // 2. 입력할 데이터의 키 생성
         String memoKey = memoRef.push().getKey(); // 자동생성된 키를 가져온다.
+        memo.memoKeyName = memoKey;
 
 
         // 3. 생성된 키를 레퍼런스로 데이터를 입력
@@ -166,6 +172,7 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                     Uri imageUri = data.getData();
                     String filePath = getPathFromUri(this, imageUri);
                     Log.i("Gallery","imageUri========================="+imageUri);
+                    Log.i("Gallery","filePath========================="+filePath);
                     txtImage.setText(filePath);
                     imageViewGallery.setImageURI(imageUri);
                     //Glide.with(getBaseContext()).load(filePath).into(imageViewGallery);
@@ -188,31 +195,6 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
         return realPath;
     }
 
-    public void setData() {
-        // 목록에서 넘어온 position 값을 이용해 상세보기 데이터를 결정
-        Intent intent = getIntent();
-        // null값 확인
-        position = intent.getIntExtra("LIST_POSITION", -1);
-
-        // 값이 있으면
-        if (position > -1) {
-            Memo memo = Data.list.get(position);
-
-            // 이미지 세팅
-            if (memo.fileUriString != null && !"".equals(memo.fileUriString)) {
-                Glide.with(this).load(memo.fileUriString).into(imageView);
-            }
-
-
-            // 값 세팅
-            editTextContent1.setText(memo.content1);
-            editTextContent2.setText(memo.content2);
-            editTextContent3.setText(memo.content3);
-
-//            txtDate.setText(memo.date);
-
-        }
-    }
 
     @Override
     public void onClick(View v) {
@@ -220,12 +202,13 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
             case R.id.imageViewSave:
                 dialog.show();
                 String imagePath = txtImage.getText().toString();
+                Log.i("imagePath", "================="+imagePath);
                 // 이미지가 있으면 이미지 경로를 받아서 저장해야 되기 때문에
                 // 이미지를 먼저 업로드 한다.
                 if( imagePath != null && !"".equals(imagePath)){
                     uploadFile(imagePath);
                 } else {
-                    afterUploadFile(null);
+                    afterUploadFile(null, null);
                 }
                 break;
             case R.id.imageViewCamera :
