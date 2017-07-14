@@ -136,12 +136,12 @@
 
     <Button
         android:id="@+id/btnDelete"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
         android:background="@drawable/listtrashcan"
         app:layout_constraintLeft_toRightOf="@+id/btnMinus"
-        android:layout_marginLeft="20dp"
-        app:layout_constraintTop_toTopOf="@+id/btnMinus"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="13dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTopTree" />
 
 </android.support.constraint.ConstraintLayout>

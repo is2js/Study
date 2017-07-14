@@ -60,14 +60,15 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
                 .load(memo.fileUriString)
                 .bitmapTransform(new GrayscaleTransformation(inflater.getContext()), new CropSquareTransformation(inflater.getContext()), new RoundedCornersTransformation(inflater.getContext(), 20, 5))
                 .into(holder.imageView);
-        holder.setPosition(position);
 
+        holder.setPosition(position);
 
         if(clickCount %2 == 1){
             holder.checkBoxOff.setVisibility(View.VISIBLE);
         } else if (clickCount %2 == 0){
-            holder.checkBoxOff.setVisibility(View.GONE);
             memo.check_flag = false;
+            holder.checkBoxOff.setChecked(false);
+            holder.checkBoxOff.setVisibility(View.GONE);
         }
 
 
@@ -118,6 +119,11 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
         public void setPosition(int position){
             this.position = position;
         }
+
+        public void setCheckBoxAllOff(){
+            checkBoxOff.setChecked(false);
+        }
+
 
     }
 
