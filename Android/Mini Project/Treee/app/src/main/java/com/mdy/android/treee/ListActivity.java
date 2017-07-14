@@ -29,6 +29,7 @@ public class ListActivity extends AppCompatActivity {
 
     ImageView btnListIcon, btnProfile;
     Button btnMinus;
+    Button btnDelete;
     ImageView imageViewTopTree, imageViewBottomTree, imageViewList;
     RecyclerView recyclerList;
     ListAdapter listAdapter;
@@ -43,7 +44,7 @@ public class ListActivity extends AppCompatActivity {
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
-    DatabaseReference userRef;
+    DatabaseReference userRef, memoRef;
 
     // 파이어베이스 인증
     FirebaseAuth auth;
@@ -58,6 +59,7 @@ public class ListActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        memoRef = database.getReference("memo");
         String userUid = PreferenceUtil.getUid(this);
         userRef = database.getReference("user").child(userUid).child("memo");
 
@@ -184,12 +186,65 @@ public class ListActivity extends AppCompatActivity {
                     listAdapter.postStatus(clickCount);
                     listAdapter.notifyDataSetChanged();
                 } else if (clickCount %2 == 1) {
-                    btnMinus.setBackgroundResource(R.drawable.listtrashcan);
+                    btnMinus.setBackgroundResource(R.drawable.listcheckboxon);
                     listAdapter.postStatus(clickCount);
                     listAdapter.notifyDataSetChanged();
                 }
                 clickCount++;
+                Log.w("clickCount", "====================" + clickCount);
+            }
+        });
+
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteItems();
             }
         });
     }
+
+
+    // 체크된 데이터 삭제
+    public void deleteItems(){
+        for(Memo memoItem : Data.list){
+            if(memoItem.check_flag == true){
+                memoRef.child(memoItem.memoKeyName).setValue(null);
+                userRef.child(memoItem.memoKeyName).setValue(null);
+            }
+        }
+        listAdapter.notifyDataSetChanged();
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -56,31 +56,20 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
     public void onBindViewHolder(Holder holder, int position) {
         Memo memo = data.get(position);
         holder.txtDate.setText(memo.date);
-//        Glide.with(inflater.getContext()).load(memo.fileUriString).into(holder.imageView);
         Glide.with(inflater.getContext())
                 .load(memo.fileUriString)
                 .bitmapTransform(new GrayscaleTransformation(inflater.getContext()), new CropSquareTransformation(inflater.getContext()), new RoundedCornersTransformation(inflater.getContext(), 20, 5))
                 .into(holder.imageView);
         holder.setPosition(position);
 
-//        if(clickCount %2 == 0){
-//            holder.imageViewCheckBoxOff.setVisibility(View.INVISIBLE);
-//        } else if (clickCount %2 ==1) {
-//            holder.imageViewCheckBoxOff.setVisibility(View.VISIBLE);
-//        }
 
         if(clickCount %2 == 1){
             holder.checkBoxOff.setVisibility(View.VISIBLE);
         } else if (clickCount %2 == 0){
             holder.checkBoxOff.setVisibility(View.GONE);
+            memo.check_flag = false;
         }
 
-    }
-
-
-
-    // 삭제하기
-    public void deleteItems(){
 
     }
 
@@ -93,20 +82,8 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
 
 
 
-    public void setItemClicked(int position){
-        for (Memo memoItem : data){
-            memoItem.check_flag = false;
-        }
-        data.get(position).check_flag = true;
-        // 리사이클러뷰 전체를 갱신해준다.
-        notifyDataSetChanged(); // 아답터를 갱신해준다.
-    }
-
-
-
     class Holder extends RecyclerView.ViewHolder{
         private int position;
-        private int checkCount = 1;
         TextView txtDate;
         ImageView imageView;
         CheckBox checkBoxOff;
