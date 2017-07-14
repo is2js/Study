@@ -27,6 +27,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
     List<Memo> data = new ArrayList<>();
     LayoutInflater inflater;
     int clickCount;
+    int checkCount1 = 0;
 
     /**
      * 아답터 생성자
@@ -61,31 +62,40 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
                 .into(holder.imageView);
         holder.setPosition(position);
 
-
         if(clickCount %2 == 0){
             holder.imageViewCheckBoxOff.setVisibility(View.INVISIBLE);
         } else if (clickCount %2 ==1) {
             holder.imageViewCheckBoxOff.setVisibility(View.VISIBLE);
         }
 
+    }
 
+
+
+    // 삭제하기
+    public void deleteItems(){
 
     }
+
+
 
     @Override
     public int getItemCount() {
         return data.size();
     }
 
+
+
     public void setItemClicked(int position){
         for (Memo memoItem : data){
             memoItem.check_flag = false;
         }
-
         data.get(position).check_flag = true;
         // 리사이클러뷰 전체를 갱신해준다.
         notifyDataSetChanged(); // 아답터를 갱신해준다.
     }
+
+
 
     class Holder extends RecyclerView.ViewHolder{
         private int position;
@@ -105,12 +115,17 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
                 public void onClick(View v) {
                     if(checkCount %2 == 1) {
                         imageViewCheckBoxOff.setImageResource(R.drawable.listcheckboxon);
+                        data.get(position).check_flag = true;
+                        // TODO postCheckCount()
                     } else if (checkCount %2 == 0) {
                         imageViewCheckBoxOff.setImageResource(R.drawable.listcheckboxoff);
+                        data.get(position).check_flag = false;
+
                     }
-                    checkCount++;
+
                 }
             });
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -125,12 +140,18 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
             this.position = position;
         }
 
-        public void setClickCount(int num){
-//            this. = num;
-        }
     }
+
+
+
+
 
     public void postStatus(int num){
         clickCount = num;
+    }
+
+    // TODO
+    public void postCheckCount(int num){
+
     }
 }

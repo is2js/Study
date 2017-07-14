@@ -7,4 +7,6 @@ package com.mdy.android.treee.domain;
 public class UserProfile {
 //    public String uid;
     public String profileFileUriString;
+    public int alarmHour;
+    public int alarmMinute;
 }

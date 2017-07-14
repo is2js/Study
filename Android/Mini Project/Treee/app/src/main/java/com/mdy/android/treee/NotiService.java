@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
@@ -33,7 +35,11 @@ public class NotiService extends Service {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setContentTitle("하루에 감사한 일 세 가지. Treee");
         builder.setContentText("오늘 하루도 감사한 일이 참 많습니다.");
-        builder.setSmallIcon(R.drawable.grouptree);
+//        builder.setSmallIcon(R.mipmap.ic_launcher_app);
+        builder.setSmallIcon(R.mipmap.ic_launcher_app_round);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_app_round);
+        builder.setLargeIcon(largeIcon);
+//        builder.setLargeIcon(R.);
         builder.setContentIntent(servicePendingIntent);
 
         notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);

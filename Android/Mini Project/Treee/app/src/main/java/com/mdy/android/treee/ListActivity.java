@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,6 +31,9 @@ public class ListActivity extends AppCompatActivity {
     ImageView imageViewTopTree, imageViewBottomTree, imageViewList;
     RecyclerView recyclerList;
     ListAdapter listAdapter;
+
+    // TODO
+    Button btnEx;
 
     int clickCount = 1;
 
@@ -171,6 +175,15 @@ public class ListActivity extends AppCompatActivity {
         listAdapter = new ListAdapter(this);
         recyclerList.setAdapter(listAdapter);
         recyclerList.setLayoutManager(new LinearLayoutManager(this));
+
+
+        // TODO 삭제하기
+        btnEx.findViewById(R.id.btnEx).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
         btnMinus.setOnClickListener(new View.OnClickListener() {

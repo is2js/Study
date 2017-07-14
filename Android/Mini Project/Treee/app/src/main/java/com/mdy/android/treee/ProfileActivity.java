@@ -72,8 +72,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     //알람 시간 측정 및 저장
     TimePickerDialog timePickerDialog;
-    int alarmHour;
-    int alarmMinute;
+    int userAlarmHour;
+    int userAlarmMinute;
     Calendar calendar;
     AlarmManager mAlarmManager;
     int initCount;
@@ -136,19 +136,44 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
 
     // 알람 시간 사용자 설정 (TimePicker)
     private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            Toast.makeText(getApplicationContext(), "알림 시간이" + hourOfDay + "시" + minute + "분 으로 설정되었습니다.", Toast.LENGTH_SHORT).show();
-            alarmHour = hourOfDay;
-            alarmMinute = minute;
-            textViewSetAlarmTime.setText(alarmHour + "시 " + alarmMinute + "분");
+            // 설정 버튼을 눌렀을 때
+            Toast.makeText(getApplicationContext(), "알림 시간이 " + hourOfDay + "시" + minute + "분 으로 설정되었습니다.", Toast.LENGTH_SHORT).show();
+
+            // SharedPreference에 알람 시간(Hour), 분(Minute) 저장
+            PreferenceUtil.setNotiAlarmHour(ProfileActivity.this, hourOfDay);
+            userAlarmHour = hourOfDay;
+
+            PreferenceUtil.setNotiAlarmMinute(ProfileActivity.this, minute);
+            userAlarmMinute = minute;
+
+            // 데이터베이스 Profile에 시간과 분 저장
+            UserProfile userProfile = new UserProfile();
+
+            userProfile.alarmHour = hourOfDay;
+            userProfile.alarmMinute = minute;
+
+
+
+            userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
+            userRef.child("alarmHour").setValue(userProfile.alarmHour);
+            userRef.child("alarmMinute").setValue(userProfile.alarmMinute);
+
+
+            textViewSetAlarmTime.setText(userAlarmHour + "시 " + userAlarmMinute + "분");
 
             calendar = Calendar.getInstance();
-            calendar.set(Calendar.HOUR_OF_DAY, alarmHour);
-            calendar.set(Calendar.MINUTE, alarmMinute);
+            calendar.set(Calendar.HOUR_OF_DAY, userAlarmHour);
+            calendar.set(Calendar.MINUTE, userAlarmMinute);
             calendar.set(Calendar.SECOND, 0);
 
             if(initCount == 12345) {
@@ -177,14 +202,34 @@ public class ProfileActivity extends AppCompatActivity {
         txtEmail = (TextView) findViewById(R.id.txtEmail);
         txtTreeCountName = (TextView) findViewById(R.id.txtTreeCountName);
         txtTotalCount = (TextView) findViewById(R.id.txtTotalCount);
+        textViewSetAlarmTime = (TextView) findViewById(R.id.textViewSetAlarmTime);
         imageViewTopTree = (ImageView) findViewById(R.id.imageViewTopTree);
         imageViewProfileShadow = (ImageView) findViewById(R.id.imageViewProfileShadow);
 
         switchNoti = (Switch) findViewById(R.id.switchNoti);
-        layoutAlarmDetail = (ConstraintLayout) findViewById(R.id.layoutAlarmDetail);
-        layoutAlarmDetail.setVisibility(View.GONE);
 
-        textViewSetAlarmTime = (TextView) findViewById(R.id.textViewSetAlarmTime);
+        layoutAlarmDetail = (ConstraintLayout) findViewById(R.id.layoutAlarmDetail);
+
+        int tempHour = PreferenceUtil.getNotiAlarmHour(this);
+        int tempMinute = PreferenceUtil.getNotiAlarmMinute(this);
+
+        Log.w("tempHour", "=================="+tempHour);
+        Log.w("tempMinute", "=================="+tempMinute);
+        if(tempHour == 0 && tempMinute == 0){
+            // 설정 switchbar가 꺼져있음
+            switchNoti.setChecked(false);
+            layoutAlarmDetail.setVisibility(View.GONE);
+        } else {
+            // 설정 switchbar가 켜져있고
+            switchNoti.setChecked(true);
+            // 알람 설정값을 불러옴.
+            textViewSetAlarmTime.setText(tempHour + "시 " + tempMinute + "분");
+        }
+
+
+
+
+
 
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
 
@@ -252,9 +297,9 @@ public class ProfileActivity extends AppCompatActivity {
                     // 파이어베이스 스토리지에 방금 업로드한 파일의 경로
                     @SuppressWarnings("VisibleForTests")
                     Uri uploadedUri = taskSnapshot.getDownloadUrl();
-                    afterUploadFile(uploadedUri);
                     Log.w("============uploadedUri===========", String.valueOf(uploadedUri));
                     PreferenceUtil.setProfileImageUri(ProfileActivity.this, uploadedUri.toString());
+                    afterUploadFile(uploadedUri);
                 }
             })
             .addOnFailureListener(new OnFailureListener() {

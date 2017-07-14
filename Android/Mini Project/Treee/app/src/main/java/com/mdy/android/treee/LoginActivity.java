@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private GoogleApiClient mGoogleApiClient;
 
     private FirebaseDatabase database;
-    private DatabaseReference userRef;
+    private DatabaseReference userRef, userProfileImageRef, userAlarmRef;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private CallbackManager mCallbackManager;
@@ -75,6 +75,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
         database = FirebaseDatabase.getInstance();
         userRef = database.getReference("user");
+        userProfileImageRef = database.getReference("user");
+        userAlarmRef = database.getReference("user");
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -127,14 +129,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     PreferenceUtil.setUid(LoginActivity.this, user.getUid());
                     Log.w("======== Uid ========", user.getUid());
 
-                    userRef = database.getReference("user").child(user.getUid()).child("profile");
-                    userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    userProfileImageRef = database.getReference("user").child(user.getUid()).child("profile");
+                    userProfileImageRef.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             try {
                                 UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
                                 // 프로필 사진이 저장되어 있지 않으면
-                                if(userProfile == null){
+                                if(userProfile.profileFileUriString == null){
                                     setProfileImg("");
                                 } else {
                                     // 프로필 사진이 저장되어 있으면
@@ -153,9 +155,38 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         }
                     });
 
+                    userAlarmRef = database.getReference("user").child(user.getUid()).child("profile");
+                    userAlarmRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            try {
+                                UserProfile userProfile = dataSnapshot.getValue(UserProfile.class);
+                                // 알람이 저장되어 있지 않으면
+                                if(userProfile.alarmHour == 0 && userProfile.alarmMinute == 0){
+                                    setAlarmTime(0, 0);
+                                    Log.w("11userProfile.alarmHour", "===============" + userProfile.alarmHour);
+                                    Log.w("11userProfile.alarmMinute", "===============" + userProfile.alarmMinute);
+                                } else {
+                                    // 알람이 저장되어 있으면
+                                    setAlarmTime(userProfile.alarmHour, userProfile.alarmMinute);
+                                    Log.w("22userProfile.alarmHour", "===============" + userProfile.alarmHour);
+                                    Log.w("22userProfile.alarmMinute", "===============" + userProfile.alarmMinute);
+                                }
+                            } catch (Exception e) {
+                                Log.e("Firebase", e.getMessage());
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+//                    Log.w("===== DisplayName =====", mAuth.getCurrentUser().getDisplayName());
 
 //                    String userEmail = mAuth.getCurrentUser().getEmail();
-//                    Log.w("===== DisplayName =====", mAuth.getCurrentUser().getDisplayName());
 //                    userRef = database.getReference("user").child(user.getUid()).child("profile");
 //                    userRef.child("userEmail").setValue(userEmail);
 
@@ -203,6 +234,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         PreferenceUtil.setProfileImageUri(this, url);
     }
 
+    public void setAlarmTime(int hour, int minute){
+        PreferenceUtil.setNotiAlarmHour(this, hour);
+        PreferenceUtil.setNotiAlarmMinute(this, minute);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -245,6 +281,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     } else {
                         Toast.makeText(LoginActivity.this, "FaceBook 아이디 연동 성공", Toast.LENGTH_SHORT).show();
 //                        PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
+
+                        // 사용자 이메일 데이터베이스 등록
+                        String userEmail = mAuth.getCurrentUser().getEmail();
+                        userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
+                        userRef.child("userEmail").setValue(userEmail);
+                        Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                         startActivity(intent);
                         finish();
@@ -265,6 +307,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             // 로그인 성공했을때 실행되는 부분
+
+                            // 사용자 이메일 데이터베이스 등록
+                            String userEmail = mAuth.getCurrentUser().getEmail();
+                            userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
+                            userRef.child("userEmail").setValue(userEmail);
                             Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
                         }
 
@@ -332,6 +379,13 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         } else {
                             Toast.makeText(LoginActivity.this, "Google 아이디 인증이 성공하였습니다.", Toast.LENGTH_SHORT).show();
 //                            PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
+
+                            // 사용자 이메일 데이터베이스 등록
+                            String userEmail = mAuth.getCurrentUser().getEmail();
+                            userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
+                            userRef.child("userEmail").setValue(userEmail);
+                            Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
+
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
                             finish();

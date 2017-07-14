@@ -24,10 +24,25 @@ public class PreferenceUtil {
         editor.commit();
     }
 
+    // setString 오버로딩
+    private static void setInt(Context context, String key, int value){
+        setSharedPreferences(context);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(key, value);
+        editor.commit();
+    }
+
     private static String getString(Context context, String key){
         setSharedPreferences(context);
         return sharedPreferences.getString(key, "해당 데이터 없음");
     }
+
+    private static int getInt(Context context, String key){
+        setSharedPreferences(context);
+        return sharedPreferences.getInt(key, -1);
+    }
+
+
 
     // Uid 세팅
     public static void setUid(Context context, String value){
@@ -47,5 +62,25 @@ public class PreferenceUtil {
 
     public static String getProfileImageUri(Context context){
         return getString(context, "userProfileImage");
+    }
+
+
+
+    // Noti Alarm 시간(Hour) 설정
+    public static void setNotiAlarmHour(Context context, int valueOfAlarmHour){
+        setInt(context, "alarmHour", valueOfAlarmHour);
+    }
+
+    public static int getNotiAlarmHour(Context context){
+        return getInt(context, "alarmHour");
+    }
+
+    // Noti Alarm 분(Minute) 설정
+    public static void setNotiAlarmMinute(Context context, int valueOfAlarmMinute){
+        setInt(context, "alarmMinute", valueOfAlarmMinute);
+    }
+
+    public static int getNotiAlarmMinute(Context context){
+        return getInt(context, "alarmMinute");
     }
 }
