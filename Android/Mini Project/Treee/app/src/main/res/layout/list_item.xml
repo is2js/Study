@@ -18,17 +18,17 @@
         android:layout_height="50dp">
 
 
-        <ImageView
-            android:id="@+id/imageViewCheckBoxOff"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+        <CheckBox
+            android:id="@+id/checkBoxOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
+            android:layout_marginLeft="0dp"
             android:layout_marginTop="8dp"
+            android:buttonTint="#9ebf57"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:srcCompat="@drawable/listcheckboxoff" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imageViewLogo"
@@ -38,9 +38,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             card_view:layout_constraintBottom_toBottomOf="parent"
-            card_view:layout_constraintLeft_toRightOf="@+id/imageViewCheckBoxOff"
+            card_view:layout_constraintLeft_toRightOf="@+id/checkBoxOff"
             card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.437"
+            card_view:layout_constraintVertical_bias="0.416"
             card_view:srcCompat="@android:drawable/ic_menu_gallery" />
 
         <TextView

@@ -27,13 +27,11 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
-    ImageView btnMinus, btnListIcon, btnProfile;
+    ImageView btnListIcon, btnProfile;
+    Button btnMinus;
     ImageView imageViewTopTree, imageViewBottomTree, imageViewList;
     RecyclerView recyclerList;
     ListAdapter listAdapter;
-
-    // TODO
-    Button btnEx;
 
     int clickCount = 1;
 
@@ -140,7 +138,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void setViews(){
-        btnMinus = (ImageView) findViewById(R.id.btnMinus);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
         btnListIcon = (ImageView) findViewById(R.id.btnListIcon);
         btnListIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,24 +175,16 @@ public class ListActivity extends AppCompatActivity {
         recyclerList.setLayoutManager(new LinearLayoutManager(this));
 
 
-        // TODO 삭제하기
-        btnEx.findViewById(R.id.btnEx).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
 
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (clickCount %2 == 0) {
-                    btnMinus.setImageResource(R.drawable.listtrashcan);
+                    btnMinus.setBackgroundResource(R.drawable.minus);
                     listAdapter.postStatus(clickCount);
                     listAdapter.notifyDataSetChanged();
                 } else if (clickCount %2 == 1) {
-                    btnMinus.setImageResource(R.drawable.minus);
+                    btnMinus.setBackgroundResource(R.drawable.listtrashcan);
                     listAdapter.postStatus(clickCount);
                     listAdapter.notifyDataSetChanged();
                 }
