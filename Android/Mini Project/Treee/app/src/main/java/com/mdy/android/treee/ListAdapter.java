@@ -15,7 +15,9 @@ import com.mdy.android.treee.domain.Memo;
 import java.util.ArrayList;
 import java.util.List;
 
+import jp.wasabeef.glide.transformations.CropSquareTransformation;
 import jp.wasabeef.glide.transformations.GrayscaleTransformation;
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 /**
  * Created by MDY on 2017-07-11.
@@ -55,7 +57,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
 //        Glide.with(inflater.getContext()).load(memo.fileUriString).into(holder.imageView);
         Glide.with(inflater.getContext())
                 .load(memo.fileUriString)
-                .bitmapTransform(new GrayscaleTransformation(inflater.getContext()))
+                .bitmapTransform(new GrayscaleTransformation(inflater.getContext()), new CropSquareTransformation(inflater.getContext()), new RoundedCornersTransformation(inflater.getContext(), 20, 5))
                 .into(holder.imageView);
         holder.setPosition(position);
 

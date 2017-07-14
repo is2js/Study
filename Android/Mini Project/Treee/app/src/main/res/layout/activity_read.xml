@@ -142,5 +142,5 @@
         android:layout_marginTop="0dp"
         app:layout_constraintRight_toLeftOf="@+id/imageViewModify"
         app:layout_constraintTop_toTopOf="@+id/imageViewModify"
-        app:srcCompat="@drawable/minus" />
+        app:srcCompat="@drawable/listtrashcan" />
 </android.support.constraint.ConstraintLayout>

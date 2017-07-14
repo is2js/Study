@@ -45,8 +45,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
         holder.txtContent2.setText(memo.content2);
         holder.txtContent3.setText(memo.content3);
         holder.txtDate.setText(memo.date);
+//.bitmapTransform(new GrayscaleTransformation(inflater.getContext()), new CropSquareTransformation(inflater.getContext()), new RoundedCornersTransformation(inflater.getContext(), 20, 5))
 
-        Glide.with(inflater.getContext()).load(memo.fileUriString).into(holder.imageView);
+        Glide.with(inflater.getContext())
+                .load(memo.fileUriString)
+//                .bitmapTransform(new RoundedCornersTransformation(inflater.getContext(), 100, 20), new CenterCrop(inflater.getContext()))
+//                .bitmapTransform(new CropSquareTransformation(inflater.getContext()))
+                .centerCrop()
+                .into(holder.imageView);
 
         holder.setPosition(position);
     }

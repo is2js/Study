@@ -46,7 +46,17 @@
         <activity android:name=".ListActivity" />
         <activity android:name=".WriteActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+
+        <service
+            android:name=".NotiService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver
+            android:name=".NotiReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>

@@ -1,5 +1,8 @@
 package com.mdy.android.treee;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,12 +11,15 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -31,6 +37,9 @@ import com.mdy.android.treee.domain.UserProfile;
 import com.mdy.android.treee.util.PreferenceUtil;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -40,7 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView imageProfile;
     TextView txtName, txtEmail;
     TextView txtTreeCountName, txtTotalCount;
-    Button btnLogout;
+    ImageView btnLogout;
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
@@ -54,6 +63,22 @@ public class ProfileActivity extends AppCompatActivity {
 
     // SharedPreference
     SharedPreferences sharedPreferences = null;
+
+
+    //스위치 기능을 위한 스위치 선언
+    Switch switchNoti;
+    ConstraintLayout layoutAlarmDetail;
+    TextView textViewSetAlarmTime;
+
+    //알람 시간 측정 및 저장
+    TimePickerDialog timePickerDialog;
+    int alarmHour;
+    int alarmMinute;
+    Calendar calendar;
+    AlarmManager mAlarmManager;
+    int initCount;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +99,78 @@ public class ProfileActivity extends AppCompatActivity {
 
         txtTotalCount.setText(Data.list.size()+"");
 
+
+        // 프로필
+        switchNoti.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    layoutAlarmDetail.setVisibility(View.VISIBLE);
+
+                    layoutAlarmDetail.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            initCount = 12345;
+                            long now = System.currentTimeMillis();
+                            Date date = new Date(now);
+                            SimpleDateFormat sdfHour = new SimpleDateFormat("HH");
+                            SimpleDateFormat sdfMinute = new SimpleDateFormat("mm");
+                            String hour = sdfHour.format(date);
+                            String minute = sdfMinute.format(date);
+
+                            int intHour = Integer.parseInt(hour);
+                            int intMinute = Integer.parseInt(minute);
+
+                            timePickerDialog = new TimePickerDialog(ProfileActivity.this, TimePickerDialog.THEME_DEVICE_DEFAULT_LIGHT, listener, intHour, intMinute, true);
+                            timePickerDialog.show();
+                        }
+                    });
+
+                } else {
+                    initCount = 678910;
+                    layoutAlarmDetail.setVisibility(View.GONE);
+
+                }
+            }
+        });
+
     }
+
+
+    // 알람 시간 사용자 설정 (TimePicker)
+    private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            Toast.makeText(getApplicationContext(), "알림 시간이" + hourOfDay + "시" + minute + "분 으로 설정되었습니다.", Toast.LENGTH_SHORT).show();
+            alarmHour = hourOfDay;
+            alarmMinute = minute;
+            textViewSetAlarmTime.setText(alarmHour + "시 " + alarmMinute + "분");
+
+            calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, alarmHour);
+            calendar.set(Calendar.MINUTE, alarmMinute);
+            calendar.set(Calendar.SECOND, 0);
+
+            if(initCount == 12345) {
+                mAlarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+                Intent alarmIntent = new Intent(ProfileActivity.this, NotiReceiver.class);
+
+                calendar = Calendar.getInstance();
+                long startTime = calendar.getTimeInMillis();
+                long allDayMill = 86400000;
+
+                PendingIntent mPendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+                mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startTime, allDayMill, mPendingIntent);
+
+            } if(initCount == 678910){
+                Intent cancelIntent = new Intent();
+                PendingIntent delAlarmIntent = PendingIntent.getBroadcast(getBaseContext(), 0, cancelIntent, 0);
+                mAlarmManager = (AlarmManager) getBaseContext().getSystemService(Context.ALARM_SERVICE);
+                mAlarmManager.cancel(delAlarmIntent);
+            }
+        }
+    };
+
 
     public void setViews(){
         txtName = (TextView) findViewById(R.id.txtName);
@@ -84,14 +180,13 @@ public class ProfileActivity extends AppCompatActivity {
         imageViewTopTree = (ImageView) findViewById(R.id.imageViewTopTree);
         imageViewProfileShadow = (ImageView) findViewById(R.id.imageViewProfileShadow);
 
+        switchNoti = (Switch) findViewById(R.id.switchNoti);
+        layoutAlarmDetail = (ConstraintLayout) findViewById(R.id.layoutAlarmDetail);
+        layoutAlarmDetail.setVisibility(View.GONE);
+
+        textViewSetAlarmTime = (TextView) findViewById(R.id.textViewSetAlarmTime);
+
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
-
-//        String userUid = PreferenceUtil.getUid(this);
-//        userRef = database.getReference("user").child(userUid).child("profile");
-////        userRef = database.getReference("user").child(userUid).child("profile").child("profileFileUriString");
-//        Log.w("============= USER ===========", userRef.getKey());
-////        userRef.child("profileFileUriString").setValue(UserProfile.profileFileUriString);
-
 
 
         String userProfileImageUri = PreferenceUtil.getProfileImageUri(this);
@@ -111,7 +206,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
 
-        btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout = (ImageView) findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
