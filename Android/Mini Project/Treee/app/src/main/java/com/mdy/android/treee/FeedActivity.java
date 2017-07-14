@@ -50,12 +50,12 @@ public class FeedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        database = FirebaseDatabase.getInstance();
-        auth = FirebaseAuth.getInstance();
         setViews();
         setFabFeed();
         setNestedFeed();
 
+        auth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
         String userUid = PreferenceUtil.getUid(this);
         userRef = database.getReference("user").child(userUid).child("memo");
 

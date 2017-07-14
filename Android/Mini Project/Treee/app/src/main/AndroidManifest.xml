@@ -56,7 +56,9 @@
         <receiver
             android:name=".NotiReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
+
+        <activity android:name=".EnlargeActivity"></activity>
     </application>
 
 </manifest>

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.mdy.android.treee.domain.Data;
 import com.mdy.android.treee.domain.Memo;
+import com.mdy.android.treee.util.PreferenceUtil;
 
 import java.util.List;
 
@@ -39,7 +41,10 @@ public class ListActivity extends AppCompatActivity {
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
-    DatabaseReference memoRef;
+    DatabaseReference userRef;
+
+    // 파이어베이스 인증
+    FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +54,10 @@ public class ListActivity extends AppCompatActivity {
         setFabList();
         setNestedList();
 
-
-
-
-
-
+        auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
-        memoRef = database.getReference("memo");
+        String userUid = PreferenceUtil.getUid(this);
+        userRef = database.getReference("user").child(userUid).child("memo");
 
         loadListData();
     }
@@ -103,7 +105,7 @@ public class ListActivity extends AppCompatActivity {
     }
 
     public void loadListData(){
-        memoRef.addValueEventListener(new ValueEventListener() {
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot data) {
                 Data.list.clear();
@@ -111,7 +113,9 @@ public class ListActivity extends AppCompatActivity {
                     // json 데이터를 Bbs 인스턴스로 변환오류 발생 가능성 있어서 예외처리 필요
                     try {
                         Memo memo = item.getValue(Memo.class);
-                        Data.list.add(memo);
+                        if(memo.userUid.equals(auth.getCurrentUser().getUid()) ) {
+                            Data.list.add(memo);
+                        }
                     } catch (Exception e){
                         Log.e("FireBase", e.getMessage());
                     }

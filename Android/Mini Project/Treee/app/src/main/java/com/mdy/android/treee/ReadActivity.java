@@ -102,6 +102,15 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
 
 
         imageViewGallery = (ImageView) findViewById(R.id.imageViewGallery);
+        imageViewGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EnlargeActivity.class);
+                intent.putExtra("LIST_POSITION", position);
+                v.getContext().startActivity(intent);
+            }
+        });
+
         imageView = (ImageView) findViewById(R.id.imageViewLogo);
 
         imageViewModify.setOnClickListener(this);
