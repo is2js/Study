@@ -120,16 +120,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
             this.position = position;
         }
 
-        public void setCheckBoxAllOff(){
-            checkBoxOff.setChecked(false);
-        }
-
-
     }
-
-
-
-
 
     public void postListStatus(int num){
         clickCount = num;

@@ -174,12 +174,9 @@ public class ProfileActivity extends AppCompatActivity {
             userProfile.alarmHour = hourOfDay;
             userProfile.alarmMinute = minute;
 
-
-
             userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
             userRef.child("alarmHour").setValue(userProfile.alarmHour);
             userRef.child("alarmMinute").setValue(userProfile.alarmMinute);
-
 
             textViewSetAlarmTime.setText(userAlarmHour + "시 " + userAlarmMinute + "분");
 
