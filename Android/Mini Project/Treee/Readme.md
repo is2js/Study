@@ -1,5 +1,6 @@
 # Treee App
-### Firebase Project
+## Firebase Project
+#### 부제: DailyThreeThanks
 ![appIcon](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/appIcon.png)
 
 <br>
@@ -39,12 +40,17 @@
 
 <br>
 
-## 소스코드 링크
+## Treee App 소스코드
 - #### [전체소스코드](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Treee/app/src/main/java/com/mdy/android/treee)
 
 <br>
 
-## 사용한 것들
+## Treee App 영상
+- #### [어플영상 링크](https://www.youtube.com/watch?v=VR_NBMiT3pM&feature=youtu.be)
+
+<br>
+
+## Treee App에 사용된 개념들
 ### 1. SharedPreference
 - #### 사용자 Uid 저장
 - #### 로그인시 프로필 사진 fileUriString
@@ -637,7 +643,6 @@ userRef.child(memo.memoKey).setValue(null);
 <br>
 
 ### 5. 파일 업로드 (Firebase 스토리지)
-- ####
 ```java
 // 파이어베이스 스토리지
 private StorageReference mStorageRef;
@@ -759,7 +764,114 @@ public String getPathFromUri(Context context, Uri uri){
 
 ### 6. Notification
 - #### Service
+```java
+public class NotiService extends Service {
+
+    private NotificationManager notificationManager;
+    private PendingIntent servicePendingIntent;
+
+    public NotiService() {
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        // TODO: Return the communication channel to the service.
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+
+        Context context = this.getApplicationContext();
+
+
+        Intent mIntent = new Intent(this, LoginActivity.class);
+        servicePendingIntent = PendingIntent.getActivity(context, 0, mIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
+        builder.setContentTitle("하루에 감사한 일 세 가지. Treee");
+        builder.setContentText("오늘 하루도 감사한 일이 참 많습니다.");
+//        builder.setSmallIcon(R.mipmap.ic_launcher_app);
+        builder.setSmallIcon(R.mipmap.ic_launcher_app_round);
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_app_round);
+        builder.setLargeIcon(largeIcon);
+        builder.setContentIntent(servicePendingIntent);
+
+        notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        notificationManager.notify(600, builder.build());
+
+
+        return super.onStartCommand(intent, flags, startId);
+    }
+}
+```
 - #### Broadcast Receiver
+```java
+public class NotiReceiver extends BroadcastReceiver {
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        Intent receiverIntent = new Intent(context, NotiService.class);
+        context.startService(receiverIntent);
+    }
+}
+```
+- #### TimePickerDialog.OnTimeSetListener
+```java
+// 알람 시간 사용자 설정 (TimePicker)
+private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        // 설정 버튼을 눌렀을 때
+        Toast.makeText(getApplicationContext(), "알림 시간이 " + hourOfDay + "시" + minute + "분 으로 설정되었습니다.", Toast.LENGTH_SHORT).show();
+
+        // SharedPreference에 알람 시간(Hour), 분(Minute) 저장
+        PreferenceUtil.setNotiAlarmHour(ProfileActivity.this, hourOfDay);
+        userAlarmHour = hourOfDay;
+
+        PreferenceUtil.setNotiAlarmMinute(ProfileActivity.this, minute);
+        userAlarmMinute = minute;
+
+        // 데이터베이스 Profile에 시간과 분 저장
+        UserProfile userProfile = new UserProfile();
+
+        userProfile.alarmHour = hourOfDay;
+        userProfile.alarmMinute = minute;
+
+        userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
+        userRef.child("alarmHour").setValue(userProfile.alarmHour);
+        userRef.child("alarmMinute").setValue(userProfile.alarmMinute);
+
+        textViewSetAlarmTime.setText(userAlarmHour + "시 " + userAlarmMinute + "분");
+
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, userAlarmHour);
+        calendar.set(Calendar.MINUTE, userAlarmMinute);
+        calendar.set(Calendar.SECOND, 0);
+
+        if(initCount == 12345) {
+            mAlarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
+            Intent alarmIntent = new Intent(ProfileActivity.this, NotiReceiver.class);
+
+            calendar = Calendar.getInstance();
+            long startTime = calendar.getTimeInMillis();
+            long allDayMill = 86400000;
+
+            PendingIntent mPendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
+            mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startTime, allDayMill, mPendingIntent);
+
+        } if(initCount == 678910){
+            Intent cancelIntent = new Intent();
+            PendingIntent delAlarmIntent = PendingIntent.getBroadcast(getBaseContext(), 0, cancelIntent, 0);
+            mAlarmManager = (AlarmManager) getBaseContext().getSystemService(Context.ALARM_SERVICE);
+            mAlarmManager.cancel(delAlarmIntent);
+        }
+    }
+};
+```
+
+
+
+
 
 <br>
 
@@ -820,17 +932,69 @@ public void setNestedList(){
 <br>
 
 
-### 8. AlertDialog / ProgressDialog
-- #### 로그인시
-- #### 파일 업로드시
+### 8. ProgressDialog / AlertDialog
+- #### ProgressDialog (로그인시)
+```java
+// 프로그래스바 정의
+private ProgressDialog loginDialog;
 
+...
 
+// onCreate()에
+loginDialog = new ProgressDialog(this);
+loginDialog.setTitle("로그인");
+loginDialog.setMessage("로그인 하고 있습니다.");
+loginDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
 
+...
 
-- FloatingActionButton
-- 프로그래스바 (로그인 / upload)
-- AlertDialog
-- Firebase 인증 / Firebase 계정 삭제
-- Firebase DB ( 삽입 / 수정 / 삭제 / 읽기)
-- 파일 업로드 ( Firebase 스토리지 )
-- Notibar (Service / Broadcast Receiver)
+// 로그인 시작하는 부분에서
+loginDialog.show();
+
+...
+
+// 로그인 끝나는 부분에서
+loginDialog.dismiss();
+
+```
+- #### AlertDialog (로그아웃시)
+```java
+setAlertDialogLogoutUserAccount();
+
+...
+
+// AlertDialog - ProfileActivity에서 사용자 계정 로그아웃
+public void setAlertDialogLogoutUserAccount(Context context){
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+    // 제목 setting
+    alertDialogBuilder.setTitle("로그아웃");
+
+    // AlertDialog setting
+    alertDialogBuilder
+            .setMessage("로그아웃 하시겠습니까?")
+            .setCancelable(false)
+            .setNegativeButton("예",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 로그아웃을 한다.
+                            logoutUserAccount();
+                        }
+                    })
+            .setPositiveButton("아니오",
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            // 로그아웃을 하지 않는다.
+                            dialog.cancel();
+                        }
+                    });
+
+    // 다이얼로그 생성
+    AlertDialog alertDialog = alertDialogBuilder.create();
+
+    // 다이얼로그 보여주기
+    alertDialog.show();
+}
+```
