@@ -24,9 +24,12 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -50,6 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView txtName, txtEmail;
     TextView txtTreeCountName, txtTotalCount;
     ImageView btnLogout;
+    ImageView btnDeleteUser;
 
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
@@ -60,6 +64,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     // 파이어베이스 인증
     private FirebaseAuth mAuth;
+
+    // 파이어베이스 사용자 삭제
+    private FirebaseUser deleteUser;
 
     // SharedPreference
     SharedPreferences sharedPreferences = null;
@@ -92,6 +99,9 @@ public class ProfileActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("profiles");
 
         mAuth = FirebaseAuth.getInstance();
+
+        // 계정 삭제 관련
+        deleteUser = mAuth.getInstance().getCurrentUser();
 
         txtName.setText(mAuth.getCurrentUser().getDisplayName());
         txtEmail.setText(mAuth.getCurrentUser().getEmail());
@@ -263,6 +273,32 @@ public class ProfileActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+
+        btnDeleteUser = (ImageView) findViewById(R.id.btnDeleteUser);
+        btnDeleteUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteUser.delete()
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    // 계정 삭제에 성공하면
+
+
+                                    finish();
+                                    Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+
+                                }
+                            }
+                        });
+            }
+        });
+
+
     }
 
     @Override
