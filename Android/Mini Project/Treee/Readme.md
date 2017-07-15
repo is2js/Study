@@ -46,7 +46,8 @@
 <br>
 
 ## Treee App 영상
-- #### [어플영상 링크](https://www.youtube.com/watch?v=VR_NBMiT3pM&feature=youtu.be)
+- #### [Treee App 시연 영상](https://www.youtube.com/watch?v=VR_NBMiT3pM&feature=youtu.be)
+- #### [Treee App 설명 영상](https://youtu.be/igLezaQlNJw)
 
 <br>
 
