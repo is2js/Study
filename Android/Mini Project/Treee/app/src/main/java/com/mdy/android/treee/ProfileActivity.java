@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -236,13 +238,7 @@ public class ProfileActivity extends AppCompatActivity {
             textViewSetAlarmTime.setText(tempHour + "시 " + tempMinute + "분");
         }
 
-
-
-
-
-
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
-
 
         String userProfileImageUri = PreferenceUtil.getProfileImageUri(this);
         Log.w("userProfileImageUri", userProfileImageUri);
@@ -265,12 +261,7 @@ public class ProfileActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mAuth.signOut();
-                LoginManager.getInstance().logOut();    // 페이스북 로그아웃 코드 (페이스북이 없으면 안써도 된다.)
-                finish();
-
-                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                startActivity(intent);
+                setAlertDialogLogoutUserAccount(v.getContext());
             }
         });
 
@@ -280,26 +271,114 @@ public class ProfileActivity extends AppCompatActivity {
         btnDeleteUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteUser.delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()){
-                                    // 계정 삭제에 성공하면
-
-
-                                    finish();
-                                    Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-                                    startActivity(intent);
-
-                                }
-                            }
-                        });
+                setAlertDialogDeleteUserAccount(v.getContext());
             }
         });
 
-
     }
+
+
+    // AlertDialog - ProfileActivity에서 사용자 계정 삭제시
+    public void setAlertDialogDeleteUserAccount(Context context){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // 제목 setting
+        alertDialogBuilder.setTitle("계정 삭제");
+
+        // AlertDialog setting
+        alertDialogBuilder
+                .setMessage("정말 계정을 삭제하시겠습니까?")
+                .setCancelable(false)
+                .setNegativeButton("예",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 사용자 계정을 삭제한다.
+                                deleteUserAccount();
+                            }
+                        })
+                .setPositiveButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 사용자 계정을 삭제하지 않는다.
+                                dialog.cancel();
+                            }
+                        });
+
+        // 다이얼로그 생성
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // 다이얼로그 보여주기
+        alertDialog.show();
+    }
+
+
+    // 사용자 계정 삭제
+    private void deleteUserAccount(){
+        deleteUser.delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            // 계정 삭제에 성공하면
+                            finish();
+                            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(ProfileActivity.this, "계정이 삭제되었습니다. \n\n이용해 주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+
+
+    // AlertDialog - ProfileActivity에서 사용자 계정 로그아웃
+    public void setAlertDialogLogoutUserAccount(Context context){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // 제목 setting
+        alertDialogBuilder.setTitle("로그아웃");
+
+        // AlertDialog setting
+        alertDialogBuilder
+                .setMessage("로그아웃 하시겠습니까?")
+                .setCancelable(false)
+                .setNegativeButton("예",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 로그아웃을 한다.
+                                logoutUserAccount();
+                            }
+                        })
+                .setPositiveButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // 로그아웃을 하지 않는다.
+                                dialog.cancel();
+                            }
+                        });
+
+        // 다이얼로그 생성
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // 다이얼로그 보여주기
+        alertDialog.show();
+    }
+
+
+    // 사용자 계정 로그아웃
+    private void logoutUserAccount(){
+        mAuth.signOut();
+        LoginManager.getInstance().logOut();    // 페이스북 로그아웃 코드 (페이스북이 없으면 안써도 된다.)
+        finish();
+
+        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -118,6 +118,7 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    // AlertDialog - ReadActivity에서 개별 데이터 삭제시
     public void setAlertDialog(Context context){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 
