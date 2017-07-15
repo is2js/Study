@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "Google 로그인 버튼이 클릭되었습니다,", Toast.LENGTH_SHORT).show();
+                // Toast.makeText(LoginActivity.this, "Google 로그인 버튼이 클릭되었습니다,", Toast.LENGTH_SHORT).show();
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
@@ -286,7 +286,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         String userEmail = mAuth.getCurrentUser().getEmail();
                         userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
                         userRef.child("userEmail").setValue(userEmail);
-                        Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
+                        // Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                         startActivity(intent);
                         finish();
@@ -301,18 +301,19 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        // 로그인 실패했을때 실행되는 부분
+                        // 기존 아이디로 로그인을 할 경우
                         if (!task.isSuccessful()) {
                             loginUser(email, password);
-                            Toast.makeText(LoginActivity.this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(LoginActivity.this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "잠시만 기다려주세요.", Toast.LENGTH_SHORT).show();
                         } else {
-                            // 로그인 성공했을때 실행되는 부분
+                            // 회원 가입을 할 경우 실행
+                            Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
 
                             // 사용자 이메일 데이터베이스 등록
                             String userEmail = mAuth.getCurrentUser().getEmail();
                             userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
                             userRef.child("userEmail").setValue(userEmail);
-                            Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
                         }
 
                         // ...
@@ -384,7 +385,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             String userEmail = mAuth.getCurrentUser().getEmail();
                             userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
                             userRef.child("userEmail").setValue(userEmail);
-                            Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
