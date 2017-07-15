@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,10 +27,12 @@
 
         <activity
             android:name="com.facebook.FacebookActivity"
+            android:screenOrientation="portrait"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -40,13 +43,20 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".FeedActivity" />
-        <activity android:name=".ReadActivity" />
-        <activity android:name=".ModifyActivity" />
-        <activity android:name=".ListActivity" />
-        <activity android:name=".WriteActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".FeedActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ReadActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ModifyActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ListActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WriteActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".LoginActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="portrait"/>
 
         <service
             android:name=".NotiService"
@@ -58,7 +68,8 @@
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".EnlargeActivity"></activity>
+        <activity android:name=".EnlargeActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
