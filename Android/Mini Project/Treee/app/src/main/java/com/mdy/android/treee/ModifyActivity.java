@@ -177,7 +177,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
                     Log.i("Gallery","imageUri========================="+imageUri);
                     Log.i("filePath", "=============================== " + filePath);
                     updateImage = filePath;
-                    Glide.with(getBaseContext()).load(filePath).into(imageViewGallery);
+                    Glide.with(getBaseContext()).load(filePath).centerCrop().into(imageViewGallery);
                     Toast.makeText(this, "사진이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 //                    imageView.setImageURI(imageUri);
                     break;
@@ -210,7 +210,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
             // 이미지 세팅
             if (memo.fileUriString != null && !"".equals(memo.fileUriString)) {
-                Glide.with(this).load(memo.fileUriString).into(imageViewGallery);
+                Glide.with(this).load(memo.fileUriString).centerCrop().into(imageViewGallery);
             }
 
             // 값 세팅

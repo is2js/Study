@@ -20,42 +20,44 @@
             android:id="@+id/checkBoxOff"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="#c6d794"
-            card_view:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="3dp"
             android:layout_marginLeft="16dp"
-            card_view:layout_constraintLeft_toLeftOf="parent" />
+            android:layout_marginTop="3dp"
+            android:buttonTint="#c6d794"
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/txtDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="-1dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="NotoSansCJKkr-Medium"
             android:text="Date"
             android:textColor="#acacac"
-            card_view:layout_constraintLeft_toRightOf="@+id/imageView2"
-            android:layout_marginStart="10dp"
             card_view:layout_constraintBottom_toBottomOf="@+id/imageView2"
-            android:layout_marginBottom="-1dp" />
+            card_view:layout_constraintLeft_toRightOf="@+id/imageView2" />
 
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:layout_marginLeft="24dp"
-            card_view:layout_constraintLeft_toLeftOf="parent"
-            card_view:srcCompat="@drawable/feedtime"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            card_view:layout_constraintTop_toBottomOf="@+id/checkBoxOff" />
+            card_view:layout_constraintLeft_toLeftOf="parent"
+            card_view:layout_constraintTop_toBottomOf="@+id/checkBoxOff"
+            card_view:srcCompat="@drawable/feedtime" />
 
         <TextView
             android:id="@+id/txtContent1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="20dp"
             android:ellipsize="end"
             android:fontFamily="NotoSansCJKkr-Medium"
@@ -65,16 +67,16 @@
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/txtDate"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp" />
+            card_view:layout_constraintTop_toBottomOf="@+id/txtDate" />
 
         <TextView
             android:id="@+id/txtContent2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="15dp"
             android:ellipsize="end"
             android:fontFamily="NotoSansCJKkr-Medium"
@@ -84,16 +86,16 @@
             android:textColor="#505050"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/txtContent1"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp" />
+            card_view:layout_constraintTop_toBottomOf="@+id/txtContent1" />
 
         <TextView
             android:id="@+id/txtContent3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="15dp"
             android:ellipsize="end"
             android:fontFamily="NotoSansCJKkr-Medium"
@@ -103,13 +105,11 @@
             card_view:layout_constraintHorizontal_bias="0.0"
             card_view:layout_constraintLeft_toLeftOf="parent"
             card_view:layout_constraintRight_toRightOf="parent"
-            card_view:layout_constraintTop_toBottomOf="@+id/txtContent2"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp" />
+            card_view:layout_constraintTop_toBottomOf="@+id/txtContent2" />
 
         <android.support.v7.widget.CardView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="220dp"
+            android:layout_height="110dp"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
@@ -123,8 +123,8 @@
 
             <ImageView
                 android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="220dp"
+                android:layout_height="110dp"
                 card_view:srcCompat="@android:drawable/ic_menu_gallery" />
         </android.support.v7.widget.CardView>
 

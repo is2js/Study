@@ -69,7 +69,7 @@ public class ReadActivity extends AppCompatActivity implements View.OnClickListe
 
             // 이미지 세팅
             if (memo.fileUriString != null && !"".equals(memo.fileUriString)) {
-                Glide.with(this).load(memo.fileUriString).into(imageViewGallery);
+                Glide.with(this).load(memo.fileUriString).centerCrop().into(imageViewGallery);
             }
 
 

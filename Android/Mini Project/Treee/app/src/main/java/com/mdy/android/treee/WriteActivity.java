@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -171,7 +172,8 @@ public class WriteActivity extends AppCompatActivity implements View.OnClickList
                     Log.i("Gallery","imageUri========================="+imageUri);
                     Log.i("Gallery","filePath========================="+filePath);
                     txtImage.setText(filePath);
-                    imageViewGallery.setImageURI(imageUri);
+                    Glide.with(this).load(imageUri).centerCrop().into(imageViewGallery);
+//                    imageViewGallery.setImageURI(imageUri);
                     //Glide.with(getBaseContext()).load(filePath).into(imageViewGallery);
                     Toast.makeText(this, "사진이 등록되었습니다.", Toast.LENGTH_SHORT).show();
 //                    imageView.setImageURI(imageUri);
