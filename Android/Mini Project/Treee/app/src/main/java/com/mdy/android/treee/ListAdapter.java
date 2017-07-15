@@ -131,7 +131,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
 
 
 
-    public void postStatus(int num){
+    public void postListStatus(int num){
         clickCount = num;
     }
 

@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
 
     List<Memo> data = new ArrayList<>();
     LayoutInflater inflater;
+    int clickCount;
 
     public FeedAdapter(Context context) {
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -45,16 +47,21 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
         holder.txtContent2.setText(memo.content2);
         holder.txtContent3.setText(memo.content3);
         holder.txtDate.setText(memo.date);
-//.bitmapTransform(new GrayscaleTransformation(inflater.getContext()), new CropSquareTransformation(inflater.getContext()), new RoundedCornersTransformation(inflater.getContext(), 20, 5))
 
         Glide.with(inflater.getContext())
                 .load(memo.fileUriString)
-//                .bitmapTransform(new RoundedCornersTransformation(inflater.getContext(), 100, 20), new CenterCrop(inflater.getContext()))
-//                .bitmapTransform(new CropSquareTransformation(inflater.getContext()))
                 .centerCrop()
                 .into(holder.imageView);
 
         holder.setPosition(position);
+
+        if(clickCount %2 == 1){
+            holder.checkBoxOff.setVisibility(View.VISIBLE);
+        } else if (clickCount %2 == 0){
+            memo.check_flag = false;
+            holder.checkBoxOff.setChecked(false);
+            holder.checkBoxOff.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -62,12 +69,12 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
         return data.size();
     }
 
-
     class Holder extends RecyclerView.ViewHolder {
         private int position;
         TextView txtContent1, txtContent2, txtContent3;
         TextView txtDate;
         ImageView imageView;
+        CheckBox checkBoxOff;
 
         public Holder(View itemView) {
             super(itemView);
@@ -76,6 +83,18 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
             txtContent3 = (TextView) itemView.findViewById(R.id.txtContent3);
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
+            checkBoxOff = (CheckBox) itemView.findViewById(R.id.checkBoxOff);
+
+            checkBoxOff.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(checkBoxOff.isChecked() == true){
+                        data.get(position).check_flag = true;
+                    } else if (checkBoxOff.isChecked() == false){
+                        data.get(position).check_flag = false;
+                    }
+                }
+            });
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -90,5 +109,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
         public void setPosition(int position) {
             this.position = position;
         }
+    }
+
+    public void postFeedStatus(int num){
+        clickCount = num;
     }
 }

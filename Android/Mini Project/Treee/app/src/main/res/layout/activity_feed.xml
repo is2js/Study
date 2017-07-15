@@ -19,16 +19,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/feedtreee" />
 
-    <ImageView
+    <Button
         android:id="@+id/btnMinus"
         android:layout_width="25dp"
         android:layout_height="25dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginStart="30dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewTopTree"
-        app:srcCompat="@drawable/minus"
-        android:layout_marginLeft="30dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:background="@drawable/minus"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTopTree" />
 
     <ImageView
         android:id="@+id/btnProfile"
@@ -130,6 +130,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:srcCompat="@drawable/fabfull" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="13dp"
+        android:background="@drawable/listtrashcan"
+        app:layout_constraintLeft_toRightOf="@+id/btnMinus"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewTopTree" />
 
 
 </android.support.constraint.ConstraintLayout>

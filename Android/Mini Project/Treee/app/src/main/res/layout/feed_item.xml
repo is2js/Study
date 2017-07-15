@@ -23,7 +23,7 @@
             android:buttonTint="#c6d794"
             card_view:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="3dp"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="16dp"
             card_view:layout_constraintLeft_toLeftOf="parent" />
 
         <TextView

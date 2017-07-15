@@ -183,11 +183,11 @@ public class ListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (clickCount %2 == 0) {
                     btnMinus.setBackgroundResource(R.drawable.minus);
-                    listAdapter.postStatus(clickCount);
+                    listAdapter.postListStatus(clickCount);
                     listAdapter.notifyDataSetChanged();
                 } else if (clickCount %2 == 1) {
                     btnMinus.setBackgroundResource(R.drawable.listcheckboxon);
-                    listAdapter.postStatus(clickCount);
+                    listAdapter.postListStatus(clickCount);
                     listAdapter.notifyDataSetChanged();
                 }
                 clickCount++;
@@ -206,7 +206,7 @@ public class ListActivity extends AppCompatActivity {
 
 
     // 체크된 데이터 삭제
-    public void deleteItems(){
+    private void deleteItems(){
         for(Memo memoItem : Data.list){
             if(memoItem.check_flag == true){
                 memoRef.child(memoItem.memoKeyName).setValue(null);

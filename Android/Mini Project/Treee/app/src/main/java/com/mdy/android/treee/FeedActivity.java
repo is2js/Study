@@ -10,6 +10,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,9 +27,11 @@ import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
 
-    ImageView btnMinus, btnFeedIcon, btnProfile;
+    ImageView btnFeedIcon, btnProfile;
     ImageView imageViewTopTree, imageViewBottomTree;
     ImageView imageViewText;
+    Button btnMinus;
+    Button btnDelete;
 
     //플로팅 버튼을 스크롤 하는 정도에 따라 나타나게 하기 위한 전역변수 준비 시작
     FloatingActionButton fabFeed;
@@ -39,9 +42,11 @@ public class FeedActivity extends AppCompatActivity {
     RecyclerView recyclerFeed;
     FeedAdapter feedAdapter;
 
+    int clickCount = 1;
+
     // 파이어베이스 데이터베이스
     FirebaseDatabase database;
-    DatabaseReference userRef;
+    DatabaseReference userRef, memoRef;
 
     // 파이어베이스 인증
     FirebaseAuth auth;
@@ -56,6 +61,7 @@ public class FeedActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
+        memoRef = database.getReference("memo");
         String userUid = PreferenceUtil.getUid(this);
         userRef = database.getReference("user").child(userUid).child("memo");
 
@@ -139,7 +145,7 @@ public class FeedActivity extends AppCompatActivity {
 
 
     public void setViews(){
-        btnMinus = (ImageView) findViewById(R.id.btnMinus);
+        btnMinus = (Button) findViewById(R.id.btnMinus);
         btnFeedIcon = (ImageView) findViewById(R.id.btnListIcon);
         btnFeedIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,5 +182,41 @@ public class FeedActivity extends AppCompatActivity {
         feedAdapter = new FeedAdapter(this);
         recyclerFeed.setAdapter(feedAdapter);
         recyclerFeed.setLayoutManager(new LinearLayoutManager(this));
+
+
+        btnMinus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (clickCount %2 == 0) {
+                    btnMinus.setBackgroundResource(R.drawable.minus);
+                    feedAdapter.postFeedStatus(clickCount);
+                    feedAdapter.notifyDataSetChanged();
+                } else if (clickCount %2 == 1) {
+                    btnMinus.setBackgroundResource(R.drawable.listcheckboxon);
+                    feedAdapter.postFeedStatus(clickCount);
+                    feedAdapter.notifyDataSetChanged();
+                }
+                clickCount++;
+            }
+        });
+
+        btnDelete = (Button) findViewById(R.id.btnDelete);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteItems();
+            }
+        });
+    }
+
+    // 체크된 데이터 삭제
+    private void deleteItems(){
+        for(Memo memoItem : Data.list){
+            if(memoItem.check_flag == true){
+                memoRef.child(memoItem.memoKeyName).setValue(null);
+                userRef.child(memoItem.memoKeyName).setValue(null);
+            }
+        }
+        feedAdapter.notifyDataSetChanged();
     }
 }
