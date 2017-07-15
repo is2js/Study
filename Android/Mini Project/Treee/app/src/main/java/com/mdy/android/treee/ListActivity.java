@@ -117,7 +117,7 @@ public class ListActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot data) {
                 Data.list.clear();
                 for( DataSnapshot item : data.getChildren() ){
-                    // json 데이터를 Bbs 인스턴스로 변환오류 발생 가능성 있어서 예외처리 필요
+                    // json 데이터를 Memo 인스턴스로 변환오류 발생 가능성 있어서 예외처리 필요
                     try {
                         Memo memo = item.getValue(Memo.class);
                         if(memo.userUid.equals(auth.getCurrentUser().getUid()) ) {
