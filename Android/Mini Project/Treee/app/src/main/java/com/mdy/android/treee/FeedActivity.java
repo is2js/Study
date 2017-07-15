@@ -1,9 +1,12 @@
 package com.mdy.android.treee;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +29,8 @@ import com.mdy.android.treee.util.PreferenceUtil;
 import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
+
+// TODO 1 - (1)  public static  Context mContext;
 
     ImageView btnFeedIcon, btnProfile;
     ImageView imageViewTopTree, imageViewBottomTree;
@@ -59,6 +64,8 @@ public class FeedActivity extends AppCompatActivity {
         setFabFeed();
         setNestedFeed();
 
+// TODO 1- (2)       mContext = FeedActivity.this;
+
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
         memoRef = database.getReference("memo");
@@ -67,6 +74,14 @@ public class FeedActivity extends AppCompatActivity {
 
         loadFeedData();
     }
+
+    // TODO 1- (3)
+    /*@Override
+    protected void onResume() {
+        super.onResume();
+        loadFeedData();
+        Log.w("FeedAcitivity Notify", "=================== FeedAcitivity Notify ==============");
+    }*/
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -204,7 +219,7 @@ public class FeedActivity extends AppCompatActivity {
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteItems();
+                setAlertDialogDeleteFeedData(FeedActivity.this);
             }
         });
     }
@@ -218,5 +233,42 @@ public class FeedActivity extends AppCompatActivity {
             }
         }
         feedAdapter.notifyDataSetChanged();
+    }
+
+
+
+    // AlertDialog - FeedActivity에서 체크된 데이터 삭제시
+    public void setAlertDialogDeleteFeedData(Context context){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // 제목 setting
+        alertDialogBuilder.setTitle("Treee 삭제");
+
+        // AlertDialog setting
+        alertDialogBuilder
+                .setMessage("Treee를 삭제하시겠습니까?")
+                .setCancelable(false)
+                .setNegativeButton("예",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Treee를 삭제한다.
+                                deleteItems();
+                            }
+                        })
+                .setPositiveButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // Treee를 삭제하지 않는다.
+                                dialog.cancel();
+                            }
+                        });
+
+        // 다이얼로그 생성
+        AlertDialog alertDialog = alertDialogBuilder.create();
+
+        // 다이얼로그 보여주기
+        alertDialog.show();
     }
 }

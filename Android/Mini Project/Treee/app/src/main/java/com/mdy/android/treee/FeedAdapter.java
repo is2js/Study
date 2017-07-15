@@ -2,7 +2,9 @@ package com.mdy.android.treee;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,10 +50,17 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
         holder.txtContent3.setText(memo.content3);
         holder.txtDate.setText(memo.date);
 
-        Glide.with(inflater.getContext())
-                .load(memo.fileUriString)
-                .centerCrop()
-                .into(holder.imageView);
+        // 이미지가 없으면 cardview 안보이게
+        if(memo.fileUriString != null && !"".equals(memo.fileUriString)) {
+            Log.w("memo.fileUriString", "111===================== memo.fileUriString ====================" + memo.fileUriString);
+            Glide.with(inflater.getContext())
+                    .load(memo.fileUriString)
+                    .centerCrop()
+                    .into(holder.imageView);
+        } else {
+            Log.w("memo.fileUriString", "222===================== memo.fileUriString ====================" + memo.fileUriString);
+            holder.cardviewImage.setVisibility(View.INVISIBLE);
+        }
 
         holder.setPosition(position);
 
@@ -75,6 +84,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
         TextView txtDate;
         ImageView imageView;
         CheckBox checkBoxOff;
+        CardView cardviewImage;
 
         public Holder(View itemView) {
             super(itemView);
@@ -84,6 +94,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
             txtDate = (TextView) itemView.findViewById(R.id.txtDate);
             imageView = (ImageView) itemView.findViewById(R.id.imageView);
             checkBoxOff = (CheckBox) itemView.findViewById(R.id.checkBoxOff);
+            cardviewImage = (CardView) itemView.findViewById(R.id.cardviewImage);
 
             checkBoxOff.setOnClickListener(new View.OnClickListener() {
                 @Override

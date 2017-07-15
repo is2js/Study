@@ -1,5 +1,6 @@
 package com.mdy.android.treee;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -64,10 +65,21 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth.AuthStateListener mAuthListener;
     private CallbackManager mCallbackManager;
 
+
+    // 프로그래스바 정의
+    private ProgressDialog loginDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        loginDialog = new ProgressDialog(this);
+        loginDialog.setTitle("로그인");
+        loginDialog.setMessage("로그인 하고 있습니다.");
+        loginDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+
         setViews();
 
         PermissionControl.checkVersion(this);
@@ -191,7 +203,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 //                    userRef.child("userEmail").setValue(userEmail);
 
 //                    PreferenceUtil.setProfileImageUri(LoginActivity.this, "");
-                    // TODO
 
                 } else {
                     // User is signed out
@@ -268,6 +279,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         Log.d(TAG, "token:" + token.describeContents());
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         Log.d(TAG, "credential:" + credential.toString());
+        loginDialog.show();
 
         mAuth.signInWithCredential(credential)
             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -287,6 +299,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
                         userRef.child("userEmail").setValue(userEmail);
                         // Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
+                        loginDialog.dismiss();
                         Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                         startActivity(intent);
                         finish();
@@ -323,6 +336,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     // 이메일 로그인 관련
     private void loginUser(String email, String password){
+        loginDialog.show();
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -334,6 +348,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         } else {
                             Toast.makeText(LoginActivity.this, "이메일 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
 //                            PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
+                            loginDialog.dismiss();
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
                             finish();
@@ -369,7 +384,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-
+        loginDialog.show();
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -386,7 +401,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
                             userRef.child("userEmail").setValue(userEmail);
                             // Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
-
+                            loginDialog.dismiss();
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
                             finish();
