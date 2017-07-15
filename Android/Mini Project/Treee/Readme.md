@@ -1,6 +1,6 @@
 # Treee App
 ### Firebase Project
-# 로고사진!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# ![appIcon](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/appIcon.png)
 
 <br>
 ## Treee App 소개
