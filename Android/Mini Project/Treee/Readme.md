@@ -190,18 +190,14 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-
         // 구글 로그인 버튼 리스너
         btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Toast.makeText(LoginActivity.this, "Google 로그인 버튼이 클릭되었습니다,", Toast.LENGTH_SHORT).show();
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
                 startActivityForResult(signInIntent, RC_SIGN_IN);
             }
         });
-
-
 
         // 이메일 로그인 버튼 리스너 -- 유효성 검사 추가
         btnLoginEmail.setOnClickListener(new View.OnClickListener() {
@@ -226,7 +222,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     // User is signed in
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                     PreferenceUtil.setUid(LoginActivity.this, user.getUid());
-                    Log.w("======== Uid ========", user.getUid());
 
                     userProfileImageRef = database.getReference("user").child(user.getUid()).child("profile");
                     userProfileImageRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -263,13 +258,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 // 알람이 저장되어 있지 않으면
                                 if(userProfile.alarmHour == 0 && userProfile.alarmMinute == 0){
                                     setAlarmTime(0, 0);
-                                    Log.w("11userProfile.alarmHour", "===============" + userProfile.alarmHour);
-                                    Log.w("11userProfile.alarmMinute", "===============" + userProfile.alarmMinute);
                                 } else {
                                     // 알람이 저장되어 있으면
                                     setAlarmTime(userProfile.alarmHour, userProfile.alarmMinute);
-                                    Log.w("22userProfile.alarmHour", "===============" + userProfile.alarmHour);
-                                    Log.w("22userProfile.alarmMinute", "===============" + userProfile.alarmMinute);
                                 }
                             } catch (Exception e) {
                                 Log.e("Firebase", e.getMessage());
@@ -281,16 +272,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                         }
                     });
-
-
-//                    Log.w("===== DisplayName =====", mAuth.getCurrentUser().getDisplayName());
-
-//                    String userEmail = mAuth.getCurrentUser().getEmail();
-//                    userRef = database.getReference("user").child(user.getUid()).child("profile");
-//                    userRef.child("userEmail").setValue(userEmail);
-
-//                    PreferenceUtil.setProfileImageUri(LoginActivity.this, "");
-
                 } else {
                     // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
@@ -379,13 +360,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                                 Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "FaceBook 아이디 연동 성공", Toast.LENGTH_SHORT).show();
-//                        PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
 
                         // 사용자 이메일 데이터베이스 등록
                         String userEmail = mAuth.getCurrentUser().getEmail();
                         userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
                         userRef.child("userEmail").setValue(userEmail);
-                        // Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
                         loginDialog.dismiss();
                         Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                         startActivity(intent);
@@ -404,7 +383,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         // 기존 아이디로 로그인을 할 경우
                         if (!task.isSuccessful()) {
                             loginUser(email, password);
-                            // Toast.makeText(LoginActivity.this, "회원가입에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             Toast.makeText(LoginActivity.this, "잠시만 기다려주세요.", Toast.LENGTH_SHORT).show();
                         } else {
                             // 회원 가입을 할 경우 실행
@@ -430,11 +408,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                     public void onComplete(@NonNull Task<AuthResult> task) {
 //                        Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
                         if (!task.isSuccessful()) {
-//                            Log.w(TAG, "signInWithEmail:failed", task.getException());
                             Toast.makeText(LoginActivity.this, "이메일 로그인에 실패하였습니다.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "이메일 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
-//                            PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
                             loginDialog.dismiss();
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
@@ -481,13 +457,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                             Toast.makeText(LoginActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(LoginActivity.this, "Google 아이디 인증이 성공하였습니다.", Toast.LENGTH_SHORT).show();
-//                            PreferenceUtil.saveUidPreference(LoginActivity.this, mAuth);
 
                             // 사용자 이메일 데이터베이스 등록
                             String userEmail = mAuth.getCurrentUser().getEmail();
                             userRef = database.getReference("user").child(mAuth.getCurrentUser().getUid()).child("profile");
                             userRef.child("userEmail").setValue(userEmail);
-                            // Toast.makeText(LoginActivity.this, "회원가입이 성공되었습니다.", Toast.LENGTH_SHORT).show();
                             loginDialog.dismiss();
                             Intent intent = new Intent(LoginActivity.this, FeedActivity.class);
                             startActivity(intent);
@@ -790,7 +764,6 @@ public class NotiService extends Service {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this);
         builder.setContentTitle("하루에 감사한 일 세 가지. Treee");
         builder.setContentText("오늘 하루도 감사한 일이 참 많습니다.");
-//        builder.setSmallIcon(R.mipmap.ic_launcher_app);
         builder.setSmallIcon(R.mipmap.ic_launcher_app_round);
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_app_round);
         builder.setLargeIcon(largeIcon);
