@@ -19,23 +19,23 @@
 <br>
 
 ## Treee App 화면
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/1_login.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/2_feedFirst.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/3_listFirst.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/4_read.png' width='210' height='350' />
+<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/1_splash.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/2_login.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/3_feedFirst.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/4_listFirst.png' width='210' height='350' />
 
 <br>
 
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/5_modify.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/6_delete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/7_feedFAB.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/8_listFAB.png' width='210' height='350' />
+<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/5_read.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/6_modify.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/7_delete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/8_feedFAB.png' width='210' height='350' />
 
 <br>
 
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/9_feedCheckBox.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/10_feedCheckBoxDelete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/11_listCheckBox.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/12_listCheckBoxDelete.png' width='210' height='350' />
+<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/9_listFAB.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/10_feedCheckBox.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/11_feedCheckBoxDelete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/12_listCheckBox.png' width='210' height='350' />
 
 <br>
 
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/13_profileImage.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/14_profileNotiOn.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/15_profileTimePickerDialog.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/16_profileNotiTimeSet.png' width='210' height='350' />
+<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/13_listCheckBoxDelete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/14_profileImage.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/15_profileNotiOn.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/16_profileTimePickerDialog.png' width='210' height='350' />
 
 <br>
 
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/17_notiAlarm.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/18_logout.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/19_accountDelete.png' width='210' height='350' />
+<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/17_profileNotiTimeSet.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/18_notiAlarm.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/19_logout.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/20_accountDelete.png' width='210' height='350' />
 
 
 <br>
@@ -46,16 +46,42 @@
 <br>
 
 ## Treee App 영상
-- #### [Treee App 시연 영상](https://www.youtube.com/watch?v=VR_NBMiT3pM&feature=youtu.be)
-- #### [Treee App 설명 영상](https://youtu.be/igLezaQlNJw)
+- #### [Treee App 시연 영상](https://www.youtube.com/watch?v=igLezaQlNJw&feature=youtu.be)
+- #### [Treee App 설명 영상](https://www.youtube.com/watch?v=VR_NBMiT3pM&feature=youtu.be)
 
 <br>
 
 ## Treee App에 사용된 개념들
+- SharedPreference
+  - 사용자 Uid 저장
+  - 로그인시 프로필 사진 경로 저장 (fileUriString)
+  - Notification 시간 설정값 저장
+- Firebase 로그인
+  - 이메일 회원가입 로그인
+  - 페이스북 계정 연동 로그인
+  - 구글 계정 연동 로그인
+- Firebase 계정 삭제
+- Firebase 데이터베이스
+  - Cretae (생성)
+  - Read (읽기)
+  - Update (수정)
+  - Delete (삭제)
+- Firebase 스토리지(Storage)
+  - 파일 업로드
+- Notification
+  - Service
+  - Broadcast Receiver
+  - TimePickerDialog
+- Floating Action Button (스크롤에 따른 Visible)
+- ProgressDialog (로그인시)
+- AlertDialog (로그아웃 및 삭제시)
+
+<br>
+
 ### 1. SharedPreference
 - #### 사용자 Uid 저장
-- #### 로그인시 프로필 사진 fileUriString
-- #### Notification 시간 설정
+- #### 로그인시 프로필 사진 경로 저장 (fileUriString)
+- #### Notification 시간 설정값 저장
 
 ```java
 public class PreferenceUtil {
@@ -129,8 +155,8 @@ public class PreferenceUtil {
 
 ### 2. Firebase 로그인
 - #### 이메일 회원가입 로그인
-- #### 페이스북 연동 로그인
-- #### 구글 연동 로그인
+- #### 페이스북 계정 연동 로그인
+- #### 구글 계정 연동 로그인
 ```java
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, PermissionControl.CallBack{
 
@@ -530,7 +556,7 @@ private void deleteUserAccount(){
 <br>
 
 ### 4. Firebase 데이터베이스
-- #### Create (삽입)
+- #### Create (생성)
 ```java
 // 파이어베이스 데이터베이스
 FirebaseDatabase database;
@@ -546,7 +572,7 @@ userRef = database.getReference("user").child(userUid).child("memo");
 
 ...
 
-// 데이터베이스 삽입
+// 데이터베이스 생성
 /* 입력할 데이터의 키 생성 */
 String memoKey = memoRef.push().getKey(); // 자동생성된 키를 가져온다.
 memo.memoKeyName = memoKey;
@@ -617,7 +643,8 @@ userRef.child(memo.memoKey).setValue(null);
 
 <br>
 
-### 5. 파일 업로드 (Firebase 스토리지)
+### 5. Firebase 스토리지(Storage)
+- #### 파일 업로드
 ```java
 // 파이어베이스 스토리지
 private StorageReference mStorageRef;
@@ -849,9 +876,8 @@ private TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTim
 
 <br>
 
-### 7. FloatingActionButton
-- #### ListActivity
-- #### FeedActivity
+### 7. Floating Action Button (스크롤에 따른 Visible)
+- #### ListActivity / FeedActivity
 ```java
 // 전역변수 선언 - FloatingActionButton을 스크롤 하는 정도에 따라 나타나게 하기 위한
 FloatingActionButton fabList;
