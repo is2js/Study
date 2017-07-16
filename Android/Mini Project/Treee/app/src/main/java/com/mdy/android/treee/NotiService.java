@@ -39,7 +39,6 @@ public class NotiService extends Service {
         builder.setSmallIcon(R.mipmap.ic_launcher_app_round);
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher_app_round);
         builder.setLargeIcon(largeIcon);
-//        builder.setLargeIcon(R.);
         builder.setContentIntent(servicePendingIntent);
 
         notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
