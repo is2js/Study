@@ -75,12 +75,12 @@ public class ListActivity extends AppCompatActivity {
         //onCreate에서 생성이 완료된 맨 위의 카드뷰(클릭하면 쓰기 액티비티로 이동하는 카드뷰)의
         //크기값을 int 값인 firstCardHeight에 받아서 넘겨줍니다.
         //(firstCardHeight도 미리 전역변수로 설정해두었습니다.)
-        //또한, 카드뷰도 cardviewFeed로 전역변수로 미리 선언하였습니다.
+        //또한, 카드뷰도 cardviewFeed로 전역변수로 미리 선언.
         cardviewList = (CardView) findViewById(R.id.cardviewList);
         firstListcardHeight = cardviewList.getHeight();
     }
 
-    //플로팅 액션 버튼 생성과 클릭 시 발생 이벤트를 정의한 함수입니다.
+    //플로팅 액션 버튼 생성과 클릭 시 발생 이벤트를 정의한 함수.
     public void setFabList(){
         //FloatingActionButton fabList로 전역변수 설정하였습니다.
         fabList = (FloatingActionButton) findViewById(R.id.fabList);

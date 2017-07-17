@@ -44,6 +44,9 @@ import com.mdy.android.treee.domain.UserProfile;
 import com.mdy.android.treee.util.PermissionControl;
 import com.mdy.android.treee.util.PreferenceUtil;
 
+/**
+ * Login 화면 ( 이메일 회원가입 / 페이스북 아이디 연동 / 구글 아이디 연동 )
+ */
 public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, PermissionControl.CallBack{
 
     private static final String TAG = "===FaceBook===";
@@ -56,7 +59,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private TextView textViewTitle;
     private ImageView imageViewLogo;
 
-
     private GoogleApiClient mGoogleApiClient;
 
     private FirebaseDatabase database;
@@ -65,10 +67,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     private FirebaseAuth.AuthStateListener mAuthListener;
     private CallbackManager mCallbackManager;
 
-
     // 프로그래스바 정의
     private ProgressDialog loginDialog;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -63,6 +63,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
         }
 
         holder.setPosition(position);
+        holder.checkBoxOff.setChecked(false);
 
         if(clickCount %2 == 1){
             holder.checkBoxOff.setVisibility(View.VISIBLE);

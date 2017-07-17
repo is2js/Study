@@ -62,6 +62,7 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.Holder> {
                 .into(holder.imageView);
 
         holder.setPosition(position);
+        holder.checkBoxOff.setChecked(false);
 
         if(clickCount %2 == 1){
             holder.checkBoxOff.setVisibility(View.VISIBLE);
