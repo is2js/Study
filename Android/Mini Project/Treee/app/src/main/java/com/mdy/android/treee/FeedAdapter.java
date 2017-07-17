@@ -52,13 +52,14 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.Holder> {
 
         // 이미지가 없으면 cardview 안보이게
         if(memo.fileUriString != null && !"".equals(memo.fileUriString)) {
-            Log.w("memo.fileUriString", "111===================== memo.fileUriString ====================" + memo.fileUriString);
+            Log.e("check", "111===================== memo.fileUriString ====================" + memo.fileUriString);
             Glide.with(inflater.getContext())
                     .load(memo.fileUriString)
                     .centerCrop()
                     .into(holder.imageView);
+            holder.cardviewImage.setVisibility(View.VISIBLE);
         } else {
-            Log.w("memo.fileUriString", "222===================== memo.fileUriString ====================" + memo.fileUriString);
+            Log.e("check", "222===================== memo.fileUriString ====================" + memo.fileUriString);
             holder.cardviewImage.setVisibility(View.INVISIBLE);
         }
 

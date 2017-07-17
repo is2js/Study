@@ -145,7 +145,7 @@ public class ModifyActivity extends AppCompatActivity implements View.OnClickLis
 
         userRef.child(memo.memoKeyName).setValue(memo);
 
-        // TODO 1 - (4)   ((FeedActivity)(FeedActivity.mContext)).onResume();
+        // TODO 1 - (4)
 
         // 3. 생성된 키를 레퍼런스로 데이터를 입력
         //   insert와 update, delete 는 동일하게 동작

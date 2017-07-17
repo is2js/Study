@@ -30,7 +30,8 @@ import java.util.List;
 
 public class FeedActivity extends AppCompatActivity {
 
-// TODO 1 - (1)  public static  Context mContext;
+// TODO 1 - (1)
+public static  Context mContext;
 
     ImageView btnFeedIcon, btnProfile;
     ImageView imageViewTopTree, imageViewBottomTree;
@@ -76,12 +77,11 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     // TODO 1- (3)
-    /*@Override
+    @Override
     protected void onResume() {
         super.onResume();
-        loadFeedData();
         Log.w("FeedAcitivity Notify", "=================== FeedAcitivity Notify ==============");
-    }*/
+    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -126,11 +126,13 @@ public class FeedActivity extends AppCompatActivity {
 
 
 
-
+    int listenerCounter = 0;
     public void loadFeedData(){
+        Log.e("check", "Log 1111111111111");
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot data) {
+                Log.e("check", "Log 222222222222=======c="+listenerCounter);
                 Data.list.clear();
                 for( DataSnapshot item : data.getChildren() ){
                     // json 데이터를 Memo 인스턴스로 변환오류 발생 가능성 있어서 예외처리 필요
