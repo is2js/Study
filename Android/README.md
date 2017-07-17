@@ -3,8 +3,14 @@
 ## Contents :open_file_folder:
 
 
+## Firebase 프로젝트 (Treee App)
+### [Treee application](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Treee)
+##### (부제: DailyThreeThanks)
 
-### [Mini Project]
+<br>
+<br>
+
+## Mini Project
   #### 1. [HelloAndroid](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/HelloAndroid)
   - 클릭리스너 3가지 방법 / Travis 연결
 
@@ -171,6 +177,10 @@
   - FireBase를 이용한 간단한 게시판 구현
     - FireBase 데이터 CRUD
     - NaviGation Drawer Activity
+
+  #### 41. [람다식 (Lambda Expression)](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Studio3Begin)
+  - 람다식 (Lambda Expression)
+  - FindViewByMe
 
 
 *****
