@@ -185,5 +185,7 @@
   #### 42. [옵저버 패턴 (Observer Pattern)](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic01)
   - 옵저버 패턴 (Observer Pattern)
 
-
-*****
+  #### 43. [RxJava (Observer, Observable)](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic02)
+  - RxJava의 Observer, Observable
+  - Observable 생성 연산자
+    - `Create`, `Just`, `From`, `Defer`
