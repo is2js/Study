@@ -37,6 +37,11 @@ public class Subject extends Thread{
         observers.add(observer);
     }
 
+    // 옵저버를 삭제하는 함수
+    public void deleteObserver(int count){
+        observers.remove(count);
+    }
+
     // 옵저버에 공지하는 함수
     public interface Observer {
         public void notification(String msg);
