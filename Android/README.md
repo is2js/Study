@@ -182,5 +182,8 @@
   - 람다식 (Lambda Expression)
   - FindViewByMe
 
+  #### 42. [옵저버 패턴 (Observer Pattern)](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic01)
+  - 옵저버 패턴 (Observer Pattern)
+
 
 *****
