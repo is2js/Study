@@ -185,13 +185,20 @@ public class ProfileActivity extends AppCompatActivity {
             calendar.set(Calendar.MINUTE, userAlarmMinute);
             calendar.set(Calendar.SECOND, 0);
 
+            Log.w("Calendar.HOUR_OF_DAY", "================= 0 " + calendar.get(Calendar.HOUR_OF_DAY));
+            Log.w("Calendar.MINUTE", "================= 0 " + calendar.get(Calendar.MINUTE));
+
             if(initCount == 12345) {
                 mAlarmManager = (AlarmManager) getBaseContext().getSystemService(ALARM_SERVICE);
                 Intent alarmIntent = new Intent(ProfileActivity.this, NotiReceiver.class);
 
-                calendar = Calendar.getInstance();
+                Log.w("Calendar.HOUR_OF_DAY", "================= 1 " + calendar.get(Calendar.HOUR_OF_DAY));
+                Log.w("Calendar.MINUTE", "================= 1 " + calendar.get(Calendar.MINUTE));
+//                calendar = Calendar.getInstance();
                 long startTime = calendar.getTimeInMillis();
                 long allDayMill = 86400000;
+                Log.w("Calendar.HOUR_OF_DAY", "================= 2 " + calendar.get(Calendar.HOUR_OF_DAY));
+                Log.w("Calendar.MINUTE", "================= 2 " + calendar.get(Calendar.MINUTE));
 
                 PendingIntent mPendingIntent = PendingIntent.getBroadcast(getBaseContext(), 0, alarmIntent, PendingIntent.FLAG_CANCEL_CURRENT);
                 mAlarmManager.setRepeating(AlarmManager.RTC_WAKEUP, startTime, allDayMill, mPendingIntent);
