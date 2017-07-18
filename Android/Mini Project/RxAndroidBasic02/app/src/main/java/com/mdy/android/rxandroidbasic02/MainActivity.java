@@ -1,5 +1,6 @@
 package com.mdy.android.rxandroidbasic02;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,17 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 
-    private Button btnJust;
-    private Button btnFrom;
-    private Button btnDefer;
+public class MainActivity extends AppCompatActivity{
+
     private TextView txtResult;
 
     // 목록
@@ -30,48 +31,114 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setViews();
-        setListeners();
+        initObservable();
     }
 
     private void setViews() {
-        btnJust = (Button) findViewById(R.id.btnJust);
-        btnFrom = (Button) findViewById(R.id.btnFrom);
-        btnDefer = (Button) findViewById(R.id.btnDefer);
         txtResult = (TextView) findViewById(R.id.txtResult);
         recycler = (RecyclerView) findViewById(R.id.recycler);
 
-        adapter = new CustomAdapter(data);
+        adapter = new CustomAdapter(data, this);
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    private void setListeners(){
-        btnJust.setOnClickListener(this);
-        btnFrom.setOnClickListener(this);
-        btnDefer.setOnClickListener(this);
+
+    Observable<String> forFrom;
+    Observable<Memo> forJust;
+    Observable<String> forDefer;
+
+    private void initObservable(){
+        // from 생성
+        String fromData[] = {"aaa", "bbb", "ccc", "ddd", "eee"};
+        forFrom = Observable.fromArray(fromData);
+
+        // just 생성
+        Memo memo1 = new Memo("Hello");
+        Memo memo2 = new Memo("Android");
+        Memo memo3 = new Memo("with");
+        Memo memo4 = new Memo("Reactive X");
+
+        forJust = Observable.just(memo1, memo2, memo3, memo4);
+
+        // defer 생성
+        // 선언할때 메모리에 올라가지 않고, 호출해서 발행할때 메모리에 올라간다.
+        forDefer = Observable.defer(new Callable<ObservableSource<? extends String>>() {
+            @Override
+            public ObservableSource<? extends String> call() throws Exception {
+                return Observable.just("monday", "tuesday", "wednesday");
+            }
+        });
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnFrom:
-                break;
-            case R.id.btnJust :
-                break;
-            case R.id.btnDefer:
-                break;
-        }
+    // xml의 onClick에 바인드됨.
+    public void doFrom(View view){
+        // 원형
+//        forFrom.subscribe(
+//                new Consumer<String>() {        // onNext 가 대응
+//                    @Override
+//                    public void accept(String str) throws Exception {
+//                        data.add(str);
+//                    }
+//                },
+//                new Consumer<Throwable>() {     // onError 가 대응
+//                    @Override
+//                    public void accept(Throwable throwable) throws Exception {
+//                        /*일단 아무것도 안함*/
+//                    }
+//                },
+//                new Action() {                  // onComplete 가 대응
+//                    @Override
+//                    public void run() throws Exception {
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }
+//        );
+
+        // 람다표현식
+        forFrom.subscribe(
+                (str) -> data.add(str),                     // 옵저버블(발행자:emitter)로 부터 데이터를 가져온다.
+                t     -> { /*일단 아무것도 안함*/},
+                ()    -> adapter.notifyDataSetChanged()     // 완료되면 리스트에 알린다.
+        );
     }
+    public void doJust(View view){
+        forJust.subscribe(
+                obj -> data.add(obj.content),
+                t     -> { /*일단 아무것도 안함*/},
+                ()    -> adapter.notifyDataSetChanged()
+        );
+    }
+    public void doDefer(View view){
+        forDefer.subscribe(
+                (str) -> data.add(str),                     // 옵저버블(발행자:emitter)로 부터 데이터를 가져온다.
+                t     -> { /*일단 아무것도 안함*/},
+                ()    -> adapter.notifyDataSetChanged()     // 완료되면 리스트에 알린다.
+        );
+    }
+
+
+
 }
 
+
+// just 생성자를 위한 클래스
+class Memo {
+    String content;
+
+    public Memo(String content){
+        this.content = content;
+    }
+}
 
 class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder>{
 
     List<String> data;
     LayoutInflater inflater;
 
-    public CustomAdapter(List<String> data){
+    public CustomAdapter(List<String> data, Context context){
         this.data = data;
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
