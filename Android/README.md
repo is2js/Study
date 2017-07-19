@@ -186,11 +186,15 @@
   - 옵저버 패턴 (Observer Pattern)
 
   #### 43. [RxJava (Observer, Observable)](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic02)
-  - RxJava의 Observer, Observable
+  - RxJava 의 Observer, Observable
   - Observable 생성 연산자
     - `Create`, `Just`, `From`, `Defer`
 
-  #### 44. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
+  #### 44. [RxAndroidBasic03](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic03)
+  - RxJava - Observable의 유틸리티 연산자 `SubscribeOn` , `ObserveOn`
+  - ListView, RecyclerView의 효율적인 사용
+
+  #### 45. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
   - View Animation
       - `translate`, `rotate`, `scale`, `alpha`
   - Property Animation
