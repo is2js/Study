@@ -189,3 +189,8 @@
   - RxJava의 Observer, Observable
   - Observable 생성 연산자
     - `Create`, `Just`, `From`, `Defer`
+
+  #### 44. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
+  - View Animation
+      - `translate`, `rotate`, `scale`, `alpha`
+  - Property Animation
