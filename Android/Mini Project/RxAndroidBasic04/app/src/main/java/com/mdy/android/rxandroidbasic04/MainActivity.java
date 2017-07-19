@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity {
 
     private Button btnMap;
     private Button btnFlatMap;
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setViews();
-        setListeners();
 
         adapter = new RecyclerAdapter(this, data);
         recyclerView.setAdapter(adapter);
@@ -48,11 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
     }
 
-    private void setListeners() {
-        btnMap.setOnClickListener(this);
-        btnFlatMap.setOnClickListener(this);
-        btnZip.setOnClickListener(this);
-    }
 
     Observable<String> observableMap;
     Observable<Integer> observableFlatMap;
@@ -89,51 +83,55 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         );
     }
 
-
-    @Override
-    public void onClick(View view) {
-        if(view.getId() == R.id.btnMap) {
-            observableMap
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .filter( item -> item.equals("May") ? false : true)
-                    .map(item -> "[" + item + "]")
-                    .subscribe(
-                    item -> {
-                        data.add(item);
-                        adapter.notifyItemInserted(data.size()-1);
-                    },
-                    error -> Log.e("Error", error.getMessage()),
-                    ( ) -> Log.i("Complete", "Successfully completed !")
-            );
-        } else if (view.getId() == R.id.btnFlatMap) {
-            observableFlatMap.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .filter( item -> item.equals("May") ? false : true)
-                    .flatMap(item -> Observable.fromArray(new String[] {
-                            "name : " + months[item], "code : " + item
-                    }))
-                    .subscribe(
-                            item -> {
-                                data.add(item);
-                                adapter.notifyItemInserted(data.size()-1);
-                            },
-                            error -> Log.e("Error", error.getMessage()),
-                            ( ) -> Log.i("Complete", "Successfully completed !")
-                    );
-        } else if (view.getId() == R.id.btnZip) {
-            observableZip
-                    // .timeInterval(TimeUnit.SECONDS, Schedulers.computation())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(
-                            item -> {
-                                data.add(item + "");
-                                adapter.notifyItemInserted(data.size()-1);
-                            },
-                            error -> Log.e("Error", error.getMessage()),
-                            ( ) -> Log.i("Complete", "Successfully completed !")
-                    );
-        }
+    // doMap - onClick
+    public void doMap(View view){
+        observableMap
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter( item -> item.equals("May") ? false : true)
+                .map(item -> "[ " + item + " ]")
+                .subscribe(
+                        item -> {
+                            data.add(item);
+                            adapter.notifyItemInserted(data.size()-1);
+                        },
+                        error -> Log.e("Error", error.getMessage()),
+                        ( ) -> Log.i("Complete", "Successfully completed !")
+                );
     }
+
+    // doFlatMap - onClick
+    public void doFlatMap(View view){
+        observableFlatMap.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .filter( item -> item.equals("May") ? false : true)
+                .flatMap(item -> Observable.fromArray(new String[] {
+                        "name : " + months[item], "code : " + item
+                }))
+                .subscribe(
+                        item -> {
+                            data.add(item);
+                            adapter.notifyItemInserted(data.size()-1);
+                        },
+                        error -> Log.e("Error", error.getMessage()),
+                        ( ) -> Log.i("Complete", "Successfully completed !")
+                );
+    }
+
+    // doZip - onClick
+    public void doZip(View view){
+        observableZip
+                // .timeInterval(TimeUnit.SECONDS, Schedulers.computation())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        item -> {
+                            data.add(item + "");
+                            adapter.notifyItemInserted(data.size()-1);
+                        },
+                        error -> Log.e("Error", error.getMessage()),
+                        ( ) -> Log.i("Complete", "Successfully completed !")
+                );
+    }
+
 }

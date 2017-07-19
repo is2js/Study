@@ -10,35 +10,38 @@
         android:id="@+id/btnMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:onClick="doMap"
         android:text="Do Map"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnFlatMap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Do FlatMap"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnMap"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="doFlatMap"
+        android:text="Do FlatMap"
         app:layout_constraintEnd_toStartOf="@+id/btnZip"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintStart_toEndOf="@+id/btnMap"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnZip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:onClick="doZip"
         android:text="Do Zip"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="8dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler"

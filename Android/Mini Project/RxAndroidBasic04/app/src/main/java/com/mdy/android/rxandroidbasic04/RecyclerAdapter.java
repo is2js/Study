@@ -25,7 +25,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder> {
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+        View view = inflater.inflate(R.layout.list_item, parent, false);
         return new Holder(view);
     }
 
@@ -44,7 +44,7 @@ class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder> {
         TextView textView;
         public Holder(View itemView) {
             super(itemView);
-            textView = (TextView) itemView.findViewById(android.R.id.text1);
+            textView = (TextView) itemView.findViewById(R.id.textView);
         }
     }
 }
