@@ -54,30 +54,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnZip.setOnClickListener(this);
     }
 
-    Observable<Integer> observable;
+    Observable<String> observableMap;
+    Observable<Integer> observableFlatMap;
+    Observable<String> observableZip;
+    String[] months;
     public void emitData(){
         // 캘린더에서 1월 ~ 12월까지 텍스트를 추출
         DateFormatSymbols dfs = new DateFormatSymbols();
-        String[] months = dfs.getMonths();
+        months = dfs.getMonths();
 
-        // 초당 1개씩 데이터 발행
-        observable = Observable.create( emitter  -> {
-            for(int i=0 ; i<12 ; i++){
-                emitter.onNext( (i+1) month);
+        // 초당 1개씩 데이터 발행 - Map
+        observableMap = Observable.create( emitter  -> {
+            for(String month : months){
+                emitter.onNext(month);
                 Thread.sleep(1000);
             }
             emitter.onComplete();
         });
-    }
 
+        // 초당 1개씩 데이터 발행 - FlatMap
+        observableFlatMap = Observable.create( emitter  -> {
+            for(int i=0 ; i<12 ; i++){
+                emitter.onNext(i);
+                Thread.sleep(1000);
+            }
+            emitter.onComplete();
+        });
+
+        // 초당 한번씩 출력하는 로직으로 변경 고민...
+        observableZip = Observable.zip(
+                Observable.just("MDY", "BeWhy"),
+                Observable.just("Developer", "Rapper"),
+                (item1, item2) -> "name : " + item1 + "  /  job : " + item2
+        );
+    }
 
 
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.btnMap) {
-            observable.subscribeOn(Schedulers.io())
+            observableMap
+                    .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .filter( item -> item.equals(("May") ? false : true))
+                    .filter( item -> item.equals("May") ? false : true)
                     .map(item -> "[" + item + "]")
                     .subscribe(
                     item -> {
@@ -88,10 +107,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     ( ) -> Log.i("Complete", "Successfully completed !")
             );
         } else if (view.getId() == R.id.btnFlatMap) {
-            observable.subscribeOn(Schedulers.io())
+            observableFlatMap.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .filter( item -> item.equals(("May") ? false : true))
-                    .map(item -> "[" + item + "]")
+                    .filter( item -> item.equals("May") ? false : true)
+                    .flatMap(item -> Observable.fromArray(new String[] {
+                            "name : " + months[item], "code : " + item
+                    }))
                     .subscribe(
                             item -> {
                                 data.add(item);
@@ -100,13 +121,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             error -> Log.e("Error", error.getMessage()),
                             ( ) -> Log.i("Complete", "Successfully completed !")
                     );
-
-
         } else if (view.getId() == R.id.btnZip) {
-
-
-
-
+            observableZip
+                    // .timeInterval(TimeUnit.SECONDS, Schedulers.computation())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            item -> {
+                                data.add(item + "");
+                                adapter.notifyItemInserted(data.size()-1);
+                            },
+                            error -> Log.e("Error", error.getMessage()),
+                            ( ) -> Log.i("Complete", "Successfully completed !")
+                    );
         }
     }
 }
