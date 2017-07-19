@@ -3,13 +3,14 @@ package com.mdy.android.rxandroidbasic03;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.DateFormatSymbols;
@@ -23,10 +24,13 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
 
     private Button btnAsync;
-    private ListView listView;
+    private RecyclerView recyclerView;
+
+    // private ListView listView;
 
 //    ArrayAdapter<String> adapter;
-    CustomAdapter adapter;
+//    CustomAdapter adapter;
+    RecyclerAdapter adapter;
     Observable<String> observable;
     List<String> data = new ArrayList<>();
 
@@ -36,9 +40,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setViews();
         setListeners();
-        //adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
-        adapter = new CustomAdapter(this, data);
-        listView.setAdapter(adapter);
+        // adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);
+
+        // adapter = new CustomAdapter(this, data);
+        // listView.setAdapter(adapter);
+
+        adapter = new RecyclerAdapter(this, data);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
 
@@ -59,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setViews() {
         btnAsync = (Button) findViewById(R.id.btnAsync);
-        listView = (ListView) findViewById(R.id.listView);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler);
     }
 
     private void setListeners(){
@@ -83,6 +92,41 @@ public class MainActivity extends AppCompatActivity {
                 );
             }
         });
+    }
+}
+
+class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder> {
+    LayoutInflater inflater = null;
+    List<String> data = null;
+
+    public RecyclerAdapter(Context context, List<String> data){
+        inflater = LayoutInflater.from(context);
+        this.data = data;
+    }
+
+    @Override
+    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = inflater.inflate(android.R.layout.simple_list_item_1, parent, false);
+        return new Holder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(Holder holder, int position) {
+        Log.i("Refresh","~~~~~~~~~~~~~~~~~position="+position);
+        holder.textView.setText(data.get(position));
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    class Holder extends RecyclerView.ViewHolder {
+        TextView textView;
+        public Holder(View itemView) {
+            super(itemView);
+            textView = (TextView) itemView.findViewById(android.R.id.text1);
+        }
     }
 }
 
