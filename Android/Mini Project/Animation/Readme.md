@@ -117,9 +117,11 @@ public void onClick(View view) {
 
 <br>
 <br>
+
 ## View Animation 응용
 - #### `res` - `Android resource directory` - 폴더이름: `anim`으로 생성 - 그 안에 `Animation resource file` 생성
 <br>
+
 - rotate_windmill.xml
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -223,8 +225,10 @@ public void onClick(View view) {
 ## Property Animation
 - #### Property Animation은 언제 사용하는가?
   - `View Animation`을 해서 버튼이 이동을 하면 버튼에 리스너가 달려있을 경우, 버튼이 이동하기 전 위치를 클릭해야 동작한다. 이는 버튼에 리스너를 달아놓은 목적을 만족시키지 못한다. 이 때 사용하는 것이 `Property Animation`이다. `Property Animation`을 사용하면 버튼이 이동한 후에 해당 위치에서 버튼을 클릭해도 버튼의 리스너가 동작을 한다.
+
 <br>
-- `Property Animation`은 `View Animation`과는 다르게 xml로 만들어 줄 것이 없고, 소스코드로 동작이 가능하다.
+
+- #### `Property Animation` 은 `View Animation` 과는 다르게 xml로 만들어 줄 것이 없고, 소스코드로 동작이 가능하다.
 <br>
 
 ### 예제코드
@@ -289,4 +293,5 @@ public void onClick(View view) {
 ### 동작화면
 - Prop 버튼을 누르면 `빨간색 Property Animation` 버튼이 Rotate하면서 이동을 한다.
 - 이동을 마친후, Prop 버튼이 아닌 `빨간색 Property Animation` 버튼을 클릭하면 Rotate를 하면서 다시 원위치로 이동을 한다.
+
 <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Animation/graphics/PropertyAnimation_init.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Animation/graphics/PropertyAnimation_ing.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Animation/graphics/PropertyAnimation_finish.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Animation/graphics/PropertyAnimation_reverse.png' width='210' height='350' />
