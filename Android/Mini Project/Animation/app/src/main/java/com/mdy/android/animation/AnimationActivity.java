@@ -39,7 +39,7 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
         ObjectAnimator rotate = null;
 
         switch (view.getId()){
-            case R.id.btnProp :
+            case R.id.btnProp : // Prop 버튼을 클릭
                 transY = ObjectAnimator.ofFloat(
                         btnRed,             // 움직일 대상
                         "translationY",     // 애니메이션 속성
@@ -61,7 +61,7 @@ public class AnimationActivity extends AppCompatActivity implements View.OnClick
                 aniSet.setInterpolator(new AccelerateDecelerateInterpolator()); // 처음엔 빨리, 점점 느리게 하는 애니메이션 도구
                 aniSet.start();
                 break;
-            case R.id.btnRed :
+            case R.id.btnRed :  // 움직인 빨간색 Property Animation 버튼을 클릭
                 // 돌아오는 것
                 transY = ObjectAnimator.ofFloat(
                         btnRed,             // 움직일 대상

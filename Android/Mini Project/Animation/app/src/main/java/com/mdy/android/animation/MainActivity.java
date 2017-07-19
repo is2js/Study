@@ -67,6 +67,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if(animation != null)
             imageView.startAnimation(animation);
-
     }
 }
