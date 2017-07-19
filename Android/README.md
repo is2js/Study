@@ -194,7 +194,13 @@
   - RxJava - Observable의 유틸리티 연산자 `SubscribeOn` , `ObserveOn`
   - ListView, RecyclerView의 효율적인 사용
 
-  #### 45. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
+  #### 45. [RxAndroidBasic04](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic04)
+  - RxJava (Observable 연산자)
+    - Observable 항목 변환 - `Map` , `FlatMap`
+    - Observable 결합 - `Zip`
+    - Observable 필터 - `Filter`
+
+  #### 46. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
   - View Animation
       - `translate`, `rotate`, `scale`, `alpha`
   - Property Animation
