@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setViews();
 
-
         Observable<TextViewTextChangeEvent> idEmitter = RxTextView.textChangeEvents(editEmail);
         Observable<TextViewTextChangeEvent> pwEmitter = RxTextView.textChangeEvents(editPassword);
 
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    // 이메일 유효성 검사
     public static boolean isValidEmail(String email) {
         boolean err = false;
         String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return err;
     }
-
 
     private void setViews() {
         editEmail = (EditText) findViewById(R.id.editEmail);
