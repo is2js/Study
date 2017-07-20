@@ -1,5 +1,5 @@
 # RxAndroidBasic09
-#### `Retrofit` 을 이용해 서울시 Open API 정보를 안드로이드 화면에 출력해본다.
+#### `RxJava`, `Retrofit` 을 이용해 서울시 Open API 정보를 안드로이드 화면에 출력해본다.
 
 
 <br>
@@ -86,46 +86,46 @@ interface IWeather {
 
 - ##### Retrofit 사용
 ```java
-// 1. Retrofit 생성
-                Retrofit client = new Retrofit.Builder()
-                        .baseUrl(SERVER)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .build();
+  // 1. Retrofit 생성
+  Retrofit client = new Retrofit.Builder()
+          .baseUrl(SERVER)
+          .addConverterFactory(GsonConverterFactory.create())
+          .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+          .build();
 
-                // 2. 서비스 생성
-                IWeather service = client.create(IWeather.class);
+  // 2. 서비스 생성
+  IWeather service = client.create(IWeather.class);
 
-                // 3. 옵저버블 생성 ( addCallAdapterFactory(RxJava2CallAdapterFactory.create()) 이걸 해줬기 때문에 가능 )
-                Observable<Data> observable = service.getData(SERVER_KEY, 1, 10, editTextName.getText().toString()+"");
+  // 3. 옵저버블 생성 ( addCallAdapterFactory(RxJava2CallAdapterFactory.create()) 이걸 해줬기 때문에 가능 )
+  Observable<Data> observable = service.getData(SERVER_KEY, 1, 10, editTextName.getText().toString()+"");
 
-                // 4. 발행 시작
-                observable.subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        // 구독 시작
-                        .subscribe(
-                                item -> {
-                                    Row rows[] = item.getRealtimeWeatherStation().getRow();
-                                    data.clear();   // 목록에 있는 것들을 다 삭제한다.
-                                    for(Row row : rows){
-                                        Info info = new Info();
-                                        info.SAWS_OBS_TM = row.getSAWS_OBS_TM();    // 측정일시
-                                        info.STN_NM = row.getSTN_NM();              // 지점명
-                                        info.STN_ID = row.getSTN_ID();              // 지점코드
-                                        info.SAWS_TA_AVG = row.getSAWS_TA_AVG();    // 기온
-                                        info.SAWS_HD = row.getSAWS_HD();            // 습도
-                                        info.CODE = row.getCODE();                  // 풍향1
-                                        info.NAME = row.getNAME();                  // 풍향2
-                                        info.SAWS_WS_AVG = row.getSAWS_WS_AVG();    // 풍속
-                                        info.SAWS_RN_SUM = row.getSAWS_RN_SUM();    // 강수
-                                        info.SAWS_SOLAR = row.getSAWS_SOLAR();      // 일사
-                                        info.SAWS_SHINE = row.getSAWS_SHINE();      // 일조
+  // 4. 발행 시작
+  observable.subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          // 구독 시작
+          .subscribe(
+                  item -> {
+                      Row rows[] = item.getRealtimeWeatherStation().getRow();
+                      data.clear();   // 목록에 있는 것들을 다 삭제한다.
+                      for(Row row : rows){
+                          Info info = new Info();
+                          info.SAWS_OBS_TM = row.getSAWS_OBS_TM();    // 측정일시
+                          info.STN_NM = row.getSTN_NM();              // 지점명
+                          info.STN_ID = row.getSTN_ID();              // 지점코드
+                          info.SAWS_TA_AVG = row.getSAWS_TA_AVG();    // 기온
+                          info.SAWS_HD = row.getSAWS_HD();            // 습도
+                          info.CODE = row.getCODE();                  // 풍향1
+                          info.NAME = row.getNAME();                  // 풍향2
+                          info.SAWS_WS_AVG = row.getSAWS_WS_AVG();    // 풍속
+                          info.SAWS_RN_SUM = row.getSAWS_RN_SUM();    // 강수
+                          info.SAWS_SOLAR = row.getSAWS_SOLAR();      // 일사
+                          info.SAWS_SHINE = row.getSAWS_SHINE();      // 일조
 
-                                        data.add(info);
-                                    }
-                                    adapter.notifyDataSetChanged();
-                                }
-                        );
+                          data.add(info);
+                      }
+                      adapter.notifyDataSetChanged();
+                  }
+          );
 ```
 
 
