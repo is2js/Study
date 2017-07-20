@@ -8,6 +8,9 @@ import android.widget.EditText;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.jakewharton.rxbinding2.widget.TextViewTextChangeEvent;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import io.reactivex.Observable;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,13 +33,23 @@ public class MainActivity extends AppCompatActivity {
                 (idEvent, pwEvent) -> {
                     boolean checkId = idEvent.text().length() >= 5;
                     boolean checkPw = pwEvent.text().length() >= 8;
-                    return checkId && checkPw;
+                    return checkId && checkPw && isValidEmail(idEvent.text().toString());
                 }
         ).subscribe(
             flag -> btnSign.setEnabled(flag)
         );
     }
 
+    public static boolean isValidEmail(String email) {
+        boolean err = false;
+        String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        if(m.matches()) {
+            err = true;
+        }
+        return err;
+    }
 
 
     private void setViews() {
