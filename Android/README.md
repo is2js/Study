@@ -190,17 +190,32 @@
   - Observable 생성 연산자
     - `Create`, `Just`, `From`, `Defer`
 
-  #### 44. [RxAndroidBasic03](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic03)
+  #### 44. [RxJava - Observable의 유틸리티 연산자](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic03)
   - RxJava - Observable의 유틸리티 연산자 `SubscribeOn` , `ObserveOn`
   - ListView, RecyclerView의 효율적인 사용
 
-  #### 45. [RxAndroidBasic04](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic04)
+  #### 45. [RxJava (Observable 연산자)](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic04)
   - RxJava (Observable 연산자)
     - Observable 항목 변환 - `Map` , `FlatMap`
     - Observable 결합 - `Zip`
     - Observable 필터 - `Filter`
 
-  #### 46. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
+  #### 46. [RxJava - Subject](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic05)
+  - RxJava - Subject
+    - PublishSubject
+    - BehaviorSubject
+    - ReplaySubject
+    - AsyncSubject
+
+  #### 47. [RxJava - RxBinding 라이브러리](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic07)
+  - RxJava - RxBinding 라이브러리
+  - RxJava - Observable 결합 - `CombineLatest`
+
+  #### 48. [RxJava - 서울시 Open API를 활용해 데이터 가져오기](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic09)
+  - RxJava / Retrofit 을 이용해 서울시 Open API를 활용해 데이터를 안드로이드 화면에 출력해본다.
+    - `Retrofit` - `@Path`
+
+  #### 49. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
   - View Animation
       - `translate`, `rotate`, `scale`, `alpha`
   - Property Animation
