@@ -71,4 +71,26 @@
         android:text="Subscriber"
         app:layout_constraintStart_toEndOf="@+id/btnBehavior"
         app:layout_constraintTop_toTopOf="@+id/btnBehavior" />
+
+    <Button
+        android:id="@+id/btnReplaySubscriber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:onClick="getReplay"
+        android:text="Subscriber"
+        app:layout_constraintStart_toEndOf="@+id/btnReplay"
+        app:layout_constraintTop_toTopOf="@+id/btnReplay" />
+
+    <Button
+        android:id="@+id/btnAsyncSubscriber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="0dp"
+        android:onClick="getAsync"
+        android:text="Subscriber"
+        app:layout_constraintStart_toEndOf="@+id/btnAsync"
+        app:layout_constraintTop_toTopOf="@+id/btnAsync" />
 </android.support.constraint.ConstraintLayout>
