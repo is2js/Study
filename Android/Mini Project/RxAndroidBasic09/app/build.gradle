@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
 }
 
 dependencies {
@@ -24,7 +28,14 @@ dependencies {
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation 'com.android.support:appcompat-v7:26.0.0-beta2'
+    implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'           // Rx 안드로이드
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'          // Retrofit
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'    // Retrofit json 컨버터
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'   // Retrofit Rx 아답터
+
+    implementation 'com.android.support:recyclerview-v7:26.0.0-beta1'
 }

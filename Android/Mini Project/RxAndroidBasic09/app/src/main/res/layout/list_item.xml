@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/txtSAWS_OBS_TM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="측정일시"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSTN_NM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="지점명"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSTN_ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="지점코드"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSAWS_TA_AVG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기온"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSAWS_HD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="습도"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtCODE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="풍향1"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtNAME"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="풍향2"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSAWS_WS_AVG"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="풍속"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSAWS_RN_SUM"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="강수"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSAWS_SOLAR"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일사"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/txtSAWS_SHINE"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="일조"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+</LinearLayout>
