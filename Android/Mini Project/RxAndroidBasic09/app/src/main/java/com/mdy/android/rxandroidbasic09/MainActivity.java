@@ -73,9 +73,10 @@ public class MainActivity extends AppCompatActivity {
                         // 구독 시작
                         .subscribe(
                                 item -> {
-                                    if(item.getRealtimeWeatherStation() == null){
+                                    // 예외 처리
+                                    if(item.getRealtimeWeatherStation() == null) {
                                         Toast.makeText(getApplicationContext(), "데이터 형식이 올바르지 않습니다.", Toast.LENGTH_LONG).show();
-                                        return;
+                                        return;     // return; 을 해줘야 null 일때 아래 코드가 실행되지 않는다.
                                     }
                                     Row rows[] = item.getRealtimeWeatherStation().getRow();
                                     data.clear();   // 목록에 있는 것들을 다 삭제한다.
