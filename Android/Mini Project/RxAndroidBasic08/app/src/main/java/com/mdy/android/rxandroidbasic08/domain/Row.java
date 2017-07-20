@@ -16,17 +16,17 @@ public class Row
 
     private String NAME;
 
-    private String SAWS_HD;
+    private int SAWS_HD;
 
     private String STN_NM;
 
-    private String SAWS_RN_SUM;
+    private int SAWS_RN_SUM;
 
     private String STN_ID;
 
     private String CODE;
 
-    private String SAWS_TA_AVG;
+    private int SAWS_TA_AVG;
 
     public String getSAWS_SOLAR ()
     {
@@ -78,12 +78,12 @@ public class Row
         this.NAME = NAME;
     }
 
-    public String getSAWS_HD ()
+    public int getSAWS_HD ()
     {
         return SAWS_HD;
     }
 
-    public void setSAWS_HD (String SAWS_HD)
+    public void setSAWS_HD (int SAWS_HD)
     {
         this.SAWS_HD = SAWS_HD;
     }
@@ -98,12 +98,12 @@ public class Row
         this.STN_NM = STN_NM;
     }
 
-    public String getSAWS_RN_SUM ()
+    public int getSAWS_RN_SUM ()
     {
         return SAWS_RN_SUM;
     }
 
-    public void setSAWS_RN_SUM (String SAWS_RN_SUM)
+    public void setSAWS_RN_SUM (int SAWS_RN_SUM)
     {
         this.SAWS_RN_SUM = SAWS_RN_SUM;
     }
@@ -128,12 +128,12 @@ public class Row
         this.CODE = CODE;
     }
 
-    public String getSAWS_TA_AVG ()
+    public int getSAWS_TA_AVG ()
     {
         return SAWS_TA_AVG;
     }
 
-    public void setSAWS_TA_AVG (String SAWS_TA_AVG)
+    public void setSAWS_TA_AVG (int SAWS_TA_AVG)
     {
         this.SAWS_TA_AVG = SAWS_TA_AVG;
     }
