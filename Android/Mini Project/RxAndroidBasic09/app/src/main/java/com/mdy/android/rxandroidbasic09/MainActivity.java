@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mdy.android.rxandroidbasic09.domain.Data;
 import com.mdy.android.rxandroidbasic09.domain.Info;
@@ -72,6 +73,10 @@ public class MainActivity extends AppCompatActivity {
                         // 구독 시작
                         .subscribe(
                                 item -> {
+                                    if(item.getRealtimeWeatherStation() == null){
+                                        Toast.makeText(getApplicationContext(), "데이터 형식이 올바르지 않습니다.", Toast.LENGTH_LONG).show();
+                                        return;
+                                    }
                                     Row rows[] = item.getRealtimeWeatherStation().getRow();
                                     data.clear();   // 목록에 있는 것들을 다 삭제한다.
                                     for(Row row : rows){
