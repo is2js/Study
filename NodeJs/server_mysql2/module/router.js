@@ -6,12 +6,12 @@ var user = require("../user");
 
 // URL 을 분석
 exports.parse = function(request, response){
-    var path = splitQuerystring(request.url);
+    var path = splitQuerystring(request.url);   // request.url을 하면 도메인 뒤를 가져온다.
 
     if(path == "/bbs"){
-        bbs.send(response);
+        parseMethod(bbs, request, response);
     }else if(path == "/user"){
-        user.send(response);
+        parseMethod(user, request, response);
     }else{
         error.send(response, 404);
     }
@@ -20,16 +20,16 @@ exports.parse = function(request, response){
 
 
 // http 메서드를 분석
-function parseMethod(request){
+function parseMethod(module, request, response){
     
     if(request.method == "POST"){
-
+        module.write(response);
     }else if(request.method == "GET"){
-
+        module.read(response);
     }else if(request.method == "PUT"){
-
+        module.update(response);
     }else if(request.method == "DELETE"){
-
+        module.delete(response);
     }
 }
 
@@ -42,5 +42,4 @@ function splitQuerystring(fullUrl){
     }else{
         return fullUrl.subString(0, position);  // 0부터 ?전까지
     }
-    
 }
