@@ -1,14 +1,14 @@
 // 1. 서버모듈
 var http = require("http");
+var router = require("./module/router.js");
 
 // 2. 서버를 생성
 var server = http.createServer(function(request, response){
     // request <- node.js가 사용자 요청정보를 담아서 넘겨준다.
     // response <- node.js가 사용자에게 응답할 때 사용하라고 담아서 넘겨준다.
 
-
-    requestParser(request, response);
-
+    // 요청분석
+    router.parse(request, response);
     
 });
 
@@ -20,15 +20,16 @@ server.listen( 80, function() {
 
 
 
+
+
+/*
+
 // 요청분석
 function requestParser(request, response){
     console.log(request.url);
-    if(request.url == "/hello"){
-        sendResponse(response);
-    } else {
-        send404(response);
-    }
+    router.parse(request);
 }
+
 
 
 // 응답처리
@@ -47,3 +48,6 @@ function send404(response){
     response.writeHead(404, {'Content-Type' : 'text/html'});
     response.end("404 Page Not Found");
 }
+
+
+*/
