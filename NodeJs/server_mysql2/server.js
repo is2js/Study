@@ -8,6 +8,7 @@ var server = http.createServer(function(request, response){
     // response <- node.js가 사용자에게 응답할 때 사용하라고 담아서 넘겨준다.
 
     // 요청분석
+    console.log("in server");
     router.parse(request, response);
     
 });

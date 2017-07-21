@@ -1,9 +1,22 @@
+var dao = require("./bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한다는 뜻
+
 exports.read = function(response){
     send(response, "READ");
 }
 
-exports.write = function(response){
-    send(response, "WRITE");
+exports.write = function(request, response){
+    console.log("in bbs write");
+    // 데이터를 꺼내자.
+    var postData = "";
+    request.on('data', function(data){  // request.on 은 리스너이다. 데이터를 읽을 수 있을 때 호출
+        postData = postData + data;
+    });
+    request.on('end', function(){       // 데이터를 다 읽었을 때 호출
+        var dataObj = JSON.parse(postData);
+        dao.insert(dataObj, function(){
+            send(response, "WRITE Success!");
+        });
+    });
 }
 
 exports.update = function(response){

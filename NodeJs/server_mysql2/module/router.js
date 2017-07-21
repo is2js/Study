@@ -6,6 +6,7 @@ var user = require("../user");
 
 // URL 을 분석
 exports.parse = function(request, response){
+    console.log("in router parse");
     var path = splitQuerystring(request.url);   // request.url을 하면 도메인 뒤를 가져온다.
 
     if(path == "/bbs"){
@@ -21,9 +22,10 @@ exports.parse = function(request, response){
 
 // http 메서드를 분석
 function parseMethod(module, request, response){
+    console.log("in router parseMethod");
     
     if(request.method == "POST"){
-        module.write(response);
+        module.write(request, response);
     }else if(request.method == "GET"){
         module.read(response);
     }else if(request.method == "PUT"){
