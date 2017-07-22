@@ -30,18 +30,6 @@ public class Main {
 		System.out.println(numbers);
 		
 		
-		// iterator 전에, for문을 이용해보기
-		/*for(int i=0 ; i<numbers.size() ; i++){
-			System.out.println(numbers.get(i));
-		}*/
-		
-		
-		ArrayList.ListIterator li = numbers.listIterator();
-		
-		// iterator 패턴 - 위에 있는 for문과 비교해보기
-		while(li.hasNext()){
-			System.out.println(li.next());
-		}
 	}
 
 }

@@ -108,10 +108,6 @@ public class ArrayList {
 	public class ListIterator{
 		private int nextIndex = 0;
 		
-		public boolean hasNext(){
-			return nextIndex < size();
-		}
-		
 		public Object next(){
 //			Object returnData = elementData[nextIndex];
 //			nextIndex++;

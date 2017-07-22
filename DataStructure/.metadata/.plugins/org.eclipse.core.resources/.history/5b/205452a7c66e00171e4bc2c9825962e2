@@ -37,11 +37,14 @@ public class Main {
 		
 		
 		ArrayList.ListIterator li = numbers.listIterator();
-		
-		// iterator 패턴 - 위에 있는 for문과 비교해보기
-		while(li.hasNext()){
-			System.out.println(li.next());
-		}
+		System.out.println(li.next());
+		System.out.println(li.next());
+		System.out.println(li.next());
+		System.out.println(li.next());
+		System.out.println(li.next());
+		System.out.println(li.next());
+		System.out.println(li.next());
+		System.out.println(li.next());
 	}
 
 }

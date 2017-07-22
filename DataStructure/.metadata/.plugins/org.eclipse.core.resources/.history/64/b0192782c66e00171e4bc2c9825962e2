@@ -99,27 +99,4 @@ public class ArrayList {
 		return -1;	// 찾는 값이 없을 경우
 	}
 	
-	
-	// ListIterator 구현
-	public ListIterator listIterator(){
-		return new ListIterator();
-	}
-	
-	public class ListIterator{
-		private int nextIndex = 0;
-		
-		public boolean hasNext(){
-			return nextIndex < size();
-		}
-		
-		public Object next(){
-//			Object returnData = elementData[nextIndex];
-//			nextIndex++;
-//			return returnData;
-			
-			// 위의 코드를 더 간단하게 작성
-			return elementData[nextIndex++];
-		}
-	}
-	
 }
