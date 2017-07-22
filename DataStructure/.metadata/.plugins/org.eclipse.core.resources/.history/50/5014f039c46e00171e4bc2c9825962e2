@@ -22,11 +22,6 @@ public class Main {
 		// remove 구현
 //		numbers.remove(4);
 //		System.out.println(numbers.remove(1));
-		
-		// removeFirst 구현
-//		numbers.removeFirtst();
-		
-		
 		System.out.println(numbers);
 		
 		

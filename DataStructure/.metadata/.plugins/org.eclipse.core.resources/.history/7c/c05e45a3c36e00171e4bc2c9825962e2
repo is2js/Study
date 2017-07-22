@@ -80,23 +80,4 @@ public class ArrayList {
 	public Object get(int index){
 		return elementData[index];
 	}
-	
-	// size 구현
-	// 변수로 직접 접근하지 않고, 메소드로 만드는 것은 외부에서 size값을 수정하지 못하게 하기 위해서이다.
-	// 그래서 위에 size는 private으로 되어 있다.
-	public int size(){
-		return size;
-	}
-	
-	
-	// size indexOf - 해당 값이 몇번째 인덱스에 있는지 알려주는 메소드
-	public int indexOf(Object o){
-		for(int i=0 ; i<size ; i++){
-			if(o.equals(elementData[i])){
-				return i;
-			}
-		}
-		return -1;	// 찾는 값이 없을 경우
-	}
-	
 }
