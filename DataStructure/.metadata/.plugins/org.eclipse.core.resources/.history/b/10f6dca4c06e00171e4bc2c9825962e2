@@ -20,8 +20,7 @@ public class Main {
 		
 		
 		// remove ±¸Çö
-//		numbers.remove(4);
-//		System.out.println(numbers.remove(1));
+		
 		System.out.println(numbers);
 		
 		
