@@ -108,12 +108,10 @@ public class ArrayList {
 	public class ListIterator{
 		private int nextIndex = 0;
 		
-		// hasNext()
 		public boolean hasNext(){
 			return nextIndex < size();
 		}
 		
-		// next()
 		public Object next(){
 //			Object returnData = elementData[nextIndex];
 //			nextIndex++;
@@ -122,66 +120,6 @@ public class ArrayList {
 			// 위의 코드를 더 간단하게 작성
 			return elementData[nextIndex++];
 		}
-		
-		//hasPrevious()
-		public boolean hasPrevious(){
-			return nextIndex > 0;
-		}
-		
-		// previous()
-		public Object previous(){
-			return elementData[--nextIndex];
-		}
-		
-		
-		
 	}
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
