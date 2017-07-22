@@ -64,20 +64,4 @@ public class ArrayList {
 		
 		return removed;	// 삭제했던 값을 알려주기 위해 반환
 	}
-	
-	
-	// removeFirst 구현
-	public Object removeFirst(){
-		return remove(0);
-	}
-	
-	// removeLast 구현
-	public Object removeLast(){
-		return remove(size-1);
-	}
-	
-	// get 구현 - ArrayList의 가장 큰 장점
-	public Object get(int index){
-		return elementData[index];
-	}
 }

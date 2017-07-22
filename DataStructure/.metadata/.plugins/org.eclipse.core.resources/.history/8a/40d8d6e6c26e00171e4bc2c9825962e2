@@ -75,9 +75,4 @@ public class ArrayList {
 	public Object removeLast(){
 		return remove(size-1);
 	}
-	
-	// get 구현 - ArrayList의 가장 큰 장점
-	public Object get(int index){
-		return elementData[index];
-	}
 }

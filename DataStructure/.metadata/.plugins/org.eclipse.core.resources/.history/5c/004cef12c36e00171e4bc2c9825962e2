@@ -76,7 +76,7 @@ public class ArrayList {
 		return remove(size-1);
 	}
 	
-	// get 구현 - ArrayList의 가장 큰 장점
+	// get 구현
 	public Object get(int index){
 		return elementData[index];
 	}
