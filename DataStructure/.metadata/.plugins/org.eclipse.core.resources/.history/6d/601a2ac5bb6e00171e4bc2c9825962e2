@@ -17,7 +17,7 @@ public class Main {
 		
 		// addFirst 구현 ( 첫번째 위치에 추가 )
 		numbers.addFirst(5);
-		System.out.println(numbers);
+		
 		
 		
 	}
