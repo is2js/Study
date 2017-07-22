@@ -1,10 +1,11 @@
 # DataStructure (자료구조) :computer: :memo:
----
-## Contents :open_file_folder:
 
+## DataStructure(자료구조)란?
+- ### [DataStructure (자료구조)](https://github.com/mdy0501/Study/tree/master/DataStructure/ConceptDescription/DataStructure)
 
+<br>
 
-  ## ArrayList
+## ArrayList
 
 ### 1. [ArrayList란 무엇인가](https://github.com/mdy0501/Study/tree/master/DataStructure/ConceptDescription/ArrayList)
 - ##### 장점 / 단점
