@@ -14,12 +14,6 @@ public class ArrayList {
 	
 	
 	
-	// addFirst 구현
-	public boolean addFirst(Object element){
-		return add(0, element);
-	}
-		
-	
 	// addLast 구현
 	public boolean addLast(Object element){
 		elementData[size] = element;
@@ -27,8 +21,6 @@ public class ArrayList {
 		return true;
 	}
 	
-	
-	// add 구현
 	public boolean add(int index, Object element){
 		for (int i = size-1 ; i >= index ; i--){
 			elementData[i+1] = elementData[i];

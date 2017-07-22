@@ -15,9 +15,6 @@ public class Main {
 		// add 구현
 		numbers.add(1, 15);
 		
-		// addFirst 구현 ( 첫번째 위치에 추가 )
-		numbers.addFirst(5);
-		
 		
 		
 	}
