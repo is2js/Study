@@ -85,6 +85,7 @@ numbers.size();
 
 ## Iterator
 - 자바에서는 ArrayList를 탐색하기 위한 방법으로 iterator를 제공한다.
+  (Iterator는 자바에 있는 인터페이스이다.)
 - 이것은 주로 객체지향 프로그래밍에서 사용하는 반복기법이다.
 
 ```java
