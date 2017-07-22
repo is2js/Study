@@ -1,0 +1,32 @@
+package list.arraylist.implementation;
+
+public class ArrayList {
+	
+	// ArrayList 내부적으로 몇개의 값들이 채워졌는가를 size가 가리킨다.
+	private int size = 0;
+	
+	// 객체 내부적으로 사용할 배열
+	private Object[] elementData = new Object[100];
+	// Object 데이터 타입을 생성을 해서 elementData라고 하는 비공개 접근제한자를 갖고 있는 인스턴스 변수에 할당한 것이다.
+	// 그리고 그 변수에 배열에 수용할 수 있는 값의 숫자는 100개 이다.
+	
+	// elementData는 고정된 크기(100)를 갖는다.
+	
+	
+	
+	// addLast 구현
+	public boolean addLast(Object element){
+		elementData[size] = element;
+		size++;
+		return true;
+	}
+	
+	public boolean add(int index, Object element){
+		for (int i = size-1 ; i >= index ; i--){
+			elementData[i+1] = elementData[i];
+		}
+		elementData[index] = element;
+		size++;
+		return true;
+	}
+}
