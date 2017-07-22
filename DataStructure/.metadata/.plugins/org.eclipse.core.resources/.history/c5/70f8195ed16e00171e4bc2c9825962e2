@@ -139,12 +139,53 @@ public class ArrayList {
 			ArrayList.this.add(nextIndex++, element);
 		}
 		
-		
-		// iterator remove - next()를 한번이라도 호출한 후에 실행해야 오류가 안난다.
-		public void remove(){
-			ArrayList.this.remove(nextIndex-1);
-			nextIndex--;
-		}
-		
 	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
