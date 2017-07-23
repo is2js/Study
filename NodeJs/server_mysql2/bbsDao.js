@@ -23,11 +23,22 @@ exports.insert = function(data, callback){
     });
 }
 
-exports.update = function(){
-    var query = " update " + tableName + " ";
+exports.update = function(data, callback){
+    console.log("in bbsDao update");
+    var query = " update " + tableName + " set title = ?, content = ?, author = ?, date =? where id = ?";
+    // var query = " update " + tableName + " set title = ? where id = ?";
+    var values = 
+        // ['data.title', 'data.content', 'data.author', 'data.date', 'data.id'];
+        // ["data.title", "data.id"];
+        ["data.title", "data.content", "data.author", "data.date", "data.id"];
+        // [data.title], [data.content], [data.author], [data.date], [data.id]
+
+    database.executeUpdate(query, values, function(){
+        callback();
+    });
 }
 
-exports.delete = function(data ,callback){
+exports.delete = function(data, callback){
     console.log("in bbsDao delete");
     var query = " delete from " + tableName + " where id = ?";
     var values = [

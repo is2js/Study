@@ -23,8 +23,19 @@ exports.write = function(request, response){
     });
 }
 
-exports.update = function(response){
-    send(response, "UPDATE");
+exports.update = function(request, response){
+    console.log("in bbs update");
+
+    var postData = "";
+    request.on('data', function(data){
+        postData = postData + data;
+    });
+    request.on('end', function(){
+        var dataObj = JSON.parse(postData);
+        dao.update(dataObj, function(){
+            send(response, "UPDATE Success!");
+        });
+    });
 }
 
 exports.delete = function(request, response){
