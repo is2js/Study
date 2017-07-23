@@ -4,7 +4,7 @@ var tableName = "board";
 
 exports.select = function(callback){
     console.log("in bbsDao select");
-    var query = "select * from " + tableName;
+    var query = " select * from " + tableName;
 
     database.execute(query, function(){
         callback();
@@ -13,7 +13,7 @@ exports.select = function(callback){
 
 exports.insert = function(data, callback){
     console.log("in bbsDao insert");
-    var query = " insert into " + tableName + "(title, content, author, date)";
+    var query = " insert into " + tableName + " (title, content, author, date)";
         query = query + " VALUES ?";
     var values = [
         [data.title, data.content, data.author, data.date]        
@@ -24,9 +24,17 @@ exports.insert = function(data, callback){
 }
 
 exports.update = function(){
-    var query = "update " + tableName + " ";
+    var query = " update " + tableName + " ";
 }
 
-exports.delete = function(){
-    var query = "delete from " + tableName + " ";
+exports.delete = function(data ,callback){
+    console.log("in bbsDao delete");
+    var query = " delete from " + tableName + " where id = ?";
+    var values = [
+        [data.id]
+    ];
+
+    database.executeMulti(query, values, function(){
+        callback();
+    });
 }

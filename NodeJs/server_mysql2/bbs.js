@@ -27,8 +27,19 @@ exports.update = function(response){
     send(response, "UPDATE");
 }
 
-exports.delete = function(response){
-    send(response, "DELETE");
+exports.delete = function(request, response){
+    console.log("in bbs delete");
+
+    var postData = "";
+    request.on('data', function(data){
+        postData = postData + data;
+    });
+    request.on('end', function(){
+        var dataObj = JSON.parse(postData);
+        dao.delete(dataObj, function(){
+            send(response, "DELETE Success!");
+        });
+    });
 }
 
 function send(response, flag){

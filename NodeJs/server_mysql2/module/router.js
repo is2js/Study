@@ -31,7 +31,7 @@ function parseMethod(module, request, response){
     }else if(request.method == "PUT"){
         module.update(response);
     }else if(request.method == "DELETE"){
-        module.delete(response);
+        module.delete(request, response);
     }
 }
 
@@ -42,6 +42,6 @@ function splitQuerystring(fullUrl){
     if(position == -1){
         return fullUrl;
     }else{
-        return fullUrl.subString(0, position);  // 0부터 ?전까지
+        return fullUrl.substring(0, position);  // 0부터 ?전까지
     }
 }

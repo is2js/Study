@@ -27,8 +27,8 @@ exports.executeQuery = function(query, callback){
 	});
 }
 
-// 쿼리를 실행만 하는 함수
-exports.execute = function(query, callback) {	// <- response 객체가 담겨온다.
+// 쿼리를 실행만 하는 함수 - select
+exports.execute = function(query, callback) {
 	console.log("in database excute");
 
 	var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
@@ -49,7 +49,7 @@ exports.execute = function(query, callback) {	// <- response 객체가 담겨온
 	});
 }
 
-// 쿼리를 실행만 하는 함수
+// 쿼리를 실행만 하는 함수 - insert
 exports.executeMulti = function(query, values, callback) {
     console.log("in database excuteMulti");
 	var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
