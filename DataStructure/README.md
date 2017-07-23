@@ -2,6 +2,13 @@
 
 ## DataStructure(자료구조)란?
 - ### [DataStructure (자료구조)](https://github.com/mdy0501/Study/tree/master/DataStructure/ConceptDescription/DataStructure)
+  - ###### 자료구조란?
+  - ###### 배경
+  - ###### 자료구조가 어려운 이유
+  - ###### 배열이란?
+  - ###### List란?
+  - ###### List의 기능
+  - ###### ArrayList vs LinkedList
 
 <br>
 
