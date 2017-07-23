@@ -71,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
                 IWeather service = client.create(IWeather.class);
 
                 // 3. 옵저버블 생성 ( addCallAdapterFactory(RxJava2CallAdapterFactory.create()) 이걸 해줬기 때문에 가능 )
-//                Observable<Data> observable = service.getData(SERVER_KEY, 1, 10, editTextName.getText().toString() + "");
-                Observable<Data> observable = service.getData(SERVER_KEY, 1, 10, "서초");
+                Observable<Data> observable = service.getData(SERVER_KEY, 1, 10, editTextName.getText().toString() + "");
+//                Observable<Data> observable = service.getData(SERVER_KEY, 1, 10, "서초");
 
                 // 4. 발행 시작
                 observable.subscribeOn(Schedulers.io())
