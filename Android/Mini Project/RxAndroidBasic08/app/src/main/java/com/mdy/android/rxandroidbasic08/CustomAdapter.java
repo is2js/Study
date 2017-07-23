@@ -7,8 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.mdy.android.rxandroidbasic08.domain.Info;
-
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,12 +16,15 @@ import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder>{
 
-    List<Info> data = null;
+    List<String> rows = new ArrayList<>();
     LayoutInflater inflater = null;
 
-    public CustomAdapter(Context context, List<Info> data){
+    public CustomAdapter(Context context){
         this.inflater = LayoutInflater.from(context);
-        this.data = data;
+    }
+
+    public void setData(List<String> rows){
+        this.rows = rows;
     }
 
     @Override
@@ -33,34 +35,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.Holder>{
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        Info info = data.get(position);
-        holder.txtName.setText(info.name);
-        holder.txtTemperature.setText(info.temperature+"");
-        holder.txtHumidity.setText(info.humidity+"");
-        holder.txtRain.setText(info.rain+"");
-
-
-//        holder.txtName.setText(rows.);
-
+        holder.textView.setText(rows.get(position).toString());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return rows.size();
     }
 
     class Holder extends RecyclerView.ViewHolder {
-        TextView txtName;
-        TextView txtTemperature;
-        TextView txtHumidity;
-        TextView txtRain;
+        TextView textView;
 
         public Holder(View itemView) {
             super(itemView);
-            txtName = (TextView) itemView.findViewById(R.id.txtName);
-            txtTemperature = (TextView) itemView.findViewById(R.id.txtTemperature);
-            txtHumidity = (TextView) itemView.findViewById(R.id.txtHumidity);
-            txtRain = (TextView) itemView.findViewById(R.id.txtRain);
+            textView = (TextView) itemView.findViewById(R.id.textView);
         }
     }
 }

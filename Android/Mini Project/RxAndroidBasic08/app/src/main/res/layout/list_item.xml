@@ -1,31 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="10dp">
 
     <TextView
-        android:id="@+id/txtName"
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Name" />
+        android:text="text" />
 
-    <TextView
-        android:id="@+id/txtTemperature"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Temperature" />
-
-    <TextView
-        android:id="@+id/txtHumidity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Humidity" />
-
-    <TextView
-        android:id="@+id/txtRain"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Rain" />
 </LinearLayout>
