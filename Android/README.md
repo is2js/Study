@@ -215,6 +215,8 @@
   - RxJava / Retrofit 을 이용해 서울시 Open API를 활용해 데이터를 안드로이드 화면에 출력해본다.
     - `Retrofit` - `@Path`
 
+  - ##### [Another Solution](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/RxAndroidBasic08)
+
   #### 49. [Animation](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/Animation)
   - View Animation
       - `translate`, `rotate`, `scale`, `alpha`
