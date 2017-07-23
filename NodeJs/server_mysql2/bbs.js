@@ -1,7 +1,11 @@
 var dao = require("./bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한다는 뜻
 
-exports.read = function(response){
-    send(response, "READ");
+exports.read = function(request, response){
+    console.log("in bbs read");
+
+    dao.select(function(){
+        send(response, "READ Success!");
+    });
 }
 
 exports.write = function(request, response){

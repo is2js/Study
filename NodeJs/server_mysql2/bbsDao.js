@@ -2,8 +2,13 @@ var database = require("./module/database");   // /index.js는 생략가능
 var tableName = "board";
 
 
-exports.select = function(){
-    var query = "select * from " + tableName + " ";
+exports.select = function(callback){
+    console.log("in bbsDao select");
+    var query = "select * from " + tableName;
+
+    database.execute(query, function(){
+        callback();
+    });
 }
 
 exports.insert = function(data, callback){

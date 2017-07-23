@@ -27,7 +27,7 @@ function parseMethod(module, request, response){
     if(request.method == "POST"){
         module.write(request, response);
     }else if(request.method == "GET"){
-        module.read(response);
+        module.read(request, response);
     }else if(request.method == "PUT"){
         module.update(response);
     }else if(request.method == "DELETE"){

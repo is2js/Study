@@ -29,6 +29,8 @@ exports.executeQuery = function(query, callback){
 
 // 쿼리를 실행만 하는 함수
 exports.execute = function(query, callback) {	// <- response 객체가 담겨온다.
+	console.log("in database excute");
+
 	var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
 	con.connect();  // 연결 정보를 이용해서 database 연결
 
@@ -40,14 +42,15 @@ exports.execute = function(query, callback) {	// <- response 객체가 담겨온
 			console.log("error message= " + err);
 		} else {
             // 에러가 안나면
-            callback();
+		callback(result);
+		console.log(result);
 		}
 		this.end();	// mysql 연결해제 - con.end();인데 안에서 해주도록 한다. <- 필수! 안하면 계속 연결된 상태
 	});
 }
 
 // 쿼리를 실행만 하는 함수
-exports.executeMulti = function(query, values, callback) {	// <- response 객체가 담겨온다.
+exports.executeMulti = function(query, values, callback) {
     console.log("in database excuteMulti");
 	var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
 	con.connect();  // 연결 정보를 이용해서 database 연결
