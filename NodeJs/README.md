@@ -27,6 +27,11 @@
   - MongoDB ~ NodeJs 서버 연동 (파일구조 및 소스코드)
   - CallBack 함수 동작 방식
 
-  #### 6. [Node.js ~ Mysql 연동을 통한 데이터 조작](https://github.com/mdy0501/Study/tree/master/NodeJs/server_mysql2)
+  #### 6. [callback 함수에 대한 이해](https://github.com/mdy0501/Study/tree/master/NodeJs/callback_test)
+  - callback 함수에 대한 이해
+  - 비동기로 `파일읽기`( `fs.readFile` ) / `파일쓰기` ( `fs.writeFile` )
+
+  #### 7. [Node.js ~ Mysql 연동을 통한 데이터 조작](https://github.com/mdy0501/Study/tree/master/NodeJs/server_mysql2)
   - Node.js와 관계형 DB인 MySql을 연동해 데이터를 조작해본다.
-    - `insert`, `select`, `update`, `delete`
+    - `insert`, `select`, `update`, `delete` (+ search)
+  - Postman을 활용한 CRUD 확인
