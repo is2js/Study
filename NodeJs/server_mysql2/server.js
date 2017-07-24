@@ -10,6 +10,7 @@ var server = http.createServer(function(request, response){
     // 요청분석
     console.log("in server");
     router.parse(request, response);
+
     
 });
 

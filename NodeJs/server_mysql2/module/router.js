@@ -7,7 +7,7 @@ var user = require("../user");
 // URL 을 분석
 exports.parse = function(request, response){
     console.log("in router parse");
-    var path = splitQuerystring(request.url);   // request.url을 하면 도메인 뒤를 가져온다.
+    var path = removeQuerystring(request.url);   // request.url을 하면 도메인 뒤를 가져온다.
 
     if(path == "/bbs"){
         parseMethod(bbs, request, response);
@@ -27,7 +27,7 @@ function parseMethod(module, request, response){
     if(request.method == "POST"){
         module.write(request, response);
     }else if(request.method == "GET"){
-        module.read(request, response);
+        module.read(getQuerystring(request.url), response);
     }else if(request.method == "PUT"){
         module.update(request, response);
     }else if(request.method == "DELETE"){
@@ -37,11 +37,21 @@ function parseMethod(module, request, response){
 
 
 // http://localhost/bbs?title=서초구
-function splitQuerystring(fullUrl){
+function removeQuerystring(fullUrl){
     var position = fullUrl.indexOf('?');    // ?의 위치값을 반환. 없으면 -1 리턴
     if(position == -1){
         return fullUrl;
     }else{
         return fullUrl.substring(0, position);  // 0부터 ?전까지
+    }
+}
+
+
+function getQuerystring(fullUrl){
+    var position = fullUrl.indexOf('?');    // ?의 위치값을 반환. 없으면 -1 리턴
+    if(position == -1){
+        return "";
+    }else{
+        return fullUrl.substring(position+1);  // ? 다음부터 끝까지 가져온다.
     }
 }

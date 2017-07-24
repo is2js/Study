@@ -8,7 +8,7 @@ var conInfo = {
 	database : 'bbs'	// 데이터베이스
 };
 
-// 쿼리 후에 결과값을 리턴해주는 함수 - select
+// 쿼리 후에 결과값을 리턴해주는 함수 - select / search
 exports.executeQuery = function(query, callback){
     var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
 	con.connect();  // 연결 정보를 이용해서 database 연결
