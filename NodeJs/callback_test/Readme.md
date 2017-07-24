@@ -115,3 +115,13 @@ exports.writeText = function(fileName, data, callback){
 ```
 
 <br>
+<br>
+
+## 결과화면
+```
+16
+14
+[Result : today ]
+첫번째 내용입니다.두번째 내용입니다.세번째 내용입니다.
+쓰기완료
+```
