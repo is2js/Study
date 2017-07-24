@@ -22,6 +22,7 @@ fs.writeFile('write.txt', content, 'utf-8', function(error){
     }
 });
 
+
 exports.writeText = function(fileName, data, callback){
     fs.writeFile(fileName, data, 'utf-8', function(error){
         if(error){

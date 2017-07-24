@@ -7,8 +7,8 @@ bFile.prev(value);
 
 bFile.print("today", function(param){
     console.log(param);
-
 });
+
 
 // 비동기 함수를 호출할 때는 결과처리 코드가 호출측에 있어야 한다.
 cFile.readText('write.txt', function(param){
