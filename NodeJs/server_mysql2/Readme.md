@@ -80,7 +80,9 @@ function send404(response){
 
 ![NodeJs_bbsTotal](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/NodeJs_bbsTotal.png)
 
-#### callback 동작순서
+<br>
+
+### callback 동작순서
 
 ![callback1](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/callback1.jpg)
 
@@ -474,7 +476,7 @@ exports.send = function(response){
 
 
 ## Postman 및 MySql
-#### 1. insert
+### 1. insert
 
 - Postman - `POST`
 
@@ -486,7 +488,7 @@ exports.send = function(response){
 
 <br>
 
-#### 2. select
+### 2. select
 
 - Postman - `GET`
 
@@ -494,7 +496,7 @@ exports.send = function(response){
 
 <br>
 
-#### 3. update
+### 3. update
 
 - Postman - `PUT`
 
@@ -511,7 +513,7 @@ exports.send = function(response){
 <br>
 
 
-#### 4. delete
+### 4. delete
 
 - Postman - `DELETE`
 
@@ -523,7 +525,7 @@ exports.send = function(response){
 
 <br>
 
-#### 5. search
+### 5. search
 
 - Postman - `GET`
 
@@ -533,7 +535,7 @@ exports.send = function(response){
 
 <br>
 <br>
-
+<br>
 
 ## callback에서 인자를 넘겨줄 때 예시코드
 - bbs.js
@@ -596,6 +598,3 @@ exports.executeMulti = function(query, values, callback) {
 ### 결과화면
 
 ![callbackResult](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/callbackResult.PNG)
-
-## 동작화면
-# 캡쳐파일 111111111111
