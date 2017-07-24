@@ -95,6 +95,7 @@
 ### 5. search
 
 - Postman - `GET`
+  - title 중에 `수정` 이라는 값을 갖고 있는 것만 검색 ( `?title=수정` )
 
 ![search_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/search_postman.PNG)
 
