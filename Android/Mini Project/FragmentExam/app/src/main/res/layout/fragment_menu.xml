@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#99b099"
     tools:context="com.mdy.android.fragmentexam.MainActivity">
 
 
@@ -11,12 +12,12 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="메인 프래그먼트"
+        android:text="메뉴 프래그먼트"
         android:textSize="30sp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="메뉴 화면으로" />
+        android:text="메인 화면으로" />
 </LinearLayout>
