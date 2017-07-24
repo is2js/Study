@@ -2,6 +2,8 @@ var dao = require("./bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한�
 var error = require("./error");
 var querystring = require("querystring");
 
+
+// select, search
 exports.read = function(qs, response){
     console.log("in bbs read");
 
@@ -24,9 +26,9 @@ exports.read = function(qs, response){
             send(response, "Search Success!" + jsonString);
         });
     }
-    
 }
 
+// insert
 exports.write = function(request, response){
     console.log("in bbs write");
     // 데이터를 꺼내자.
@@ -42,7 +44,7 @@ exports.write = function(request, response){
     });
 }
 
-// update는 write와 동작방식이 유사하다.
+// update는 write(insert)와 동작방식이 유사
 exports.update = function(request, response){
     console.log("in bbs update");
 
@@ -71,6 +73,7 @@ exports.update = function(request, response){
     });
 }
 
+// delete
 exports.delete = function(request, response){
     console.log("in bbs delete");
 

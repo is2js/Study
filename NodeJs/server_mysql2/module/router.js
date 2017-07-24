@@ -19,7 +19,6 @@ exports.parse = function(request, response){
 };
 
 
-
 // http 메서드를 분석
 function parseMethod(module, request, response){
     console.log("in router parseMethod");
@@ -36,7 +35,7 @@ function parseMethod(module, request, response){
 }
 
 
-// http://localhost/bbs?title=서초구
+// http://localhost/bbs?title=제목 일 경우,  =>  [http://localhost/bbs] 을 반환
 function removeQuerystring(fullUrl){
     var position = fullUrl.indexOf('?');    // ?의 위치값을 반환. 없으면 -1 리턴
     if(position == -1){
@@ -47,6 +46,7 @@ function removeQuerystring(fullUrl){
 }
 
 
+// http://localhost/bbs?title=제목 일 경우,  =>  [title=제목] 을 반환
 function getQuerystring(fullUrl){
     var position = fullUrl.indexOf('?');    // ?의 위치값을 반환. 없으면 -1 리턴
     if(position == -1){

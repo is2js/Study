@@ -10,10 +10,7 @@ var server = http.createServer(function(request, response){
     // 요청분석
     console.log("in server");
     router.parse(request, response);
-
-    
 });
-
 
 // 3. 서버를 시작
 server.listen( 80, function() { // 80포트는 뒤에 포트이름을 생략가능하다.

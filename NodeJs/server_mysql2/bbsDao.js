@@ -1,4 +1,4 @@
-var database = require("./module/database");   // /index.js는 생략가능
+var database = require("./module/database");   //  /index.js는 생략가능
 var tableName = "board";
 
 
@@ -20,7 +20,11 @@ exports.insert = function(data, callback){
     console.log("in bbsDao insert");
     var query = " insert into " + tableName + " (title, content, author, date)";
         query = query + " VALUES ?";
-    var values = [data.title, data.content, data.author, data.date];
+
+    // var now = new Date().toLocaleDateString();
+    var now = new Date().toLocaleString();
+
+    var values = [data.title, data.content, data.author, now];
     database.executeMulti(query, values, function(){
         callback();
     });
@@ -31,7 +35,7 @@ exports.update = function(data, callback){
     var query = " update " + tableName + " set title = ?, content = ?, author = ?, date =? where id = ?";
     // var query = " update " + tableName + " set title = ? where id = ?";
     
-    var now = new Date().toLocaleDateString();
+    var now = new Date().toLocaleString();
     var values = [data.title, data.content, data.author, now, data.id];
     
     database.execute(query, values, function(error){
@@ -47,16 +51,4 @@ exports.delete = function(data, callback){
     database.execute(query, values, function(){
         callback();
     });
-}
-
-function createDate(response){
-    var d = new Date();
-
-    var localeDate = d.toLocaleDateString();
-    var localeTime = d.toLocaleTimeString();
-}
-
-function send(response, flag){
-    response.writeHead(200, {'Content-Type':'text/html'});
-    response.end("BBS " + flag);
 }
