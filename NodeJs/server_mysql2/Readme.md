@@ -3,6 +3,7 @@
 
 <br>
 <br>
+<br>
 
 ## 파일 구조
 | Depth1 | Depth2 | Depth3 | Depth4 | Depth5 |
@@ -16,61 +17,9 @@
 |   |   |   | ***database(폴더)*** | index.js |
 
 
+
+
 <br>
-<br>
-
-## 서버 생성
-```JavaScript
-// 1. 서버모듈
-var http = require("http");
-
-// 2. 서버를 생성
-
-
-var server = http.createServer(function(request, response){ // 콜백함수 <- 사용자 요청이 있을시에 호출
-    // request <- node.js가 사용자 요청정보를 담아서 넘겨준다.
-    // response <- node.js가 사용자에게 응답할 때 사용하라고 담아서 넘겨준다.
-
-});
-
-
-
-// 3. 서버를 시작
-server.listen( 80, function() { // 콜백함수 <- start 후에 호출 : 단순 참고용 로그
-    console.log("server's running...");
-});
-
-
-// 요청분석
-function requestParser(request, response){
-    console.log(request.url);
-    if(request.url == "/hello"){
-        sendResponse(response);
-    } else {
-        send404(response);
-    }
-}
-
-
-// 응답처리
-function sendResponse(response){
-    response.writeHead(200, {'Content-Type' : 'text/html'});
-    for(i=0; i<10; i++){
-        response.write( i + "<br/>");
-    }
-    response.write("Hello");
-    response.end();    // response.end("Hello");
-    // 한줄만 쓸 경우에는 response.end("Hello"); 를 쓰기도 한다.
-}
-
-// 오류처리
-function send404(response){
-    response.writeHead(404, {'Content-Type' : 'text/html'});
-    response.end("404 Page Not Found");
-}
-```
-
-
 <br>
 <br>
 
@@ -88,6 +37,70 @@ function send404(response){
 
 ![callback2](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/callback2.jpg)
 
+<br>
+<br>
+<br>
+
+
+## Postman 및 MySql
+### 1. insert
+
+- Postman - `POST`
+
+![get_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/get_postman.PNG)
+
+- MySql
+
+![post_mysql](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/post_mysql.PNG)
+
+<br>
+
+### 2. select
+
+- Postman - `GET`
+
+![post_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/post_postman.PNG)
+
+<br>
+
+### 3. update
+
+- Postman - `PUT`
+
+![put_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/put_postman.PNG)
+
+- MySql
+
+![put_mysql](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/put_mysql.PNG)
+
+- update간 에러 메세지 발생 예시
+
+![put_errorMessage](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/put_errorMessage.PNG)
+
+<br>
+
+
+### 4. delete
+
+- Postman - `DELETE`
+
+![delete_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/delete_postman.PNG)
+
+- MySql
+
+![delete_mysql](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/delete_mysql.PNG)
+
+<br>
+
+### 5. search
+
+- Postman - `GET`
+
+![search_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/search_postman.PNG)
+
+
+<br>
+<br>
 <br>
 
 ## 소스코드
@@ -471,65 +484,6 @@ exports.send = function(response){
 }
 ```
 
-<br>
-<br>
-
-
-## Postman 및 MySql
-### 1. insert
-
-- Postman - `POST`
-
-![get_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/get_postman.PNG)
-
-- MySql
-
-![post_mysql](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/post_mysql.PNG)
-
-<br>
-
-### 2. select
-
-- Postman - `GET`
-
-![post_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/post_postman.PNG)
-
-<br>
-
-### 3. update
-
-- Postman - `PUT`
-
-![put_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/put_postman.PNG)
-
-- MySql
-
-![put_mysql](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/put_mysql.PNG)
-
-- update간 에러 메세지 발생 예시
-
-![put_errorMessage](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/put_errorMessage.PNG)
-
-<br>
-
-
-### 4. delete
-
-- Postman - `DELETE`
-
-![delete_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/delete_postman.PNG)
-
-- MySql
-
-![delete_mysql](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/delete_mysql.PNG)
-
-<br>
-
-### 5. search
-
-- Postman - `GET`
-
-![search_postman](https://github.com/mdy0501/Study/blob/master/NodeJs/server_mysql2/graphics/search_postman.PNG)
 
 
 
