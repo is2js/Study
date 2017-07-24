@@ -1,4 +1,5 @@
 var dao = require("./bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한다는 뜻
+var error = require("./error");
 
 exports.read = function(request, response){
     console.log("in bbs read");
@@ -24,17 +25,31 @@ exports.write = function(request, response){
     });
 }
 
+// update는 write와 동작방식이 유사하다.
 exports.update = function(request, response){
     console.log("in bbs update");
 
+    // 요청한 데이터를 담을 변수를 선언
     var postData = "";
-    request.on('data', function(data){
+    
+    request.on('data', function(data){  // 데이터가 버퍼에 가득차면 자동으로 호출
         postData = postData + data;
     });
-    request.on('end', function(){
+    request.on('end', function(){   // 데이터를 다 읽었을 때 호출
         var dataObj = JSON.parse(postData);
-        dao.update(dataObj, function(){
-            send(response, '{"update result" : "ok"}');
+        // dataObj = {
+        //     "id" : 7,
+        //     "title" : "수정된 제목입니다",
+        //     "content" : "수정된 내용 내용 \n 내용 내용 내용",
+        //     "author" : "수정된 Bewhy",
+        //     "date" : "2017-07-24"
+        // }
+        dao.update(dataObj, function(err){
+            if(err){
+                error.send(response, 500, err);
+            }else{
+                send(response, '{"update result" : "ok"}');
+            }
         });
     });
 }
@@ -48,13 +63,17 @@ exports.delete = function(request, response){
     });
     request.on('end', function(){
         var dataObj = JSON.parse(postData);
-        dao.delete(dataObj, function(){
-            send(response, '{"delete result" : "ok"}');
+        dao.delete(dataObj, function(err){
+            if(err){
+                error.send(response, 500, err);
+            }else{
+                send(response, '{"delete result" : "ok"}');
+            }
         });
     });
 }
 
 function send(response, result){
-    response.writeHead(200, {'Content-Type':'application/json'});
+    response.writeHead(200, {'Content-Type':'application/json ; charset=utf-8'});
     response.end(result);
 }

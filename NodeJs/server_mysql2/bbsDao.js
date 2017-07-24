@@ -23,14 +23,12 @@ exports.update = function(data, callback){
     console.log("in bbsDao update");
     var query = " update " + tableName + " set title = ?, content = ?, author = ?, date =? where id = ?";
     // var query = " update " + tableName + " set title = ? where id = ?";
-    var values = 
-        // ['data.title', 'data.content', 'data.author', 'data.date', 'data.id'];
-        // ["data.title", "data.id"];
-        ["data.title", "data.content", "data.author", "data.date", "data.id"];
-        // [data.title], [data.content], [data.author], [data.date], [data.id]
-
-    database.executeUpdate(query, values, function(){
-        callback();
+    
+    var now = new Date().toLocaleDateString();
+    var values = [data.title, data.content, data.author, now, data.id];
+    
+    database.execute(query, values, function(error){
+        callback(error);
     });
 }
 
@@ -39,7 +37,7 @@ exports.delete = function(data, callback){
     var query = " delete from " + tableName + " where id = ?";
     var values = [data.id];
 
-    database.executeMulti(query, values, function(){
+    database.execute(query, values, function(){
         callback();
     });
 }
