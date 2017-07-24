@@ -8,7 +8,7 @@ var conInfo = {
 	database : 'bbs'	// 데이터베이스
 };
 
-// 쿼리 후에 결과값을 리턴해주는 함수
+// 쿼리 후에 결과값을 리턴해주는 함수 - select
 exports.executeQuery = function(query, callback){
     var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
 	con.connect();  // 연결 정보를 이용해서 database 연결
@@ -27,7 +27,7 @@ exports.executeQuery = function(query, callback){
 	});
 }
 
-// 쿼리를 실행만 하는 함수 - select
+// 쿼리를 실행만 하는 함수
 exports.execute = function(query, callback) {
 	console.log("in database excute");
 
@@ -56,7 +56,7 @@ exports.executeMulti = function(query, values, callback) {
 	con.connect();  // 연결 정보를 이용해서 database 연결
 
 	// 데이터베이스에 쿼리 실행
-	con.query(query, [values], function(err, result){
+	con.query(query, [[values]], function(err, result){
         console.log("in database excuteMulti query");
 		// 에러체크
 		if(err){
