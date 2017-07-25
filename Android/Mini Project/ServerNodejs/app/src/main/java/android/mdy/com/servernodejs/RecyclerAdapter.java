@@ -61,16 +61,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         }
 
         public void setTitle(String title){
-            txtTitle.setText(title);
+            txtTitle.setText("제목 : " + title);
         }
         public void setDate(String date){
-            txtDate.setText(date);
+            txtDate.setText("날짜 : " + date);
         }
         public void setAuthor(String author){
-            txtAuthor.setText(author);
+            txtAuthor.setText("저자 : " + author);
         }
         public void setContent(String content){
-            txtContent.setText(content);
+            txtContent.setText("내용 : " + content);
         }
     }
 }

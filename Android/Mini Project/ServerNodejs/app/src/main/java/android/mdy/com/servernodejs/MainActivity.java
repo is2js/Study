@@ -23,6 +23,8 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int OKAY = 77;
+
     private Button btnWrite;
     private RecyclerView recyclerView;
     private List<Bbs> data;
@@ -40,7 +42,14 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        Log.e("실행 순서 확인 1", "========================= 1 ");
+
         loader();
+
+        Log.e("실행 순서 확인 1", "========================= 2 ");
+
+//        Intent intent = new Intent();
+//        setResult(RESULT_OK, intent);
     }
 
 
@@ -48,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         btnWrite = (Button) findViewById(R.id.btnPost);
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
     }
+
 
     private void setListeners() {
         btnWrite.setOnClickListener(new View.OnClickListener() {
@@ -59,15 +69,44 @@ public class MainActivity extends AppCompatActivity {
 
                     위의 두 가지를 구분하고
                     1번 또는 2번 결과값을 MainActivity로 넘겨서 처리
-
                  */
 
 
                 Intent intent = new Intent(MainActivity.this, WriteActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, OKAY);
             }
         });
     }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        Log.e("실행 순서 확인 3", "========================= 3 ");
+
+        if(requestCode == OKAY){
+            // 정상적으로 Post를 한 경우
+            if(resultCode == RESULT_OK){
+                Log.e("로그 확인", "===================== 작성 완료.");
+
+                Log.e("실행 순서 확인 4", "========================= 4 ");
+                this.data.clear();
+                // 데이터를 갱신
+                loader();
+
+            // Back버튼으로 돌아온 경우
+            } else if (resultCode == RESULT_CANCELED){
+                Log.e("로그 확인", "===================== 입력값들 중 입력하지 않은 값이 있음.");
+
+                Log.e("실행 순서 확인 5", "========================= 5 ");
+                this.data.clear();
+                // 데이터를 갱신
+                loader();
+            }
+        }
+    }
+
+
 
     private void loader() {
         // 1. 레트로핏 생성
@@ -76,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
               //  .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-
         // -> 이렇게 하면 client가 생성된다.
 
 
@@ -106,23 +144,18 @@ public class MainActivity extends AppCompatActivity {
                             Log.e("로그 확인", "============================= test 1");
                             Bbs data[] = gson.fromJson(jsonString, Bbs[].class);
 
-                            Log.e("로그 확인", "============================= test 2");
                             if(data == null){
                                 Log.e("데이터", "data가 null 입니다.");
                             } else {
                                 Log.e("데이터", "============= 데이터 넘어옴. ==============");
                             }
 
-                            Log.e("로그 확인", "============================= test 3");
                             // 2. 아답터에 세팅하고
                             for(Bbs bbs : data){
-                                Log.e("로그 확인", "============================= test 4");
                                 this.data.add(bbs);
-                                Log.e("로그 확인", "============================= test 5");
-    //                            Log.e("Data", "title = " + bbs.title);
+//                                Log.e("Data", "title = " + bbs.title);
                             }
                             // 3. 아답터 갱신
-                            Log.e("로그 확인", "============================= test 6");
                             adapter.notifyDataSetChanged();
                         }
                 );

@@ -1,9 +1,11 @@
 package android.mdy.com.servernodejs;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -47,47 +49,55 @@ public class WriteActivity extends AppCompatActivity {
         bbs.author = author;
         bbs.content = content;
 
-        // 1. 레트로핏 생성
-        Retrofit client = new Retrofit.Builder()
-                .baseUrl(IBbs.SERVER)
-                //  .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
 
-        // -> 이렇게 하면 client가 생성된다.
+        // 예외처리 - 텍스트 모두 입력하지 않을 경우
+        if(bbs.title.equals("") || bbs.author.equals("") || bbs.content.equals("")) {
+            Toast.makeText(WriteActivity.this, "텍스트를 모두 입력해주세요.", Toast.LENGTH_SHORT).show();
+            return;
 
+        } else {
 
-        // 2. 서비스 연결
-        IBbs myServer = client.create(IBbs.class);
+        // 텍스트를 모두 입력한 경우
 
-        // 3. 서비스의 특정 함수 호출 -> Observable 생성
-        Gson gson = new Gson();
+            // 1. 레트로핏 생성
+            Retrofit client = new Retrofit.Builder()
+                    .baseUrl(IBbs.SERVER)
+                    //  .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
 
-        // bbs 객체를 수동으로 전송하기 위해서는 bbs 객체를 jsonString으로 변환하고
-        // RequestBody에 미디어타입과 String으로 변환된 데이터를 담아서 전송
-        RequestBody requestBody = RequestBody.create(
-                MediaType.parse("application/json"), gson.toJson(bbs)
-        );
-
-        Observable<ResponseBody> observable = myServer.write(requestBody);
-
-        // 4. subscribe 등록
-        observable.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                        responseBody -> {
-                            String result = responseBody.string();  // 결과코드를 넘겨서 처리
-                            /*
-                                1. 내가 정상적으로 새글을 입력한 후 데이터를 전송하고 종료 (목록 갱신해야 함)
-                                2. 새글을 전송하지 않고, 화면을 그냥 종료 (목록 갱신 안해도 됨)
-
-                                위의 두 가지를 구분해서 결과값을 호출한 MainActivity로 넘겨서 처리
-                             */
-                            finish();
-                        }
-                );
+            // -> 이렇게 하면 client가 생성된다.
 
 
+            // 2. 서비스 연결
+            IBbs myServer = client.create(IBbs.class);
+
+            // 3. 서비스의 특정 함수 호출 -> Observable 생성
+            Gson gson = new Gson();
+
+            // bbs 객체를 수동으로 전송하기 위해서는 bbs 객체를 jsonString으로 변환하고
+            // RequestBody에 미디어타입과 String으로 변환된 데이터를 담아서 전송
+            RequestBody requestBody = RequestBody.create(
+                    MediaType.parse("application/json"), gson.toJson(bbs)
+            );
+
+            Observable<ResponseBody> observable = myServer.write(requestBody);
+
+            // 4. subscribe 등록
+            observable.subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(
+                            responseBody -> {
+                                String result = responseBody.string();  // 결과코드를 넘겨서 처리
+
+
+                                Intent intent = getIntent();
+
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+                    );
+        }
     }
 
     private void initView() {
@@ -95,5 +105,14 @@ public class WriteActivity extends AppCompatActivity {
         editTextAuthor = (EditText) findViewById(R.id.editTextAuthor);
         editTextContent = (EditText) findViewById(R.id.editTextContent);
         btnPost = (Button) findViewById(R.id.btnPost);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();  // Back버튼 실행
+
+        Intent intent = getIntent();
+
+        setResult(RESULT_CANCELED, intent);
     }
 }
