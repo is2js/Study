@@ -19,7 +19,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
 
     public RecyclerAdapter(Context context, List<Bbs> data){
         this.data = data;
-        this.inflater = LayoutInflater.from(context);
+//        this.inflater = LayoutInflater.from(context);
+        inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         return data.size();
     }
 
-    class Holder extends RecyclerView.ViewHolder{
+    public class Holder extends RecyclerView.ViewHolder{
 
         TextView txtTitle;
         TextView txtDate;

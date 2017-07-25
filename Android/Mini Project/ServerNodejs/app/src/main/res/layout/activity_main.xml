@@ -7,12 +7,14 @@
     tools:context="android.mdy.com.servernodejs.MainActivity">
 
     <Button
-        android:id="@+id/btnWrite"
+        android:id="@+id/btnPost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_write"
-        tools:layout_editor_absoluteX="280dp"
-        tools:layout_editor_absoluteY="18dp" />
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -25,6 +27,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnWrite" />
+        app:layout_constraintTop_toBottomOf="@+id/btnPost" />
 
 </android.support.constraint.ConstraintLayout>
