@@ -1,5 +1,5 @@
-var dao = require("./bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한다는 뜻
-var error = require("./error");
+var dao = require("../c_dao/bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한다는 뜻
+var error = require("../module/error");
 var querystring = require("querystring");
 
 

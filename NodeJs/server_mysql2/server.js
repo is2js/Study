@@ -1,6 +1,6 @@
 // 1. 서버모듈
 var http = require("http");
-var router = require("./module/router.js");
+var router = require("./a_router/router.js");
 
 // 2. 서버를 생성
 var server = http.createServer(function(request, response){

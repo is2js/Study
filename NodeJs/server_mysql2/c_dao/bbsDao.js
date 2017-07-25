@@ -1,4 +1,4 @@
-var database = require("./module/database");   //  /index.js는 생략가능
+var database = require("../module/database");   //  /index.js는 생략가능
 var tableName = "board";
 
 
