@@ -10,7 +10,8 @@ exports.read = function(qs, response){
     if(qs == ""){
         dao.select(function(data){  // dao를 통해 db를 읽고난 후 결과셋을 처리하는 코드
             var jsonString = JSON.stringify(data);
-            send(response, "READ Success!" + jsonString);
+            // send(response, "READ Success!" + jsonString);
+            send(response, jsonString);
         });
     }else{  // 검색을 위한 쿼리스트링이 있으면 쿼리스트링을 분해해서 처리한다.
         var parsedQs = querystring.parse(qs, '&', '=');
