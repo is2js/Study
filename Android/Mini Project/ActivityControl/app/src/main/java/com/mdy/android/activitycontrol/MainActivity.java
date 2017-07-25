@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()){
             // 일반적인 Activity start
             case R.id.btnStart:
-                intent.putExtra("key", "0");  //  putExtra("변수", "값")
+                intent.putExtra("key", mEditText.getText().toString());  //  putExtra("변수", "값")
                 startActivityForResult(intent, BUTTON_START);
                 break;
             // 값을 돌려받는 Activity start
