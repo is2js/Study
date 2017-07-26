@@ -24,7 +24,7 @@ exports.read = function(qs, response){
 
         dao.search(parsedQs, function(data){
             var jsonString = JSON.stringify(data);
-            send(response, "Search Success!" + jsonString);
+            send(response, jsonString);
         });
     }
 }

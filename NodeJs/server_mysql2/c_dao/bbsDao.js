@@ -4,28 +4,29 @@ var tableName = "board";
 
 exports.select = function(callback){
     console.log("in bbsDao select");
-    var query = " select * from " + tableName;
+    var query = " select * from " +tableName+ " order by id desc"; // 반대는 asc
 
     database.executeQuery(query, callback);
 }
 
 exports.search = function(qs, callback){
     console.log("in bbsDao search");
-    var query = " select * from " + tableName + " where title like '%" + qs.title + "%' ";
+    var query = " select * from " + tableName + " where title like '%%?%' ";
+    var values = [qs.title];
 
-    database.executeQuery(query, callback);
+    database.executeQueryValues(query, values, callback);
 }
 
 exports.insert = function(data, callback){
     console.log("in bbsDao insert");
     var query = " insert into " + tableName + " (title, content, author, date)";
-        query = query + " VALUES ?";
+        query = query + " values(?,?,?,?)";
 
     // var now = new Date().toLocaleDateString();
     var now = new Date().toLocaleString();
 
     var values = [data.title, data.content, data.author, now];
-    database.executeMulti(query, values, function(){
+    database.execute(query, values, function(){
         callback();
     });
 }
