@@ -18,6 +18,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
+import static android.mdy.com.servernodejs.MainActivity.BACK;
+
 public class WriteActivity extends AppCompatActivity {
 
     private EditText editTextTitle;
@@ -91,9 +93,18 @@ public class WriteActivity extends AppCompatActivity {
                                 String result = responseBody.string();  // 결과코드를 넘겨서 처리
 
 
-                                Intent intent = getIntent();
+                                /* 데이터를 보낼 경우 */
 
+                                /*
+                                Intent intent = getIntent();
+                                intent.putExtra("result", 123);
                                 setResult(RESULT_OK, intent);
+
+                                이렇게 하면 MainActivity에 있는 onActivityResult()에 세번째 인자인 Intent data에 값이 넘어간다.
+
+                                */
+
+                                setResult(MainActivity.SUCCESS);   // 값을 인텐트에 담아두기만 한다.
                                 finish();
                             }
                     );
@@ -107,12 +118,15 @@ public class WriteActivity extends AppCompatActivity {
         btnPost = (Button) findViewById(R.id.btnPost);
     }
 
+
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();  // Back버튼 실행
 
         Intent intent = getIntent();
 
-        setResult(RESULT_CANCELED, intent);
+        setResult(BACK, intent);
     }
 }

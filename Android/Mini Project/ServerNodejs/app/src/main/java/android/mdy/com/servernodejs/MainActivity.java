@@ -23,8 +23,6 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int OKAY = 77;
-
     private Button btnWrite;
     private RecyclerView recyclerView;
     private List<Bbs> data;
@@ -73,20 +71,23 @@ public class MainActivity extends AppCompatActivity {
 
 
                 Intent intent = new Intent(MainActivity.this, WriteActivity.class);
-                startActivityForResult(intent, OKAY);
+                startActivityForResult(intent, REQ_CODE);
             }
         });
     }
 
+    private static final int REQ_CODE = 77;
+    public static final int SUCCESS = 1001;
+    public static final int BACK = 1002;
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         Log.e("실행 순서 확인 3", "========================= 3 ");
 
-        if(requestCode == OKAY){
+        if(requestCode == REQ_CODE){
             // 정상적으로 Post를 한 경우
-            if(resultCode == RESULT_OK){
+            if(resultCode == SUCCESS){
                 Log.e("로그 확인", "===================== 작성 완료.");
 
                 Log.e("실행 순서 확인 4", "========================= 4 ");
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 loader();
 
             // Back버튼으로 돌아온 경우
-            } else if (resultCode == RESULT_CANCELED){
+            } else if (resultCode == BACK){
                 Log.e("로그 확인", "===================== 입력값들 중 입력하지 않은 값이 있음.");
 
                 Log.e("실행 순서 확인 5", "========================= 5 ");
