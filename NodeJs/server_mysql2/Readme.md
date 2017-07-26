@@ -9,12 +9,12 @@
 | Depth1 | Depth2 | Depth3 | Depth4 | Depth5 |
 | :---- | :---- | :---- | :---- | :---- |
 | ***NodeJs(폴더)*** | ***server_mysql2(폴더)*** | server.js |   |  |
-|   |   | bbs.js  | | |
-|   |   | bbsDao.js | | |
-|   |   | error.js  | | |
-|   |   | user.js   | | |
-|   |   | ***module(폴더)***  | router.js | |
-|   |   |   | ***database(폴더)*** | index.js |
+|   |   | ***a_router(폴더)***  | router.js | |
+|   |   | ***b_controller(폴더)*** | bbs.js | |
+|   |   |   | user.js | |
+|   |   | ***c_dao(폴더)*** | bbsDao.js | |
+|   |   | ***module(폴더)*** | ***database(폴더)*** | index.js |
+|   |   |  | error.js | |
 
 
 
