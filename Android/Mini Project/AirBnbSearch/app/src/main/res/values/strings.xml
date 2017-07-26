@@ -2,9 +2,13 @@
     <string name="app_name">AirBnbSearch</string>
     <string name="action_settings">Settings</string>
 
-    <string name="title_select_date">Select Period</string>
+    <string name="title_select_date">Select Date</string>
     <string name="title_guests">Select Guests</string>
-    <string name="title_accommodation_type">Accommodation Type</string>
+    <string name="title_accommodation_type">Accommodation Types</string>
     <string name="title_price">Price</string>
     <string name="title_amenities">Amenities</string>
+
+    <string name="hint_start_date">Check in</string>
+    <string name="hint_end_date">Check out</string>
+    <string name="hint_select_Date">Select Date</string>
 </resources>
