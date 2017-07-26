@@ -222,7 +222,8 @@
       - `translate`, `rotate`, `scale`, `alpha`
   - Property Animation
 
-  #### 50. [ServerNodejs](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ServerNodejs)
+  #### 50. [Nodejs 서버를 통해 받는 데이터(MySql - 관계형DB)를 Retrofit을 이용해 화면에 출력](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ServerNodejs)
+  ### -> [Fragment로 구현](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ServerNodejsFragment)
   - ##### Gradle 세팅 (레트로람다)
   - ##### `startActivityForResult()` 와 `onActivityResult()`
   - ##### Back버튼 `onBackPressed()` 와 `finish()`
