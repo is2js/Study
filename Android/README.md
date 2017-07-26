@@ -221,3 +221,10 @@
   - View Animation
       - `translate`, `rotate`, `scale`, `alpha`
   - Property Animation
+
+  #### 50. [ServerNodejs](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ServerNodejs)
+  - ##### `startActivityForResult()` 와 `onActivityResult()`
+  - ##### Back버튼 `onBackPressed()` 와 `finish()`
+  - ##### `Retrofit`
+    - RequestBody / ResponseBody 이용
+    - .addConverterFactory(GsonConverterFactory.create())를 사용하지 않고 통신
