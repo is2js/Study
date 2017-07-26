@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
             btnCheckIn.setText(Html.fromHtml(btnCheckInText, Html.FROM_HTML_MODE_LEGACY));
         }
 
-//        btnCheckIn.setText(Html.fromHtml(btnCheckInText));
 
 
         btnCheckOut = (Button) findViewById(R.id.btnCheckOut);
