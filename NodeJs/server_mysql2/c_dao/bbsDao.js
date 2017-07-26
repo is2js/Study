@@ -11,8 +11,8 @@ exports.select = function(callback){
 
 exports.search = function(qs, callback){
     console.log("in bbsDao search");
-    var query = " select * from " + tableName + " where title like '%%?%' ";
-    var values = [qs.title];
+    var query = " select * from " + tableName + " where title like ? ";
+    var values = ["%"+qs.title+"%"];
 
     database.executeQueryValues(query, values, callback);
 }
