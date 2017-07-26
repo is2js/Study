@@ -223,6 +223,7 @@
   - Property Animation
 
   #### 50. [ServerNodejs](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ServerNodejs)
+  - ##### Gradle 세팅 (레트로람다)
   - ##### `startActivityForResult()` 와 `onActivityResult()`
   - ##### Back버튼 `onBackPressed()` 와 `finish()`
   - ##### `Retrofit`
