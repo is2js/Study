@@ -1,6 +1,5 @@
 package android.mdy.com.servernodejs;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Button;
@@ -118,15 +117,21 @@ public class WriteActivity extends AppCompatActivity {
         btnPost = (Button) findViewById(R.id.btnPost);
     }
 
-
-
-
+    // Back 버튼
     @Override
     public void onBackPressed() {
         super.onBackPressed();  // Back버튼 실행
 
-        Intent intent = getIntent();
+        /* 데이터를 보내지 않기 때문에 바로 setResult(Back);으로 작성한다. */
+        // Intent intent = getIntent();
+        // setResult(BACK, intent);
 
-        setResult(BACK, intent);
+
+        /*
+            그러나 여기에서 Back버튼에서 아무것도 하는게 없기 때문에 onBackPressed가 아예 없어도 된다.
+            그리고 MainActivity에 있는 onActivityResult()에도 resultCode를 보내지 않고, onActivitiyResult에서 처리하지 않으면 된다.
+         */
+
+        setResult(BACK);
     }
 }

@@ -40,14 +40,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        Log.e("실행 순서 확인 1", "========================= 1 ");
-
         loader();
-
-        Log.e("실행 순서 확인 1", "========================= 2 ");
-
-//        Intent intent = new Intent();
-//        setResult(RESULT_OK, intent);
     }
 
 
@@ -61,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btnWrite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 /*
                     호출시 startActivity를 사용하면 onResume 처리를 따로 해줘야 된다.(생명주기처리)
                     그래서 다른것 사용
@@ -69,14 +63,13 @@ public class MainActivity extends AppCompatActivity {
                     1번 또는 2번 결과값을 MainActivity로 넘겨서 처리
                  */
 
-
                 Intent intent = new Intent(MainActivity.this, WriteActivity.class);
                 startActivityForResult(intent, REQ_CODE);
             }
         });
     }
 
-    private static final int REQ_CODE = 77;
+    private static final int REQ_CODE = 101;
     public static final int SUCCESS = 1001;
     public static final int BACK = 1002;
 
@@ -106,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
-
-
 
     private void loader() {
         // 1. 레트로핏 생성
@@ -142,14 +133,7 @@ public class MainActivity extends AppCompatActivity {
 //                            Type type = new TypeToken<List<Bbs>>(){}.getType(); //  컨버팅하기 위한 타입지정
 //                            List<Bbs> data = gson.fromJson(jsonString, type);
 
-                            Log.e("로그 확인", "============================= test 1");
                             Bbs data[] = gson.fromJson(jsonString, Bbs[].class);
-
-                            if(data == null){
-                                Log.e("데이터", "data가 null 입니다.");
-                            } else {
-                                Log.e("데이터", "============= 데이터 넘어옴. ==============");
-                            }
 
                             // 2. 아답터에 세팅하고
                             for(Bbs bbs : data){

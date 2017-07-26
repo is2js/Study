@@ -14,7 +14,7 @@ import retrofit2.http.PUT;
  */
 
 public interface IBbs {
-    public static final String SERVER = "http://192.168.10.79/";
+    public static final String SERVER = "http://192.168.10.79/";    // Retrofit을 사용할 때, 반드시 주소 뒤에 슬래시(/)를 붙여줘야 한다.
     @GET("bbs")
     public Observable<ResponseBody> read();
 

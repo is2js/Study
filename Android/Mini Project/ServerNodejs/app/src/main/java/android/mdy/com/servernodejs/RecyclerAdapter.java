@@ -38,8 +38,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.Holder
         holder.setDate(bbs.date);
     }
 
-
-
     @Override
     public int getItemCount() {
         return data.size();
