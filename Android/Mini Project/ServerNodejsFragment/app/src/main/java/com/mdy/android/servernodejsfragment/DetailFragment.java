@@ -100,12 +100,14 @@ public class DetailFragment extends Fragment {
                 .subscribe(
                         responseBody -> {
                             //String result = responseBody.string(); // 결과코드를 넘겨서 처리...
-                            resetInput();
+                            resetInput();   // DetailFragment에서 입력했던 값들을 post이후 초기화해주는 메소드
                             mainActivity.goList();
                         }
                 );
     }
 
+
+    // DetailFragment에서 입력했던 값들을 post이후 초기화해주는 메소드
     private void resetInput() {
         editTitle.setText("");
         editAuthor.setText("");

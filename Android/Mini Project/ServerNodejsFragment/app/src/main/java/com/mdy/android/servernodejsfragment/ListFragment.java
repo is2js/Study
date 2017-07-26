@@ -25,10 +25,15 @@ public class ListFragment extends Fragment {
         // Required empty public constructor
     }
 
+    // MainActivity에서 setFragment()를 통해 listFragment가 commit이 되는 순간,
+    // ListFragment의 onAttach()가 호출된다.
+    // 그럼 여기를 통해서 MainActivity가 context로 넘어온다.
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         mainActivity = (MainActivity) context;
+        // 이렇게 하고 나면, 이제 ListFragment에서는 mainActivity의 모든 것(메소드 등)을 가져다 쓸 수 있다. mainAcitivity.~~~
+        // 그래서 data를 가져오려고 할때도 mainActivity의 것을 그냥 가져오면 된다.
     }
 
     @Override
@@ -41,7 +46,7 @@ public class ListFragment extends Fragment {
 
     private void initView(View view) {
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-        adapter = new RecyclerAdapter(getContext(), mainActivity.getData());
+        adapter = new RecyclerAdapter(getContext(), mainActivity.getData());    // mainActivity의 data를 getData()를 통해 가져왔다.
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

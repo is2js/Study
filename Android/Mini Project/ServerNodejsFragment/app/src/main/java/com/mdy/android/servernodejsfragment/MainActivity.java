@@ -21,9 +21,13 @@ public class MainActivity extends AppCompatActivity {
     ListFragment listFragment;
     DetailFragment detailFragment;
 
-    private static final int FROM_CREATE = 1;
-    private static final int FROM_DETAIL = 2;
+    // loader를 실행한 위치를 알려주기 위해서 상수 선언
+    private static final int FROM_CREATE = 1;   // onCreate에서 loader호출할 경우
+    private static final int FROM_DETAIL = 2;   // DetailFragment에서 loader호출할 경우
 
+
+    // List<Bbs> data를 private으로 해놨기 때문에 data를 가져오는 함수를 getData로 만들었고,
+    // onAttach()로 MainActivity를 넘길 경우, ListFragment에서 사용할 수 있다.
     public List<Bbs> getData(){
         return data;
     }
@@ -40,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         listFragment = new ListFragment();
         detailFragment = new DetailFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.container, listFragment)
+                .add(R.id.container, listFragment)      // 첫번째 Fragment는 BackStack하면 앱이 종료되어야 하기 때문에 .addToBackStack()를 해주지 않는다.
                 .commit();
     }
 
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
+    // 제일 위에 있는 Fragment를 꺼내는 메소드
     private void popFragment(){
         onBackPressed();
     }
@@ -84,14 +89,13 @@ public class MainActivity extends AppCompatActivity {
                             // 3. 아답터 갱신
                             // 호출된 곳에 따라 처리가 달라진다.
                             switch (from){
-                                case FROM_CREATE:
+                                case FROM_CREATE:   // onCreate에서 loader호출할 경우
                                     setFragment();
                                     break;
-                                case FROM_DETAIL:
+                                case FROM_DETAIL:   // DetailFragment에서 loader호출할 경우
                                     listFragment.refresh();
                                     break;
                             }
-
                         }
                 );
     }
@@ -101,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goList() {
-        popFragment();
+        popFragment();  // 제일 위에 있는 Fragment를 꺼낸다.
         data.clear();
         loader(FROM_DETAIL);
     }
