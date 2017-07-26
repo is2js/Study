@@ -133,9 +133,9 @@ server.listen( 80, function() { // 80포트는 뒤에 포트이름을 생략가�
 
 - router.js
 ```JavaScript
-var error = require("../error");
-var bbs = require("../bbs");
-var user = require("../user");
+var error = require("../module/error");
+var bbs = require("../b_controller/bbs");
+var user = require("../b_controller/user");
 // request를 분석해서 요청 url에 대한 연결
 
 
@@ -198,8 +198,8 @@ function getQuerystring(fullUrl){
 
 - bbs.js
 ```JavaScript
-var dao = require("./bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한다는 뜻
-var error = require("./error");
+var dao = require("../c_dao/bbsDao");  // 현재 폴더에 있는 bbsDao를 사용한다는 뜻
+var error = require("../module/error");
 var querystring = require("querystring");
 
 
@@ -210,7 +210,8 @@ exports.read = function(qs, response){
     if(qs == ""){
         dao.select(function(data){  // dao를 통해 db를 읽고난 후 결과셋을 처리하는 코드
             var jsonString = JSON.stringify(data);
-            send(response, "READ Success!" + jsonString);
+            // send(response, "READ Success!" + jsonString);
+            send(response, jsonString);
         });
     }else{  // 검색을 위한 쿼리스트링이 있으면 쿼리스트링을 분해해서 처리한다.
         var parsedQs = querystring.parse(qs, '&', '=');
@@ -223,7 +224,7 @@ exports.read = function(qs, response){
 
         dao.search(parsedQs, function(data){
             var jsonString = JSON.stringify(data);
-            send(response, "Search Success!" + jsonString);
+            send(response, jsonString);
         });
     }
 }
@@ -303,34 +304,35 @@ function send(response, result){
 
 - bbsDao.js
 ```JavaScript
-var database = require("./module/database");   //  /index.js는 생략가능
+var database = require("../module/database");   //  /index.js는 생략가능
 var tableName = "board";
 
 
 exports.select = function(callback){
     console.log("in bbsDao select");
-    var query = " select * from " + tableName;
+    var query = " select * from " +tableName+ " order by id desc"; // 반대는 asc
 
     database.executeQuery(query, callback);
 }
 
 exports.search = function(qs, callback){
     console.log("in bbsDao search");
-    var query = " select * from " + tableName + " where title like '%" + qs.title + "%' ";
+    var query = " select * from " + tableName + " where title like ? ";
+    var values = ["%"+qs.title+"%"];
 
-    database.executeQuery(query, callback);
+    database.executeQueryValues(query, values, callback);
 }
 
 exports.insert = function(data, callback){
     console.log("in bbsDao insert");
     var query = " insert into " + tableName + " (title, content, author, date)";
-        query = query + " VALUES ?";
+        query = query + " values(?,?,?,?)";
 
     // var now = new Date().toLocaleDateString();
     var now = new Date().toLocaleString();
 
     var values = [data.title, data.content, data.author, now];
-    database.executeMulti(query, values, function(){
+    database.execute(query, values, function(){
         callback();
     });
 }
@@ -361,7 +363,7 @@ exports.delete = function(data, callback){
 
 <br>
 
-- ./module/database/index.jx
+- ./module/database/index.js
 ```JavaScript
 var mysql = require('mysql');
 
@@ -373,13 +375,17 @@ var conInfo = {
 	database : 'bbs'	// 데이터베이스
 };
 
-// 쿼리 후에 결과값을 리턴해주는 함수 - select / search
+// 쿼리 후에 결과값을 리턴해주는 함수 - select
 exports.executeQuery = function(query, callback){
+	console.log("in database executeQuery");
+
     var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
 	con.connect();  // 연결 정보를 이용해서 database 연결
 
 	// 데이터베이스에 쿼리 실행
 	con.query(query, function(err, items, fields){
+		console.log("in database executeQuery query");
+
 		// 에러체크
 		if(err){
             // 에러처리
@@ -392,15 +398,40 @@ exports.executeQuery = function(query, callback){
 	});
 }
 
-// 쿼리를 실행만 하는 함수 - update / delete
+// 검색조건을 받아서 처리하는 함수 - search
+exports.executeQueryValues = function(query, values, callback){
+	console.log("in database executeQueryValues");
+
+    var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
+	con.connect();  // 연결 정보를 이용해서 database 연결
+
+	// 데이터베이스에 쿼리 실행
+	con.query(query, values, function(err, items, fields){
+		console.log("in database executeQueryValues query");
+
+		// 에러체크
+		if(err){
+            // 에러처리
+			console.log("error message= " + err);
+		} else {
+            // 에러가 안나면
+            callback(items);
+		}
+		this.end();	// mysql 연결해제 - con.end();인데 안에서 해주도록 한다. <- 필수! 안하면 계속 연결된 상태
+	});
+}
+
+// 쿼리를 실행만 하는 함수 - update / delete / insert
 exports.execute = function(query, values, callback) {
-	console.log("in database excute");
+	console.log("in database execute");
 
 	var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
 	con.connect();  // 연결 정보를 이용해서 database 연결
 
 	// 데이터베이스에 쿼리 실행
 	con.query(query, values, function(err, result){
+		console.log("in database execute query");
+
 		// 에러체크
 		if(err){
             // 에러처리
@@ -413,15 +444,15 @@ exports.execute = function(query, values, callback) {
 	});
 }
 
-// 쿼리를 실행만 하는 함수 - insert
+// 쿼리를 실행만 하는 함수
 exports.executeMulti = function(query, values, callback) {
-    console.log("in database excuteMulti");
+    console.log("in database executeMulti");
 	var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
 	con.connect();  // 연결 정보를 이용해서 database 연결
 
 	// 데이터베이스에 쿼리 실행
 	con.query(query, [[values]], function(err, result){
-        console.log("in database excuteMulti query");
+        console.log("in database executeMulti query");
 		// 에러체크
 		if(err){
             // 에러처리
