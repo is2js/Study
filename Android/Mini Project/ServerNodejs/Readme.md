@@ -11,6 +11,88 @@
 <br>
 <br>
 
+## Gradle 세팅 (레트로람다)
+- #### 앱 gradle
+```
+apply plugin: 'com.android.application'
+// 람다추가 2
+apply plugin: 'me.tatarka.retrolambda'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "android.mdy.com.servernodejs"
+        minSdkVersion 15
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    // 람다추가 3
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    // Rx 안드로이드
+    // Retrofit
+    // Retrofit json 컨버터
+    // Retrofit Rx 아답터
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    testCompile 'junit:junit:4.12'
+}
+```
+- #### 빌드 gradle
+```
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.3.3'
+        // 람다추가 1
+        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
+
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+```
+
+<br>
+<br>
+<br>
+
 ## `startActivityForResult()` 와 `onActivityResult()`
 - #### MainActivity.java 에서 onActivityResult메소드
   - WriteActivity.java에서 돌려받는 경우가 1가지(작성을 했을 경우)이기 때문에 resultCode를 하나로 해줘도 된다.
