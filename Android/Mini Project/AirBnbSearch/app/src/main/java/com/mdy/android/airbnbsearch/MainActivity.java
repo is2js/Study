@@ -19,6 +19,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private Search search;
 
+    private static final int CHECK_IN = 10;
+    private static final int CHECK_OUT = 20;
+    private int checkStatus = CHECK_IN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +49,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
     }
-
-    private static final int CHECK_IN = 10;
-    private static final int CHECK_OUT = 20;
-    private int checkStatus = CHECK_IN;
-
 
     private void setListeners(){
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
