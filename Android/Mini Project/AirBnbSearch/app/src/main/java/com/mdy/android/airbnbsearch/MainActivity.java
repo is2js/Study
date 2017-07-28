@@ -3,13 +3,20 @@ package com.mdy.android.airbnbsearch;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.TextView;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,6 +25,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CalendarView calendarView;
 
     private Search search;
+    private TextView txtGuest;
+    private Button btnGuestMinus;
+    private Button btnGuestPlus;
 
     private static final int CHECK_IN = 10;
     private static final int CHECK_OUT = 20;
@@ -35,9 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+
+
     private void init() {
         search = new Search();
     }
+
     private void setViews(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -47,6 +60,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnCheckOut = (Button) findViewById(R.id.btnCheckOut);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
+
+        txtGuest = (TextView) findViewById(R.id.txtGuest);
+        btnGuestMinus = (Button) findViewById(R.id.btnGuestMinus);
+        btnGuestPlus = (Button) findViewById(R.id.btnGuestPlus);
 
     }
 
@@ -68,13 +85,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         setButtonText(btnCheckOut, getString(R.string.hint_end_date), search.checkOutDate);
                         break;
                 }
-
             }
         });
 
         btnCheckIn.setOnClickListener(this);
         btnCheckOut.setOnClickListener(this);
         fab.setOnClickListener(this);
+        btnGuestMinus.setOnClickListener(this);
+        btnGuestPlus.setOnClickListener(this);
     }
 
     private void setCalendarButtonText(){
@@ -90,6 +108,49 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         StringUtil.setHtmlText(btn, inText);
     }
 
+
+    private void search(){
+        // 1. 레트로핏 생성
+        Retrofit client = new Retrofit.Builder()
+                .baseUrl(ISearch.SERVER)
+                //.addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+        // 2. 서비스 연결
+        ISearch myServer = client.create(ISearch.class);
+
+        // 3. 서비스의 특정 함수 호출 -> Observable 생성
+        Observable<ResponseBody> observable = myServer.get(
+                search.checkInDate,
+                search.checkOutDate,
+                search.getGuests(),
+                -1,
+                -1,
+                -1,
+                -1
+        );
+
+        // 4. subscribe 등록
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                        responseBody -> {
+                            // 1. 데이터를 꺼내고
+                            String jsonString = responseBody.string();
+
+                            Log.e("RESULT",""+jsonString);
+
+                            /* Gson은 해보기
+
+                            Gson gson = new Gson();
+
+                             */
+                        }
+                );
+    }
+
+
+
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -103,9 +164,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setButtonText(btnCheckOut, getString(R.string.hint_end_date), getString(R.string.hint_select_Date));
                 setButtonText(btnCheckIn, getString(R.string.hint_start_date), search.checkInDate);
                 break;
-            case R.id.fab:
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            case R.id.fab: // 검색 전송
+                search();
+                break;
+            case R.id.btnGuestMinus:
+                search.setGuests(search.getGuests()-1);
+                txtGuest.setText(search.getGuests() + "");
+                break;
+            case R.id.btnGuestPlus:
+                search.setGuests(search.getGuests()+1);
+                txtGuest.setText(search.getGuests() + "");
                 break;
         }
     }

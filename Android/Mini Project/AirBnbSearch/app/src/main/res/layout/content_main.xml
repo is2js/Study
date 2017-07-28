@@ -86,7 +86,7 @@
                 android:layout_weight="1" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/txtGuest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -99,14 +99,14 @@
                 android:layout_weight="1" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnGuestMinus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="-" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnGuestPlus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
