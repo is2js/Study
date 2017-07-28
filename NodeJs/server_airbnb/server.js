@@ -43,51 +43,41 @@ var server = http.createServer(function(request, response){
 
 // 2. 쿼리 실행
 function executeQuery(response, search){
-    var query = " select * from house as a join reservation as b "
-                + " on a.id = b.house_id ";
-    var values = [];
-
-    console.log("\n\n");
-    console.log(search);
-    console.log("\n\n");
-
-
+    var query = "select * from house";
     if(search){
-        query = query + " where 1=1 ";
-        // search 오브젝트의 key를 반복문을 돌면서 꺼내고
-
-        for(key in search){
-            // key 이름을 쿼리에 삽입하고
-            query = query + " and b." + key + " = ? ";
-            // key로 조회한 값을 valuse에 담는다.
-            values.push(search[key]);
+        query = " select * from house where id not in "
+              + " (select a.id "
+              + "   from house a join reservation b "
+              + "     on a.id = b.house_id "
+              + "  where b.checkin between '"+search.checkin+"' and '"+search.checkout+"' "
+              + "     or b.checkout between '"+search.checkin+"' and '"+search.checkout+"' "
+              + "     or (b.checkin <= '"+search.checkin+"' and b.checkout >= '"+search.checkout+"') "
+              + " ) ";
+        if(search.guests > -1){
+            query = query + " and guests > " + search.guests;
         }
+        if(search.type > -1){
+            query = query + " and type = " + search.type;
+        }
+        if(search.price_min > -1 && search.price_max > -1){
+            query = query + " and price between " + search.price_min + " and " + search.price_max;
+        }
+        if(search.amenities > -1){ // wifi 여부만 체크
+            query = query + " and amenities = " + search.amenities;
+        }
+        console.log("Query:"+query);
     }
-    console.log(values);
-
-    // select * from house where checkin = ? and checkout = ?
-    console.log("QUERY : " + query);
-
-    
-
-
-    var con = mysql.createConnection(conInfo);  // 연결 정보를 담은 객체를 생성
-    con.connect();  // 연결 정보를 이용해서 database 연결
-
-    // 데이터베이스에 쿼리 실행
-    con.query(query, values, function(err, items, fields){
-
-        // 에러체크
+    var con = mysql.createConnection(conInfo);
+    con.connect();
+    con.query(query, function(err, items, fields){ 
         if(err){
-            // 에러처리
-            console.log("error message= " + err);
+            console.log(err);
             sendResult(response, err);
-        } else {
-            // 에러가 안나면
+        }else{
             console.log(items);
             sendResult(response, items);
         }
-        this.end();	// mysql 연결해제 - con.end();인데 안에서 해주도록 한다. <- 필수! 안하면 계속 연결된 상태
+        this.end();
     });
 }
 
