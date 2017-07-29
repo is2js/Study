@@ -145,6 +145,20 @@ public void onBackPressed() {
 - 데이터를 보내지 않기 떄문에 바로 setResult(BACK); 으로 코딩을 하면 된다.
 - 그러나 여기서는 데이터를 보내주는 것이 없기 때문에 onBackPressed() 코딩을 하지 않아도 Back버튼을 누르면 스택에서 WriteActivity가 사라진다. 즉, 굳이 코딩하지 않아도 되는 부분이다.
 
+
+- #### Back 버튼이 동작하지 않게 하려면
+
+```java
+@Override
+public void onBackPressed() {
+	// super.onBackPressed();
+}
+```
+
+- // super.onBackPressed();
+  - onBackPressed를 Override하고, super.onBackPressed(); 메소드를 주석처리해주면 Back버튼이 동작을 하지 않는다.
+
+
   ### [정리]
   #### 1) 데이터를 보낼 경우
   ```java
