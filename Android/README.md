@@ -321,7 +321,7 @@
 
 <br>
 
-  #### 51. [Nodejs 서버를 통해 받는 데이터(MySql - 관계형DB)를 Retrofit을 이용해 화면에 출력 - 2](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/ServerNodejs)
+  #### 51. [Nodejs 서버를 통해 받는 데이터(MySql - 관계형DB)를 Retrofit을 이용해 화면에 출력 - 2](https://github.com/mdy0501/Study/tree/master/Android/Mini%20Project/AirBnbSearch)
   - ##### [다국어지원 준비] res - values - strings.xml
   - ##### 버튼에 다양한 색깔의 폰트 적용하기
   - ##### `Retrofit`을 이용한 데이터 통신
