@@ -595,20 +595,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/afterSearch1.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/afterSearch2.png' width='210' height='350' />
 
-- MySQl 화면
+<br>
+
+#### 기타 화면
+
+##### 1-1) MySQl 화면 ***(house 테이블)***
 
 ![mysql_house](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/mysql_house.png)
+
 
 ![mysql_reservation](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/mysql_reservation.png)
 
 <br>
 
-#### 기타 화면
+##### 1-2) MySQl 화면 ***(reservation 테이블)***
 
-##### 1) 안드로이드 Log
+
+
+##### 2) 안드로이드 Log
 
 ![mysql_reservation](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/android_log.PNG)
 
-##### 2) Node.js 콘솔창
+<br>
+
+##### 3) Node.js 콘솔창
 
 ![mysql_reservation](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/server_console.PNG)
