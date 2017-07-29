@@ -5,8 +5,6 @@ package com.mdy.android.airbnbsearch;
  */
 
 public class Reservation {
-
-//    int id;
     String title;
     String user_id;
     int type;

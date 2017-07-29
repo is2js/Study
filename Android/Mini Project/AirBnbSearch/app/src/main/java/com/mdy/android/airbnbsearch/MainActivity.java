@@ -50,11 +50,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setCalendarButtonText();
         setListeners();
         init();
-
-
-
-
-
     }
 
 
@@ -148,9 +143,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         responseBody -> {
                             // 1. 데이터를 꺼내고
                             String jsonString = responseBody.string();
-
                             Log.e("RESULT",""+jsonString);
-
 
                             Gson gson = new Gson();
 
@@ -166,15 +159,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 Data.data.add(reservation);
                             }
 
-
                             Intent intent = new Intent(MainActivity.this, ListActivity.class);
                             startActivity(intent);
                             finish();
                         }
                 );
     }
-
-
 
     @Override
     public void onClick(View view) {

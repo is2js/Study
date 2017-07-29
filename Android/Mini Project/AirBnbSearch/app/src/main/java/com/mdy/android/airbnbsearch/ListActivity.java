@@ -30,9 +30,6 @@ public class ListActivity extends AppCompatActivity {
         adapter = new RecyclerAdapter(this, data);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
     }
 
     private void setViews(){
