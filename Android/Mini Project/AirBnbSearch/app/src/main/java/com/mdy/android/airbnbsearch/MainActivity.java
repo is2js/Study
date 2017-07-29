@@ -157,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Reservation data[] = gson.fromJson(jsonString, Reservation[].class);
 
                             // 2. 아답터에 세팅하고
+                            Log.w("Data.data", "==================== Data.data" + Data.data);
                             if(Data.data != null){
                                 Data.data.clear();
                             }
@@ -168,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             Intent intent = new Intent(MainActivity.this, ListActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                 );
     }
