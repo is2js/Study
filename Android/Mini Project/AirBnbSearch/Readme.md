@@ -604,7 +604,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 ![mysql_house](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/mysql_house.png)
 
 <br>
+
 ##### 1-2) MySQl 화면 ***(reservation 테이블)***
+
 
 ![mysql_reservation](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/AirBnbSearch/graphics/mysql_reservation.png)
 
