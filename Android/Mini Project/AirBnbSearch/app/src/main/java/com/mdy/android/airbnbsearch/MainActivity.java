@@ -1,5 +1,6 @@
 package com.mdy.android.airbnbsearch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -23,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FloatingActionButton fab;
     private Button btnCheckIn, btnCheckOut;
     private CalendarView calendarView;
+
 
     private Search search;
     private TextView txtGuest;
@@ -38,10 +44,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Data.data = new ArrayList<>();
+
         setViews();
         setCalendarButtonText();
         setListeners();
         init();
+
+
+
+
 
     }
 
@@ -64,7 +76,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         txtGuest = (TextView) findViewById(R.id.txtGuest);
         btnGuestMinus = (Button) findViewById(R.id.btnGuestMinus);
         btnGuestPlus = (Button) findViewById(R.id.btnGuestPlus);
-
     }
 
     private void setListeners(){
@@ -140,11 +151,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                             Log.e("RESULT",""+jsonString);
 
-                            /* Gson은 해보기
 
                             Gson gson = new Gson();
 
-                             */
+                            Reservation data[] = gson.fromJson(jsonString, Reservation[].class);
+
+                            // 2. 아답터에 세팅하고
+                            if(Data.data != null){
+                                Data.data.clear();
+                            }
+
+                            for(Reservation reservation : data){
+                                Data.data.add(reservation);
+                            }
+
+
+                            Intent intent = new Intent(MainActivity.this, ListActivity.class);
+                            startActivity(intent);
                         }
                 );
     }

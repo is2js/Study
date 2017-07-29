@@ -10,7 +10,9 @@ import retrofit2.http.Query;
  */
 
 public interface ISearch {
-    public static final String SERVER = "http://192.168.10.79/";
+//    public static final String SERVER = "http://192.168.10.79/";
+
+    public static final String SERVER = "http://172.30.0.108/";
     /**
      * @param checkin
      * @param checkout
