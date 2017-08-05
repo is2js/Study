@@ -61,7 +61,6 @@ public class ListActivity extends AppCompatActivity {
                     String jsonString = response.body().string();
                     Log.e("==================== house 1 ", "house 1 " + jsonString);
 
-
                     Gson gson = new Gson();
                     Data data = gson.fromJson(jsonString, Data.class);
 
@@ -69,22 +68,6 @@ public class ListActivity extends AppCompatActivity {
                     recyclerAdapter = new RecyclerAdapter(ListActivity.this, data);
                     recyclerView.setAdapter(recyclerAdapter);
                     recyclerView.setLayoutManager(new LinearLayoutManager(ListActivity.this));
-
-
-//                    RoomsData roomsData = new RoomsData();
-//
-//                    roomsData.price_per_day = data.getPrice_per_day();
-//                    Log.e("==================== house 2 ", "house 2 " + roomsData.price_per_day);
-//                    roomsData.introduce = data.getIntroduce();
-//                    roomsData.room_type = data.getRoom_type();
-//                    House_images[] imagesEx = data.getHouse_images();
-//                    roomsData.image = imagesEx[0].getImage();
-//
-//                    Log.e("==================== house 3 ", "house 3 " + roomsData.image);
-//                    aData.add(roomsData);
-
-
-
 
                 } catch (IOException e) {
                     e.printStackTrace();
