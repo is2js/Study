@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("=========== dataList", dataList+"");
                     customAdapter = new CustomAdapter(MainActivity.this, dataList);
                     viewPager1.setAdapter(customAdapter);
-                    viewPager1.setCurrentItem(0);
+//                    viewPager1.setCurrentItem(0);
                 } catch (Exception e) {
 
                 }

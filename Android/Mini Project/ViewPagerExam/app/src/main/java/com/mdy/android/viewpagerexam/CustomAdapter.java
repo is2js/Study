@@ -8,13 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.mdy.android.viewpagerexam.domain.House_images;
 import com.mdy.android.viewpagerexam.domain.RoomsData;
 
 import java.util.List;
-
-import static com.mdy.android.viewpagerexam.R.id.img;
 
 /**
  * Created by MDY on 2017-08-08.
@@ -48,7 +47,17 @@ public class CustomAdapter extends PagerAdapter {
         RoomsData roomsData = data.get(position);
 
 //        ImageView img = (ImageView) view.findViewById(R.id.img);
-        ImageView img1 = (ImageView) view.findViewById(img);
+        ImageView img = (ImageView) view.findViewById(R.id.img);
+        TextView txtPrice = (TextView) view.findViewById(R.id.txtPrice);
+        TextView txtIntroduce = (TextView) view.findViewById(R.id.txtIntroduce);
+
+        Log.e("============== 1 ", "==========" + roomsData.getPrice_per_day());
+        Log.e("============== 2 ", "==========" + roomsData.getIntroduce());
+
+//        txtPrice.setText(roomsData.getPrice_per_day() + " 원");
+//        txtPrice.setText(roomsData.getPrice_per_day() + " 원");
+        txtPrice.setText(roomsData.getPrice_per_day() + " 원");
+        txtIntroduce.setText(roomsData.getIntroduce());
 
         House_images[] images = roomsData.getHouse_images();
         if(images.length > 0){
@@ -61,7 +70,7 @@ public class CustomAdapter extends PagerAdapter {
                 .load(images.length > 0 ? images[0].getImage() : null)
                 .centerCrop()
                 .fallback(R.mipmap.ic_launcher)
-                .into(img1);
+                .into(img);
         ((ViewPager) container).addView(view);
 
         return view;
