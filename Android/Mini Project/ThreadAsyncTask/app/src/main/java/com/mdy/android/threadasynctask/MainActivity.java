@@ -69,8 +69,9 @@ public class MainActivity extends AppCompatActivity {
 
             // 제네릭 타입 1 - doInBackground 의 인자
             //             2 - onProgressUpdate 의 인자
-            //             3 - doInBackground 의 리턴타입 ,
-            // doInBackground 가 호출되기 전에 먼저 호출된다.
+            //             3 - doInBackground 의 리턴타입 & onPostExecute 의 인자
+
+            // onPreExecute()는 doInBackground 가 호출되기 전에 먼저 호출된다.
             @Override
             protected void onPreExecute() {
                 // progress는 화면에 진행상태를 표시
