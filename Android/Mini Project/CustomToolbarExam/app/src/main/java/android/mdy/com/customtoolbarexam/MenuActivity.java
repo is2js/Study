@@ -30,9 +30,6 @@ public class MenuActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.image1);
         layout1 = (ConstraintLayout) findViewById(R.id.constraintLayout);
 
-
-
-
         Button btnPrevious = (Button) findViewById(R.id.btnPrevious);
         btnPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
