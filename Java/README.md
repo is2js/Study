@@ -55,6 +55,8 @@
   ##### 17. [FileCopy](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/FileCopy)
   - File 복사
 
+  ##### 18. [SocketChatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/SocketChatting)
+  - Java Socket programming - 채팅
 
 <br>
 
