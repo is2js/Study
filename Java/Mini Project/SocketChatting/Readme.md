@@ -15,6 +15,8 @@
 ![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_03.png)
 ![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_04.png)
 ![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_05.png)
+![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_06.png)
+![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_07.png)
 
 <br>
 
