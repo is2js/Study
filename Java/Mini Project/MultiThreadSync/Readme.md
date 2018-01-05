@@ -11,7 +11,7 @@
 
 
 ## 결과 화면
-![MultiThreadSync](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/MultiThreadSync/graphics/result.PNG)
+![MultiThreadSync](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/MultiThreadSync/graphics/result.PNG)
 
 <br>
 
