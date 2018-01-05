@@ -56,7 +56,7 @@
   - File 복사
 
   ##### 18. [SocketChatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/SocketChatting)
-  - Java Socket programming - 채팅
+  - Java Socket programming **(다중 접속 채팅 프로그램)**
 
 <br>
 
