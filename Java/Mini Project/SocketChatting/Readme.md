@@ -10,11 +10,11 @@
 
 
 ## 결과 화면
-![SocketChatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/SocketChatting/graphics/result_01.PNG)
-![SocketChatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/SocketChatting/graphics/result_02.PNG)
-![SocketChatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/SocketChatting/graphics/result_03.PNG)
-![SocketChatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/SocketChatting/graphics/result_04.PNG)
-![SocketChatting](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/SocketChatting/graphics/result_05.PNG)
+![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_01.png)
+![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_02.png)
+![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_03.png)
+![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_04.png)
+![SocketChatting](https://github.com/mdy0501/Study/blob/master/Java/Mini%20Project/SocketChatting/graphics/result_05.png)
 
 <br>
 
