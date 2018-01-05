@@ -49,6 +49,9 @@
   ##### 15. [Recursive](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/Recursive)
   - 재귀함수 ( Factorial / 피보나치 수열 )
 
+  ##### 16. [MultiThreadSync](https://github.com/mdy0501/Study/tree/master/Java/Mini%20Project/MultiThreadSync)
+  - MultiThread 동기화
+
 <br>
 
 - ### Questions
