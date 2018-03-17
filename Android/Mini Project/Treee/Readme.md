@@ -19,24 +19,8 @@
 <br>
 
 ## Treee App 화면
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/1_splash.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/2_login.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/3_feedFirst.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/4_listFirst.png' width='210' height='350' />
-
-<br>
-
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/5_read.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/6_modify.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/7_delete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/8_feedFAB.png' width='210' height='350' />
-
-<br>
-
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/9_listFAB.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/10_feedCheckBox.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/11_feedCheckBoxDelete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/12_listCheckBox.png' width='210' height='350' />
-
-<br>
-
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/13_listCheckBoxDelete.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/14_profileImage.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/15_profileNotiOn.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/16_profileTimePickerDialog.png' width='210' height='350' />
-
-<br>
-
-<img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/17_profileNotiTimeSet.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/18_notiAlarm.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/19_logout.png' width='210' height='350' /> <img src = 'https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/20_accountDelete.png' width='210' height='350' />
-
+![Treee_01](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/Treee_01.png)
+![Treee_02](https://github.com/mdy0501/Study/blob/master/Android/Mini%20Project/Treee/graphics/Treee_02.png)
 
 <br>
 
