@@ -18,7 +18,7 @@
 
 ## Web Programming
 
-- ### [HTML5](https://github.com/mdy0501/HTML5)
+- ### [HTML5/CSS](https://github.com/mdy0501/HTML-CSS)
 
 - ### [JSP/Servlet](https://github.com/mdy0501/Model2_Board)
 
