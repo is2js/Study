@@ -22,7 +22,6 @@
 
 - ### [JSP/Servlet](https://github.com/mdy0501/Model2_Board)
 
-- ### [Spring Framework](https://github.com/mdy0501/EIWAF)
 
 
 <br>
